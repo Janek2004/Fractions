@@ -156,14 +156,12 @@
         
         MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
         //get completed
-        //NSMutableArray * progress = [obj objectForKey:@"progress"];
-      
+        NSMutableArray * completed = [obj objectForKey:@"completed"];
+        mf1.completed = completed;
         
         if([mf1.name isEqualToString: name] &&  pin.integerValue == mf1.userPin){
-            
+               mf= mf1;
             *stop = YES;
-            mf= mf1;
-            
         }
     }];
     
@@ -188,14 +186,19 @@
        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
         if([mf1.name isEqualToString: userName] && mf1.userPin== userPin.integerValue){
             
-            *stop = YES;
+            NSMutableArray * completed = [obj objectForKey:@"completed"];
+            mf1.completed = completed;
+
             mf= mf1;
-            
+            *stop = YES;
         }
     }];
     return mf;
     
 }
+
+
+
 
 -(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user{
     

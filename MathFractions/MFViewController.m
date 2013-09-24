@@ -100,6 +100,24 @@
     }
     
     //update map
+    [self checkProgress];
+}
+
+-(void)checkProgress{
+    //get current progress
+    MFUser * mf = [[MFManager sharedManager]mfuser];
+    
+    for(NSNumber * nm in mf.completed){
+        [UIView animateWithDuration:1.0 animations:^{
+                        [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:nil forState:UIControlStateNormal];
+            [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
+            
+        }];
+        
+
+        
+    
+    }
 }
 
 
