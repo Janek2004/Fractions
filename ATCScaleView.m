@@ -29,10 +29,17 @@
 
 #import "ATCScaleView.h"
 #import "MFFraction.h"
+#import "MFFractionView.h"
 
 #define RectSize 25
 #define WIDTH 0.7
 #define alpha_interval 0.5
+
+enum kFractionComparator {
+    kEqual = 0,
+    kLess = 1,
+    kMore = 2
+};
 
 @interface ATCScaleView()
 {
@@ -41,10 +48,21 @@
     CGPoint touchOrigin;
     float scaleWidth;
     float alpha;
+    float armHeight;
+    enum kFractionComparator comparator;
+    
+    
+    
+    
 }
 @property(nonatomic,strong) UIPanGestureRecognizer * upGesture;
-@property(nonatomic,strong) UITapGestureRecognizer * tapGesture;
-@property(nonatomic,strong) UILabel * label;
+@property(nonatomic,strong) UIImageView * leftArm;
+@property(nonatomic,strong) UIImageView * rightArm;
+@property(nonatomic,strong) MFFraction * leftFraction;
+@property(nonatomic,strong) MFFraction * rightFraction;
+@property(nonatomic,strong) MFFractionView * leftFractionView;
+@property(nonatomic,strong) MFFractionView * rightFractionView;
+
 @end
 
 
@@ -61,16 +79,83 @@ CGFloat RadiansToDegrees(CGFloat radians)
     return radians * 180 / M_PI;
 };
 
--(MFFraction *)calculateScore{
- 
-    return [MFFraction new];
-}
+//-(MFFraction *)calculateScore{
+// 
+//    return [MFFraction new];
+//}
 
 -(BOOL)checkAnswer{
-    MFFraction * mf = [self calculateScore];
-    MFFraction * mf1 = self.currentFraction;
+    NSLog(@"%f %f",self.leftFraction.value,self.rightFraction.value);
     
-    return [mf isEqual: mf1];
+    
+    if(self.leftFraction.value == self.rightFraction.value && comparator == kEqual)
+    {
+        return YES;
+    }
+    if(self.leftFraction.value < self.rightFraction.value && comparator == kLess)
+    {
+        return YES;
+    }
+    if(self.leftFraction.value > self.rightFraction.value && comparator == kMore)
+    {
+             return YES;
+    }
+    
+    
+    return NO;
+}
+
+
+- (id)initWithCoder:(NSCoder *)inCoder;{
+    self = [super initWithCoder:inCoder];
+    if (self) {
+        
+    }
+    return self;
+}
+
+-(void)setUpView{
+    // Initialization code
+    self.backgroundColor = [UIColor whiteColor];
+    //get width
+    float width = WIDTH * self.frame.size.width;
+    float x1 = self.center.x - width/2.0;
+    float x2 = self.center.x + width/2.0;
+    alpha = 0;
+    leftOrigin = CGPointMake(x1, self.center.y);
+    rightOrigin = CGPointMake(x2, self.center.y);
+    scaleWidth = width;
+    
+    
+    if(!_upGesture){
+    _upGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(upGestureTriggered:)];
+    _upGesture.minimumNumberOfTouches =1;
+    _upGesture.maximumNumberOfTouches =1;
+    [self addGestureRecognizer:_upGesture];
+    }
+   
+    if(!_leftArm){
+        _leftArm = [[UIImageView alloc]init];
+        _rightArm = [[UIImageView alloc]init];
+        self.leftArm.image = [UIImage imageNamed:@"scaleleft"];
+        self.rightArm.image = [UIImage imageNamed:@"scaleright"];
+        [self addSubview:self.leftArm];
+        [self addSubview:self.rightArm];
+    }
+    
+    armHeight = 175;
+    CGRect f1 = CGRectMake(0,CGRectGetHeight(self.bounds)-armHeight+20,71,armHeight);
+    self.leftArm.frame = CGRectOffset(f1, 350, 0);
+    self.rightArm.frame = CGRectOffset(f1, 680, 0);
+    
+    if(!_rightFractionView){
+        _leftFractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(300, 0, 200,200)];
+        _rightFractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(600, 0, 200,200)];
+        [self addSubview:_leftFractionView];
+        [self addSubview:_rightFractionView];
+    }
+    
+   
 }
 
 
@@ -78,36 +163,13 @@ CGFloat RadiansToDegrees(CGFloat radians)
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        self.backgroundColor = [UIColor whiteColor];
-        //get width
-        float width = WIDTH * frame.size.width;
-        float x1 = self.center.x - width/2.0;
-        float x2 = self.center.x + width/2.0;
-        alpha = 180;
-        
-        leftOrigin = CGPointMake(x1, self.center.y);
-        rightOrigin = CGPointMake(x2, self.center.y);
-        scaleWidth = width;
-        
-        _upGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(upGestureTriggered:)];
-        _tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(reset)];
-        
-        _tapGesture.numberOfTapsRequired = 3;
-        
-        _upGesture.minimumNumberOfTouches =1;
-        _upGesture.maximumNumberOfTouches =1;
-        
-        [self addGestureRecognizer:_upGesture];
-        [self addGestureRecognizer:_tapGesture];
-        
+        [self setUpView];
     }
     return self;
 }
 
 -(void)reset{
-    id k =[self initWithFrame:self.bounds];
-    k=nil;
+    [self setUpView];
     [self setNeedsDisplay];
 }
 
@@ -115,141 +177,61 @@ CGFloat RadiansToDegrees(CGFloat radians)
 
 -(void)upGestureTriggered:(UIPanGestureRecognizer *)recognizer{
     CGPoint  touch = [recognizer locationInView:self];
-    touchOrigin = touch;
-    //get distance
-    float d1 = abs([self calculateDistanceBetweenPoint:touch andPoint:leftOrigin]);
-    float d2 = abs([self calculateDistanceBetweenPoint:touch andPoint:rightOrigin]);
-    NSLog(@" %f %f",d1, d2);
+    // CGPoint  velocity = [recognizer velocityInView:self];
+    CGPoint lcenter = self.leftArm.center;
+    CGPoint rcenter = self.rightArm.center;
     
-    //if it's closer then some threshold
-    CGPoint velocity = [recognizer velocityInView:self];
-    if(d1<15)
-    {
-       
-        if(velocity.y > 0)
-        {
-            alpha -=alpha_interval;
-            
-            if(abs(alpha)<160 )
-            {
-                alpha =160;
-                return;
-            }
-           
-            
-            float x = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha));
-            float y = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha));
-            
-            leftOrigin.x = x;
-            leftOrigin.y = y;
-            
-            float x1 = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha+180));
-            float y1 = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha+180));
-            
-            rightOrigin.x = x1;
-            rightOrigin.y = y1;
-            
-            
-        }
-        else
-        {
-            alpha +=alpha_interval;
-            
-            if(abs(alpha)>200 )
-            {
-                alpha = 200;
-                return;
-            }
-            
-            
-            float x = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha));
-            float y = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha));
-            
-            leftOrigin.x = x;
-            leftOrigin.y = y;
-            
-            float x1 = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha+180));
-            float y1 = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha+180));
-            
-            rightOrigin.x = x1;
-            rightOrigin.y = y1;
-            
-            
-        }
-               
-    }
+    CGRect  dl = self.leftArm.frame;
+    CGRect dr = self.rightArm.frame;
+    
+    float delta;
     
     
-    if(d2<15)
-    {
-        if(velocity.y > 0)
-        {
-            alpha +=alpha_interval;
-
-
-            if(alpha>200){
-                alpha =200;
-                return;}
-            
-
-            
-            float x = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha));
-            float y = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha));
-            
-            leftOrigin.x = x;
-            leftOrigin.y = y;
-            
-            float x1 = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha+180));
-            float y1 = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha+180));
-            
-            rightOrigin.x = x1;
-            rightOrigin.y = y1;
-            
-                       
-        }
-        else
-        {
-            alpha -=alpha_interval;
-            
-            if(alpha<160){
-                alpha = 160;
-                return;}
-            
-           
-            
-            float x = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha));
-            float y = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha));
-            
-            leftOrigin.x = x;
-            leftOrigin.y = y;
-            
-            float x1 = self.center.x + scaleWidth/2.0 * cos(DegreesToRadians(alpha+180));
-            float y1 = self.center.y + scaleWidth/2.0 * sin(DegreesToRadians(alpha+180));
-            
-            rightOrigin.x = x1;
-            rightOrigin.y = y1;
-            
-            
-        }
-
+    if(CGRectContainsPoint(self.leftArm.frame, touch)){
+        //move up or down and do opposite for other arm
+        delta = lcenter.y - touch.y;
+        
+        lcenter.y = touch.y;
+        rcenter.y = rcenter.y + delta;
+        
         
     }
-    NSLog(@"Alpha %f",alpha);
+    if(CGRectContainsPoint(self.rightArm.frame, touch)){
+        //move up or down and do opposite for other arm
+        delta = rcenter.y - touch.y;
+        rcenter.y = touch.y;
+        lcenter.y = lcenter.y + delta;
+        
+    }
+    
+    self.leftArm.center = lcenter;
+    self.rightArm.center = rcenter;
+    
+    NSLog(@"%f %f %f ",CGRectGetMinY(_leftArm.frame),CGRectGetHeight(self.bounds), CGRectGetHeight(self.leftArm.bounds));
+    if(CGRectGetMinY(_leftArm.frame)<= (CGRectGetHeight(self.bounds)- CGRectGetHeight(self.leftArm.bounds))||CGRectGetMinY(_rightArm.frame)<= (CGRectGetHeight(self.bounds)- CGRectGetHeight(self.rightArm.bounds))){
+        self.leftArm.frame= dl;
+        self.rightArm.frame= dr;
+        
+        
+        return;
+    }
+    
+    
+    alpha =  self.leftArm.center.y -  self.rightArm.center.y;
+    self.leftArm.center = lcenter;
+    self.rightArm.center = rcenter;
     
     [self setNeedsDisplay];
-
-   
-    
 }
-
-
-
--(float)calculateDistanceBetweenPoint:(CGPoint)p1 andPoint:(CGPoint)p2{
-
-    CGFloat xDist = (p2.x - p1.x); //[2]
-    CGFloat yDist = (p2.y - p1.y); //[3]
-    CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist)); //[4]
-    return distance;
+-(void)setCurrentFractions:(NSArray *)currentFractions{
+    if(currentFractions.count==2){
+        self.leftFraction = currentFractions[0];
+        self.rightFraction = currentFractions[1];
+        
+        self.leftFractionView.fraction= self.leftFraction;
+        self.rightFractionView.fraction= self.rightFraction;
+    }
+    [self setNeedsDisplay];
 }
 
 
@@ -258,105 +240,43 @@ CGFloat RadiansToDegrees(CGFloat radians)
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    [self drawScale:leftOrigin right:rightOrigin];
+    // [self drawScale:leftOrigin right:rightOrigin];
+    
     [self drawSign];
+  }
+
+-(void)drawFractions{
+   
+        
 }
 
 -(void)drawSign{
-   int labelWidth = self.frame.size.width * 0.5;
+    int labelWidth = self.frame.size.width * 0.5;
     CGRect textRect = CGRectMake(self.center.x-labelWidth/2.0,self.center.y+ 40,labelWidth,30);
     
     NSString *textContent;
-    if(alpha >=175 && alpha <=185){
+    if(alpha >=-15 && alpha <=15){
         textContent = @"=";
+        comparator =kEqual;
+        
     }
     
-    else if(alpha >185 ){
+    else if(alpha <-15 ){
         textContent = @">";
+        comparator =kMore;
     }
-
-    else if(alpha <175 ){
+    
+    else if(alpha >15 ){
+        comparator =kLess;
         textContent = @"<";
     }
-        
     
     [[UIColor blackColor] setFill];
-    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 13] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
-    
+    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 53] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
+
     
 }
 
--(void)drawScale:(CGPoint)left right:(CGPoint)right{
-    //// Color Declarations
-    UIColor* color = [UIColor colorWithRed: 0.886 green: 0 blue: 0 alpha: 1];
-    UIColor* color1 = [UIColor colorWithRed: 0.486 green: 0 blue: 0 alpha: 1];
-    UIColor* color2 = [UIColor colorWithRed: 0.886 green: 0.886 blue: 0 alpha: 1];
-    
-    CGPoint center = self.center;
-    
-
-    //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(center.x,center.y, 13, 12)];
-    [color setFill];
-    [ovalPath fill];
-    [[UIColor blackColor] setStroke];
-    ovalPath.lineWidth = 1;
-    [ovalPath stroke];
-
-    
-    UIBezierPath* touchPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(touchOrigin.x, touchOrigin.y, 13, 12)];
-    [color setFill];
-    [touchPath fill];
-    [[UIColor blackColor] setStroke];
-    touchPath.lineWidth = 1;
-    [touchPath stroke];
-
-    
-    
-    //// Bezier Drawing
-    UIBezierPath* bezierPath = [UIBezierPath bezierPath];
-    [bezierPath moveToPoint: left];
-    [bezierPath addLineToPoint: right];
-    [color setFill];
-    [bezierPath fill];
-    [[UIColor blackColor] setStroke];
-    bezierPath.lineWidth = 1;
-    [bezierPath stroke];
- 
-    
-    //// Rectangle Drawing
-    CGSize rectSize = CGSizeMake(RectSize, RectSize);
-    CGPoint or1 = left;
-    or1.x  -=rectSize.height/2.0;
-    or1.y -=rectSize.height/2.0;
- 
-    CGPoint or2 = right;
-    or2.x  -=rectSize.height/2.0;
-    or2.y -=rectSize.height/2.0;
-
-    CGRect leftRect = CGRectMake(or1.x, or1.y, rectSize.width, rectSize.height);
-    CGRect rightRect = CGRectMake(or2.x, or2.y, rectSize.width, rectSize.height);
-    
-    
-    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: leftRect];
-    [color1 setFill];
-    [rectanglePath fill];
-    [[UIColor blackColor] setStroke];
-    rectanglePath.lineWidth = 1;
-    [rectanglePath stroke];
-
-   
-    //// Rectangle 2 Drawing
-    UIBezierPath* rectangle2Path = [UIBezierPath bezierPathWithRect: rightRect];
-    [color2 setFill];
-    [rectangle2Path fill];
-    [[UIColor blackColor] setStroke];
-    rectangle2Path.lineWidth = 1;
-    [rectangle2Path stroke];
-
-    
-    
-}
 
 
 @end

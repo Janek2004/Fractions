@@ -34,4 +34,5 @@
 @property int denominator;
 
 -(instancetype)initWithNumerator:(int)n andDenominatro:(int)d;
+-(float)value;
 @end

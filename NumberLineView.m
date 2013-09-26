@@ -48,6 +48,7 @@
 //@property (nonatomic,strong) UILabel * fractionLabel;
 @property (nonatomic,strong) MFFractionView * fractionView;
 
+@property(nonatomic,strong) MFFraction * currentFraction;
 
 
 
@@ -110,12 +111,20 @@
     return self;
 }
 
--(void)setCurrentFraction:(MFFraction *)currentFraction{
+-(void)setCurrentFractions:(NSArray *)currentFractions{
+    MFFraction * currentFraction = currentFractions[0];
     _currentFraction = currentFraction;
     _fractionView.fraction = currentFraction;
     [_fractionView setNeedsDisplay];
-    
+
 }
+
+//-(void)setCurrentFraction:(MFFraction *)currentFraction{
+//    _currentFraction = currentFraction;
+//    _fractionView.fraction = currentFraction;
+//    [_fractionView setNeedsDisplay];
+//    
+//}
 
 -(void)addPiece{
     if(_piecesArray.count < MAX_NUM_PIECES){

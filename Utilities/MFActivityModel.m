@@ -40,6 +40,7 @@
         self.activityId = dictionary[@"id"];
         self.standard = dictionary[@"standard"];
         self.maxQuestions = [dictionary[@"questioncount"]integerValue];
+        _questionsSet = [NSArray new];
     }
     return self;
 }

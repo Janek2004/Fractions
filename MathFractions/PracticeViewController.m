@@ -119,10 +119,19 @@
 }
 
 -(void)displayFraction{
-    if([self.practiceView respondsToSelector:@selector(setCurrentFraction:)]){
-       [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
-        MFFraction * mf = self.currentActivity.questionsSet[_currentQuestionIndex];
-        [self.practiceView performSelector:@selector(setCurrentFraction:) withObject:mf];
+    if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
+
+        [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
+        id question =self.currentActivity.questionsSet[_currentQuestionIndex];
+      
+        if([question isKindOfClass:[NSArray class]]){
+            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
+        }
+        if([question isKindOfClass:[MFFraction class]]){
+            
+            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:@[question]];
+        
+        }
         
     }
 }
@@ -184,21 +193,26 @@
             //good job - > new question
             //play sound
             NSLog(@"Good Job");
+            
+            
             MFAttempt *attempt = [[MFAttempt alloc]init];
             attempt.attempt_date = [NSDate new];
             attempt.score =[[NSNumber numberWithBool:check]integerValue];
-            attempt.fractions =@[[(id <MFPracticeRequiredMethods>)  self.practiceView currentFraction]];
+            attempt.fractions =[(id <MFPracticeRequiredMethods>)  self.practiceView currentFractions];
             attempt.activity = self.activityId;
             
             _manager = [MFManager sharedManager];
            [self.dataManager saveAttempt:attempt forUser:self.manager.mfuser];
            [self nextQuestion];
-            
+            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Good Job!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [a show];
             
         }
         else{
             _wrongCount ++;
             NSLog(@"Bad");
+            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"No" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [a show];
             
         }
     }

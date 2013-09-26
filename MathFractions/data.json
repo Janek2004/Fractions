@@ -5,15 +5,17 @@
         "name":"Tip The Scale",
         "classname":"ATCScaleView",
         "standard":"CCSS.Math.Content.3.NF.A.3d",
+        "nr_fraction_inquestion":2,
         "questioncount":2,
         "set": 1
     },
 
     {
-        "id":1,
+        "id":2,
         "name":"Tip The Scale",
         "classname":"ATCScaleView",
         "standard":"CCSS.Math.Content.3.NF.A.3d",
+        "nr_fraction_inquestion":1,
         "set": 1,
         "questioncount":2
     },
@@ -24,7 +26,8 @@
        "classname":"NumberLineView",
        "standard":"CCSS.Math.Content.3.NF.A.3d",
        "questioncount":2,
-       "set": 1          
+        "nr_fraction_inquestion":1,
+        "set": 1
     }
     
                 
@@ -32,8 +35,9 @@
    
    "sets":[{
           "id":1,
-                "numerator" :   [1,2,3,4,5,6,7,8,9,10],
-                "denominator" : [1,1,1,1,1,1,1,1,1,1]
+          
+                "numerator" :   [1,2,3,4,5],
+                "denominator" : [1,1,1,1,1]
               },
             
              {

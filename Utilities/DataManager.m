@@ -83,9 +83,30 @@
            activity = [[MFActivityModel alloc]initWithDictionary:obj];
            //get sets
            int set = [[obj objectForKey:@"set"]integerValue];
-           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:dict]mutableCopy] andDesiredCount:activity.maxQuestions];
+           int nr_fraction_inquestion = [[obj objectForKey:@"nr_fraction_inquestion"]integerValue];
            
-           activity.questionsSet = a;
+           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:dict]mutableCopy] andDesiredCount:activity.maxQuestions * nr_fraction_inquestion];
+           if(nr_fraction_inquestion>1){
+               //select pairs
+               NSMutableArray * array = [NSMutableArray new];
+               while(a.count>0) {
+                int random =arc4random()%a.count;
+                MFFraction  *a1 = a[random];
+               [a removeObjectAtIndex:random];
+                MFFraction  *a2 = a[arc4random()%a.count];
+                random =arc4random()%a.count;
+               [a removeObjectAtIndex:random];
+                NSArray * k =@[a1,a2];
+               [array addObject:k];
+               }
+               activity.questionsSet = array;
+
+               
+           }else{
+               activity.questionsSet = a;
+
+           }
+           
            
            *stop = YES;
        }

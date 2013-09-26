@@ -42,6 +42,10 @@
     return self;
 }
 
+-(void)setFraction:(MFFraction *)fraction{
+    _fraction =fraction;
+    [self setNeedsDisplay];
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -88,9 +92,7 @@
     [[UIColor blackColor] setStroke];
     rectanglePath.lineWidth = 1;
     [rectanglePath stroke];
-    
-    //center.y-5 height
-    //// Text Drawing
+
     CGRect textRect = CGRectMake(x, 45, w, center.y-5);
     
     

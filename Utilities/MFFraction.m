@@ -38,6 +38,10 @@
     }
     return self;
 }
+
+-(float)value{
+    return self.numerator*1.0/self.denominator*1.0;
+}
 - (NSComparisonResult)compare:(MFFraction *)otherObject {
     float a =  self.numerator/self.denominator;
     float b = otherObject.numerator/otherObject.denominator;

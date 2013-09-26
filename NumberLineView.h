@@ -35,6 +35,8 @@
 
 -(BOOL)checkAnswer;
 -(void)reset;
-@property (nonatomic,strong) MFFraction * currentFraction;
+@property (nonatomic,strong) NSArray * currentFractions;
+
+
 
 @end

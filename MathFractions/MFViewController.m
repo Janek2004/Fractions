@@ -78,7 +78,7 @@
     else{
         [[MFManager sharedManager]setMfuser:user];
         self.userNameTextField.text = user.name;
-        self.userName.text = user.name;
+        self.userName.text = [NSString stringWithFormat:@"Hi %@", user.name];
     }
 }
 
@@ -184,12 +184,13 @@
     else{
         [self.dataManager loginUser:mf];
         [self hideMenu:nil];
-        self.userName.text = mf.name;
+        self.userName.text = [NSString stringWithFormat:@"Hi %@", mf.name];
     }
 }
 
 - (IBAction)newUser:(id)sender {
     //DATA MANAGER
+    #warning TO DO IMPLEMENT THIS METHOD
 }
 
 #pragma mark picker
@@ -210,7 +211,7 @@
 
 
 
-#warning TO DO restore name and email
-#warning TO DO handle saving and restoring progress
+#warning TO DO handle saving
+
 
 @end
