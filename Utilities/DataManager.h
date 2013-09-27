@@ -36,7 +36,6 @@
 -(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user;
 -(MFUser *)getCurrentUser;
 -(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
-
 -(void)loginUser:(MFUser *)user;
 
 

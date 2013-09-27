@@ -36,7 +36,6 @@
 -(void)reset;
 
 @optional
-//@property (nonatomic,strong) MFFraction * currentFraction;
 @property (nonatomic,strong) NSArray * currentFractions;
 
 @end

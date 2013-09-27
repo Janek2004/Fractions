@@ -214,12 +214,8 @@
             *stop = YES;
         }
     }];
-    return mf;
-    
+    return mf;    
 }
-
-
-
 
 -(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user{
     

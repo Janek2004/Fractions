@@ -34,6 +34,8 @@
 		4F69F7A317F4CB61007D6510 /* unselectedDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F69F7A117F4CB61007D6510 /* unselectedDot.png */; };
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
+		4FDFE0BB17F5D7B8008D31D4 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0B917F5D7B8008D31D4 /* happy.png */; };
+		4FDFE0BC17F5D7B8008D31D4 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0BA17F5D7B8008D31D4 /* sad.png */; };
 		4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7BA7E179F286B0025DAF7 /* Segment.m */; };
 		4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */; };
 		4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02B17E7AE48004AF076 /* KxIntroView.m */; };
@@ -106,6 +108,8 @@
 		4F97803317A31C7A0093294A /* PracticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeViewController.h; sourceTree = "<group>"; };
 		4F97803417A31C7A0093294A /* PracticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeViewController.m; sourceTree = "<group>"; };
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
+		4FDFE0B917F5D7B8008D31D4 /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happy.png; sourceTree = "<group>"; };
+		4FDFE0BA17F5D7B8008D31D4 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sad.png; sourceTree = "<group>"; };
 		4FE7BA7D179F286B0025DAF7 /* Segment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
 		4FE7BA7E179F286B0025DAF7 /* Segment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCScaleView.h; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4FDFE0B917F5D7B8008D31D4 /* happy.png */,
+				4FDFE0BA17F5D7B8008D31D4 /* sad.png */,
 				4F69F7A017F4CB61007D6510 /* selectedDot.png */,
 				4F69F7A117F4CB61007D6510 /* unselectedDot.png */,
 				4F69F79E17F4CB3E007D6510 /* map.png */,
@@ -427,11 +433,13 @@
 				4F69F7A317F4CB61007D6510 /* unselectedDot.png in Resources */,
 				4F14C1F817999FD90043B1D4 /* Default@2x.png in Resources */,
 				4F14C1FA17999FD90043B1D4 /* Default-568h@2x.png in Resources */,
+				4FDFE0BB17F5D7B8008D31D4 /* happy.png in Resources */,
 				4F69F79F17F4CB3E007D6510 /* map.png in Resources */,
 				4FEFE03717E8D829004AF076 /* fractio.jpg in Resources */,
 				4FFA9C0C17F391F300F6FF32 /* scaleleft.png in Resources */,
 				4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */,
 				4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */,
+				4FDFE0BC17F5D7B8008D31D4 /* sad.png in Resources */,
 				4F69F7A217F4CB61007D6510 /* selectedDot.png in Resources */,
 				4FFA9C0D17F391F300F6FF32 /* scaleright.png in Resources */,
 			);

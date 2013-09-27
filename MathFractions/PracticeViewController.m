@@ -52,9 +52,11 @@
 @property (strong, nonatomic) IBOutlet UIView *activityContainer;
 @property int currentQuestionIndex;
 @property int wrongCount;
-
+@property (strong, nonatomic) IBOutlet UIView *feedbackView;
 @property (strong, nonatomic) IBOutlet UIView *gameOver;
-
+@property (strong, nonatomic) IBOutlet UIImageView *feedbackImageView;
+@property (strong, nonatomic) IBOutlet UILabel *fedbackLabel;
+@property BOOL right;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)answerSelected:(id)sender;
@@ -63,6 +65,54 @@
 @end
 
 @implementation PracticeViewController
+
+-(void)loadView{
+    [super loadView];
+    self.view.frame = self.view.bounds;
+}
+
+-(void)showFeedback:(BOOL)positive{
+    _right = positive;
+    UIImage * img = positive?[UIImage imageNamed:@"happy"]:[UIImage imageNamed:@"sad"];
+    NSString * feedback = positive?@"Good Job!":@"Try again!";
+    self.fedbackLabel.text = feedback;
+    self.feedbackImageView.image= img;
+    self.feedbackView.alpha = 0;
+   [self.view addSubview:self.feedbackView];
+
+    [UIView animateWithDuration:0.8 animations:^{
+        self.feedbackView.alpha = 1;
+        CGRect r = self.feedbackView.frame;
+        CGPoint center =self.view.center;
+
+        NSLog(@"%f %f, %f",self.view.bounds.size.width, CGRectGetWidth(r),center.x);
+        
+        float x = center.x -  CGRectGetHeight(r)/2.0;
+        float y = center.y -  CGRectGetWidth(r)/2.0;
+        r.origin.x = y;
+        r.origin.y = x;
+        self.feedbackView.frame = r;
+        
+
+    }];
+}
+
+- (IBAction)dismissFeedback:(id)sender {
+    if(_right){
+        [self nextQuestion];
+    }
+    
+    [UIView animateWithDuration:0.8 animations:^{
+        self.feedbackView.alpha = 0;
+        
+    }completion:^(BOOL finished) {
+        [self.feedbackView removeFromSuperview];
+       
+        
+        
+    }];
+
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -105,7 +155,7 @@
 }
 
 -(void)nextQuestion{
-    _currentQuestionIndex++;
+     _currentQuestionIndex++;
     if(_currentQuestionIndex<self.currentActivity.questionsSet.count){
         [self displayFraction];
     }
@@ -203,16 +253,20 @@
             
             _manager = [MFManager sharedManager];
            [self.dataManager saveAttempt:attempt forUser:self.manager.mfuser];
-           [self nextQuestion];
-            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Good Job!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [a show];
+           [self showFeedback:YES];
+            
             
         }
         else{
             _wrongCount ++;
-            NSLog(@"Bad");
-            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"No" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [a show];
+           
+            if(_wrongCount > 2)
+            {
+                NSLog(@"Show the correct answer");
+            }
+            else{
+             [self showFeedback:NO];
+           }
             
         }
     }
