@@ -106,11 +106,15 @@
 -(void)checkProgress{
     //get current progress
     MFUser * mf = [[MFManager sharedManager]mfuser];
+    //set unselected images as well
     
     for(NSNumber * nm in mf.completed){
         [UIView animateWithDuration:1.0 animations:^{
                         [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:nil forState:UIControlStateNormal];
-            [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
+           // [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
+            [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
+            
+             [(UIButton*)[self.view viewWithTag:nm.integerValue] setImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
             
         }];
         
@@ -208,7 +212,6 @@
        return  [NSString stringWithFormat:@"%@",_array[row]];
 
 }
-
 
 
 #warning TO DO handle saving
