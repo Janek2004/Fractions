@@ -33,6 +33,12 @@
 #import "MFUser.h"
 #import "MFAttempt.h"
 
+
+@interface DataManager()
+@property (nonatomic,strong) NSMutableDictionary * appData;
+
+@end
+
 @implementation DataManager
 
 - (id)init
@@ -73,9 +79,12 @@
 
 -(MFActivityModel *)getActivity:(int)activityId{
     
-    //get all data
-   NSDictionary *dict = [self getLocalJSON];
-   NSArray * a = [dict objectForKey:@"activities"];
+   
+    if(!self.appData){
+        [self getLocalJSON];
+    }
+
+   NSArray * a = [self.appData objectForKey:@"activities"];
    __block MFActivityModel * activity;
     [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
        if([[obj objectForKey:@"id"]integerValue]== activityId)
@@ -85,7 +94,7 @@
            int set = [[obj objectForKey:@"set"]integerValue];
            int nr_fraction_inquestion = [[obj objectForKey:@"nr_fraction_inquestion"]integerValue];
            
-           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:dict]mutableCopy] andDesiredCount:activity.maxQuestions * nr_fraction_inquestion];
+           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:self.appData]mutableCopy] andDesiredCount:activity.maxQuestions * nr_fraction_inquestion];
            if(nr_fraction_inquestion>1){
                //select pairs
                NSMutableArray * array = [NSMutableArray new];
@@ -137,19 +146,38 @@
             }
             *stop = YES;
         }
-
     }];
-    
-    
      return fractions;
 }
 
 
 
 -(NSDictionary *)getLocalJSON{
+   
+    NSString *docFolder = [DataManager applicationDocumentsDirectory];
+    NSString * docPath = [docFolder stringByAppendingPathComponent:@"data.json"];
     NSError * err;
+  
+    
+    if([[NSFileManager defaultManager]fileExistsAtPath:docPath isDirectory:NO])
+    {
+        NSData *data = [NSData dataWithContentsOfFile:docPath options:NSDataReadingMappedIfSafe error:&err];
+        if(err){
+            NSLog(@"Docs Error %@", err.debugDescription);
+            return nil;
+        }
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
+        if(err){
+            NSLog(@"Docs to JSON Error %@", err.debugDescription);
+        }
+        self.appData = [json mutableCopy];
+        
+        NSLog(@"App Data is: %@",self.appData);
+        return self.appData;
+    }
+   
     NSString * path = [[NSBundle mainBundle]pathForResource:@"data" ofType:@"json"];
-
     NSData *data = [NSData dataWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:&err];
     if(err){
         NSLog(@"Error %@", err.debugDescription);
@@ -160,16 +188,17 @@
     if(err){
         NSLog(@"Error %@", err.debugDescription);
     }
-    
-
-    
+    self.appData = [json mutableCopy];
     return json;
 }
 
 
 -(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name{
-    NSDictionary * dict = [self getLocalJSON];
-    NSArray * users = [dict objectForKey:@"users"];
+    if(!self.appData){
+     [self getLocalJSON];
+    }
+    
+        NSArray * users = [self.appData objectForKey:@"users"];
     __block MFUser * mf;
     
 
@@ -180,7 +209,7 @@
         NSMutableArray * completed = [obj objectForKey:@"completed"];
         mf1.completed = completed;
         
-        if([mf1.name isEqualToString: name] &&  pin.integerValue == mf1.userPin){
+        if([mf1.name isEqualToString: name] &&  pin.integerValue == mf1.pin){
                mf= mf1;
             *stop = YES;
         }
@@ -198,14 +227,18 @@
 
     if(!userName) return nil;
     
-    NSDictionary * dict = [self getLocalJSON];
-    NSArray * users = [dict objectForKey:@"users"];
+    if(!self.appData){
+        [self getLocalJSON];
+    }
+    
+    
+    NSArray * users = [self.appData objectForKey:@"users"];
     __block MFUser * mf;
     
     [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
      
        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
-        if([mf1.name isEqualToString: userName] && mf1.userPin== userPin.integerValue){
+        if([mf1.name isEqualToString: userName] && mf1.pin== userPin.integerValue){
             
             NSMutableArray * completed = [obj objectForKey:@"completed"];
             mf1.completed = completed;
@@ -218,15 +251,61 @@
 }
 
 -(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user{
+    // get current user
+    NSMutableArray * array = user.progress;
+    [array addObject:attempt];
+    user.progress = array;
+
+    //save to disk will be performed in  app delegate
+    if(!self.appData){
+        [self getLocalJSON];
+    }
     
-   
+    NSMutableArray * users = [[self.appData objectForKey:@"users"]mutableCopy];
+//    __block MFUser * mf = user;
+    [users enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
+        
+        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
+        
+        if([mf1.name isEqualToString: user.name] &&  user.pin == mf1.pin){
+            [users replaceObjectAtIndex:idx withObject:user];
+     
+            [self.appData setObject:users forKey:@"users"];
+            *stop = YES;
+        }
+    }];
+
+    NSError * err;
+    
+    NSString *docFolder = [DataManager applicationDocumentsDirectory];
+    NSString * path = [docFolder stringByAppendingPathComponent:@"data.json"];
+    
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:self.appData options:NSJSONWritingPrettyPrinted error:&err];
+    [jsonData writeToFile:path atomically:YES];
+
+}
+
+
++ (NSString *) applicationDocumentsDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
+
+
+-(void)markActivity:(int )activity asCompletedForUser:(MFUser *)user{
+    
+    
+
 }
 
 
 -(void)loginUser:(MFUser *)user{
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
-    [ud setObject: [NSNumber numberWithInt:user.userPin] forKey:@"current_pin"];
+    [ud setObject: [NSNumber numberWithInt:user.pin] forKey:@"current_pin"];
     [ud setObject:user.name    forKey:@"current_user"];
     [ud synchronize];
 }

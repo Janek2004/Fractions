@@ -239,20 +239,23 @@
     //calculate score
     if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
         BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
+        MFAttempt *attempt = [[MFAttempt alloc]init];
+        attempt.attempt_date = [NSDate new];
+        attempt.score =[[NSNumber numberWithBool:check]integerValue];
+        attempt.fractions =[(id <MFPracticeRequiredMethods>)  self.practiceView currentFractions];
+        attempt.activity = self.activityId;
+        if(!_manager)
+        {
+            _manager = [MFManager sharedManager];
+        }
+        
+        [self.dataManager saveAttempt:attempt forUser:self.manager.mfuser];
         if(check){
             //good job - > new question
             //play sound
             NSLog(@"Good Job");
-            
-            
-            MFAttempt *attempt = [[MFAttempt alloc]init];
-            attempt.attempt_date = [NSDate new];
-            attempt.score =[[NSNumber numberWithBool:check]integerValue];
-            attempt.fractions =[(id <MFPracticeRequiredMethods>)  self.practiceView currentFractions];
-            attempt.activity = self.activityId;
-            
             _manager = [MFManager sharedManager];
-           [self.dataManager saveAttempt:attempt forUser:self.manager.mfuser];
+          
            [self showFeedback:YES];
             
             
@@ -269,6 +272,7 @@
            }
             
         }
+       
     }
     
     //compare the scores

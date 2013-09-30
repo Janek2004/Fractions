@@ -38,16 +38,14 @@
 @implementation MFUtilities
 
 
-
-
 -(void)presentIntroIn:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Math Fractions"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"About US"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
 
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
@@ -66,7 +64,7 @@
 
 
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller{
-    //possibly we can store it in database file
+  //probably we can store it in database file
 #warning store it in database
     if(activity == 1)
     {
@@ -89,11 +87,11 @@
 -(void)presentScaleIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Scale Activity"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
@@ -109,10 +107,6 @@
     vc.completionHandler =handler;
     
     [vc presentInView:[(UIViewController *) viewcontroller view]];
-    
-   // [[(UIViewController *) viewcontroller view] addSubview:vc.introView];
-    
-    
 
     
 }
@@ -120,11 +114,11 @@
 -(void)presentNumberLineIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
@@ -147,11 +141,11 @@
 -(void)presentFillGlassIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio.jpg"]];
+                                                           withImage: [UIImage imageNamed:@"fractio"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;

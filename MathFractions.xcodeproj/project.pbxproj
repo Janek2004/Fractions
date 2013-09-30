@@ -36,13 +36,17 @@
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
 		4FDFE0BB17F5D7B8008D31D4 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0B917F5D7B8008D31D4 /* happy.png */; };
 		4FDFE0BC17F5D7B8008D31D4 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0BA17F5D7B8008D31D4 /* sad.png */; };
+		4FDFE0C917F9DC71008D31D4 /* walk4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0C517F9DC71008D31D4 /* walk4.png */; };
+		4FDFE0CA17F9DC71008D31D4 /* walk3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0C617F9DC71008D31D4 /* walk3.png */; };
+		4FDFE0CB17F9DC71008D31D4 /* walk2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0C717F9DC71008D31D4 /* walk2.png */; };
+		4FDFE0CC17F9DC71008D31D4 /* walk1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0C817F9DC71008D31D4 /* walk1.png */; };
+		4FDFE0CE17FA00B3008D31D4 /* fractio.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFE0CD17FA00B3008D31D4 /* fractio.png */; };
 		4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7BA7E179F286B0025DAF7 /* Segment.m */; };
 		4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */; };
 		4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02B17E7AE48004AF076 /* KxIntroView.m */; };
 		4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02D17E7AE48004AF076 /* KxIntroViewController.m */; };
 		4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02F17E7AE48004AF076 /* KxIntroViewPage.m */; };
 		4FEFE03417E7B10A004AF076 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FEFE03317E7B10A004AF076 /* data.json */; };
-		4FEFE03717E8D829004AF076 /* fractio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4FEFE03617E8D829004AF076 /* fractio.jpg */; };
 		4FEFE03A17E8D8DC004AF076 /* MFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE03917E8D8DC004AF076 /* MFManager.m */; };
 		4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE03C17E8DCED004AF076 /* MFUtilities.m */; };
 		4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */; };
@@ -110,6 +114,11 @@
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
 		4FDFE0B917F5D7B8008D31D4 /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happy.png; sourceTree = "<group>"; };
 		4FDFE0BA17F5D7B8008D31D4 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sad.png; sourceTree = "<group>"; };
+		4FDFE0C517F9DC71008D31D4 /* walk4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk4.png; sourceTree = "<group>"; };
+		4FDFE0C617F9DC71008D31D4 /* walk3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk3.png; sourceTree = "<group>"; };
+		4FDFE0C717F9DC71008D31D4 /* walk2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk2.png; sourceTree = "<group>"; };
+		4FDFE0C817F9DC71008D31D4 /* walk1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk1.png; sourceTree = "<group>"; };
+		4FDFE0CD17FA00B3008D31D4 /* fractio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fractio.png; sourceTree = "<group>"; };
 		4FE7BA7D179F286B0025DAF7 /* Segment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
 		4FE7BA7E179F286B0025DAF7 /* Segment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCScaleView.h; sourceTree = "<group>"; };
@@ -121,7 +130,6 @@
 		4FEFE02E17E7AE48004AF076 /* KxIntroViewPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroViewPage.h; sourceTree = "<group>"; };
 		4FEFE02F17E7AE48004AF076 /* KxIntroViewPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxIntroViewPage.m; sourceTree = "<group>"; };
 		4FEFE03317E7B10A004AF076 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		4FEFE03617E8D829004AF076 /* fractio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fractio.jpg; sourceTree = "<group>"; };
 		4FEFE03817E8D8DC004AF076 /* MFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFManager.h; path = Utilities/MFManager.h; sourceTree = "<group>"; };
 		4FEFE03917E8D8DC004AF076 /* MFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFManager.m; path = Utilities/MFManager.m; sourceTree = "<group>"; };
 		4FEFE03B17E8DCED004AF076 /* MFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUtilities.h; path = Utilities/MFUtilities.h; sourceTree = "<group>"; };
@@ -267,6 +275,20 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		4FDFE0C417F9DC55008D31D4 /* Fractio */ = {
+			isa = PBXGroup;
+			children = (
+				4FDFE0C517F9DC71008D31D4 /* walk4.png */,
+				4FDFE0C617F9DC71008D31D4 /* walk3.png */,
+				4FDFE0C717F9DC71008D31D4 /* walk2.png */,
+				4FDFE0C817F9DC71008D31D4 /* walk1.png */,
+				4FDFE0B917F5D7B8008D31D4 /* happy.png */,
+				4FDFE0BA17F5D7B8008D31D4 /* sad.png */,
+				4FDFE0CD17FA00B3008D31D4 /* fractio.png */,
+			);
+			name = Fractio;
+			sourceTree = "<group>";
+		};
 		4FEFE02517E7ABE8004AF076 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,14 +327,12 @@
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4FDFE0B917F5D7B8008D31D4 /* happy.png */,
-				4FDFE0BA17F5D7B8008D31D4 /* sad.png */,
+				4FDFE0C417F9DC55008D31D4 /* Fractio */,
 				4F69F7A017F4CB61007D6510 /* selectedDot.png */,
 				4F69F7A117F4CB61007D6510 /* unselectedDot.png */,
 				4F69F79E17F4CB3E007D6510 /* map.png */,
 				4FFA9C0A17F391F300F6FF32 /* scaleleft.png */,
 				4FFA9C0B17F391F300F6FF32 /* scaleright.png */,
-				4FEFE03617E8D829004AF076 /* fractio.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -429,19 +449,23 @@
 			files = (
 				4F14C1EE17999FD90043B1D4 /* InfoPlist.strings in Resources */,
 				4F14C1F617999FD90043B1D4 /* Default.png in Resources */,
+				4FDFE0CA17F9DC71008D31D4 /* walk3.png in Resources */,
 				4FEFE03417E7B10A004AF076 /* data.json in Resources */,
 				4F69F7A317F4CB61007D6510 /* unselectedDot.png in Resources */,
 				4F14C1F817999FD90043B1D4 /* Default@2x.png in Resources */,
 				4F14C1FA17999FD90043B1D4 /* Default-568h@2x.png in Resources */,
 				4FDFE0BB17F5D7B8008D31D4 /* happy.png in Resources */,
 				4F69F79F17F4CB3E007D6510 /* map.png in Resources */,
-				4FEFE03717E8D829004AF076 /* fractio.jpg in Resources */,
 				4FFA9C0C17F391F300F6FF32 /* scaleleft.png in Resources */,
+				4FDFE0CB17F9DC71008D31D4 /* walk2.png in Resources */,
 				4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */,
+				4FDFE0CC17F9DC71008D31D4 /* walk1.png in Resources */,
+				4FDFE0CE17FA00B3008D31D4 /* fractio.png in Resources */,
 				4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */,
 				4FDFE0BC17F5D7B8008D31D4 /* sad.png in Resources */,
 				4F69F7A217F4CB61007D6510 /* selectedDot.png in Resources */,
 				4FFA9C0D17F391F300F6FF32 /* scaleright.png in Resources */,
+				4FDFE0C917F9DC71008D31D4 /* walk4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

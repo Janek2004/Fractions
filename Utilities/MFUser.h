@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MFUser : NSObject
--(instancetype)initWithDictionary:(NSDictionary *)dict;
+@interface MFUser : NSObject <NSCoding>
 
+-(instancetype)initWithDictionary:(NSDictionary *)dict;
+-(NSDictionary *)dictionaryRepresentation;
 @property (nonatomic,strong) NSMutableArray * progress;
 @property (nonatomic,strong) NSMutableArray * completed;
-@property(nonatomic) int  userPin;
+@property(nonatomic) int  pin;
 @property(nonatomic,strong)  NSString * name;
 
 

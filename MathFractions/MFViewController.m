@@ -46,7 +46,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 
 @property (strong, nonatomic) IBOutlet UILabel *userName;
-
+@property (strong, nonatomic) IBOutlet UIImageView *fractioImageView;
 
 @property (strong, nonatomic) NSArray * array;
 
@@ -56,6 +56,9 @@
 
 - (IBAction)loginUser:(id)sender;
 - (IBAction)newUser:(id)sender;
+
+- (IBAction)activityInfo:(id)sender;
+
 
 @end
 
@@ -70,6 +73,12 @@
     _pickerView.delegate = self;
     _pickerView.dataSource= self;
 
+    NSArray * images = @[[UIImage imageNamed:@"walk1"],[UIImage imageNamed:@"walk2"],[UIImage imageNamed:@"walk3"],[UIImage imageNamed:@"walk4"]];
+    
+    self.fractioImageView.animationImages = images;
+    self.fractioImageView.animationDuration=1;
+    [self.fractioImageView startAnimating];
+    
     MFUser * user =  [_dataManager getCurrentUser];
     if(!user){
         [self showMenu:nil];
@@ -80,15 +89,38 @@
         self.userNameTextField.text = user.name;
         self.userName.text = [NSString stringWithFormat:@"Hi %@", user.name];
     }
+    
+    
 }
 
 
 - (IBAction)showActivity:(id)sender {
-    int tag  = [sender tag];
-    PracticeViewController * pv = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
-    pv.activityId = tag;
+    UIButton * btn =  (UIButton *) sender;
+    CGRect r =    self.fractioImageView.frame;
+    r.origin = btn.frame.origin;
+    self.fractioImageView.frame = r;
 
-    [self presentViewController:pv animated:YES completion:^{}];
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.fractioImageView.center = btn.center;
+        
+    } completion:
+     
+     ^(BOOL finished) {
+         if(finished){
+         self.fractioImageView.center = btn.center;
+         CGRect r =    self.fractioImageView.frame;
+         r.origin = btn.frame.origin;
+         self.fractioImageView.frame = r;
+ 
+        PracticeViewController * pv = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
+         pv.activityId = btn.tag;
+        [self presentViewController:pv animated:YES completion:^{}];
+         
+         }
+         
+     }];
+    
     
 }
 
@@ -113,14 +145,7 @@
                         [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:nil forState:UIControlStateNormal];
            // [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
             [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
-            
-             [(UIButton*)[self.view viewWithTag:nm.integerValue] setImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
-            
         }];
-        
-
-        
-    
     }
 }
 
@@ -139,7 +164,7 @@
 }
 
 - (IBAction)hideMenu:(id)sender {
-   
+  
     [UIView animateWithDuration:1
                      animations:^{
                          self.MenuView.alpha = 0;
@@ -195,6 +220,10 @@
 - (IBAction)newUser:(id)sender {
     //DATA MANAGER
     #warning TO DO IMPLEMENT THIS METHOD
+}
+
+- (IBAction)activityInfo:(id)sender {
+    NSLog(@"Activity ");
 }
 
 #pragma mark picker
