@@ -1,4 +1,0 @@
-Fractions
-=========
-
-Fractions App
