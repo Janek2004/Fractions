@@ -100,7 +100,7 @@
         NSLog(@"Error %@",error.debugDescription);
     }
 
-    NSLog(@"Activity Array %@",array);
+
     MFActivity *act;
     if(array.count==1){
     
@@ -108,13 +108,18 @@
         if(!self.appData){
             [self getLocalJSON];
         }
+        
+           NSLog(@"Before");
         NSSet *set = [self getSet:activityId fromDict:self.appData];
         //randomize it
         
-        
+           NSLog(@"Before");
         
         NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
+                  NSLog(@"Before");
         act.set = [NSSet setWithArray:a];
+           NSLog(@"Before");
+
         return act;
     }
 

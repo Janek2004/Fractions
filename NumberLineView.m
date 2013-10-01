@@ -79,7 +79,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        fraction = [MFFraction new];
+       // fraction = [MFFraction new];
         
         _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
         _piecesArray = [[NSMutableArray alloc]initWithCapacity:0];
@@ -112,9 +112,15 @@
 }
 
 -(void)setCurrentFractions:(NSArray *)currentFractions{
+   
+    
+    
     MFFraction * currentFraction = currentFractions[0];
     _currentFraction = currentFraction;
+
     _fractionView.fraction = currentFraction;
+    
+    
     [_fractionView setNeedsDisplay];
 
 }

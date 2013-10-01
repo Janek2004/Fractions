@@ -174,7 +174,9 @@
     if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
 #warning get questions that belong to activity
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
-//        id question =self.currentActivity.questionsSet[_currentQuestionIndex];
+
+        
+        //        id question =self.currentActivity.questionsSet[_currentQuestionIndex];
 //      
 //        if([question isKindOfClass:[NSArray class]]){
 //            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
