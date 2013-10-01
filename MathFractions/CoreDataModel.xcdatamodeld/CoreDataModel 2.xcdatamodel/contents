@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MFActivity" representedClassName="MFActivity" syncable="YES">
+        <attribute name="activityid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="class_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fractionCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxQuestions" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="standard" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="set" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MFFraction" inverseName="activity" inverseEntity="MFFraction" syncable="YES"/>
+    </entity>
+    <entity name="MFAttempt" representedClassName="MFAttempt" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="attempt_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFUser" inverseName="attempts" inverseEntity="MFUser" syncable="YES"/>
+    </entity>
+    <entity name="MFCompleted" representedClassName="MFCompleted" syncable="YES">
+        <attribute name="completed_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFUser" inverseName="completed" inverseEntity="MFUser" syncable="YES"/>
+    </entity>
+    <entity name="MFFraction" representedClassName="MFFraction" syncable="YES">
+        <attribute name="denominator" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="numerator" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFActivity" inverseName="set" inverseEntity="MFActivity" syncable="YES"/>
+    </entity>
+    <entity name="MFUser" representedClassName="MFUser" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pin" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="attempts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MFAttempt" inverseName="user" inverseEntity="MFAttempt" syncable="YES"/>
+        <relationship name="completed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MFCompleted" inverseName="activity" inverseEntity="MFCompleted" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MFActivity" positionX="0" positionY="0" width="128" height="133"/>
+        <element name="MFCompleted" positionX="540" positionY="261" width="128" height="73"/>
+        <element name="MFFraction" positionX="34" positionY="245" width="128" height="88"/>
+        <element name="MFAttempt" positionX="540" positionY="113" width="128" height="103"/>
+        <element name="MFUser" positionX="180" positionY="128" width="128" height="103"/>
+    </elements>
+</model>

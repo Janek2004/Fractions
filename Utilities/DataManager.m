@@ -28,10 +28,11 @@
  */
 
 #import "DataManager.h"
-#import "MFActivityModel.h"
+#import "MFActivity.h"
 #import "MFFraction.h"
 #import "MFUser.h"
 #import "MFAttempt.h"
+#import "MFAppDelegate.h"
 
 
 @interface DataManager()
@@ -53,6 +54,8 @@
 
 -(NSMutableArray *)randomize:(NSMutableArray *) array fromSet:(NSMutableArray *)defaultSet andDesiredCount:(int)count
 {
+    
+   
     if(!array){
         array = [NSMutableArray new];
     }
@@ -77,58 +80,103 @@
 
 
 
--(MFActivityModel *)getActivity:(int)activityId{
+-(MFActivity *)getActivity:(int)activityId{
     
-   
-    if(!self.appData){
-        [self getLocalJSON];
+    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"MFActivity" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(activityid == %d)",activityId];
+    
+    [request setPredicate:predicate];
+    
+    
+    NSError *error;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if(error){
+        NSLog(@"Error %@",error.debugDescription);
     }
 
-   NSArray * a = [self.appData objectForKey:@"activities"];
-   __block MFActivityModel * activity;
-    [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-       if([[obj objectForKey:@"id"]integerValue]== activityId)
-       {
-           activity = [[MFActivityModel alloc]initWithDictionary:obj];
-           //get sets
-           int set = [[obj objectForKey:@"set"]integerValue];
-           int nr_fraction_inquestion = [[obj objectForKey:@"nr_fraction_inquestion"]integerValue];
-           
-           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:self.appData]mutableCopy] andDesiredCount:activity.maxQuestions * nr_fraction_inquestion];
-           if(nr_fraction_inquestion>1){
-               //select pairs
-               NSMutableArray * array = [NSMutableArray new];
-               while(a.count>0) {
-                int random =arc4random()%a.count;
-                MFFraction  *a1 = a[random];
-               [a removeObjectAtIndex:random];
-                MFFraction  *a2 = a[arc4random()%a.count];
-                random =arc4random()%a.count;
-               [a removeObjectAtIndex:random];
-                NSArray * k =@[a1,a2];
-               [array addObject:k];
-               }
-               activity.questionsSet = array;
+    NSLog(@"Activity Array %@",array);
+    MFActivity *act;
+    if(array.count==1){
+    
+        act= array[0];
+        if(!self.appData){
+            [self getLocalJSON];
+        }
+        NSSet *set = [self getSet:activityId fromDict:self.appData];
+        //randomize it
+        
+        
+        
+        NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
+        act.set = [NSSet setWithArray:a];
+        return act;
+    }
 
-               
-           }else{
-               activity.questionsSet = a;
-
-           }
-           
-           
-           *stop = YES;
-       }
-   }];
     
     
-    return activity;
+
+    
+    
+//    if(!self.appData){
+//        [self getLocalJSON];
+//    }
+//
+//   NSArray * a = [self.appData objectForKey:@"activities"];
+//   __block MFActivity * activity;
+//    [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
+//       if([[obj objectForKey:@"id"]integerValue]== activityId)
+//       {
+//           activity = [[MFActivity alloc]initWithDictionary:obj];
+////           //get sets
+//           int set = [[obj objectForKey:@"set"]integerValue];
+//           int nr_fraction_inquestion = [[obj objectForKey:@"nr_fraction_inquestion"]integerValue];
+//           
+//           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:self.appData]mutableCopy] andDesiredCount:activity.maxQuestions * nr_fraction_inquestion];
+//           if(nr_fraction_inquestion>1){
+//               //select pairs
+//               NSMutableArray * array = [NSMutableArray new];
+//               while(a.count>0) {
+//                int random =arc4random()%a.count;
+//                MFFraction  *a1 = a[random];
+//               [a removeObjectAtIndex:random];
+//                MFFraction  *a2 = a[arc4random()%a.count];
+//                random =arc4random()%a.count;
+//               [a removeObjectAtIndex:random];
+//                NSArray * k =@[a1,a2];
+//               [array addObject:k];
+//               }
+//               activity.questionsSet = array;
+//
+//               
+//           }else{
+//               activity.questionsSet = a;
+//
+//           }
+//
+//           
+//           *stop = YES;
+//       }
+//   }];
+    
+    
+    return nil;
     
 }
 
--(NSArray *)getSet:(int)setId fromDict:(NSDictionary *)dict {
-    NSMutableArray * fractions = [NSMutableArray new];
-    NSArray * a = [dict objectForKey:@"sets"];
+
+
+
+-(NSMutableSet *)getSet:(int)setId fromDict:(NSDictionary *)dict {
+   NSMutableSet * fractions = [NSMutableSet new];
+   NSArray * a = [dict objectForKey:@"sets"];
+   NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+ 
     [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
         if([[obj objectForKey:@"id"]integerValue] == setId)
         {
@@ -137,16 +185,20 @@
             if(numerators.count !=denominators.count){
                 *stop = YES;
             }
-            
+
             for(int i=0; i<numerators.count;i ++){
                 
-                MFFraction * fraction =[[MFFraction alloc]initWithNumerator:[numerators[i] integerValue] andDenominatro:[ denominators[i] integerValue]];
+              MFFraction * fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
+               fraction.numerator =[numerators[i] integerValue] ;
+               fraction.denominator =[denominators[i] integerValue] ;
+
                 [fractions addObject: fraction];
-            
-            }
-            *stop = YES;
+
         }
-    }];
+              *stop = YES;
+            }
+        }];
+
      return fractions;
 }
 
@@ -173,7 +225,7 @@
         }
         self.appData = [json mutableCopy];
         
-        NSLog(@"App Data is: %@",self.appData);
+    
         return self.appData;
     }
    
@@ -194,94 +246,106 @@
 
 
 -(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name{
-    if(!self.appData){
-     [self getLocalJSON];
+    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"MFUser" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(name LIKE[c] %@)",name];
+    
+    [request setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    
+    NSError *error;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if(error){
+        NSLog(@"Error %@",error.debugDescription);
     }
+    NSLog(@"Array %@",array);
     
-        NSArray * users = [self.appData objectForKey:@"users"];
-    __block MFUser * mf;
     
+    MFUser *mf;
+    if(array.count==1)
+    {
+        mf = array[0];
+  
+    }
 
-    [users enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-        
-        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
-        //get completed
-        NSMutableArray * completed = [obj objectForKey:@"completed"];
-        mf1.completed = completed;
-        
-        if([mf1.name isEqualToString: name] &&  pin.integerValue == mf1.pin){
-               mf= mf1;
-            *stop = YES;
-        }
-    }];
+    
     
      return mf;
     
 }
 
 -(MFUser *)getCurrentUser{
-    NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
+//    NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
+//
+//    NSString *userName= [ud objectForKey:@"current_user"];
+//    NSString *userPin= [ud objectForKey:@"current_pin"];
 
-    NSString *userName= [ud objectForKey:@"current_user"];
-    NSString *userPin= [ud objectForKey:@"current_pin"];
+//    if(!userName) return nil;
+//    
+//    if(!self.appData){
+//        [self getLocalJSON];
+//    }
+//    
+//    
+//    NSArray * users = [self.appData objectForKey:@"users"];
+//    __block MFUser * mf;
+//    
+//    [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//     
+//       MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
+//        if([mf1.name isEqualToString: userName] && mf1.pin== userPin.integerValue){
+//            
+//            NSMutableArray * completed = [obj objectForKey:@"completed"];
+//            mf1.completed = completed;
+//
+//            mf= mf1;
+//            *stop = YES;
+//        }
+//    }];
 
-    if(!userName) return nil;
-    
-    if(!self.appData){
-        [self getLocalJSON];
-    }
-    
-    
-    NSArray * users = [self.appData objectForKey:@"users"];
-    __block MFUser * mf;
-    
-    [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-     
-       MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
-        if([mf1.name isEqualToString: userName] && mf1.pin== userPin.integerValue){
-            
-            NSMutableArray * completed = [obj objectForKey:@"completed"];
-            mf1.completed = completed;
-
-            mf= mf1;
-            *stop = YES;
-        }
-    }];
-    return mf;    
+    return nil;
 }
 
 -(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user{
     // get current user
-    NSMutableArray * array = user.progress;
-    [array addObject:attempt];
-    user.progress = array;
-
-    //save to disk will be performed in  app delegate
-    if(!self.appData){
-        [self getLocalJSON];
-    }
-    
-    NSMutableArray * users = [[self.appData objectForKey:@"users"]mutableCopy];
-//    __block MFUser * mf = user;
-    [users enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-        
-        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
-        
-        if([mf1.name isEqualToString: user.name] &&  user.pin == mf1.pin){
-            [users replaceObjectAtIndex:idx withObject:user];
-     
-            [self.appData setObject:users forKey:@"users"];
-            *stop = YES;
-        }
-    }];
-
-    NSError * err;
-    
-    NSString *docFolder = [DataManager applicationDocumentsDirectory];
-    NSString * path = [docFolder stringByAppendingPathComponent:@"data.json"];
-    
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:self.appData options:NSJSONWritingPrettyPrinted error:&err];
-    [jsonData writeToFile:path atomically:YES];
+//    NSMutableArray * array = user.progress;
+//    [array addObject:attempt];
+//    user.progress = array;
+//
+//    //save to disk will be performed in  app delegate
+//    if(!self.appData){
+//        [self getLocalJSON];
+//    }
+//    
+//    NSMutableArray * users = [[self.appData objectForKey:@"users"]mutableCopy];
+////    __block MFUser * mf = user;
+//    [users enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
+//        
+//        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
+//        
+//        if([mf1.name isEqualToString: user.name] &&  user.pin == mf1.pin){
+//            [users replaceObjectAtIndex:idx withObject:user];
+//     
+//            [self.appData setObject:users forKey:@"users"];
+//            *stop = YES;
+//        }
+//    }];
+//
+//    NSError * err;
+//    
+//    NSString *docFolder = [DataManager applicationDocumentsDirectory];
+//    NSString * path = [docFolder stringByAppendingPathComponent:@"data.json"];
+//    
+//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:self.appData options:NSJSONWritingPrettyPrinted error:&err];
+//    [jsonData writeToFile:path atomically:YES];
 
 }
 
@@ -308,6 +372,73 @@
     [ud setObject: [NSNumber numberWithInt:user.pin] forKey:@"current_pin"];
     [ud setObject:user.name    forKey:@"current_user"];
     [ud synchronize];
+    
+    
+    
+    
+}
+
+-(void)import{
+    [self getLocalJSON];
+
+    NSArray * a = [self.appData objectForKey:@"activities"];
+  
+    [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
+
+        NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+
+        MFActivity *act = [NSEntityDescription insertNewObjectForEntityForName:@"MFActivity" inManagedObjectContext:context];
+        act.activityid = [obj[@"id"]integerValue];
+        act.name =obj[@"name"];
+        act.class_name = obj[@"classname"];
+        act.standard = obj[@"standard"];
+        act.maxQuestions = [obj[@"questioncount"]integerValue];
+        act.fractionCount =[obj[@"nr_fraction_inquestion"]integerValue];
+        
+        //get raw set
+        NSSet *set = [self getSet:act.activityid fromDict:self.appData];
+        //randomize it
+        NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
+        act.set = [NSSet setWithArray:a];
+        
+        //save it
+        NSError * error;
+        [context save:&error];
+        if(error){
+            NSLog(@"Error %@",error.debugDescription);
+        
+        }
+    }];
+}
+
+
+-(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;{
+    
+    if([self findUserWithPin:pin andName:name]){
+        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User already exists" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [a show];
+
+        return nil;
+    }
+    
+    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+
+    MFUser * user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:context];
+    user.pin = pin.integerValue;
+    user.name = name;
+    
+    NSError *error;
+    [context save:&error];
+    if(error){
+        NSLog(@"Error %@",error.debugDescription);
+        return nil;
+    }
+    else{
+        
+        [self loginUser:user];
+         return user;
+    }
+    
 }
 
 

@@ -28,11 +28,14 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "MFFraction.h"
 
 @interface MFUtilities : NSObject
 //main intro
 -(void)presentIntroIn:(id)viewcontroller;
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller;
-
+-(float)getValueOfFraction:(MFFraction *)fraction;
+- (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object;
+- (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject;
 
 @end

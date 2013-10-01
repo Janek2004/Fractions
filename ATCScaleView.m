@@ -30,6 +30,7 @@
 #import "ATCScaleView.h"
 #import "MFFraction.h"
 #import "MFFractionView.h"
+#import "MFUtilities.h"
 
 #define RectSize 25
 #define WIDTH 0.7
@@ -62,6 +63,7 @@ enum kFractionComparator {
 @property(nonatomic,strong) MFFraction * rightFraction;
 @property(nonatomic,strong) MFFractionView * leftFractionView;
 @property(nonatomic,strong) MFFractionView * rightFractionView;
+@property(nonatomic,strong) MFUtilities *utitilities;
 
 @end
 
@@ -85,18 +87,17 @@ CGFloat RadiansToDegrees(CGFloat radians)
 //}
 
 -(BOOL)checkAnswer{
-    NSLog(@"%f %f",self.leftFraction.value,self.rightFraction.value);
     
     
-    if(self.leftFraction.value == self.rightFraction.value && comparator == kEqual)
+    if([_utitilities getValueOfFraction: self.leftFraction] == [_utitilities getValueOfFraction: self.rightFraction] && comparator == kEqual)
     {
         return YES;
     }
-    if(self.leftFraction.value < self.rightFraction.value && comparator == kLess)
+    if([_utitilities getValueOfFraction: self.leftFraction] < [_utitilities getValueOfFraction: self.rightFraction] && comparator == kLess)
     {
         return YES;
     }
-    if(self.leftFraction.value > self.rightFraction.value && comparator == kMore)
+    if([_utitilities getValueOfFraction: self.leftFraction] > [_utitilities getValueOfFraction: self.rightFraction] && comparator == kMore)
     {
              return YES;
     }
@@ -164,6 +165,7 @@ CGFloat RadiansToDegrees(CGFloat radians)
     self = [super initWithFrame:frame];
     if (self) {
         [self setUpView];
+        _utitilities = [[MFUtilities alloc]init];
     }
     return self;
 }

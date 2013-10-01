@@ -163,6 +163,31 @@
     
 }
 
+-(float)getValueOfFraction:(MFFraction *)fraction;{
+     return fraction.numerator*1.0/fraction.denominator*1.0;
+
+}
+
+
+- (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject {
+    float a =  fractionOne.numerator/fractionOne.denominator;
+    float b = otherObject.numerator/otherObject.denominator;
+    if(a==b)
+    {
+        return NSOrderedSame;
+    }
+    if(a<b){
+        return NSOrderedAscending;
+    }
+    return NSOrderedDescending;
+}
+
+- (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object
+{
+   MFFraction * other = (MFFraction *)object;
+  return fractionOne.numerator == other.numerator && fractionOne.denominator == other.denominator;
+  
+}
 
 
 

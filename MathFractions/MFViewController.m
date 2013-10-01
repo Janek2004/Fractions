@@ -140,13 +140,13 @@
     MFUser * mf = [[MFManager sharedManager]mfuser];
     //set unselected images as well
     
-    for(NSNumber * nm in mf.completed){
-        [UIView animateWithDuration:1.0 animations:^{
-                        [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:nil forState:UIControlStateNormal];
-           // [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
-            [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
-        }];
-    }
+//    for(NSNumber * nm in mf.completed){
+//        [UIView animateWithDuration:1.0 animations:^{
+//                        [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:nil forState:UIControlStateNormal];
+//           // [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
+//            [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
+//        }];
+//    }
 }
 
 
@@ -204,6 +204,8 @@
     NSString * name = _userNameTextField.text;
     
     MFUser * mf =  [self.dataManager findUserWithPin:pin andName:name];
+    
+    
     if(!mf){
 
         UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"User with this pin and name doesn't exist." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -219,7 +221,22 @@
 
 - (IBAction)newUser:(id)sender {
     //DATA MANAGER
-    #warning TO DO IMPLEMENT THIS METHOD
+    NSNumber * pin1 = _array[[_pickerView selectedRowInComponent:0]];
+    NSNumber * pin2 = _array[[_pickerView selectedRowInComponent:1]];
+    NSNumber * pin3 = _array[[_pickerView selectedRowInComponent:2]];
+    NSNumber * pin4 = _array[[_pickerView selectedRowInComponent:3]];
+    
+    NSString * pin = [NSString stringWithFormat:@"%@%@%@%@",pin1,pin2,pin3,pin4];
+    NSString * name = _userNameTextField.text;
+    
+    MFUser * newuser = [self.dataManager addNewUserWithPin:pin andName:name];
+    
+    
+    if(newuser){
+        [self.dataManager loginUser:newuser];
+        [self hideMenu:nil];
+        self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
+    }
 }
 
 - (IBAction)activityInfo:(id)sender {

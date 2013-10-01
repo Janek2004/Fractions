@@ -37,7 +37,7 @@
 #import "MFManager.h"
 
 #import "MFFraction.h"
-#import  "MFActivityModel.h"
+#import  "MFActivity.h"
 #import "MFPracticeRequiredMethods.h"
 #import "MFAttempt.h"
 
@@ -46,7 +46,7 @@
 @property (nonatomic,strong) MFUtilities * utilities;
 @property (nonatomic,strong) DataManager * dataManager;
 @property (nonatomic,strong) MFManager * manager;
-@property (nonatomic,strong) MFActivityModel *currentActivity;
+@property (nonatomic,strong) MFActivity *currentActivity;
 
 @property (nonatomic,strong) UIView * practiceView;
 @property (strong, nonatomic) IBOutlet UIView *activityContainer;
@@ -156,33 +156,35 @@
 
 -(void)nextQuestion{
      _currentQuestionIndex++;
-    if(_currentQuestionIndex<self.currentActivity.questionsSet.count){
-        [self displayFraction];
-    }
-    else{
-        //Game Over
-         NSLog(@"GAME OVER Screen");
-        [self.view addSubview: self.gameOver];
-        
-        
-    }
+ 
+#warning get questions that belong to activity
+//    if(_currentQuestionIndex<self.currentActivity.questionsSet.count){
+//        [self displayFraction];
+//    }
+//    else{
+//        //Game Over
+//         NSLog(@"GAME OVER Screen");
+//        [self.view addSubview: self.gameOver];
+//        
+//        
+//    }
 }
 
 -(void)displayFraction{
     if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
-
+#warning get questions that belong to activity
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
-        id question =self.currentActivity.questionsSet[_currentQuestionIndex];
-      
-        if([question isKindOfClass:[NSArray class]]){
-            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
-        }
-        if([question isKindOfClass:[MFFraction class]]){
-            
-            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:@[question]];
-        
-        }
-        
+//        id question =self.currentActivity.questionsSet[_currentQuestionIndex];
+//      
+//        if([question isKindOfClass:[NSArray class]]){
+//            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
+//        }
+//        if([question isKindOfClass:[MFFraction class]]){
+//            
+//            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:@[question]];
+//        
+//        }
+//        
     }
 }
 
@@ -190,7 +192,7 @@
     //Get activity data. This method is loading dynamically questions sets and etc.
     self.currentActivity = [_dataManager getActivity:self.activityId];
    
-    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.className) alloc]initWithFrame:self.activityContainer.bounds];
+    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
     self.practiceView = (UIView *) activityView;
     [self.activityContainer addSubview:self.practiceView];
     _currentQuestionIndex =0;
@@ -240,9 +242,12 @@
     if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
         BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
         MFAttempt *attempt = [[MFAttempt alloc]init];
-        attempt.attempt_date = [NSDate new];
+        NSDate *today = [NSDate new];
+        
+        
+        attempt.attempt_date = [today timeIntervalSinceReferenceDate];
         attempt.score =[[NSNumber numberWithBool:check]integerValue];
-        attempt.fractions =[(id <MFPracticeRequiredMethods>)  self.practiceView currentFractions];
+
         attempt.activity = self.activityId;
         if(!_manager)
         {

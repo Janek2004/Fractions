@@ -27,16 +27,22 @@
  THE SOFTWARE.
  */
 #import <UIKit/UIKit.h>
-@class MFActivityModel;
+@class MFActivity;
 @class MFAttempt;
 @class MFUser;
 
 @interface DataManager : NSObject
--(MFActivityModel *)getActivity:(int)activityId;
+-(MFActivity *)getActivity:(int)activityId;
 -(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user;
 -(MFUser *)getCurrentUser;
 -(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
 -(void)loginUser:(MFUser *)user;
+-(NSDictionary *)getLocalJSON;
+-(void)import;
+-(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;
+//@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+//@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+//@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
 @end
