@@ -32,6 +32,8 @@
 #import "Segment.h"
 #import "MFFraction.h"
 #import "MFFractionView.h"
+#import "MFUtilities.h"
+#import "MFAppDelegate.h"
 
 
 @interface NumberLineView()
@@ -39,17 +41,16 @@
     int numerator;
     int denominator;
     MFFraction *fraction;
+    
 }
 
 @property (nonatomic,strong) UIBezierPath* ovalPath;
 @property (nonatomic,strong) UITapGestureRecognizer * tapRecognizer;
 @property (nonatomic,strong) NSMutableArray * piecesArray;
 @property (nonatomic,strong) UIButton * addButton;
-//@property (nonatomic,strong) UILabel * fractionLabel;
 @property (nonatomic,strong) MFFractionView * fractionView;
-
 @property(nonatomic,strong) MFFraction * currentFraction;
-
+@property (nonatomic,strong) MFUtilities * utilities;
 
 
 @property int pieces;
@@ -80,6 +81,10 @@
     if (self) {
         // Initialization code
        // fraction = [MFFraction new];
+          NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+          fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
+        
+        
         
         _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
         _piecesArray = [[NSMutableArray alloc]initWithCapacity:0];
@@ -90,8 +95,7 @@
 
         _fractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
         [self addSubview:_fractionView];
-                         
-                          
+        
         CGRect frame = CGRectMake(x,55, w,100);
         NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
         [_piecesArray addObject:nl];
@@ -105,6 +109,8 @@
         numerator = 0;
         denominator = 0;
         
+        _utilities = [[MFUtilities alloc]init];
+        
         [self drawPieces];
         [self addSubview:_addButton];
     }
@@ -112,25 +118,14 @@
 }
 
 -(void)setCurrentFractions:(NSArray *)currentFractions{
-   
-    
-    
     MFFraction * currentFraction = currentFractions[0];
     _currentFraction = currentFraction;
-
     _fractionView.fraction = currentFraction;
-    
+
     
     [_fractionView setNeedsDisplay];
 
 }
-
-//-(void)setCurrentFraction:(MFFraction *)currentFraction{
-//    _currentFraction = currentFraction;
-//    _fractionView.fraction = currentFraction;
-//    [_fractionView setNeedsDisplay];
-//    
-//}
 
 -(void)addPiece{
     if(_piecesArray.count < MAX_NUM_PIECES){
@@ -140,16 +135,6 @@
     }
 }
 
-// Only override drawRect: if you perform custom drawing.
-/* An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-    [self drawPlus];
-    [self drawPieces];
-    
-}
-*/
  
 -(void)tapGesture:(UITapGestureRecognizer*)r{
     CGPoint point = [r locationInView:self];
@@ -189,8 +174,10 @@
 -(BOOL)checkAnswer{
     MFFraction * mf = [self calculateScore];
     MFFraction * mf1 = self.currentFraction;
-
-    return [mf isEqual: mf1];
+    
+    
+    
+    return [_utilities isEqual:mf and:mf1];
 }
 
 
@@ -214,7 +201,6 @@
            numerator = new_numerator;
            denominator =new_denominator;
 
-            //break;
         }
         else if(new_denominator!=0 && denominator !=0)
         {
@@ -223,9 +209,13 @@
             
         }
     }
+    
+    
     fraction.numerator = numerator;
     fraction.denominator = denominator;
+    
     fraction =  [self simplify:fraction];
+    
     
     return fraction;
 }

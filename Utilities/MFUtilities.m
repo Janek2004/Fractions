@@ -185,6 +185,7 @@
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object
 {
    MFFraction * other = (MFFraction *)object;
+    
   return fractionOne.numerator == other.numerator && fractionOne.denominator == other.denominator;
   
 }

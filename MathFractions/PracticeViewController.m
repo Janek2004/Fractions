@@ -56,6 +56,7 @@
 @property (strong, nonatomic) IBOutlet UIView *gameOver;
 @property (strong, nonatomic) IBOutlet UIImageView *feedbackImageView;
 @property (strong, nonatomic) IBOutlet UILabel *fedbackLabel;
+@property (strong,nonatomic) NSMutableArray *questionsSet;
 @property BOOL right;
 
 - (IBAction)goBack:(id)sender;
@@ -78,6 +79,8 @@
     self.fedbackLabel.text = feedback;
     self.feedbackImageView.image= img;
     self.feedbackView.alpha = 0;
+    _questionsSet= [NSMutableArray new];
+    
    [self.view addSubview:self.feedbackView];
 
     [UIView animateWithDuration:0.8 animations:^{
@@ -157,47 +160,70 @@
 -(void)nextQuestion{
      _currentQuestionIndex++;
  
-#warning get questions that belong to activity
-//    if(_currentQuestionIndex<self.currentActivity.questionsSet.count){
-//        [self displayFraction];
-//    }
-//    else{
-//        //Game Over
-//         NSLog(@"GAME OVER Screen");
-//        [self.view addSubview: self.gameOver];
-//        
-//        
-//    }
+    if(_currentQuestionIndex<self.questionsSet.count){
+        [self displayFraction];
+    }
+    else{
+        //Game Over
+         NSLog(@"GAME OVER Screen");
+        [self.view addSubview: self.gameOver];
+        
+        
+    }
+
+
 }
 
 -(void)displayFraction{
     if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
-#warning get questions that belong to activity
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
 
+      id question = self.questionsSet[_currentQuestionIndex];
+      
+        if([question isKindOfClass:[NSArray class]]){
+            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
+        }
+        if([question isKindOfClass:[MFFraction class]]){
+            
+            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:@[question]];
         
-        //        id question =self.currentActivity.questionsSet[_currentQuestionIndex];
-//      
-//        if([question isKindOfClass:[NSArray class]]){
-//            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
-//        }
-//        if([question isKindOfClass:[MFFraction class]]){
-//            
-//            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:@[question]];
-//        
-//        }
-//        
+        }
+        
     }
 }
 
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
     self.currentActivity = [_dataManager getActivity:self.activityId];
+    NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
+    if(self.currentActivity.fractionCount>1){
    
+    NSMutableArray * array = [NSMutableArray new];
+    while(a.count>0) {
+      int random =arc4random()%a.count;
+      MFFraction  *a1 = a[random];
+     [a removeObjectAtIndex:random];
+      MFFraction  *a2 = a[arc4random()%a.count];
+      random =arc4random()%a.count;
+      [a removeObjectAtIndex:random];
+      NSArray * k =@[a1,a2];
+      [array addObject:k];
+      }
+        self.questionsSet = array;
+    }
+    else{
+        self.questionsSet = a;
+    
+    }
+    
     id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
     self.practiceView = (UIView *) activityView;
     [self.activityContainer addSubview:self.practiceView];
     _currentQuestionIndex =0;
+    //here
+    
+    
+    
     [self displayFraction];
     
 }
@@ -239,24 +265,20 @@
 
 //method will be called when user submits the answer
 - (IBAction)answerSelected:(id)sender {
-   
+#warning implement it!!!!
     //calculate score
     if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
         BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
-        MFAttempt *attempt = [[MFAttempt alloc]init];
-        NSDate *today = [NSDate new];
-        
-        
-        attempt.attempt_date = [today timeIntervalSinceReferenceDate];
-        attempt.score =[[NSNumber numberWithBool:check]integerValue];
-
-        attempt.activity = self.activityId;
+       
         if(!_manager)
         {
             _manager = [MFManager sharedManager];
         }
         
-        [self.dataManager saveAttempt:attempt forUser:self.manager.mfuser];
+        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity];
+
+        
+        
         if(check){
             //good job - > new question
             //play sound
@@ -270,7 +292,7 @@
         else{
             _wrongCount ++;
            
-            if(_wrongCount > 2)
+            if(_wrongCount > 12)
             {
                 NSLog(@"Show the correct answer");
             }

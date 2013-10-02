@@ -29,7 +29,6 @@
 #import <UIKit/UIKit.h>
 #import "MFPracticeRequiredMethods.h"
 
-
 @class MFFraction;
 @interface NumberLineView : UIView <MFPracticeRequiredMethods>
 

@@ -288,69 +288,29 @@
 }
 
 -(MFUser *)getCurrentUser{
-//    NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
-//
-//    NSString *userName= [ud objectForKey:@"current_user"];
-//    NSString *userPin= [ud objectForKey:@"current_pin"];
+    NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
-//    if(!userName) return nil;
-//    
-//    if(!self.appData){
-//        [self getLocalJSON];
-//    }
-//    
-//    
-//    NSArray * users = [self.appData objectForKey:@"users"];
-//    __block MFUser * mf;
-//    
-//    [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//     
-//       MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
-//        if([mf1.name isEqualToString: userName] && mf1.pin== userPin.integerValue){
-//            
-//            NSMutableArray * completed = [obj objectForKey:@"completed"];
-//            mf1.completed = completed;
-//
-//            mf= mf1;
-//            *stop = YES;
-//        }
-//    }];
+    NSString *userName= [ud objectForKey:@"current_user"];
+    NSString *userPin= [ud objectForKey:@"current_pin"];
 
-    return nil;
+
+    MFUser * user=   [self findUserWithPin:userPin andName:userName];
+    return user;
 }
 
--(void)saveAttempt:(MFAttempt *)attempt forUser:(MFUser *)user{
-    // get current user
-//    NSMutableArray * array = user.progress;
-//    [array addObject:attempt];
-//    user.progress = array;
-//
-//    //save to disk will be performed in  app delegate
-//    if(!self.appData){
-//        [self getLocalJSON];
-//    }
-//    
-//    NSMutableArray * users = [[self.appData objectForKey:@"users"]mutableCopy];
-////    __block MFUser * mf = user;
-//    [users enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-//        
-//        MFUser * mf1 = [[MFUser alloc]initWithDictionary:obj];
-//        
-//        if([mf1.name isEqualToString: user.name] &&  user.pin == mf1.pin){
-//            [users replaceObjectAtIndex:idx withObject:user];
-//     
-//            [self.appData setObject:users forKey:@"users"];
-//            *stop = YES;
-//        }
-//    }];
-//
-//    NSError * err;
-//    
-//    NSString *docFolder = [DataManager applicationDocumentsDirectory];
-//    NSString * path = [docFolder stringByAppendingPathComponent:@"data.json"];
-//    
-//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:self.appData options:NSJSONWritingPrettyPrinted error:&err];
-//    [jsonData writeToFile:path atomically:YES];
+-(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity{
+    
+    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+    
+    MFAttempt *at = [NSEntityDescription insertNewObjectForEntityForName:@"MFAttempt" inManagedObjectContext:context];
+    
+    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+    at.score = score;
+    at.attempt_date =time;
+    at.user = self.getCurrentUser;
+    
+    NSError * error;
+    [context save:&error];
 
 }
 
