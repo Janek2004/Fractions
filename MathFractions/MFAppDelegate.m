@@ -33,6 +33,7 @@
 #import "DataManager.h"
 #import "MFActivity.h"
 #import "MFFraction.h"
+#import "PDDebugger.h"
 
 @interface MFAppDelegate()
 @property (nonatomic,strong)  DataManager *dm;
@@ -47,32 +48,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[MFViewController alloc] initWithNibName:@"MFViewController" bundle:nil];
     //test core data
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"MFActivity" inManagedObjectContext:context];
+    
+    PDDebugger *debugger = [PDDebugger defaultInstance];
+    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+    [debugger enableCoreDataDebugging];
+    [debugger addManagedObjectContext:context withName:@"My MOC"];
+    
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFActivity" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
 
+    
+    
     NSError *error;
     NSArray *array = [context executeFetchRequest:request error:&error];
     if(error){
         NSLog(@"Error %@",error.debugDescription);
     }
-   
-    for(MFActivity *act in array){
-        NSSet *set = act.set;
-        for(MFFraction *fr in set){
-               NSLog(@"fr %d ",fr.numerator);
-        }
-        NSLog(@"Act %@ ",act.name);
-    }
-    
-    
-    
+
+    //if array is empty
     if(array.count ==0){
         _dm = [[DataManager alloc]init];
         [_dm import];

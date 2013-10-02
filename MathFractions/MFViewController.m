@@ -47,8 +47,10 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 @property (strong, nonatomic) IBOutlet UIImageView *fractioImageView;
-
 @property (strong, nonatomic) NSArray * array;
+@property (strong, nonatomic) IBOutlet UIView *aboutView;
+@property (strong, nonatomic) IBOutlet UIView *userView;
+
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)hideMenu:(id)sender;
@@ -58,7 +60,10 @@
 - (IBAction)newUser:(id)sender;
 
 - (IBAction)activityInfo:(id)sender;
+- (IBAction)showAbout:(id)sender;
+- (IBAction)showUserView:(id)sender;
 
+- (IBAction)dismissView:(id)sender;
 
 @end
 
@@ -164,13 +169,21 @@
 }
 
 - (IBAction)hideMenu:(id)sender {
-  
+    if(self.userNameTextField.text.length==0)
+    {
+        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on User button to log in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [a show];
+        return;
+    }
+   
     [UIView animateWithDuration:1
                      animations:^{
                          self.MenuView.alpha = 0;
                          
                      } completion:^(BOOL finished) {
                          [self.MenuView removeFromSuperview];
+                         
+                         
                          
                      }];
    
@@ -214,6 +227,7 @@
     }
     else{
         [self.dataManager loginUser:mf];
+        [self dismissView:sender];
         [self hideMenu:nil];
         self.userName.text = [NSString stringWithFormat:@"Hi %@", mf.name];
     }
@@ -234,13 +248,60 @@
     
     if(newuser){
         [self.dataManager loginUser:newuser];
-        [self hideMenu:nil];
         self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
+        
+        [self dismissView:sender];
+        [self hideMenu:nil];
+
     }
 }
 
 - (IBAction)activityInfo:(id)sender {
     NSLog(@"Activity ");
+}
+
+- (IBAction)showAbout:(id)sender {
+    
+    [self.view addSubview:self.aboutView];
+    self.aboutView.alpha = 0;
+    [UIView animateWithDuration:1
+                     animations:^{
+                         self.aboutView.alpha = 1;
+                         
+                     } completion:^(BOOL finished) {
+                         self.aboutView.bounds = self.view.bounds;
+                         
+                     }];
+
+    
+}
+
+- (IBAction)showUserView:(id)sender {
+    [self.view addSubview:self.userView];
+   self.userView.alpha = 0;
+    [UIView animateWithDuration:1
+                     animations:^{
+                         self.userView.alpha = 1;
+                         
+                     } completion:^(BOOL finished) {
+                        self.userView.bounds = self.view.bounds;
+                         
+                     }];
+
+    
+}
+
+- (IBAction)dismissView:(id)sender {
+    [UIView animateWithDuration:1
+                     animations:^{
+                         [[sender superview]setAlpha:0];
+                         
+                     } completion:^(BOOL finished) {
+                         [[sender superview] removeFromSuperview];
+                         
+                     }];
+
+
 }
 
 #pragma mark picker
@@ -260,7 +321,7 @@
 }
 
 
-#warning TO DO handle saving
+
 
 
 @end

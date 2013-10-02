@@ -38,6 +38,21 @@
 @implementation MFUtilities
 
 
+/*
+ About the  FracTiO App:
+ 
+ This mobile app was design based on learning trajectory perspectives, supports grades 3-6 students’ development of fraction understanding that aligns with the Common Core State Standards for Mathematics. Teachers and students could use this app for teaching and learning of function concept.  This app include three of the Common Core State Standards Mathematics:
+ 1. CCSS.Math.Content.3.NF.A.1. Understand a fraction 1/b as the quantity formed by 1 part when a whole is partitioned into b equal parts; understand a fraction a/b as the quantity formed by a parts of size 1/b.
+ 
+ 
+ 
+ 2. CCSS.Math.Content.3.NF.A.2 Understand a fraction as a number on the number line; represent fractions on a number line diagram.
+ 
+ CCSS.Math.Content.3.NF.A.3.Explain equivalence of fractions in special cases, and compare fractions by reasoning about their size.
+
+ 
+ */
+
 -(void)presentIntroIn:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Math Fractions"
                                                           withDetail: @"That will be intro to the fractions app"

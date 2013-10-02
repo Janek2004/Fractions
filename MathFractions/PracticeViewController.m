@@ -59,6 +59,7 @@
 @property (strong,nonatomic) NSMutableArray *questionsSet;
 @property BOOL right;
 
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 - (IBAction)goBack:(id)sender;
 - (IBAction)answerSelected:(id)sender;
 - (IBAction)showHint:(id)sender;
@@ -148,6 +149,8 @@
     
     [self loadData];
    
+    
+    
     [_utilities presentIntroForActivity:self.activityId inViewController:self];
     
 }
@@ -195,7 +198,18 @@
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
     self.currentActivity = [_dataManager getActivity:self.activityId];
+    
+    if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
+        self.backgroundImageView.image =  [UIImage imageNamed:@"scalebg.png"];
+    }
+    if([self.currentActivity.name isEqualToString:@"Number Line Activity"]){
+        self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
+    }
+    
+    
     NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
+    
+    
     if(self.currentActivity.fractionCount>1){
    
     NSMutableArray * array = [NSMutableArray new];

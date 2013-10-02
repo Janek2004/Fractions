@@ -109,65 +109,22 @@
             [self getLocalJSON];
         }
         
-           NSLog(@"Before");
-        NSSet *set = [self getSet:activityId fromDict:self.appData];
-        //randomize it
-        
-           NSLog(@"Before");
-        
-        NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
+//           NSLog(@"Before");
+//        NSSet *set = [self getSet:activityId fromDict:self.appData];
+//        //randomize it
+//        
+//           NSLog(@"Before");
+//        
+
+        NSMutableArray * a=[self randomize:nil fromSet:act.set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
                   NSLog(@"Before");
         act.set = [NSSet setWithArray:a];
-           NSLog(@"Before");
+           NSLog(@"After ");
 
         return act;
     }
 
     
-    
-
-    
-    
-//    if(!self.appData){
-//        [self getLocalJSON];
-//    }
-//
-//   NSArray * a = [self.appData objectForKey:@"activities"];
-//   __block MFActivity * activity;
-//    [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-//       if([[obj objectForKey:@"id"]integerValue]== activityId)
-//       {
-//           activity = [[MFActivity alloc]initWithDictionary:obj];
-////           //get sets
-//           int set = [[obj objectForKey:@"set"]integerValue];
-//           int nr_fraction_inquestion = [[obj objectForKey:@"nr_fraction_inquestion"]integerValue];
-//           
-//           NSMutableArray * a = [self randomize:Nil fromSet:[[self getSet: set   fromDict:self.appData]mutableCopy] andDesiredCount:activity.maxQuestions * nr_fraction_inquestion];
-//           if(nr_fraction_inquestion>1){
-//               //select pairs
-//               NSMutableArray * array = [NSMutableArray new];
-//               while(a.count>0) {
-//                int random =arc4random()%a.count;
-//                MFFraction  *a1 = a[random];
-//               [a removeObjectAtIndex:random];
-//                MFFraction  *a2 = a[arc4random()%a.count];
-//                random =arc4random()%a.count;
-//               [a removeObjectAtIndex:random];
-//                NSArray * k =@[a1,a2];
-//               [array addObject:k];
-//               }
-//               activity.questionsSet = array;
-//
-//               
-//           }else{
-//               activity.questionsSet = a;
-//
-//           }
-//
-//           
-//           *stop = YES;
-//       }
-//   }];
     
     
     return nil;
@@ -189,6 +146,7 @@
             NSArray * denominators = [obj objectForKey:@"denominator"];
             if(numerators.count !=denominators.count){
                 *stop = YES;
+                NSLog(@"Incosistent data error");
             }
 
             for(int i=0; i<numerators.count;i ++){
@@ -196,10 +154,12 @@
               MFFraction * fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
                fraction.numerator =[numerators[i] integerValue] ;
                fraction.denominator =[denominators[i] integerValue] ;
-
+                
                 [fractions addObject: fraction];
 
-        }
+                NSLog(@"Fraction %d %d added for set %d",fraction.numerator,fraction.denominator,setId );
+            
+            }
               *stop = YES;
             }
         }];
@@ -361,10 +321,11 @@
         act.fractionCount =[obj[@"nr_fraction_inquestion"]integerValue];
         
         //get raw set
-        NSSet *set = [self getSet:act.activityid fromDict:self.appData];
+        NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
         //randomize it
-        NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
-        act.set = [NSSet setWithArray:a];
+      //  NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
+        
+        act.set = set; //[NSSet setWithArray:a.a];
         
         //save it
         NSError * error;
