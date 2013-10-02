@@ -37,7 +37,7 @@
 @property (readwrite, nonatomic, strong) UILabel *titleLabel;
 @property (readwrite, nonatomic, strong) UILabel *detailLabel;
 @property (readwrite, nonatomic, strong) UIImageView *imageView;
-
+@property BOOL fullScreenImage;
 + (id) introViewPageWithTitle: (NSString *) title
                    withDetail: (NSString *) detail
                     withImage: (UIImage *) image;

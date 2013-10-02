@@ -74,7 +74,7 @@
 
 -(void)showFeedback:(BOOL)positive{
     _right = positive;
-    UIImage * img = positive?[UIImage imageNamed:@"happy"]:[UIImage imageNamed:@"sad"];
+    UIImage * img = positive?[UIImage imageNamed:@"correct"]:[UIImage imageNamed:@"wrong"];
     NSString * feedback = positive?@"Good Job!":@"Try again!";
     self.fedbackLabel.text = feedback;
     self.feedbackImageView.image= img;

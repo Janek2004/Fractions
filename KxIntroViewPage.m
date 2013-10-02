@@ -104,7 +104,7 @@
         _imageView.clipsToBounds = YES;
         _imageView.opaque = YES;
         _imageView.backgroundColor = [UIColor clearColor];
-        //_imageView.backgroundColor = [UIColor greenColor];               
+        
         [self addSubview:_imageView];
     }
     return _imageView;
@@ -139,6 +139,11 @@
         const float imgH = MIN(imageSize.height, h);
         
         _imageView.frame  = CGRectMake(xPadding, Y + (h - imgH) * 0.5f, W, imgH);
+        
+        if(self.fullScreenImage){
+            _imageView.frame=self.bounds;
+            _imageView.contentMode =UIViewContentModeScaleToFill;
+        }
         
         Y += h + yPadding;
     }

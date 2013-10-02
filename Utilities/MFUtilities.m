@@ -41,13 +41,14 @@
 -(void)presentIntroIn:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Math Fractions"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"titlepage"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"About US"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
                                                            withImage: [UIImage imageNamed:@"fractio"]];
 
     
+    page0.fullScreenImage = YES;
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
     
     KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];

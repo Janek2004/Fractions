@@ -123,7 +123,9 @@ static float addDegrees(float delta, float deg)
         
         _closeButton = [[UIButton alloc] initWithFrame:CGRectZero];
         _closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:isPhone ? 16 : 20];
-        [_closeButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
+        //[_closeButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
+        [_closeButton setImage:[UIImage imageNamed:@"done1"] forState:UIControlStateNormal];
+        
         [_closeButton addTarget:self action:@selector(closeIntro) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_closeButton];
         
@@ -172,7 +174,8 @@ static float addDegrees(float delta, float deg)
     const float sH = H - bH - dH - margin;
     
     _scrollView.frame = CGRectMake(0, Y, W, sH);
-    
+    _scrollView.frame=self.bounds;
+
     Y += sH;
     
     _pageControl.frame = CGRectMake((W - pageWidth) * 0.5,
@@ -202,8 +205,8 @@ static float addDegrees(float delta, float deg)
     if (_backgroundView)
         _backgroundView.frame = CGRectMake(0, 0, W, H);
     
-    if (_gradientBackground)
-        [self mkGradientBackround];
+    //if (_gradientBackground)
+        //[self mkGradientBackround];
 }
 
 - (void) closeIntro
