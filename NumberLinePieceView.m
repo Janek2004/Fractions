@@ -38,6 +38,9 @@
 @property (nonatomic,strong) UITapGestureRecognizer * doubleTapRecognizer;
 @property CGPoint currentPoint;
 @property BOOL segmentsNumberChanged;
+@property (nonatomic,strong) UIImage  *star;
+@property (nonatomic,strong) UIImage  *segment;
+@property (nonatomic,strong) UIImage  *chocolate;
 
 
 
@@ -51,6 +54,11 @@
     if (self) {
         // Initialization code
         //debugging only
+        _segment = [UIImage imageNamed:@"chocopiece"];
+        _star = [UIImage imageNamed:@"chocostar"];
+        _chocolate = [UIImage imageNamed:@"chocothin"];
+  
+        
         _segments = 1;
         _segmentsArray = [[NSMutableArray alloc]initWithCapacity:0];
         
@@ -80,7 +88,7 @@
     //for making sure that user tapped the right thing.
     CGPoint point = [r locationInView:self];
     _currentPoint = point;
-
+    
     CGRect lineRect = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
   
     if(CGRectContainsPoint(lineRect, point)){
@@ -135,66 +143,19 @@
 
 
 
--(void)drawScale{
-    CGContextRef ctx =  UIGraphicsGetCurrentContext();
-    CGContextSaveGState(ctx);
-    CGContextSetFillColorWithColor(ctx, [[UIColor blackColor]CGColor]);
-    CGContextSetStrokeColorWithColor(ctx, [[UIColor blackColor]CGColor]);
-   
-    CGContextSelectFont(ctx, "Helvetica", 20, kCGEncodingMacRoman);
-    CGContextSetTextDrawingMode(ctx, kCGTextFill);
-
-    int margin = 40;
-    int lineH = CGRectGetHeight(self.frame);
-    int scaleMarker = 15;
-    //get line width
-    float lineWidth = self.bounds.size.width-2*margin;
-    
-    //get nr of segments
-    float lineSegmentWidth = lineWidth *1.0f/(self.segments)*1.0f;
-    
-    CGContextMoveToPoint(ctx, margin, lineH);
-    //drawing horizontal line:
-    CGContextAddLineToPoint(ctx, lineWidth+margin, lineH);
-
-    NSString *zero = [NSString stringWithFormat:@"%d",0];
-    NSString *one = [NSString stringWithFormat:@"%d",1];
-    const char *str1=[zero UTF8String];
-    const char *str2=[one UTF8String];
-    
-
-    CGContextSetTextMatrix(ctx, CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0));
-    CGContextShowTextAtPoint(ctx, margin-5, lineH+20, str1, strlen(str1));
-    CGContextShowTextAtPoint(ctx, margin-5 + lineWidth, lineH+20, str2, strlen(str2));
-    //depending on number of segments draw scale    
-    
-    for(int i =0;i<=self.segments;i++)
-    {
-        CGContextMoveToPoint(ctx, margin +lineSegmentWidth*i, lineH);
-        CGContextAddLineToPoint(ctx,  margin +lineSegmentWidth*i, lineH-scaleMarker);
-    
-    }
-
-    CGContextStrokePath(ctx);
-    CGContextFillPath(ctx);
-    CGContextRestoreGState(ctx);
-    
-}
-
--(void)preparePieces{
-    
-
-}
 
 -(void)prepareSegments{
     CGContextRef ctx =  UIGraphicsGetCurrentContext();
     CGContextSaveGState(ctx);
     CGContextSetFillColorWithColor(ctx, [[UIColor grayColor]CGColor]);
+    
+    
     int margin = 40;
     int lineH = 10;
     //int segmentHeight = 35;
     int segmentHeight = 0.8 * CGRectGetHeight(self.frame);
     lineH = 0.1 * CGRectGetHeight(self.frame);
+   
     
     //get line width
     float lineWidth = self.bounds.size.width-2*margin;
@@ -203,22 +164,30 @@
     float lineSegmentWidth = lineWidth *1.0f/(self.segments)*1.0f;
     float adjustedLineSegmentedWidth = lineSegmentWidth * 0.99;
     float delta = (lineSegmentWidth- adjustedLineSegmentedWidth)/2.0;
+    CGContextSetAlpha(ctx, 0.3);
     
     for(int i =0;i<self.segments;i++)
     {
+        
         float x = margin +lineSegmentWidth*i +delta;
         CGContextMoveToPoint(ctx,x,  lineH);
         CGRect rect = CGRectMake(x, lineH, adjustedLineSegmentedWidth, segmentHeight);
         CGContextFillRect(ctx,rect);
+        if(self.segments == 1){
+            CGContextDrawImage(ctx, rect, _chocolate.CGImage);
         
-      //  NSLog(@"M: %f %f",x,adjustedLineSegmentedWidth);
+        }else{
+            CGContextDrawImage(ctx, rect, _segment.CGImage);
+        
+        }
+
+        
         Segment * s= [[Segment alloc]init];
         s.frame = rect;
         s.selected = NO;
         self.segmentsArray[i]=s;
-      //  NSLog(@"Segmented Array : %@ %d",self.segmentsArray,s.selected);
+  
     }
-    
     CGContextRestoreGState(ctx);
 }
 
@@ -232,13 +201,32 @@
     {
         Segment * s =(Segment *)self.segmentsArray[i];
         if(s.selected){
-            CGContextSetFillColorWithColor(ctx, [[UIColor blueColor]CGColor]);
+            CGContextSetAlpha(ctx, 1);
+            
+            if(self.segments == 1){
+                CGContextDrawImage(ctx, s.frame, _chocolate.CGImage);
+                
+            }else{
+                CGContextDrawImage(ctx, s.frame, _segment.CGImage);
+                
+            }
+
+            
+            
+        
         }
         else{
-            CGContextSetFillColorWithColor(ctx, [[UIColor grayColor]CGColor]);
+            CGContextSetAlpha(ctx, 0.5);
+            if(self.segments == 1){
+                CGContextDrawImage(ctx, s.frame, _chocolate.CGImage);
+                
+            }else{
+                CGContextDrawImage(ctx, s.frame, _segment.CGImage);
+                
+            }
+
         }
         CGContextFillRect(ctx,s.frame);
-        
         self.segmentsArray[i]=s;
     }
     

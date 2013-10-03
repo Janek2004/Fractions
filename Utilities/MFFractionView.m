@@ -62,49 +62,32 @@
 
 -(void)drawFractions{
     //// Color Declarations
-    UIColor* color = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
+   UIColor* color = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
     
     //// Abstracted Attributes
     NSString* textContent =[NSString stringWithFormat:@"%d",self.fraction.numerator];
-    
     NSString* text2Content = [NSString stringWithFormat:@"%d",self.fraction.denominator];
-    
 
-    //// Rounded Rectangle Drawing
-    CGRect roundedRect =CGRectMake(0.5, 0.5, CGRectGetWidth(self.bounds)-0.5, CGRectGetHeight(self.bounds)-0.5) ;
-
-    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect:roundedRect cornerRadius: 4];
-    [[UIColor whiteColor] setFill];
-    [roundedRectanglePath fill];
-    [[UIColor blackColor] setStroke];
-    roundedRectanglePath.lineWidth = 1;
-   /// [roundedRectanglePath stroke];
-    
-    
-    CGPoint center = self.center;
-    //// Rectangle Drawing
-    float w = 0.7 * CGRectGetWidth(roundedRect);
-    float x = 0.5 +  (CGRectGetWidth(roundedRect) - w)/2.0;
-    float h = 2;
-    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(x,center.y-h/2.0, w, h)];
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(0,70, 100, 2)];
     [color setFill];
     [rectanglePath fill];
     [[UIColor blackColor] setStroke];
     rectanglePath.lineWidth = 1;
     [rectanglePath stroke];
 
-    CGRect textRect = CGRectMake(x, 45, w, center.y-5);
+    CGRect textRect = CGRectMake(45, 10, 200, 100);
     
     
     [[UIColor blackColor] setFill];
-    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
+    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentLeft];
     
     
     //// Text 2 Drawing
-    CGRect text2Rect = CGRectMake(x, center.y +5, w, CGRectGetHeight(self.bounds)-5);
+    CGRect text2Rect = CGRectMake(45, 80, 200, 100);
+
     
     [[UIColor blackColor] setFill];
-    [text2Content drawInRect: text2Rect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
+    [text2Content drawInRect: text2Rect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentLeft];
     
     
 

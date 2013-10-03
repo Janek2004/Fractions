@@ -201,13 +201,30 @@
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object
 {
    MFFraction * other = (MFFraction *)object;
+    fractionOne = [self simplify:fractionOne];
+    other = [self simplify:other];
     
   return fractionOne.numerator == other.numerator && fractionOne.denominator == other.denominator;
   
 }
 
+-(MFFraction *)simplify:(MFFraction *)_fraction{
+  
+    int a = _fraction.numerator;
+    int b = _fraction.denominator;
+    
+    long gcm = GCD(a, b);
+    a = a/gcm;
+    b= b/gcm;
+    _fraction.numerator = a;
+    _fraction.denominator = b;
+    
+    return _fraction;
+}
 
-
-
+int GCD(int a, int b){
+    if (b==0) return a;
+    return GCD(b,a%b);
+}
 
 @end

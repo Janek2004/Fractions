@@ -54,6 +54,10 @@
 @property int wrongCount;
 @property (strong, nonatomic) IBOutlet UIView *feedbackView;
 @property (strong, nonatomic) IBOutlet UIView *gameOver;
+@property (strong, nonatomic) IBOutlet UIView *hintView;
+
+@property (strong, nonatomic) IBOutlet ATCScaleView *scaleView;
+
 @property (strong, nonatomic) IBOutlet UIImageView *feedbackImageView;
 @property (strong, nonatomic) IBOutlet UILabel *fedbackLabel;
 @property (strong,nonatomic) NSMutableArray *questionsSet;
@@ -70,7 +74,7 @@
 
 -(void)loadView{
     [super loadView];
-    self.view.frame = self.view.bounds;
+     self.view.frame = self.view.bounds;
 }
 
 -(void)showFeedback:(BOOL)positive{
@@ -101,20 +105,25 @@
     }];
 }
 
+-(IBAction)dismissView:(id)sender
+{
+    UIView *v = [sender superview];
+    [UIView animateWithDuration:0.8 animations:^{
+        v.alpha  = 0;
+        
+    }completion:^(BOOL finished) {
+        [v  removeFromSuperview];
+  
+    }];
+
+}
+
 - (IBAction)dismissFeedback:(id)sender {
     if(_right){
         [self nextQuestion];
     }
-    
-    [UIView animateWithDuration:0.8 animations:^{
-        self.feedbackView.alpha = 0;
-        
-    }completion:^(BOOL finished) {
-        [self.feedbackView removeFromSuperview];
-       
-        
-        
-    }];
+    [self dismissView:sender];
+ 
 
 }
 
@@ -197,10 +206,19 @@
 
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
+    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
+    self.practiceView = (UIView *) activityView;
+    [self.activityContainer addSubview:self.practiceView];
+    _currentQuestionIndex =0;
+    
     self.currentActivity = [_dataManager getActivity:self.activityId];
     
     if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
         self.backgroundImageView.image =  [UIImage imageNamed:@"scalebg.png"];
+
+        [self.activityContainer addSubview:self.scaleView];
+        self.practiceView = self.scaleView;
+    
     }
     if([self.currentActivity.name isEqualToString:@"Number Line Activity"]){
         self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
@@ -230,11 +248,7 @@
     
     }
     
-    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
-    self.practiceView = (UIView *) activityView;
-    [self.activityContainer addSubview:self.practiceView];
-    _currentQuestionIndex =0;
-    //here
+        //here
     
     
     
@@ -325,5 +339,6 @@
 }
 
 - (IBAction)showHint:(id)sender {
+    [self.view addSubview:self.hintView];
 }
 @end

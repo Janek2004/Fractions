@@ -57,6 +57,9 @@
 @end
 
 #define MAX_NUM_PIECES  10
+#define PIECE_WIDTH 600
+#define PIECE_HEIGHT  100
+
 @implementation NumberLineView
 -(void)reset{
     for(UIView * v in _piecesArray){
@@ -64,9 +67,10 @@
     
     }
     [_piecesArray removeAllObjects];
-    float w = 0.5 * CGRectGetWidth(self.frame);
-    float x =CGRectGetWidth(self.frame) - w -w/2.0;
+    float w = PIECE_WIDTH;///_PR * CGRectGetWidth(self.frame);
     
+    float x =w / 2.0; //CGRectGetWidth(self.frame) - w -w/2.0;
+    x = [self getX];
     CGRect frame = CGRectMake(x,55, w,100);
     NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
     [_piecesArray addObject:nl];
@@ -89,11 +93,12 @@
         _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
         _piecesArray = [[NSMutableArray alloc]initWithCapacity:0];
         
-        float w = 0.5 * CGRectGetWidth(self.frame);
+        float w = PIECE_WIDTH;
         float x =CGRectGetWidth(self.frame) - w -w/2.0;
-        
+        x =[self getX];
 
-        _fractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+        _fractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(845, 310, 200, 200)];
+        _fractionView.backgroundColor = [UIColor clearColor];
         [self addSubview:_fractionView];
         
         CGRect frame = CGRectMake(x,55, w,100);
@@ -146,6 +151,14 @@
     }
 }
 
+-(int)getX{
+    float w = PIECE_WIDTH;
+    float x =w / 2.0;
+    x= 10;
+    return x;
+}
+
+
 -(void)drawPieces{
     //calculate dimensions
     //add as subview
@@ -159,8 +172,10 @@
         // calculate frame
         float y = 55 + 10*i + h *i;
         
-        float w = 0.5 * CGRectGetWidth(self.frame);
-        float x =CGRectGetWidth(self.frame) - w -w/2.0;
+        float w = PIECE_WIDTH;
+        //float x =CGRectGetWidth(self.frame) - w -w/2.0;
+        float x = [self getX];
+       
         CGRect frame = CGRectMake(x,y, w, h);
         
         UIView * v = _piecesArray[i];
@@ -175,7 +190,7 @@
     MFFraction * mf = [self calculateScore];
     MFFraction * mf1 = self.currentFraction;
     
-    
+    NSLog(@"%d %d %d %d",mf.numerator, mf1.numerator, mf.denominator, mf1.denominator);
     
     return [_utilities isEqual:mf and:mf1];
 }
@@ -214,33 +229,13 @@
     fraction.numerator = numerator;
     fraction.denominator = denominator;
     
-    fraction =  [self simplify:fraction];
+    fraction =  [_utilities simplify:fraction];
     
     
     return fraction;
 }
 
 
--(MFFraction *)simplify:(MFFraction *)_fraction{
-    if(_fraction.denominator==0 && _fraction.numerator ==0)
-    {
-        return _fraction;
-    }
-    if(_fraction.denominator%5==0 &&_fraction.numerator %5==0)
-    {
-        _fraction.denominator = _fraction.denominator/5;
-        _fraction.numerator = _fraction.numerator/5;
-        [self simplify:_fraction];
-    }
-    if(_fraction.denominator%2==0 &&_fraction.numerator %2==0)
-    {
-        _fraction.denominator =_fraction.denominator/2;
-        _fraction.numerator = _fraction.numerator/2;
-        [self simplify:_fraction];
-    }
-    return _fraction;
-    
-}
 
 
 

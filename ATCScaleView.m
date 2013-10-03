@@ -57,13 +57,18 @@ enum kFractionComparator {
     
 }
 @property(nonatomic,strong) UIPanGestureRecognizer * upGesture;
-@property(nonatomic,strong) UIImageView * leftArm;
-@property(nonatomic,strong) UIImageView * rightArm;
-@property(nonatomic,strong) MFFraction * leftFraction;
+@property(nonatomic,strong) IBOutlet UIImageView * leftArmImageView;
+@property(nonatomic,strong) IBOutlet UIImageView * rightArmImageView;
+@property(nonatomic,strong)  MFFraction * leftFraction;
 @property(nonatomic,strong) MFFraction * rightFraction;
-@property(nonatomic,strong) MFFractionView * leftFractionView;
-@property(nonatomic,strong) MFFractionView * rightFractionView;
+
 @property(nonatomic,strong) MFUtilities *utitilities;
+@property (strong, nonatomic) IBOutlet UILabel *leftFractionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *rightFractionLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *leftArm;
+@property (strong, nonatomic) IBOutlet UIView *rightArm;
+
 
 @end
 
@@ -71,20 +76,7 @@ enum kFractionComparator {
 
 @implementation ATCScaleView
 
-CGFloat DegreesToRadians(CGFloat degrees)
-{
-    return degrees * M_PI / 180;
-};
 
-CGFloat RadiansToDegrees(CGFloat radians)
-{
-    return radians * 180 / M_PI;
-};
-
-//-(MFFraction *)calculateScore{
-// 
-//    return [MFFraction new];
-//}
 
 -(BOOL)checkAnswer{
     
@@ -110,7 +102,7 @@ CGFloat RadiansToDegrees(CGFloat radians)
 - (id)initWithCoder:(NSCoder *)inCoder;{
     self = [super initWithCoder:inCoder];
     if (self) {
-        
+        [self setUpView];
     }
     return self;
 }
@@ -126,7 +118,7 @@ CGFloat RadiansToDegrees(CGFloat radians)
     leftOrigin = CGPointMake(x1, self.center.y);
     rightOrigin = CGPointMake(x2, self.center.y);
     scaleWidth = width;
-    
+    armHeight = CGRectGetHeight(self.leftArm.frame);
     
     if(!_upGesture){
     _upGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(upGestureTriggered:)];
@@ -134,29 +126,6 @@ CGFloat RadiansToDegrees(CGFloat radians)
     _upGesture.maximumNumberOfTouches =1;
     [self addGestureRecognizer:_upGesture];
     }
-   
-    if(!_leftArm){
-        _leftArm = [[UIImageView alloc]init];
-        _rightArm = [[UIImageView alloc]init];
-        self.leftArm.image = [UIImage imageNamed:@"scaleleft"];
-        self.rightArm.image = [UIImage imageNamed:@"scaleright"];
-        [self addSubview:self.leftArm];
-        [self addSubview:self.rightArm];
-    }
-    
-    armHeight = 175;
-    CGRect f1 = CGRectMake(0,CGRectGetHeight(self.bounds)-armHeight+20,71,armHeight);
-    self.leftArm.frame = CGRectOffset(f1, 350, 0);
-    self.rightArm.frame = CGRectOffset(f1, 680, 0);
-    
-    if(!_rightFractionView){
-        _leftFractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(300, 0, 200,200)];
-        _rightFractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(600, 0, 200,200)];
-        [self addSubview:_leftFractionView];
-        [self addSubview:_rightFractionView];
-    }
-    
-   
 }
 
 
@@ -184,7 +153,7 @@ CGFloat RadiansToDegrees(CGFloat radians)
     CGPoint rcenter = self.rightArm.center;
     
     CGRect  dl = self.leftArm.frame;
-    CGRect dr = self.rightArm.frame;
+    CGRect  dr = self.rightArm.frame;
     
     float delta;
     
@@ -195,7 +164,9 @@ CGFloat RadiansToDegrees(CGFloat radians)
         
         lcenter.y = touch.y;
         rcenter.y = rcenter.y + delta;
+       
         
+       
         
     }
     if(CGRectContainsPoint(self.rightArm.frame, touch)){
@@ -203,17 +174,20 @@ CGFloat RadiansToDegrees(CGFloat radians)
         delta = rcenter.y - touch.y;
         rcenter.y = touch.y;
         lcenter.y = lcenter.y + delta;
+
+       
         
     }
     
     self.leftArm.center = lcenter;
     self.rightArm.center = rcenter;
     
-    NSLog(@"%f %f %f ",CGRectGetMinY(_leftArm.frame),CGRectGetHeight(self.bounds), CGRectGetHeight(self.leftArm.bounds));
+    
+    
+    
     if(CGRectGetMinY(_leftArm.frame)<= (CGRectGetHeight(self.bounds)- CGRectGetHeight(self.leftArm.bounds))||CGRectGetMinY(_rightArm.frame)<= (CGRectGetHeight(self.bounds)- CGRectGetHeight(self.rightArm.bounds))){
         self.leftArm.frame= dl;
         self.rightArm.frame= dr;
-        
         
         return;
     }
@@ -226,12 +200,17 @@ CGFloat RadiansToDegrees(CGFloat radians)
     [self setNeedsDisplay];
 }
 -(void)setCurrentFractions:(NSArray *)currentFractions{
+  
+    
     if(currentFractions.count==2){
         self.leftFraction = currentFractions[0];
         self.rightFraction = currentFractions[1];
         
-        self.leftFractionView.fraction= self.leftFraction;
-        self.rightFractionView.fraction= self.rightFraction;
+        self.leftFractionLabel.text = [NSString stringWithFormat:@"%d/%d",self.leftFraction.numerator,self.leftFraction.denominator];
+        self.rightFractionLabel.text = [NSString stringWithFormat:@"%d/%d",self.leftFraction.numerator,self.leftFraction.denominator];
+        
+//        self.leftFractionView.fraction= self.leftFraction;
+//        self.rightFractionView.fraction= self.rightFraction;
     }
     [self setNeedsDisplay];
 }
@@ -274,7 +253,7 @@ CGFloat RadiansToDegrees(CGFloat radians)
     }
     
     [[UIColor blackColor] setFill];
-    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 53] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
+    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 153] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
 
     
 }

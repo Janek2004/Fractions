@@ -37,5 +37,7 @@
 -(float)getValueOfFraction:(MFFraction *)fraction;
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object;
 - (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject;
+-(MFFraction *)simplify:(MFFraction *)_fraction;
+
 
 @end

@@ -120,7 +120,9 @@
  
         PracticeViewController * pv = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
          pv.activityId = btn.tag;
-        [self presentViewController:pv animated:YES completion:^{}];
+        [self presentViewController:pv animated:YES completion:^{
+            
+        }];
          
          }
          

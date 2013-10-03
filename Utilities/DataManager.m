@@ -72,12 +72,8 @@
         [self randomize:array fromSet:defaultSet andDesiredCount:count];
     
     }
-    
     return array;
-    
 }
-
-
 
 
 -(MFActivity *)getActivity:(int)activityId{
@@ -117,16 +113,12 @@
 //        
 
         NSMutableArray * a=[self randomize:nil fromSet:act.set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
-                  NSLog(@"Before");
+      
         act.set = [NSSet setWithArray:a];
-           NSLog(@"After ");
+ 
 
         return act;
     }
-
-    
-    
-    
     return nil;
     
 }
@@ -157,7 +149,7 @@
                 
                 [fractions addObject: fraction];
 
-                NSLog(@"Fraction %d %d added for set %d",fraction.numerator,fraction.denominator,setId );
+               
             
             }
               *stop = YES;
@@ -217,11 +209,11 @@
                                               entityForName:@"MFUser" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
-    
+   
     NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(name LIKE[c] %@)",name];
     
     [request setPredicate:predicate];
-    
+   
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
                                         initWithKey:@"name" ascending:YES];
     [request setSortDescriptors:@[sortDescriptor]];
@@ -231,10 +223,7 @@
     if(error){
         NSLog(@"Error %@",error.debugDescription);
     }
-    NSLog(@"Array %@",array);
-    
-    
-    MFUser *mf;
+      MFUser *mf;
     if(array.count==1)
     {
         mf = array[0];
@@ -252,7 +241,7 @@
 
     NSString *userName= [ud objectForKey:@"current_user"];
     NSString *userPin= [ud objectForKey:@"current_pin"];
-
+    if(!userName||!userPin) return nil;
 
     MFUser * user=   [self findUserWithPin:userPin andName:userName];
     return user;
