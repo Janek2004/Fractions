@@ -2,7 +2,7 @@
 //  MFCompleted.m
 //  MathFractions
 //
-//  Created by Janusz Chudzynski on 10/1/13.
+//  Created by Janusz Chudzynski on 10/3/13.
 //  Copyright (c) 2013 UWF. All rights reserved.
 //
 
@@ -14,5 +14,6 @@
 
 @dynamic completed_date;
 @dynamic activity;
+@dynamic user;
 
 @end

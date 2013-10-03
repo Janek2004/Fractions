@@ -33,6 +33,7 @@
 #import "MFUser.h"
 #import "MFAttempt.h"
 #import "MFAppDelegate.h"
+#import "MFCompleted.h"
 
 
 @interface DataManager()
@@ -274,7 +275,19 @@
 
 
 -(void)markActivity:(int )activity asCompletedForUser:(MFUser *)user{
+    [self getActivity:activity];
+    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     
+    MFCompleted *at = [NSEntityDescription insertNewObjectForEntityForName:@"MFCompleted" inManagedObjectContext:context];
+    at.completed_date = [NSDate new];
+    at.activity =[NSNumber numberWithInt:activity];
+    at.user = [self getCurrentUser];
+
+    NSError * e;
+    [context save:&e];
+    if(e){
+        NSLog(@"Error: debug desription %@",e.debugDescription);
+    }
     
 
 }
@@ -311,9 +324,7 @@
         
         //get raw set
         NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
-        //randomize it
-      //  NSMutableArray * a=[self randomize:nil fromSet:set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
-        
+
         act.set = set; //[NSSet setWithArray:a.a];
         
         //save it

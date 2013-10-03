@@ -206,12 +206,12 @@
 
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
+    self.currentActivity = [_dataManager getActivity:self.activityId];
     id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
     self.practiceView = (UIView *) activityView;
     [self.activityContainer addSubview:self.practiceView];
     _currentQuestionIndex =0;
-    
-    self.currentActivity = [_dataManager getActivity:self.activityId];
+  
     
     if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
         self.backgroundImageView.image =  [UIImage imageNamed:@"scalebg.png"];

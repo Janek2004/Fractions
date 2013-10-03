@@ -2,7 +2,7 @@
 //  MFCompleted.h
 //  MathFractions
 //
-//  Created by Janusz Chudzynski on 10/1/13.
+//  Created by Janusz Chudzynski on 10/3/13.
 //  Copyright (c) 2013 UWF. All rights reserved.
 //
 
@@ -13,7 +13,8 @@
 
 @interface MFCompleted : NSManagedObject
 
-@property (nonatomic) NSTimeInterval completed_date;
-@property (nonatomic, retain) MFUser *activity;
+@property (nonatomic, retain) NSDate * completed_date;
+@property (nonatomic, retain) NSNumber * activity;
+@property (nonatomic, retain) MFUser *user;
 
 @end

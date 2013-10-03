@@ -51,15 +51,12 @@ enum kFractionComparator {
     float alpha;
     float armHeight;
     enum kFractionComparator comparator;
-    
-    
-    
-    
 }
+
 @property(nonatomic,strong) UIPanGestureRecognizer * upGesture;
 @property(nonatomic,strong) IBOutlet UIImageView * leftArmImageView;
 @property(nonatomic,strong) IBOutlet UIImageView * rightArmImageView;
-@property(nonatomic,strong)  MFFraction * leftFraction;
+@property(nonatomic,strong) MFFraction * leftFraction;
 @property(nonatomic,strong) MFFraction * rightFraction;
 
 @property(nonatomic,strong) MFUtilities *utitilities;
@@ -68,7 +65,7 @@ enum kFractionComparator {
 
 @property (strong, nonatomic) IBOutlet UIView *leftArm;
 @property (strong, nonatomic) IBOutlet UIView *rightArm;
-
+@property (strong, nonatomic) IBOutlet UILabel *labelSign;
 
 @end
 
@@ -141,7 +138,7 @@ enum kFractionComparator {
 
 -(void)reset{
     [self setUpView];
-    [self setNeedsDisplay];
+    [self drawSign];
 }
 
 
@@ -165,26 +162,20 @@ enum kFractionComparator {
         lcenter.y = touch.y;
         rcenter.y = rcenter.y + delta;
        
-        
-       
-        
+    
     }
     if(CGRectContainsPoint(self.rightArm.frame, touch)){
         //move up or down and do opposite for other arm
         delta = rcenter.y - touch.y;
         rcenter.y = touch.y;
         lcenter.y = lcenter.y + delta;
-
-       
-        
+    
     }
     
     self.leftArm.center = lcenter;
     self.rightArm.center = rcenter;
     
-    
-    
-    
+
     if(CGRectGetMinY(_leftArm.frame)<= (CGRectGetHeight(self.bounds)- CGRectGetHeight(self.leftArm.bounds))||CGRectGetMinY(_rightArm.frame)<= (CGRectGetHeight(self.bounds)- CGRectGetHeight(self.rightArm.bounds))){
         self.leftArm.frame= dl;
         self.rightArm.frame= dr;
@@ -197,7 +188,7 @@ enum kFractionComparator {
     self.leftArm.center = lcenter;
     self.rightArm.center = rcenter;
     
-    [self setNeedsDisplay];
+     [self drawSign];
 }
 -(void)setCurrentFractions:(NSArray *)currentFractions{
   
@@ -212,19 +203,19 @@ enum kFractionComparator {
 //        self.leftFractionView.fraction= self.leftFraction;
 //        self.rightFractionView.fraction= self.rightFraction;
     }
-    [self setNeedsDisplay];
+    [self drawSign];
 }
 
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-    // [self drawScale:leftOrigin right:rightOrigin];
-    
-    [self drawSign];
-  }
+//- (void)drawRect:(CGRect)rect
+//{
+//    // Drawing code
+//    // [self drawScale:leftOrigin right:rightOrigin];
+//    
+//    [self drawSign];
+//  }
 
 -(void)drawFractions{
    
@@ -237,24 +228,20 @@ enum kFractionComparator {
     
     NSString *textContent;
     if(alpha >=-15 && alpha <=15){
-        textContent = @"=";
+        self.labelSign.text = @"=";
         comparator =kEqual;
         
     }
     
     else if(alpha <-15 ){
-        textContent = @">";
+         self.labelSign.text = @">";
         comparator =kMore;
     }
     
     else if(alpha >15 ){
         comparator =kLess;
-        textContent = @"<";
+         self.labelSign.text = @"<";
     }
-    
-    [[UIColor blackColor] setFill];
-    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 153] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
-
     
 }
 

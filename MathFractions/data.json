@@ -7,7 +7,7 @@
         "standard":"CCSS.Math.Content.3.NF.A.3d",
         "nr_fraction_inquestion":2,
         "questioncount":2,
-        "set": 1
+        "set": 2
     },
 
     {
@@ -16,7 +16,7 @@
         "classname":"ATCScaleView",
         "standard":"CCSS.Math.Content.3.NF.A.3d",
         "nr_fraction_inquestion":1,
-        "set": 1,
+        "set": 3,
         "questioncount":2
     },
                   

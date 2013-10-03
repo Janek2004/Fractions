@@ -31,7 +31,6 @@
 		4F50341417FB5A1D007A9DE8 /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341317FB5A1D007A9DE8 /* MFUser.m */; };
 		4F50341A17FB5A1E007A9DE8 /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341917FB5A1E007A9DE8 /* MFAttempt.m */; };
 		4F50342017FB5A1E007A9DE8 /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341F17FB5A1E007A9DE8 /* MFFraction.m */; };
-		4F50342317FB5A80007A9DE8 /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50342217FB5A80007A9DE8 /* MFCompleted.m */; };
 		4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50342517FB5BB5007A9DE8 /* MFActivity.m */; };
 		4F50346017FC7747007A9DE8 /* LevelComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342717FC7747007A9DE8 /* LevelComp.png */; };
 		4F50346117FC7747007A9DE8 /* wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342817FC7747007A9DE8 /* wrong.png */; };
@@ -143,6 +142,7 @@
 		4FE8C50617FDF73A00B0C796 /* walk3@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D417FDF73A00B0C796 /* walk3@2.png */; };
 		4FE8C50717FDF73A00B0C796 /* walk4@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D517FDF73A00B0C796 /* walk4@2.png */; };
 		4FE8C50817FDF73A00B0C796 /* wrong@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D617FDF73A00B0C796 /* wrong@2.png */; };
+		4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */; };
 		4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */; };
 		4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02B17E7AE48004AF076 /* KxIntroView.m */; };
 		4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02D17E7AE48004AF076 /* KxIntroViewController.m */; };
@@ -210,8 +210,6 @@
 		4F50341917FB5A1E007A9DE8 /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFAttempt.m; path = CoreDataModel/MFAttempt.m; sourceTree = "<group>"; };
 		4F50341E17FB5A1E007A9DE8 /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFraction.h; path = CoreDataModel/MFFraction.h; sourceTree = "<group>"; };
 		4F50341F17FB5A1E007A9DE8 /* MFFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFraction.m; path = CoreDataModel/MFFraction.m; sourceTree = "<group>"; };
-		4F50342117FB5A80007A9DE8 /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
-		4F50342217FB5A80007A9DE8 /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
 		4F50342417FB5BB5007A9DE8 /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4F50342517FB5BB5007A9DE8 /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4F50342717FC7747007A9DE8 /* LevelComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LevelComp.png; path = Graphics/LevelComp.png; sourceTree = "<group>"; };
@@ -326,6 +324,8 @@
 		4FE8C4D417FDF73A00B0C796 /* walk3@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walk3@2.png"; sourceTree = "<group>"; };
 		4FE8C4D517FDF73A00B0C796 /* walk4@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walk4@2.png"; sourceTree = "<group>"; };
 		4FE8C4D617FDF73A00B0C796 /* wrong@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrong@2.png"; sourceTree = "<group>"; };
+		4FE8C50917FE1AF000B0C796 /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
+		4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
 		4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCScaleView.h; sourceTree = "<group>"; };
 		4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCScaleView.m; sourceTree = "<group>"; };
 		4FEFE02A17E7AE48004AF076 /* KxIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroView.h; sourceTree = "<group>"; };
@@ -485,10 +485,10 @@
 			isa = PBXGroup;
 			children = (
 				4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */,
+				4FE8C50917FE1AF000B0C796 /* MFCompleted.h */,
+				4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */,
 				4F50342417FB5BB5007A9DE8 /* MFActivity.h */,
 				4F50342517FB5BB5007A9DE8 /* MFActivity.m */,
-				4F50342117FB5A80007A9DE8 /* MFCompleted.h */,
-				4F50342217FB5A80007A9DE8 /* MFCompleted.m */,
 				4F50341217FB5A1D007A9DE8 /* MFUser.h */,
 				4F50341317FB5A1D007A9DE8 /* MFUser.m */,
 				4F50341E17FB5A1E007A9DE8 /* MFFraction.h */,
@@ -979,7 +979,6 @@
 				4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */,
 				4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */,
 				4F14C1F417999FD90043B1D4 /* MFAppDelegate.m in Sources */,
-				4F50342317FB5A80007A9DE8 /* MFCompleted.m in Sources */,
 				4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */,
 				4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */,
 				4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */,
@@ -988,6 +987,7 @@
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				4F50342017FB5A1E007A9DE8 /* MFFraction.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
+				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,
 				4FEFE04517E8FD0F004AF076 /* NumberLineView.m in Sources */,
 				4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */,
 				4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */,

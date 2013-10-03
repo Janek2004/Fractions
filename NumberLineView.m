@@ -110,7 +110,9 @@
         [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
         
         [_addButton setTitle:@"+" forState:UIControlStateNormal];
+        
         [_addButton setBackgroundColor:[UIColor redColor]];
+        _addButton.layer.cornerRadius =5;
         numerator = 0;
         denominator = 0;
         
