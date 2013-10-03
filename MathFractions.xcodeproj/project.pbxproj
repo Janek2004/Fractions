@@ -157,6 +157,7 @@
 		4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFA9C0417F2381900F6FF32 /* MFViewController.xib */; };
 		822276F317FBBDB0006A5798 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822276F217FBBDB0006A5798 /* Images.xcassets */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
+		DBB42ACB17FE1BA90082D799 /* GlassActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,6 +349,7 @@
 		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFViewController.xib; sourceTree = "<group>"; };
 		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlassActivityView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +386,7 @@
 				4FEFE04617EA2D05004AF076 /* UIBAlertView */,
 				4FEFE03517E8D81D004AF076 /* Resources */,
 				4FEFE02617E7ABFE004AF076 /* ActivityView */,
+				DBB42ACC17FE1BE60082D799 /* GlassActivity */,
 				4FEFE02517E7ABE8004AF076 /* Intro */,
 				4F14C1E917999FD90043B1D4 /* MathFractions */,
 				4F14C20D17999FD90043B1D4 /* MathFractionsTests */,
@@ -706,6 +709,14 @@
 			name = Buttons;
 			sourceTree = "<group>";
 		};
+		DBB42ACC17FE1BE60082D799 /* GlassActivity */ = {
+			isa = PBXGroup;
+			children = (
+				DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */,
+			);
+			name = GlassActivity;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -836,6 +847,7 @@
 				4F50346E17FC7747007A9DE8 /* map2.png in Resources */,
 				4F50347917FC7747007A9DE8 /* Icon-Small@2x.png in Resources */,
 				4FE8C50317FDF73A00B0C796 /* walk@2.gif in Resources */,
+				DBB42ACB17FE1BA90082D799 /* GlassActivityView.xib in Resources */,
 				4FE8C4FC17FDF73A00B0C796 /* menu2@2.png in Resources */,
 				4F50348917FC7747007A9DE8 /* done2.png in Resources */,
 				4F50346517FC7747007A9DE8 /* walk1.png in Resources */,
