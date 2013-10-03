@@ -106,13 +106,6 @@
             [self getLocalJSON];
         }
         
-//           NSLog(@"Before");
-//        NSSet *set = [self getSet:activityId fromDict:self.appData];
-//        //randomize it
-//        
-//           NSLog(@"Before");
-//        
-
         NSMutableArray * a=[self randomize:nil fromSet:act.set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
       
         act.set = [NSSet setWithArray:a];
@@ -325,7 +318,7 @@
         //get raw set
         NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
 
-        act.set = set; //[NSSet setWithArray:a.a];
+        act.set = set;
         
         //save it
         NSError * error;

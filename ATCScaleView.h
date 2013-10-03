@@ -31,7 +31,6 @@
 
 @interface ATCScaleView : UIView <MFPracticeRequiredMethods>
 -(BOOL)checkAnswer;
-@property (nonatomic,strong) NSMutableArray * segmentsArray;
 @property (nonatomic,strong) NSArray * currentFractions;
 
 @end

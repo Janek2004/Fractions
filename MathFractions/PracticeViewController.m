@@ -189,8 +189,8 @@
 -(void)displayFraction{
     if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
-
-      id question = self.questionsSet[_currentQuestionIndex];
+ 
+        id question = self.questionsSet[_currentQuestionIndex];
       
         if([question isKindOfClass:[NSArray class]]){
             [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
@@ -308,13 +308,9 @@
         
         
         if(check){
-            //good job - > new question
-            //play sound
-            NSLog(@"Good Job");
-            _manager = [MFManager sharedManager];
-          
+
+           _manager = [MFManager sharedManager];
            [self showFeedback:YES];
-            
             
         }
         else{

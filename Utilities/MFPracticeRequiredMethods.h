@@ -34,8 +34,6 @@
 @required
 -(BOOL)checkAnswer;
 -(void)reset;
-
-@optional
 @property (nonatomic,strong) NSArray * currentFractions;
 
 @end

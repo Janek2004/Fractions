@@ -32,7 +32,7 @@
 #import "MFManager.h"
 #import "DataManager.h"
 #import "PracticeViewController.h"
-
+#import "MFActivity.h"
 
 @interface MFViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *MenuView;
@@ -145,15 +145,12 @@
 -(void)checkProgress{
     //get current progress
     MFUser * mf = [[MFManager sharedManager]mfuser];
-    //set unselected images as well
+    for(MFActivity *act in mf.completed){
+        [UIView animateWithDuration:1.0 animations:^{
+            [(UIButton*)[self.view viewWithTag:act.activityid]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
+        }];
+    }
     
-//    for(NSNumber * nm in mf.completed){
-//        [UIView animateWithDuration:1.0 animations:^{
-//                        [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:nil forState:UIControlStateNormal];
-//           // [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundColor:[UIColor redColor]]; //] forState:UIControlStateNormal];
-//            [(UIButton*)[self.view viewWithTag:nm.integerValue]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
-//        }];
-//    }
 }
 
 
