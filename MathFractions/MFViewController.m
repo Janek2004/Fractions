@@ -149,30 +149,23 @@
         UIButton *btn = (UIButton *)[self.view viewWithTag:i];
         NSString * imageName;
         
-        if(i== 1 ||i == 2||i == 3)
+        if(i== 1 ||i == 2)
         {
             imageName =@"scale2";
         }
         
-        if(i == 4)
+        if(i == 3)
         {
             
             imageName =@"glass2";
         }
-        if(i == 5||i == 6)
+        if(i == 5||i == 6||i == 4)
         {
             imageName =@"choco1@2.png";
         }
         
-        
-        
-        
-        [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-        
-        
-        
+        [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];\
     }
-    
     
     MFUser * mf = [[MFManager sharedManager]mfuser];
     for(MFCompleted *act in mf.completed){
@@ -180,15 +173,15 @@
         
         [UIView animateWithDuration:1.0 animations:^{
             NSString * imageName;
-            if(act.activity.integerValue == 1 ||act.activity.integerValue == 2||act.activity.integerValue == 3)
+            if(act.activity.integerValue == 1 ||act.activity.integerValue == 2)
             {
                 imageName =@"scale1";
             }
-            if(act.activity.integerValue == 4)
+            if(act.activity.integerValue == 3)
             {
                 imageName =@"glass1";
             }
-            if(act.activity.integerValue == 5||act.activity.integerValue == 6)
+            if(act.activity.integerValue == 4||act.activity.integerValue == 5||act.activity.integerValue == 6)
             {
                 imageName =@"choco1";
             }
@@ -196,9 +189,7 @@
             [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         }];
     }
-    
 }
-
 
 - (IBAction)showMenu:(id)sender {
     [self.view addSubview:self.MenuView];
@@ -365,7 +356,15 @@
 
 }
 
-
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
+    lbl.backgroundColor = [UIColor clearColor];
+    lbl.text =[NSString stringWithFormat:@"%@",_array[row]];
+    lbl.textColor = [UIColor whiteColor];
+    
+    return lbl;
+    
+}
 
 
 
