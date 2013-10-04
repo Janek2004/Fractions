@@ -11,6 +11,7 @@
 @interface MFGlassActivityViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *leftGlass;
 @property (weak, nonatomic) IBOutlet UIImageView *rightGlass;
+@property (weak, nonatomic) IBOutlet UIImageView *redoActivity;
 @property (strong, nonatomic) NSMutableArray *leftGlassViews;
 @property (strong, nonatomic) NSMutableArray *rightGlassViews;
 
@@ -36,8 +37,29 @@
     self.rightGlassViews = [NSMutableArray new];
     [self.leftGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLeftGlass:)]];
     [self.rightGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapRightGlass:)]];
+    [self.redoActivity addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startOver:)]];
 }
 
+-(void)startOver:(UITapGestureRecognizer *)recognizer {
+    for(NSInteger i = self.leftGlassViews.count - 1; i >= 0; i--) {
+        UIView *v = self.leftGlassViews[i];
+        [UIView animateWithDuration:.227 delay:((self.leftGlassViews.count - 1 - i) * .1) options:UIViewAnimationOptionCurveLinear animations:^{
+            v.alpha = 0;
+        } completion:^(BOOL finished) {
+            [v removeFromSuperview];
+        }];
+    }
+    [self.leftGlassViews removeAllObjects];
+    for(NSInteger i = self.rightGlassViews.count - 1; i >= 0; i--) {
+        UIView *v = self.rightGlassViews[i];
+        [UIView animateWithDuration:.227 delay:((self.rightGlassViews.count - 1 - i) * .1) options:UIViewAnimationOptionCurveLinear animations:^{
+            v.alpha = 0;
+        } completion:^(BOOL finished) {
+            [v removeFromSuperview];
+        }];
+    }
+    [self.rightGlassViews removeAllObjects];
+}
 -(void)tapLeftGlass:(UITapGestureRecognizer *)recognizer {
     if(self.leftGlassViews.count == 0) {
         UIView *fraction = ({
