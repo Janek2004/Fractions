@@ -313,8 +313,9 @@
         act.class_name = obj[@"classname"];
         act.standard = obj[@"standard"];
         act.maxQuestions = [obj[@"questioncount"]integerValue];
-        act.fractionCount =[obj[@"nr_fraction_inquestion"]integerValue];
         
+        act.fractionCount =[obj[@"nr_fraction_inquestion"]integerValue];
+        NSLog(@"nr_fraction_inquestion %d",[obj[@"nr_fraction_inquestion"]integerValue]);
         //get raw set
         NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
 

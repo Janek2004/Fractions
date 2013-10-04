@@ -34,7 +34,7 @@
 @interface DataManager : NSObject
 -(MFActivity *)getActivity:(int)activityId;
 -(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity;
-
+-(void)markActivity:(int )activity asCompletedForUser:(MFUser *)user;
 -(MFUser *)getCurrentUser;
 -(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
 -(void)loginUser:(MFUser *)user;

@@ -29,7 +29,7 @@
 
 #import "ATCScaleView.h"
 #import "MFFraction.h"
-#import "MFFractionView.h"
+//#import "MFFractionView.h"
 #import "MFUtilities.h"
 
 #define RectSize 25
@@ -200,22 +200,11 @@ enum kFractionComparator {
         self.leftFractionLabel.text = [NSString stringWithFormat:@"%d/%d",self.leftFraction.numerator,self.leftFraction.denominator];
         self.rightFractionLabel.text = [NSString stringWithFormat:@"%d/%d",self.leftFraction.numerator,self.leftFraction.denominator];
         
-//        self.leftFractionView.fraction= self.leftFraction;
-//        self.rightFractionView.fraction= self.rightFraction;
     }
     [self drawSign];
 }
 
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-//- (void)drawRect:(CGRect)rect
-//{
-//    // Drawing code
-//    // [self drawScale:leftOrigin right:rightOrigin];
-//    
-//    [self drawSign];
-//  }
 
 -(void)drawFractions{
    
@@ -223,13 +212,9 @@ enum kFractionComparator {
 }
 
 -(void)drawSign{
-    int labelWidth = self.frame.size.width * 0.5;
-    CGRect textRect = CGRectMake(self.center.x-labelWidth/2.0,self.center.y+ 40,labelWidth,30);
-    
-    NSString *textContent;
     if(alpha >=-15 && alpha <=15){
-        self.labelSign.text = @"=";
-        comparator =kEqual;
+     self.labelSign.text = @"=";
+     comparator =kEqual;
         
     }
     

@@ -31,7 +31,7 @@
 #import "NumberLinePieceView.h"
 #import "Segment.h"
 #import "MFFraction.h"
-#import "MFFractionView.h"
+//#import "MFFractionView.h"
 #import "MFUtilities.h"
 #import "MFAppDelegate.h"
 
@@ -48,9 +48,11 @@
 @property (nonatomic,strong) UITapGestureRecognizer * tapRecognizer;
 @property (nonatomic,strong) NSMutableArray * piecesArray;
 @property (nonatomic,strong) UIButton * addButton;
-@property (nonatomic,strong) MFFractionView * fractionView;
+
 @property(nonatomic,strong) MFFraction * currentFraction;
 @property (nonatomic,strong) MFUtilities * utilities;
+
+@property (strong, nonatomic) IBOutlet UILabel *fractionLabel;
 
 
 @property int pieces;
@@ -74,10 +76,53 @@
     CGRect frame = CGRectMake(x,55, w,100);
     NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
     [_piecesArray addObject:nl];
-  [self drawPieces];
+   [self drawPieces];
     
     [self setNeedsDisplay];
 }
+
+- (id)initWithCoder:(NSCoder *)inCoder;{
+    self = [super initWithCoder:inCoder];
+    if (self) {
+        [self setUpView];
+    }
+    return self;
+}
+
+-(void)setUpView{
+    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+    fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
+
+    _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
+    _piecesArray = [[NSMutableArray alloc]initWithCapacity:0];
+    
+    float w = PIECE_WIDTH;
+    float x =CGRectGetWidth(self.frame) - w -w/2.0;
+    x =[self getX];
+    
+    CGRect frame = CGRectMake(x,55, w,100);
+    NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
+    [_piecesArray addObject:nl];
+    
+    CGRect btnframe = CGRectMake(5,25,50,50);
+    _addButton=[[UIButton alloc]initWithFrame:btnframe];
+    [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_addButton setTitle:@"+" forState:UIControlStateNormal];
+    
+    [_addButton setBackgroundColor:[UIColor redColor]];
+    _addButton.layer.cornerRadius =5;
+    numerator = 0;
+    denominator = 0;
+    
+    _utilities = [[MFUtilities alloc]init];
+    
+    [self drawPieces];
+    [self addSubview:_addButton];
+
+}
+
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -85,54 +130,17 @@
     if (self) {
         // Initialization code
        // fraction = [MFFraction new];
-          NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-          fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
-        
-        
-        
-        _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
-        _piecesArray = [[NSMutableArray alloc]initWithCapacity:0];
-        
-        float w = PIECE_WIDTH;
-        float x =CGRectGetWidth(self.frame) - w -w/2.0;
-        x =[self getX];
-
-        _fractionView = [[MFFractionView alloc]initWithFrame:CGRectMake(845, 310, 200, 200)];
-        _fractionView.backgroundColor = [UIColor clearColor];
-        [self addSubview:_fractionView];
-        
-        CGRect frame = CGRectMake(x,55, w,100);
-        NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
-        [_piecesArray addObject:nl];
-        
-        CGRect btnframe = CGRectMake(5,5,50,50);
-        _addButton=[[UIButton alloc]initWithFrame:btnframe];
-        [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_addButton setTitle:@"+" forState:UIControlStateNormal];
-        
-        [_addButton setBackgroundColor:[UIColor redColor]];
-        _addButton.layer.cornerRadius =5;
-        numerator = 0;
-        denominator = 0;
-        
-        _utilities = [[MFUtilities alloc]init];
-        
-        [self drawPieces];
-        [self addSubview:_addButton];
-    }
+           }
     return self;
 }
 
 -(void)setCurrentFractions:(NSArray *)currentFractions{
     MFFraction * currentFraction = currentFractions[0];
     _currentFraction = currentFraction;
-    _fractionView.fraction = currentFraction;
-
+    self.fractionLabel.text =[NSString stringWithFormat:@"%d/%d",_currentFraction.numerator, _currentFraction.denominator];
     
-    [_fractionView setNeedsDisplay];
-
-}
+    
+  }
 
 -(void)addPiece{
     if(_piecesArray.count < MAX_NUM_PIECES){
@@ -156,7 +164,7 @@
 -(int)getX{
     float w = PIECE_WIDTH;
     float x =w / 2.0;
-    x= 10;
+    x= 40;
     return x;
 }
 

@@ -82,18 +82,18 @@
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller{
   //probably we can store it in database file
 #warning store it in database
-    if(activity == 1)
+    if(activity == 1||activity == 2||activity == 3)
     {
         [self presentScaleIntro:viewcontroller];
     }
-    if(activity == 2)
+    if(activity == 5||activity == 6)
     {
        [self presentNumberLineIntro:viewcontroller];
     }
-    if(activity == 3)
+    if(activity == 4)
     {
 
-       [self presentNumberLineIntro:viewcontroller];
+       [self presentFillGlassIntro:viewcontroller];
     }
     
     

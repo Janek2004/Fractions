@@ -143,6 +143,7 @@
 		4FE8C50717FDF73A00B0C796 /* walk4@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D517FDF73A00B0C796 /* walk4@2.png */; };
 		4FE8C50817FDF73A00B0C796 /* wrong@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D617FDF73A00B0C796 /* wrong@2.png */; };
 		4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */; };
+		4FE8C50E17FF0A5800B0C796 /* Choco.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C50D17FF0A5800B0C796 /* Choco.png */; };
 		4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */; };
 		4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02B17E7AE48004AF076 /* KxIntroView.m */; };
 		4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02D17E7AE48004AF076 /* KxIntroViewController.m */; };
@@ -326,6 +327,7 @@
 		4FE8C4D617FDF73A00B0C796 /* wrong@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrong@2.png"; sourceTree = "<group>"; };
 		4FE8C50917FE1AF000B0C796 /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
 		4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
+		4FE8C50D17FF0A5800B0C796 /* Choco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Choco.png; sourceTree = "<group>"; };
 		4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCScaleView.h; sourceTree = "<group>"; };
 		4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCScaleView.m; sourceTree = "<group>"; };
 		4FEFE02A17E7AE48004AF076 /* KxIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroView.h; sourceTree = "<group>"; };
@@ -621,6 +623,19 @@
 			name = Fractio;
 			sourceTree = "<group>";
 		};
+		4FE8C50C17FF07AE00B0C796 /* NumberLine */ = {
+			isa = PBXGroup;
+			children = (
+				4F14C21E1799BA160043B1D4 /* NumberLinePieceView.h */,
+				4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */,
+				4FEFE04317E8FD0F004AF076 /* NumberLineView.h */,
+				4FEFE04417E8FD0F004AF076 /* NumberLineView.m */,
+				4FE7BA7D179F286B0025DAF7 /* Segment.h */,
+				4FE7BA7E179F286B0025DAF7 /* Segment.m */,
+			);
+			name = NumberLine;
+			sourceTree = "<group>";
+		};
 		4FEFE02517E7ABE8004AF076 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,14 +654,9 @@
 			children = (
 				4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */,
 				4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */,
-				4F14C21E1799BA160043B1D4 /* NumberLinePieceView.h */,
-				4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */,
-				4FEFE04317E8FD0F004AF076 /* NumberLineView.h */,
-				4FEFE04417E8FD0F004AF076 /* NumberLineView.m */,
+				4FE8C50C17FF07AE00B0C796 /* NumberLine */,
 				4F44AEE817ECAEA1001AF95B /* MFFractionView.h */,
 				4F44AEE917ECAEA1001AF95B /* MFFractionView.m */,
-				4FE7BA7D179F286B0025DAF7 /* Segment.h */,
-				4FE7BA7E179F286B0025DAF7 /* Segment.m */,
 				4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */,
 				4F44AEEF17ECD176001AF95B /* MFQuestionSet.m */,
 				4F44AEF117ECDE82001AF95B /* MFPracticeRequiredMethods.h */,
@@ -657,6 +667,7 @@
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4FE8C50D17FF0A5800B0C796 /* Choco.png */,
 				4F50349917FC7779007A9DE8 /* Graphics_All */,
 				822276FE17FBC05F006A5798 /* Buttons */,
 				4FDFE0C417F9DC55008D31D4 /* Fractio */,
@@ -852,6 +863,7 @@
 				4F50348917FC7747007A9DE8 /* done2.png in Resources */,
 				4F50346517FC7747007A9DE8 /* walk1.png in Resources */,
 				4FE8C50017FDF73A00B0C796 /* sign@2.png in Resources */,
+				4FE8C50E17FF0A5800B0C796 /* Choco.png in Resources */,
 				4F14C1F817999FD90043B1D4 /* Default@2x.png in Resources */,
 				4FE8C4F117FDF73A00B0C796 /* holdweight@2.png in Resources */,
 				4F14C1FA17999FD90043B1D4 /* Default-568h@2x.png in Resources */,

@@ -37,9 +37,11 @@
 #import "MFManager.h"
 
 #import "MFFraction.h"
-#import  "MFActivity.h"
+#import "MFActivity.h"
 #import "MFPracticeRequiredMethods.h"
 #import "MFAttempt.h"
+#import "NumberLineView.h"
+
 
 @interface PracticeViewController ()
 @property (nonatomic) BOOL  introShown;
@@ -55,6 +57,8 @@
 @property (strong, nonatomic) IBOutlet UIView *feedbackView;
 @property (strong, nonatomic) IBOutlet UIView *gameOver;
 @property (strong, nonatomic) IBOutlet UIView *hintView;
+
+@property (strong, nonatomic) IBOutlet NumberLineView *numberLineView;
 
 @property (strong, nonatomic) IBOutlet ATCScaleView *scaleView;
 
@@ -178,6 +182,7 @@
     else{
         //Game Over
          NSLog(@"GAME OVER Screen");
+        [self.dataManager markActivity:self.activityId asCompletedForUser:self.manager.mfuser];
         [self.view addSubview: self.gameOver];
         
         
@@ -207,12 +212,13 @@
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
     self.currentActivity = [_dataManager getActivity:self.activityId];
-    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
-    self.practiceView = (UIView *) activityView;
+    
+//    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
+//    self.practiceView = (UIView *) activityView;
+
     [self.activityContainer addSubview:self.practiceView];
     _currentQuestionIndex =0;
   
-    
     if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
         self.backgroundImageView.image =  [UIImage imageNamed:@"scalebg.png"];
 
@@ -220,8 +226,12 @@
         self.practiceView = self.scaleView;
     
     }
+    
     if([self.currentActivity.name isEqualToString:@"Number Line Activity"]){
-        self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
+       self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
+       [self.activityContainer addSubview:self.numberLineView];
+        self.practiceView = self.numberLineView;
+        
     }
     
     
@@ -248,8 +258,7 @@
     
     }
     
-        //here
-    
+         
     
     
     [self displayFraction];
@@ -335,6 +344,8 @@
 }
 
 - (IBAction)showHint:(id)sender {
+    
     [self.view addSubview:self.hintView];
+    
 }
 @end

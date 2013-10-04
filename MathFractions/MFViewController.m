@@ -33,6 +33,7 @@
 #import "DataManager.h"
 #import "PracticeViewController.h"
 #import "MFActivity.h"
+#import "MFCompleted.h"
 
 @interface MFViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *MenuView;
@@ -144,10 +145,55 @@
 
 -(void)checkProgress{
     //get current progress
+    for(int i=1;i<=6;i++){
+        UIButton *btn = (UIButton *)[self.view viewWithTag:i];
+        NSString * imageName;
+        
+        if(i== 1 ||i == 2||i == 3)
+        {
+            imageName =@"scale2";
+        }
+        
+        if(i == 4)
+        {
+            
+            imageName =@"glass2";
+        }
+        if(i == 5||i == 6)
+        {
+            imageName =@"choco1@2.png";
+        }
+        
+        
+        
+        
+        [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        
+        
+        
+    }
+    
+    
     MFUser * mf = [[MFManager sharedManager]mfuser];
-    for(MFActivity *act in mf.completed){
+    for(MFCompleted *act in mf.completed){
+        
+        
         [UIView animateWithDuration:1.0 animations:^{
-            [(UIButton*)[self.view viewWithTag:act.activityid]setBackgroundImage:[UIImage imageNamed:@"selectedDot"] forState:UIControlStateNormal];
+            NSString * imageName;
+            if(act.activity.integerValue == 1 ||act.activity.integerValue == 2||act.activity.integerValue == 3)
+            {
+                imageName =@"scale1";
+            }
+            if(act.activity.integerValue == 4)
+            {
+                imageName =@"glass1";
+            }
+            if(act.activity.integerValue == 5||act.activity.integerValue == 6)
+            {
+                imageName =@"choco1";
+            }
+            
+            [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         }];
     }
     
