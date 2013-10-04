@@ -103,11 +103,11 @@
 -(void)presentScaleIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Scale Activity"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"holdweight@2"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"holdweight@2"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
@@ -130,11 +130,11 @@
 -(void)presentNumberLineIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"holdchoco@2"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"holdchoco@2"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
@@ -157,11 +157,11 @@
 -(void)presentFillGlassIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
                                                           withDetail: @"That will be intro to the fractions app"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"holdcup@2"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
                                                           withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+                                                           withImage: [UIImage imageNamed:@"holdcup@2"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
