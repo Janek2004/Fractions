@@ -159,6 +159,7 @@
 		822276F317FBBDB0006A5798 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822276F217FBBDB0006A5798 /* Images.xcassets */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
 		DBB42ACB17FE1BA90082D799 /* GlassActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */; };
+		DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB42ACE17FE1FD20082D799 /* MFGlassActivityViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +353,8 @@
 		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlassActivityView.xib; sourceTree = "<group>"; };
+		DBB42ACD17FE1FD20082D799 /* MFGlassActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFGlassActivityViewController.h; sourceTree = "<group>"; };
+		DBB42ACE17FE1FD20082D799 /* MFGlassActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFGlassActivityViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -724,6 +727,8 @@
 			isa = PBXGroup;
 			children = (
 				DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */,
+				DBB42ACD17FE1FD20082D799 /* MFGlassActivityViewController.h */,
+				DBB42ACE17FE1FD20082D799 /* MFGlassActivityViewController.m */,
 			);
 			name = GlassActivity;
 			sourceTree = "<group>";
@@ -997,6 +1002,7 @@
 				4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */,
 				4F50341417FB5A1D007A9DE8 /* MFUser.m in Sources */,
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
+				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
 				4F50342017FB5A1E007A9DE8 /* MFFraction.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,

@@ -35,7 +35,7 @@
 #import "UIBAlertView.h"
 #import "DataManager.h"
 #import "MFManager.h"
-
+#import "MFGlassActivityViewController.h"
 #import "MFFraction.h"
 #import "MFActivity.h"
 #import "MFPracticeRequiredMethods.h"
@@ -233,7 +233,11 @@
         self.practiceView = self.numberLineView;
         
     }
-    
+    if([self.currentActivity.name isEqualToString:@"Filling the Glass Activity"]) {
+        MFGlassActivityViewController *glassVC = [[MFGlassActivityViewController alloc]initWithNibName:@"GlassActivityView" bundle:[NSBundle mainBundle]];
+        [self.activityContainer addSubview:glassVC.view];
+        self.practiceView = glassVC.view;
+    }
     
     NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
     
