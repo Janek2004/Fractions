@@ -9,6 +9,10 @@
 #import "MFGlassActivityViewController.h"
 
 @interface MFGlassActivityViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *leftGlass;
+@property (weak, nonatomic) IBOutlet UIImageView *rightGlass;
+@property (strong, nonatomic) NSMutableArray *leftGlassViews;
+@property (strong, nonatomic) NSMutableArray *rightGlassViews;
 
 @end
 
@@ -16,17 +20,71 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (!self) {
+        return nil;
     }
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.leftGlassViews = [NSMutableArray new];
+    self.rightGlassViews = [NSMutableArray new];
+    [self.leftGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLeftGlass:)]];
+    [self.rightGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapRightGlass:)]];
 }
 
+-(void)tapLeftGlass:(UITapGestureRecognizer *)recognizer {
+    if(self.leftGlassViews.count == 0) {
+        UIView *fraction = ({
+            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(recognizer.view.frame) + 10, CGRectGetMaxY(recognizer.view.frame) - CGRectGetHeight(recognizer.view.frame) / 6, CGRectGetWidth(recognizer.view.frame) - 20, CGRectGetHeight(recognizer.view.frame) / 6)];
+            v.backgroundColor = [UIColor blueColor];
+            v;
+        });
+        [self.view addSubview:fraction];
+        [self.view insertSubview:fraction belowSubview:self.leftGlass];
+        [self.leftGlassViews addObject:fraction];
+    }
+        
+    else if(self.leftGlassViews.count < 6 && self.leftGlassViews.count != 0) {
+        UIView *topView = [self.leftGlassViews lastObject];
+        UIView *fraction = ({
+            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(topView.frame), CGRectGetMinY(topView.frame) - CGRectGetHeight(topView.frame), CGRectGetWidth(topView.frame), CGRectGetHeight(topView.frame))];
+            v.backgroundColor = [UIColor blueColor];
+            v;
+        });
+        [self.view addSubview:fraction];
+        [self.view insertSubview:fraction belowSubview:self.leftGlass];
+        [self.leftGlassViews addObject:fraction];
+    }
+}
 
+-(void)tapRightGlass:(UITapGestureRecognizer *)recognizer {
+    if(self.rightGlassViews.count == 0) {
+        UIView *fraction = ({
+            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(recognizer.view.frame) + 10, CGRectGetMaxY(recognizer.view.frame) - CGRectGetHeight(recognizer.view.frame) / 6, CGRectGetWidth(recognizer.view.frame) - 20, CGRectGetHeight(recognizer.view.frame) / 6)];
+            v.backgroundColor = [UIColor blueColor];
+            v;
+        });
+        [self.view addSubview:fraction];
+        [self.view insertSubview:fraction belowSubview:self.rightGlass];
+        [self.rightGlassViews addObject:fraction];
+    }
+    
+    else if(self.rightGlassViews.count < 6 && self.rightGlassViews.count != 0) {
+        UIView *topView = [self.rightGlassViews lastObject];
+        UIView *fraction = ({
+            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(topView.frame), CGRectGetMinY(topView.frame) - CGRectGetHeight(topView.frame), CGRectGetWidth(topView.frame), CGRectGetHeight(topView.frame))];
+            v.backgroundColor = [UIColor blueColor];
+            v;
+        });
+        [self.view addSubview:fraction];
+        [self.view insertSubview:fraction belowSubview:self.rightGlass];
+        [self.rightGlassViews addObject:fraction];
+    }
+}
 @end
