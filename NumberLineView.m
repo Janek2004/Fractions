@@ -137,7 +137,7 @@
 -(void)setCurrentFractions:(NSArray *)currentFractions{
     MFFraction * currentFraction = currentFractions[0];
     _currentFraction = currentFraction;
-    self.fractionLabel.text =[NSString stringWithFormat:@"%d/%d",_currentFraction.numerator, _currentFraction.denominator];
+    self.fractionLabel.text =[NSString stringWithFormat:@"%@/%@",_currentFraction.numerator, _currentFraction.denominator];
     
     
   }
@@ -200,7 +200,6 @@
     MFFraction * mf = [self calculateScore];
     MFFraction * mf1 = self.currentFraction;
     
-    NSLog(@"%d %d %d %d",mf.numerator, mf1.numerator, mf.denominator, mf1.denominator);
     
     return [_utilities isEqual:mf and:mf1];
 }
@@ -236,8 +235,8 @@
     }
     
     
-    fraction.numerator = numerator;
-    fraction.denominator = denominator;
+    fraction.numerator = [NSNumber numberWithInt: numerator];
+    fraction.denominator = [NSNumber numberWithInt:denominator];
     
     fraction =  [_utilities simplify:fraction];
     

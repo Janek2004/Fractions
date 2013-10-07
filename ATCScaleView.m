@@ -197,8 +197,8 @@ enum kFractionComparator {
         self.leftFraction = currentFractions[0];
         self.rightFraction = currentFractions[1];
         
-        self.leftFractionLabel.text = [NSString stringWithFormat:@"%d/%d",self.leftFraction.numerator,self.leftFraction.denominator];
-        self.rightFractionLabel.text = [NSString stringWithFormat:@"%d/%d",self.leftFraction.numerator,self.leftFraction.denominator];
+        self.leftFractionLabel.text = [NSString stringWithFormat:@"%@/%@",self.leftFraction.numerator,self.leftFraction.denominator];
+        self.rightFractionLabel.text = [NSString stringWithFormat:@"%@/%@",self.rightFraction.numerator,self.rightFraction.denominator];
         
     }
     [self drawSign];

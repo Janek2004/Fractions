@@ -88,7 +88,7 @@
     self.fedbackLabel.text = feedback;
     self.feedbackImageView.image= img;
     self.feedbackView.alpha = 0;
-    _questionsSet= [NSMutableArray new];
+   // _questionsSet= [NSMutableArray new];
     
    [self.view addSubview:self.feedbackView];
 
@@ -247,13 +247,19 @@
     if(self.currentActivity.fractionCount>1){
    
     NSMutableArray * array = [NSMutableArray new];
+   int count = a.count;
     while(a.count>0) {
       int random =arc4random()%a.count;
       MFFraction  *a1 = a[random];
-     [a removeObjectAtIndex:random];
-      MFFraction  *a2 = a[arc4random()%a.count];
-      random =arc4random()%a.count;
+    
+        [a removeObjectAtIndex:random];
+    count--;
+        if(a.count==0)break;
+        random =arc4random()%a.count;
+      
+      MFFraction  *a2 = a[random];
       [a removeObjectAtIndex:random];
+    
       NSArray * k =@[a1,a2];
       [array addObject:k];
       }
@@ -264,7 +270,7 @@
     
     }
     
-         
+   // NSLog(@"Self Question Set %@",self.questionsSet);
     
     
     [self displayFraction];
@@ -308,7 +314,7 @@
 
 //method will be called when user submits the answer
 - (IBAction)answerSelected:(id)sender {
-#warning implement it!!!!
+
     //calculate score
     if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
         BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
@@ -318,7 +324,16 @@
             _manager = [MFManager sharedManager];
         }
         
-        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity];
+      id question =   self.questionsSet[_currentQuestionIndex];
+        NSSet *set;
+        if([question isKindOfClass:[NSArray class]]){
+         set = [NSSet setWithArray:question];
+        }
+        if([question isKindOfClass:[MFFraction class]])
+        {
+            set = [NSSet setWithObject:question];
+        }
+        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
 
         
         

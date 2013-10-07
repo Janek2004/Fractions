@@ -180,14 +180,14 @@
 }
 
 -(float)getValueOfFraction:(MFFraction *)fraction;{
-     return fraction.numerator*1.0/fraction.denominator*1.0;
+     return fraction.numerator.intValue*1.0/fraction.denominator.intValue*1.0;
 
 }
 
 
 - (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject {
-    float a =  fractionOne.numerator/fractionOne.denominator;
-    float b = otherObject.numerator/otherObject.denominator;
+    float a =  fractionOne.numerator.intValue/fractionOne.denominator.intValue;
+    float b = otherObject.numerator.intValue/otherObject.denominator.intValue;
     if(a==b)
     {
         return NSOrderedSame;
@@ -204,20 +204,20 @@
     fractionOne = [self simplify:fractionOne];
     other = [self simplify:other];
     
-  return fractionOne.numerator == other.numerator && fractionOne.denominator == other.denominator;
+  return fractionOne.numerator.intValue == other.numerator.intValue && fractionOne.denominator.intValue == other.denominator.intValue;
   
 }
 
 -(MFFraction *)simplify:(MFFraction *)_fraction{
   
-    int a = _fraction.numerator;
-    int b = _fraction.denominator;
+    int a = _fraction.numerator.intValue;
+    int b = _fraction.denominator.intValue;
     
     long gcm = GCD(a, b);
     a = a/gcm;
     b= b/gcm;
-    _fraction.numerator = a;
-    _fraction.denominator = b;
+    _fraction.numerator = [NSNumber numberWithInt:a];
+    _fraction.denominator = [NSNumber numberWithInt:b];
     
     return _fraction;
 }

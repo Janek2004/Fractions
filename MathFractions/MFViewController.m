@@ -161,7 +161,7 @@
         }
         if(i == 5||i == 6||i == 4)
         {
-            imageName =@"choco1@2.png";
+            imageName =@"choco1@2";
         }
         
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];\
@@ -183,7 +183,7 @@
             }
             if(act.activity.integerValue == 4||act.activity.integerValue == 5||act.activity.integerValue == 6)
             {
-                imageName =@"choco1";
+                imageName =@"choco2@2";
             }
             
             [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];

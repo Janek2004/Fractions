@@ -6,7 +6,7 @@
                    "classname": "ATCScaleView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
                    "nr_fraction_inquestion": 2,
-                   "questioncount": 2,
+                   "questioncount": 5,
                    "set": 2
                    },
                    {
@@ -16,14 +16,14 @@
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
                    "nr_fraction_inquestion": 2,
                    "set": 3,
-                   "questioncount": 2
+                   "questioncount": 5
                    },
                                      {
                    "id": 3,
                    "name": "Filling the Glass Activity",
                    "classname": "NumberLineView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
-                   "questioncount": 2,
+                   "questioncount": 5,
                    "nr_fraction_inquestion": 1,
                    "set": 1
                    },
@@ -33,7 +33,7 @@
                    "name": "Number Line Activity",
                    "classname": "NumberLineView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
-                   "questioncount": 2,
+                   "questioncount": 5,
                    "nr_fraction_inquestion": 1,
                    "set": 1
                    },
@@ -43,18 +43,18 @@
                    "name": "Number Line Activity",
                    "classname": "NumberLineView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
-                   "questioncount": 2,
+                   "questioncount": 5,
                    "nr_fraction_inquestion": 1,
-                   "set": 1
+                   "set": 2
                    },
                    {
                    "id": 6,
                    "name": "Number Line Activity",
                    "classname": "NumberLineView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
-                   "questioncount": 2,
+                   "questioncount": 5,
                    "nr_fraction_inquestion": 1,
-                   "set": 2
+                   "set": 3
                    }
                    ],
     "sets": [

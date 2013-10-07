@@ -23,14 +23,14 @@
 		4F14C21217999FD90043B1D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F14C21017999FD90043B1D4 /* InfoPlist.strings */; };
 		4F14C21517999FD90043B1D4 /* MathFractionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14C21417999FD90043B1D4 /* MathFractionsTests.m */; };
 		4F14C2201799BA160043B1D4 /* NumberLinePieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */; };
+		4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78B6180319B500E1E64B /* MFFraction.m */; };
+		4F3B78BA180319CC00E1E64B /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78B9180319CC00E1E64B /* MFAttempt.m */; };
 		4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEE917ECAEA1001AF95B /* MFFractionView.m */; };
 		4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEEF17ECD176001AF95B /* MFQuestionSet.m */; };
 		4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEF717F09BB9001AF95B /* NSArray+RandomArray.m */; };
 		4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5033F417FB41B9007A9DE8 /* CoreData.framework */; };
 		4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */; };
 		4F50341417FB5A1D007A9DE8 /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341317FB5A1D007A9DE8 /* MFUser.m */; };
-		4F50341A17FB5A1E007A9DE8 /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341917FB5A1E007A9DE8 /* MFAttempt.m */; };
-		4F50342017FB5A1E007A9DE8 /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341F17FB5A1E007A9DE8 /* MFFraction.m */; };
 		4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50342517FB5BB5007A9DE8 /* MFActivity.m */; };
 		4F50346017FC7747007A9DE8 /* LevelComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342717FC7747007A9DE8 /* LevelComp.png */; };
 		4F50346117FC7747007A9DE8 /* wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342817FC7747007A9DE8 /* wrong.png */; };
@@ -197,6 +197,10 @@
 		4F14C21417999FD90043B1D4 /* MathFractionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MathFractionsTests.m; sourceTree = "<group>"; };
 		4F14C21E1799BA160043B1D4 /* NumberLinePieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberLinePieceView.h; sourceTree = "<group>"; };
 		4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberLinePieceView.m; sourceTree = "<group>"; };
+		4F3B78B5180319B500E1E64B /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFraction.h; path = CoreDataModel/MFFraction.h; sourceTree = "<group>"; };
+		4F3B78B6180319B500E1E64B /* MFFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFraction.m; path = CoreDataModel/MFFraction.m; sourceTree = "<group>"; };
+		4F3B78B8180319CC00E1E64B /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFAttempt.h; path = MathFractions/CoreDataModel/MFAttempt.h; sourceTree = "<group>"; };
+		4F3B78B9180319CC00E1E64B /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFAttempt.m; path = MathFractions/CoreDataModel/MFAttempt.m; sourceTree = "<group>"; };
 		4F44AEE817ECAEA1001AF95B /* MFFractionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFractionView.h; path = Utilities/MFFractionView.h; sourceTree = "<group>"; };
 		4F44AEE917ECAEA1001AF95B /* MFFractionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFractionView.m; path = Utilities/MFFractionView.m; sourceTree = "<group>"; };
 		4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFQuestionSet.h; path = Utilities/MFQuestionSet.h; sourceTree = "<group>"; };
@@ -208,10 +212,6 @@
 		4F5033FD17FB4B35007A9DE8 /* CoreDataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CoreDataModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		4F50341217FB5A1D007A9DE8 /* MFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUser.h; path = CoreDataModel/MFUser.h; sourceTree = "<group>"; };
 		4F50341317FB5A1D007A9DE8 /* MFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFUser.m; path = CoreDataModel/MFUser.m; sourceTree = "<group>"; };
-		4F50341817FB5A1E007A9DE8 /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFAttempt.h; path = CoreDataModel/MFAttempt.h; sourceTree = "<group>"; };
-		4F50341917FB5A1E007A9DE8 /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFAttempt.m; path = CoreDataModel/MFAttempt.m; sourceTree = "<group>"; };
-		4F50341E17FB5A1E007A9DE8 /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFraction.h; path = CoreDataModel/MFFraction.h; sourceTree = "<group>"; };
-		4F50341F17FB5A1E007A9DE8 /* MFFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFraction.m; path = CoreDataModel/MFFraction.m; sourceTree = "<group>"; };
 		4F50342417FB5BB5007A9DE8 /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4F50342517FB5BB5007A9DE8 /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4F50342717FC7747007A9DE8 /* LevelComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LevelComp.png; path = Graphics/LevelComp.png; sourceTree = "<group>"; };
@@ -387,6 +387,8 @@
 		4F14C1D717999FD80043B1D4 = {
 			isa = PBXGroup;
 			children = (
+				4F3B78B8180319CC00E1E64B /* MFAttempt.h */,
+				4F3B78B9180319CC00E1E64B /* MFAttempt.m */,
 				4F44AEF217ECE08D001AF95B /* Model */,
 				4FEFE04617EA2D05004AF076 /* UIBAlertView */,
 				4FEFE03517E8D81D004AF076 /* Resources */,
@@ -490,16 +492,14 @@
 			isa = PBXGroup;
 			children = (
 				4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */,
+				4F3B78B5180319B500E1E64B /* MFFraction.h */,
+				4F3B78B6180319B500E1E64B /* MFFraction.m */,
 				4FE8C50917FE1AF000B0C796 /* MFCompleted.h */,
 				4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */,
 				4F50342417FB5BB5007A9DE8 /* MFActivity.h */,
 				4F50342517FB5BB5007A9DE8 /* MFActivity.m */,
 				4F50341217FB5A1D007A9DE8 /* MFUser.h */,
 				4F50341317FB5A1D007A9DE8 /* MFUser.m */,
-				4F50341E17FB5A1E007A9DE8 /* MFFraction.h */,
-				4F50341F17FB5A1E007A9DE8 /* MFFraction.m */,
-				4F50341817FB5A1E007A9DE8 /* MFAttempt.h */,
-				4F50341917FB5A1E007A9DE8 /* MFAttempt.m */,
 			);
 			name = CoreData;
 			path = MathFractions;
@@ -988,7 +988,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F50341A17FB5A1E007A9DE8 /* MFAttempt.m in Sources */,
 				4FEFE03A17E8D8DC004AF076 /* MFManager.m in Sources */,
 				4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */,
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
@@ -1003,14 +1002,15 @@
 				4F50341417FB5A1D007A9DE8 /* MFUser.m in Sources */,
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
-				4F50342017FB5A1E007A9DE8 /* MFFraction.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,
+				4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */,
 				4FEFE04517E8FD0F004AF076 /* NumberLineView.m in Sources */,
 				4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */,
 				4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */,
 				4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */,
 				4F14C2201799BA160043B1D4 /* NumberLinePieceView.m in Sources */,
+				4F3B78BA180319CC00E1E64B /* MFAttempt.m in Sources */,
 				4FEFE04917EA2D05004AF076 /* UIBAlertView.m in Sources */,
 				4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */,
 			);

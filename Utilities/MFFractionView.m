@@ -65,8 +65,8 @@
    UIColor* color = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
     
     //// Abstracted Attributes
-    NSString* textContent =[NSString stringWithFormat:@"%d",self.fraction.numerator];
-    NSString* text2Content = [NSString stringWithFormat:@"%d",self.fraction.denominator];
+    NSString* textContent =[NSString stringWithFormat:@"%@",self.fraction.numerator];
+    NSString* text2Content = [NSString stringWithFormat:@"%@",self.fraction.denominator];
 
     UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(0,70, 100, 2)];
     [color setFill];

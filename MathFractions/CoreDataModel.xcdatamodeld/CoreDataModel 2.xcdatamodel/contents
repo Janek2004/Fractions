@@ -13,6 +13,7 @@
         <attribute name="activity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="attempt_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="fractions" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MFFraction" inverseName="attempt" inverseEntity="MFFraction" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFUser" inverseName="attempts" inverseEntity="MFUser" syncable="YES"/>
     </entity>
     <entity name="MFCompleted" representedClassName="MFCompleted" syncable="YES">
@@ -24,6 +25,7 @@
         <attribute name="denominator" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="numerator" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFActivity" inverseName="set" inverseEntity="MFActivity" syncable="YES"/>
+        <relationship name="attempt" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MFAttempt" inverseName="fractions" inverseEntity="MFAttempt" syncable="YES"/>
     </entity>
     <entity name="MFUser" representedClassName="MFUser" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,9 +35,9 @@
     </entity>
     <elements>
         <element name="MFActivity" positionX="54" positionY="-88" width="128" height="133"/>
-        <element name="MFAttempt" positionX="540" positionY="113" width="128" height="103"/>
+        <element name="MFAttempt" positionX="234" positionY="305" width="128" height="118"/>
         <element name="MFCompleted" positionX="540" positionY="261" width="128" height="88"/>
-        <element name="MFFraction" positionX="34" positionY="245" width="128" height="88"/>
-        <element name="MFUser" positionX="180" positionY="128" width="128" height="103"/>
+        <element name="MFFraction" positionX="-20" positionY="324" width="128" height="103"/>
+        <element name="MFUser" positionX="144" positionY="113" width="128" height="103"/>
     </elements>
 </model>

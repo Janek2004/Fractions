@@ -56,24 +56,44 @@
 -(NSMutableArray *)randomize:(NSMutableArray *) array fromSet:(NSMutableArray *)defaultSet andDesiredCount:(int)count
 {
     
+    
+    
    
     if(!array){
         array = [NSMutableArray new];
     }
-    //desired count
-    if(array.count == count){
-        return array;
-    }
-    else{
+    
+    while(array.count<count){
         int index = arc4random()%defaultSet.count;
         id obj = defaultSet[index];
         [defaultSet removeObjectAtIndex:index];
         [array addObject:obj];
-        
-        [self randomize:array fromSet:defaultSet andDesiredCount:count];
-    
     }
+    
     return array;
+//    //desired count
+    
+    
+//    NSLog(@"Desired Count : %d",count);
+//    if(array.count == count){
+//
+//        NSLog(@"Desired Array is %@",array);
+//        return array;
+//    }
+//    else{
+//        int index = arc4random()%defaultSet.count;
+//        id obj = defaultSet[index];
+//        [defaultSet removeObjectAtIndex:index];
+//        [array addObject:obj];
+//        
+//        [self randomize:array fromSet:defaultSet andDesiredCount:count];
+//    
+//    }
+//    for (int i=0;i<array.count;i++){
+//        NSLog(@"n%@ d%@",[array[i] numerator], [array[i] denominator]);
+//    }
+//    
+//    return nil;
 }
 
 
@@ -106,8 +126,12 @@
             [self getLocalJSON];
         }
         
+       // NSLog(@"Act %hd %@ %hd",act.maxQuestions, act.set,act.fractionCount);
+        
         NSMutableArray * a=[self randomize:nil fromSet:act.set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions];
-      
+       
+        
+        
         act.set = [NSSet setWithArray:a];
  
 
@@ -138,8 +162,8 @@
             for(int i=0; i<numerators.count;i ++){
                 
               MFFraction * fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
-               fraction.numerator =[numerators[i] integerValue] ;
-               fraction.denominator =[denominators[i] integerValue] ;
+               fraction.numerator =numerators[i];
+               fraction.denominator =denominators[i] ;
                 
                 [fractions addObject: fraction];
 
@@ -150,6 +174,8 @@
             }
         }];
 
+    
+    
      return fractions;
 }
 
@@ -241,17 +267,16 @@
     return user;
 }
 
--(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity{
+-(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions{
     
     NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     
     MFAttempt *at = [NSEntityDescription insertNewObjectForEntityForName:@"MFAttempt" inManagedObjectContext:context];
-    
-    NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
-    at.score = score;
-    at.attempt_date =time;
+    at.score = [NSNumber numberWithInt:score];
+    at.attempt_date = [NSDate new];
     at.user = self.getCurrentUser;
-    
+    at.activity = [NSNumber numberWithInt: activity.activityid];
+    at.fractions = fractions;
     NSError * error;
     [context save:&error];
 
@@ -264,8 +289,6 @@
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
     return basePath;
 }
-
-
 
 -(void)markActivity:(int )activity asCompletedForUser:(MFUser *)user{
     [self getActivity:activity];
@@ -313,9 +336,8 @@
         act.class_name = obj[@"classname"];
         act.standard = obj[@"standard"];
         act.maxQuestions = [obj[@"questioncount"]integerValue];
-        
         act.fractionCount =[obj[@"nr_fraction_inquestion"]integerValue];
-        NSLog(@"nr_fraction_inquestion %d",[obj[@"nr_fraction_inquestion"]integerValue]);
+        
         //get raw set
         NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
 
