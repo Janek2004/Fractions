@@ -269,10 +269,7 @@
         self.questionsSet = a;
     
     }
-    
-   // NSLog(@"Self Question Set %@",self.questionsSet);
-    
-    
+
     [self displayFraction];
     
 }
@@ -335,8 +332,7 @@
         }
         [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
 
-        
-        
+
         if(check){
 
            _manager = [MFManager sharedManager];
@@ -366,7 +362,8 @@
 
 - (IBAction)showHint:(id)sender {
     
-    [self.view addSubview:self.hintView];
-    
+   // [self.view addSubview:self.hintView];
+   // [self show]
+    [_utilities presentIntroForActivity:self.activityId inViewController:self];
 }
 @end

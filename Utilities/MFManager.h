@@ -32,5 +32,7 @@
 @interface MFManager : NSObject
 @property (nonatomic,strong) MFUser * mfuser;
 @property (nonatomic) int currentLevel;
+@property (strong, nonatomic) FatFractal *ff;
+@property (strong, nonatomic ) NSString * classId;
 + (id)sharedManager;
 @end

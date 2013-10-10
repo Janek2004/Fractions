@@ -34,11 +34,14 @@
 #import "MFAttempt.h"
 #import "MFAppDelegate.h"
 #import "MFCompleted.h"
-
+#import "MFManager.h"
+#import "UIBAlertView.h"
+#import "MFFrAttempt.h"
+#import  "MFFractalFraction.h"
 
 @interface DataManager()
 @property (nonatomic,strong) NSMutableDictionary * appData;
-
+@property (nonatomic,strong) MFManager * manager;
 @end
 
 @implementation DataManager
@@ -48,6 +51,7 @@
     self = [super init];
     if (self) {
         // Initialization code
+        _manager = [MFManager sharedManager];
     }
     return self;
 }
@@ -243,7 +247,7 @@
     if(error){
         NSLog(@"Error %@",error.debugDescription);
     }
-      MFUser *mf;
+    MFUser *mf;
     if(array.count==1)
     {
         mf = array[0];
@@ -267,6 +271,32 @@
     return user;
 }
 
+-(MFFrAttempt *)createFractalAttemptWithAttempt:(MFAttempt *)attempt{
+    MFFrAttempt * mf = [[MFFrAttempt alloc]init];
+    mf.score = attempt.score;
+    mf.attempt_date = attempt.attempt_date;
+    mf.name = attempt.user.name;
+    mf.mfclassId = attempt.user.classId;
+  
+    mf.activity = attempt.activity;
+    NSMutableArray * a =[NSMutableArray new];
+    for(MFFraction *fra in attempt.fractions){
+        MFFractalFraction *fr = [[MFFractalFraction alloc]init];
+        fr.numerator = fra.numerator;
+        fr.denominator = fra.denominator;
+        
+        [a addObject:fr];
+        
+        
+    }
+    NSLog(@"Fractions %@",a);
+    mf.fractions =a;
+    
+    
+    
+    return mf;
+}
+
 -(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions{
     
     NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
@@ -277,8 +307,43 @@
     at.user = self.getCurrentUser;
     at.activity = [NSNumber numberWithInt: activity.activityid];
     at.fractions = fractions;
+    at.uid = [NSString stringWithFormat:@"%@",[at objectID]];
+    
+    MFFrAttempt * a = [self createFractalAttemptWithAttempt:at];
+    
     NSError * error;
-    [context save:&error];
+   [_manager.ff createObj:a atUri:@"/MFAttempt" error:&error];
+    
+    if(error) {
+        NSLog(@"Saving Attempt %@",error.debugDescription);
+  
+    }
+    
+    
+//[manager.ff createObj:at atUri:@"/Attempt" onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+//    at.saved =[NSNumber numberWithBool:YES];
+//    if(theErr){
+//        NSLog(@"Saving Attempt %@",theErr.debugDescription);
+//    }
+//    NSError * error;
+//    [context save:&error];
+//    if(error){
+//        NSLog(@"Online Attempt 2 %@",error.debugDescription);
+//    }
+//    
+//
+//} onOffline:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+//        at.saved =[NSNumber numberWithBool:NO];
+//    if(theErr){
+//        NSLog(@"Offline Attempt %@",theErr.debugDescription);
+//    }
+//    NSError * error;
+//    [context save:&error];
+//    if(error){
+//        NSLog(@"Offline Attempt 2 %@",error.debugDescription);
+//    }
+//}];
+
 
 }
 
@@ -304,21 +369,16 @@
     if(e){
         NSLog(@"Error: debug desription %@",e.debugDescription);
     }
-    
-
 }
 
 
 -(void)loginUser:(MFUser *)user{
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
-    [ud setObject: [NSNumber numberWithInt:user.pin] forKey:@"current_pin"];
+    [ud setObject: user.pin forKey:@"current_pin"];
     [ud setObject:user.name    forKey:@"current_user"];
     [ud synchronize];
-    
-    
-    
-    
+ 
 }
 
 -(void)import{
@@ -366,7 +426,7 @@
     NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
 
     MFUser * user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:context];
-    user.pin = pin.integerValue;
+    user.pin = [NSNumber numberWithInt:pin.integerValue];
     user.name = name;
     
     NSError *error;
@@ -380,8 +440,8 @@
         [self loginUser:user];
          return user;
     }
-    
 }
+
 
 
 @end

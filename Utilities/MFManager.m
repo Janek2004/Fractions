@@ -39,13 +39,19 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
-    });
+           });
     return sharedMyManager;
 }
 
 - (id)init {
     if (self = [super init]) {
-      
+        NSString *baseUrl = @"https://djmobileinc.fatfractal.com/Fractions/";
+        if(!_ff){
+            _ff = [[FatFractal alloc] initWithBaseUrl:baseUrl];
+            [_ff loginWithUserName:@"Test" andPassword:@"Test1234"];
+        }
+
+
     }
     return self;
 }

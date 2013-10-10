@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MFGlassActivityViewController : UIViewController
+-(void)setCurrentFractions:(NSArray *)currentFractions;
 
 @end

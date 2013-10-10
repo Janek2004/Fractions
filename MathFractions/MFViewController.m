@@ -52,6 +52,8 @@
 @property (strong, nonatomic) IBOutlet UIView *aboutView;
 @property (strong, nonatomic) IBOutlet UIView *userView;
 
+@property (strong, nonatomic) IBOutlet UITextField *classIdTxtField;
+
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)hideMenu:(id)sender;
@@ -164,7 +166,7 @@
             imageName =@"choco1@2";
         }
         
-        [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];\
+        [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     
     MFUser * mf = [[MFManager sharedManager]mfuser];
@@ -191,6 +193,8 @@
     }
 }
 
+
+
 - (IBAction)showMenu:(id)sender {
     [self.view addSubview:self.MenuView];
     self.MenuView.alpha = 0;
@@ -205,6 +209,11 @@
 }
 
 - (IBAction)hideMenu:(id)sender {
+   
+    if(self.classIdTxtField.text.length>0){
+        [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
+        
+    }
     if(self.userNameTextField.text.length==0)
     {
         UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on User button to log in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -351,7 +360,13 @@
     return _array.count;
 
 }
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;{
+
+
+    - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row
+
+
+
+            forComponent:(NSInteger)component;{
        return  [NSString stringWithFormat:@"%@",_array[row]];
 
 }

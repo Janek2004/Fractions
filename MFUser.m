@@ -2,7 +2,7 @@
 //  MFUser.m
 //  MathFractions
 //
-//  Created by Janusz Chudzynski on 10/1/13.
+//  Created by Janusz Chudzynski on 10/10/13.
 //  Copyright (c) 2013 UWF. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 
 @dynamic name;
 @dynamic pin;
+@dynamic classId;
 @dynamic attempts;
 @dynamic completed;
 

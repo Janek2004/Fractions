@@ -7,6 +7,7 @@
 //
 
 #import "MFGlassActivityViewController.h"
+#import "MFFraction.h"
 
 @interface MFGlassActivityViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *leftGlass;
@@ -14,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *redoActivity;
 @property (strong, nonatomic) NSMutableArray *leftGlassViews;
 @property (strong, nonatomic) NSMutableArray *rightGlassViews;
+@property (strong, nonatomic) IBOutlet UILabel *fractionView;
 
 @end
 
@@ -109,4 +111,18 @@
         [self.rightGlassViews addObject:fraction];
     }
 }
+
+//displays current fraction
+-(void)setCurrentFractions:(NSArray *)currentFractions{
+    
+
+}
+
+-(BOOL)checkAnswer{
+
+    return NO;
+}
+
+
+
 @end

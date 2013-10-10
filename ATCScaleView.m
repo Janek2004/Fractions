@@ -76,19 +76,24 @@ enum kFractionComparator {
 
 
 -(BOOL)checkAnswer{
-    
+    if(!_utitilities){
+       _utitilities =[[MFUtilities alloc]init];
+    }
     
     if([_utitilities getValueOfFraction: self.leftFraction] == [_utitilities getValueOfFraction: self.rightFraction] && comparator == kEqual)
     {
+        
         return YES;
     }
     if([_utitilities getValueOfFraction: self.leftFraction] < [_utitilities getValueOfFraction: self.rightFraction] && comparator == kLess)
     {
+       
         return YES;
     }
     if([_utitilities getValueOfFraction: self.leftFraction] > [_utitilities getValueOfFraction: self.rightFraction] && comparator == kMore)
     {
-             return YES;
+        
+        return YES;
     }
     
     
@@ -183,7 +188,6 @@ enum kFractionComparator {
         return;
     }
     
-    
     alpha =  self.leftArm.center.y -  self.rightArm.center.y;
     self.leftArm.center = lcenter;
     self.rightArm.center = rcenter;
@@ -206,10 +210,6 @@ enum kFractionComparator {
 
 
 
--(void)drawFractions{
-   
-        
-}
 
 -(void)drawSign{
     if(alpha >=-15 && alpha <=15){

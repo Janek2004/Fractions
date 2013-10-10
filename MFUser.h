@@ -2,7 +2,7 @@
 //  MFUser.h
 //  MathFractions
 //
-//  Created by Janusz Chudzynski on 10/1/13.
+//  Created by Janusz Chudzynski on 10/10/13.
 //  Copyright (c) 2013 UWF. All rights reserved.
 //
 
@@ -14,7 +14,8 @@
 @interface MFUser : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic) int16_t pin;
+@property (nonatomic, retain) NSNumber * pin;
+@property (nonatomic, retain) NSString * classId;
 @property (nonatomic, retain) NSSet *attempts;
 @property (nonatomic, retain) NSSet *completed;
 @end

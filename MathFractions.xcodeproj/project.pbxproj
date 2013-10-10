@@ -24,13 +24,23 @@
 		4F14C21517999FD90043B1D4 /* MathFractionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14C21417999FD90043B1D4 /* MathFractionsTests.m */; };
 		4F14C2201799BA160043B1D4 /* NumberLinePieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */; };
 		4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78B6180319B500E1E64B /* MFFraction.m */; };
-		4F3B78BA180319CC00E1E64B /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78B9180319CC00E1E64B /* MFAttempt.m */; };
+		4F3B78C51805A64B00E1E64B /* n1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78BD1805A64B00E1E64B /* n1.png */; };
+		4F3B78C71805A64B00E1E64B /* n3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78BF1805A64B00E1E64B /* n3.png */; };
+		4F3B78C81805A64B00E1E64B /* n4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C01805A64B00E1E64B /* n4.png */; };
+		4F3B78C91805A64B00E1E64B /* n5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C11805A64B00E1E64B /* n5.png */; };
+		4F3B78CA1805A64B00E1E64B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C31805A64B00E1E64B /* s1.png */; };
+		4F3B78CB1805A64B00E1E64B /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C41805A64B00E1E64B /* s2.png */; };
+		4F3B78CD1806F61B00E1E64B /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3B78CC1806F61B00E1E64B /* FFEF.framework */; };
+		4F3B78D01807006B00E1E64B /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78CF1807006B00E1E64B /* MFUser.m */; };
+		4F3B78D6180705B800E1E64B /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78D5180705B800E1E64B /* MFAttempt.m */; };
+		4F3B78D9180728C300E1E64B /* MFFractalUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78D8180728C300E1E64B /* MFFractalUser.m */; };
+		4F3B78DD180728FF00E1E64B /* MFFrAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */; };
+		4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DF1807291500E1E64B /* MFFractalFraction.m */; };
 		4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEE917ECAEA1001AF95B /* MFFractionView.m */; };
 		4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEEF17ECD176001AF95B /* MFQuestionSet.m */; };
 		4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEF717F09BB9001AF95B /* NSArray+RandomArray.m */; };
 		4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5033F417FB41B9007A9DE8 /* CoreData.framework */; };
 		4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */; };
-		4F50341417FB5A1D007A9DE8 /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50341317FB5A1D007A9DE8 /* MFUser.m */; };
 		4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50342517FB5BB5007A9DE8 /* MFActivity.m */; };
 		4F50346017FC7747007A9DE8 /* LevelComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342717FC7747007A9DE8 /* LevelComp.png */; };
 		4F50346117FC7747007A9DE8 /* wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342817FC7747007A9DE8 /* wrong.png */; };
@@ -199,8 +209,23 @@
 		4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberLinePieceView.m; sourceTree = "<group>"; };
 		4F3B78B5180319B500E1E64B /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFraction.h; path = CoreDataModel/MFFraction.h; sourceTree = "<group>"; };
 		4F3B78B6180319B500E1E64B /* MFFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFraction.m; path = CoreDataModel/MFFraction.m; sourceTree = "<group>"; };
-		4F3B78B8180319CC00E1E64B /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFAttempt.h; path = MathFractions/CoreDataModel/MFAttempt.h; sourceTree = "<group>"; };
-		4F3B78B9180319CC00E1E64B /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFAttempt.m; path = MathFractions/CoreDataModel/MFAttempt.m; sourceTree = "<group>"; };
+		4F3B78BD1805A64B00E1E64B /* n1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n1.png; sourceTree = "<group>"; };
+		4F3B78BF1805A64B00E1E64B /* n3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n3.png; sourceTree = "<group>"; };
+		4F3B78C01805A64B00E1E64B /* n4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n4.png; sourceTree = "<group>"; };
+		4F3B78C11805A64B00E1E64B /* n5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n5.png; sourceTree = "<group>"; };
+		4F3B78C31805A64B00E1E64B /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
+		4F3B78C41805A64B00E1E64B /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
+		4F3B78CC1806F61B00E1E64B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../../../Downloads/FFEF.framework; sourceTree = "<group>"; };
+		4F3B78CE1807006B00E1E64B /* MFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUser.h; path = ../MFUser.h; sourceTree = "<group>"; };
+		4F3B78CF1807006B00E1E64B /* MFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFUser.m; path = ../MFUser.m; sourceTree = "<group>"; };
+		4F3B78D4180705B800E1E64B /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
+		4F3B78D5180705B800E1E64B /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
+		4F3B78D7180728C300E1E64B /* MFFractalUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFractalUser.h; path = FractalData/MFFractalUser.h; sourceTree = "<group>"; };
+		4F3B78D8180728C300E1E64B /* MFFractalUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFractalUser.m; path = FractalData/MFFractalUser.m; sourceTree = "<group>"; };
+		4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFrAttempt.h; sourceTree = "<group>"; };
+		4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFrAttempt.m; sourceTree = "<group>"; };
+		4F3B78DE1807291500E1E64B /* MFFractalFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFractalFraction.h; sourceTree = "<group>"; };
+		4F3B78DF1807291500E1E64B /* MFFractalFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFractalFraction.m; sourceTree = "<group>"; };
 		4F44AEE817ECAEA1001AF95B /* MFFractionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFractionView.h; path = Utilities/MFFractionView.h; sourceTree = "<group>"; };
 		4F44AEE917ECAEA1001AF95B /* MFFractionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFractionView.m; path = Utilities/MFFractionView.m; sourceTree = "<group>"; };
 		4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFQuestionSet.h; path = Utilities/MFQuestionSet.h; sourceTree = "<group>"; };
@@ -210,8 +235,6 @@
 		4F44AEF717F09BB9001AF95B /* NSArray+RandomArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+RandomArray.m"; path = "Utilities/NSArray+RandomArray.m"; sourceTree = SOURCE_ROOT; };
 		4F5033F417FB41B9007A9DE8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4F5033FD17FB4B35007A9DE8 /* CoreDataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CoreDataModel 2.xcdatamodel"; sourceTree = "<group>"; };
-		4F50341217FB5A1D007A9DE8 /* MFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUser.h; path = CoreDataModel/MFUser.h; sourceTree = "<group>"; };
-		4F50341317FB5A1D007A9DE8 /* MFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFUser.m; path = CoreDataModel/MFUser.m; sourceTree = "<group>"; };
 		4F50342417FB5BB5007A9DE8 /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4F50342517FB5BB5007A9DE8 /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4F50342717FC7747007A9DE8 /* LevelComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LevelComp.png; path = Graphics/LevelComp.png; sourceTree = "<group>"; };
@@ -362,6 +385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F3B78CD1806F61B00E1E64B /* FFEF.framework in Frameworks */,
 				4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */,
 				4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */,
 				4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */,
@@ -387,8 +411,6 @@
 		4F14C1D717999FD80043B1D4 = {
 			isa = PBXGroup;
 			children = (
-				4F3B78B8180319CC00E1E64B /* MFAttempt.h */,
-				4F3B78B9180319CC00E1E64B /* MFAttempt.m */,
 				4F44AEF217ECE08D001AF95B /* Model */,
 				4FEFE04617EA2D05004AF076 /* UIBAlertView */,
 				4FEFE03517E8D81D004AF076 /* Resources */,
@@ -415,6 +437,7 @@
 		4F14C1E217999FD80043B1D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F3B78CC1806F61B00E1E64B /* FFEF.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
 				4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */,
 				4F14C1E317999FD80043B1D4 /* UIKit.framework */,
@@ -474,9 +497,53 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4F3B78BB1805A64B00E1E64B /* Activities Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				4F3B78BC1805A64B00E1E64B /* NumberLineActivity */,
+				4F3B78C21805A64B00E1E64B /* ScaleActivity */,
+			);
+			path = "Activities Screenshots";
+			sourceTree = "<group>";
+		};
+		4F3B78BC1805A64B00E1E64B /* NumberLineActivity */ = {
+			isa = PBXGroup;
+			children = (
+				4F3B78BD1805A64B00E1E64B /* n1.png */,
+				4F3B78BF1805A64B00E1E64B /* n3.png */,
+				4F3B78C01805A64B00E1E64B /* n4.png */,
+				4F3B78C11805A64B00E1E64B /* n5.png */,
+			);
+			path = NumberLineActivity;
+			sourceTree = "<group>";
+		};
+		4F3B78C21805A64B00E1E64B /* ScaleActivity */ = {
+			isa = PBXGroup;
+			children = (
+				4F3B78C31805A64B00E1E64B /* s1.png */,
+				4F3B78C41805A64B00E1E64B /* s2.png */,
+			);
+			path = ScaleActivity;
+			sourceTree = "<group>";
+		};
+		4F3B78DA180728C900E1E64B /* FatFractal */ = {
+			isa = PBXGroup;
+			children = (
+				4F3B78D7180728C300E1E64B /* MFFractalUser.h */,
+				4F3B78D8180728C300E1E64B /* MFFractalUser.m */,
+				4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */,
+				4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */,
+				4F3B78DE1807291500E1E64B /* MFFractalFraction.h */,
+				4F3B78DF1807291500E1E64B /* MFFractalFraction.m */,
+			);
+			name = FatFractal;
+			path = MathFractions;
+			sourceTree = "<group>";
+		};
 		4F44AEF217ECE08D001AF95B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4F3B78DA180728C900E1E64B /* FatFractal */,
 				4F50340E17FB4F7D007A9DE8 /* CoreData */,
 				4FEFE03B17E8DCED004AF076 /* MFUtilities.h */,
 				4FEFE03C17E8DCED004AF076 /* MFUtilities.m */,
@@ -491,15 +558,17 @@
 		4F50340E17FB4F7D007A9DE8 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				4F3B78CE1807006B00E1E64B /* MFUser.h */,
+				4F3B78CF1807006B00E1E64B /* MFUser.m */,
 				4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */,
+				4F3B78D4180705B800E1E64B /* MFAttempt.h */,
+				4F3B78D5180705B800E1E64B /* MFAttempt.m */,
 				4F3B78B5180319B500E1E64B /* MFFraction.h */,
 				4F3B78B6180319B500E1E64B /* MFFraction.m */,
 				4FE8C50917FE1AF000B0C796 /* MFCompleted.h */,
 				4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */,
 				4F50342417FB5BB5007A9DE8 /* MFActivity.h */,
 				4F50342517FB5BB5007A9DE8 /* MFActivity.m */,
-				4F50341217FB5A1D007A9DE8 /* MFUser.h */,
-				4F50341317FB5A1D007A9DE8 /* MFUser.m */,
 			);
 			name = CoreData;
 			path = MathFractions;
@@ -670,9 +739,9 @@
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4F3B78BB1805A64B00E1E64B /* Activities Screenshots */,
 				4FE8C50D17FF0A5800B0C796 /* Choco.png */,
 				4F50349917FC7779007A9DE8 /* Graphics_All */,
-				822276FE17FBC05F006A5798 /* Buttons */,
 				4FDFE0C417F9DC55008D31D4 /* Fractio */,
 			);
 			name = Resources;
@@ -714,13 +783,6 @@
 				4FEFE04817EA2D05004AF076 /* UIBAlertView.m */,
 			);
 			path = UIBAlertView;
-			sourceTree = "<group>";
-		};
-		822276FE17FBC05F006A5798 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Buttons;
 			sourceTree = "<group>";
 		};
 		DBB42ACC17FE1BE60082D799 /* GlassActivity */ = {
@@ -825,8 +887,10 @@
 				4F14C1EE17999FD90043B1D4 /* InfoPlist.strings in Resources */,
 				4F50348617FC7747007A9DE8 /* facethink.png in Resources */,
 				4FE8C4DC17FDF73A00B0C796 /* choco1@2.png in Resources */,
+				4F3B78C81805A64B00E1E64B /* n4.png in Resources */,
 				4FE8C4F517FDF73A00B0C796 /* intro2@2.png in Resources */,
 				822276F317FBBDB0006A5798 /* Images.xcassets in Resources */,
+				4F3B78C51805A64B00E1E64B /* n1.png in Resources */,
 				4FE8C50117FDF73A00B0C796 /* spout@2.png in Resources */,
 				4FE8C4EA17FDF73A00B0C796 /* glass1@2.png in Resources */,
 				4FE8C4D717FDF73A00B0C796 /* armleft@2.png in Resources */,
@@ -863,6 +927,7 @@
 				4F50346E17FC7747007A9DE8 /* map2.png in Resources */,
 				4F50347917FC7747007A9DE8 /* Icon-Small@2x.png in Resources */,
 				4FE8C50317FDF73A00B0C796 /* walk@2.gif in Resources */,
+				4F3B78CB1805A64B00E1E64B /* s2.png in Resources */,
 				DBB42ACB17FE1BA90082D799 /* GlassActivityView.xib in Resources */,
 				4FE8C4FC17FDF73A00B0C796 /* menu2@2.png in Resources */,
 				4F50348917FC7747007A9DE8 /* done2.png in Resources */,
@@ -882,6 +947,7 @@
 				4FE8C4EC17FDF73A00B0C796 /* glassbg@2.png in Resources */,
 				4F50349617FC7747007A9DE8 /* unselectedDot.png in Resources */,
 				4F50349717FC7747007A9DE8 /* scaleleft.png in Resources */,
+				4F3B78C91805A64B00E1E64B /* n5.png in Resources */,
 				4F50348717FC7747007A9DE8 /* fieldlrg.png in Resources */,
 				4F50346117FC7747007A9DE8 /* wrong.png in Resources */,
 				4FE8C4F917FDF73A00B0C796 /* map1@2.png in Resources */,
@@ -895,6 +961,7 @@
 				4FE8C4ED17FDF73A00B0C796 /* hint1@2.png in Resources */,
 				4FE8C50517FDF73A00B0C796 /* walk2@2.png in Resources */,
 				4FE8C4E117FDF73A00B0C796 /* chocothin@2.png in Resources */,
+				4F3B78C71805A64B00E1E64B /* n3.png in Resources */,
 				4F50347217FC7747007A9DE8 /* login1.png in Resources */,
 				4FE8C4EB17FDF73A00B0C796 /* glass2@2.png in Resources */,
 				4FE8C4DF17FDF73A00B0C796 /* chocopiece@2.png in Resources */,
@@ -914,6 +981,7 @@
 				4FE8C50217FDF73A00B0C796 /* title@2.png in Resources */,
 				4F50348417FC7747007A9DE8 /* fieldsm.png in Resources */,
 				4FE8C4E917FDF73A00B0C796 /* glass@2.png in Resources */,
+				4F3B78CA1805A64B00E1E64B /* s1.png in Resources */,
 				4F50348F17FC7747007A9DE8 /* chocobg.png in Resources */,
 				4F50347317FC7747007A9DE8 /* login2.png in Resources */,
 				4F50346017FC7747007A9DE8 /* LevelComp.png in Resources */,
@@ -992,6 +1060,7 @@
 				4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */,
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
 				4F14C1F017999FD90043B1D4 /* main.m in Sources */,
+				4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */,
 				4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */,
 				4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */,
 				4F14C1F417999FD90043B1D4 /* MFAppDelegate.m in Sources */,
@@ -999,10 +1068,10 @@
 				4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */,
 				4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */,
 				4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */,
-				4F50341417FB5A1D007A9DE8 /* MFUser.m in Sources */,
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
+				4F3B78D01807006B00E1E64B /* MFUser.m in Sources */,
 				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,
 				4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */,
 				4FEFE04517E8FD0F004AF076 /* NumberLineView.m in Sources */,
@@ -1010,9 +1079,11 @@
 				4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */,
 				4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */,
 				4F14C2201799BA160043B1D4 /* NumberLinePieceView.m in Sources */,
-				4F3B78BA180319CC00E1E64B /* MFAttempt.m in Sources */,
+				4F3B78D6180705B800E1E64B /* MFAttempt.m in Sources */,
+				4F3B78D9180728C300E1E64B /* MFFractalUser.m in Sources */,
 				4FEFE04917EA2D05004AF076 /* UIBAlertView.m in Sources */,
 				4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */,
+				4F3B78DD180728FF00E1E64B /* MFFrAttempt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1118,6 +1189,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jmc72/Downloads,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";
 				INFOPLIST_FILE = "MathFractions/MathFractions-Info.plist";
@@ -1132,6 +1207,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/jmc72/Downloads,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";
 				INFOPLIST_FILE = "MathFractions/MathFractions-Info.plist";

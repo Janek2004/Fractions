@@ -107,9 +107,7 @@
     CGRect btnframe = CGRectMake(5,25,50,50);
     _addButton=[[UIButton alloc]initWithFrame:btnframe];
     [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
-  //  [_addButton setF]
-//    [_addButton setTitle:@"+" forState:UIControlStateNormal];
-    
+   
     [_addButton setBackgroundColor:[UIColor redColor]];
     _addButton.layer.cornerRadius =5;
     numerator = 0;
@@ -128,9 +126,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-       // fraction = [MFFraction new];
-           }
+             }
     return self;
 }
 
@@ -234,7 +230,9 @@
         }
     }
     
-    
+    if(numerator ==0 &&denominator ==0){
+        return nil;
+    }
     fraction.numerator = [NSNumber numberWithInt: numerator];
     fraction.denominator = [NSNumber numberWithInt:denominator];
     

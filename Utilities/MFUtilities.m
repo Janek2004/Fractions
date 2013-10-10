@@ -82,17 +82,16 @@
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller{
   //probably we can store it in database file
 #warning store it in database
-    if(activity == 1||activity == 2||activity == 3)
+    if(activity == 1||activity == 2)
     {
         [self presentScaleIntro:viewcontroller];
     }
-    if(activity == 5||activity == 6)
+    if(activity == 4||activity == 5||activity == 6)
     {
        [self presentNumberLineIntro:viewcontroller];
     }
-    if(activity == 4)
+    if(activity == 3)
     {
-
        [self presentFillGlassIntro:viewcontroller];
     }
     
@@ -102,17 +101,21 @@
 
 -(void)presentScaleIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Scale Activity"
-                                                          withDetail: @"That will be intro to the fractions app"
+                                                          withDetail: @"Move the scale's arm up and down to determine which fraction is bigger or equal"
                                                            withImage: [UIImage imageNamed:@"holdweight@2"]];
     
-    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
-                                                          withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"holdweight@2"]];
+    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Scale Activity"
+                                                          withDetail: @"(9 divided by 9 is 1 and 5 divided by 5 is 1 therefore fractions are equal."
+                                                           withImage: [UIImage imageNamed:@"s1"]];
+    KxIntroViewPage *page2 = [KxIntroViewPage introViewPageWithTitle: @"Scale Activity"
+                                                          withDetail: @"(7 divided by 10 is more than and 4 divided by 7."
+                                                           withImage: [UIImage imageNamed:@"s2"]];
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
     
-    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1,page2]];
+
     vc.introView.animatePageChanges = YES;
     vc.introView.gradientBackground = YES;
    //[vc presentInViewController:viewcontroller fullScreenLayout:YES];
@@ -129,17 +132,24 @@
 
 -(void)presentNumberLineIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
-                                                          withDetail: @"That will be intro to the fractions app"
+                                                          withDetail: @""
                                                            withImage: [UIImage imageNamed:@"holdchoco@2"]];
     
-    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
-                                                          withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"holdchoco@2"]];
+    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+                                                          withDetail: @"5/1 = 5 selected chocolate bars"
+                                                           withImage: [UIImage imageNamed:@"n1"]];
+    KxIntroViewPage *page2 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+                                                          withDetail: @"2/3 = 2 selected chocolate segments out of three available"
+                                                           withImage: [UIImage imageNamed:@"n3"]];
+    KxIntroViewPage *page3 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+                                                          withDetail: @"5/9 = 5 selected chocolate segments out of nine available"
+                                                           withImage: [UIImage imageNamed:@"n4"]];
+    
     
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
     
-    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1, page2, page3]];
 
     vc.introView.animatePageChanges = YES;
     vc.introView.gradientBackground = YES;
@@ -156,11 +166,11 @@
 
 -(void)presentFillGlassIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
-                                                          withDetail: @"That will be intro to the fractions app"
+                                                          withDetail: nil
                                                            withImage: [UIImage imageNamed:@"holdcup@2"]];
     
-    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"What's new in fractions"
-                                                          withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
+    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
+                                                          withDetail: nil
                                                            withImage: [UIImage imageNamed:@"holdcup@2"]];
     
     
@@ -201,8 +211,8 @@
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object
 {
    MFFraction * other = (MFFraction *)object;
-    fractionOne = [self simplify:fractionOne];
-    other = [self simplify:other];
+  if(fractionOne)  fractionOne = [self simplify:fractionOne];
+    if(other)   other = [self simplify:other];
     
   return fractionOne.numerator.intValue == other.numerator.intValue && fractionOne.denominator.intValue == other.denominator.intValue;
   
