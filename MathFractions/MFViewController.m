@@ -34,6 +34,8 @@
 #import "PracticeViewController.h"
 #import "MFActivity.h"
 #import "MFCompleted.h"
+#import "MFProgressViewController.h"
+
 
 @interface MFViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *MenuView;
@@ -66,7 +68,10 @@
 - (IBAction)showAbout:(id)sender;
 - (IBAction)showUserView:(id)sender;
 
+
+
 - (IBAction)dismissView:(id)sender;
+- (IBAction)showProgress:(id)sender;
 
 @end
 
@@ -347,6 +352,15 @@
                      }];
 
 
+}
+
+- (IBAction)showProgress:(id)sender {
+    
+    MFProgressViewController *mf = [[MFProgressViewController alloc]initWithNibName:@"MFProgressViewController" bundle:nil];
+    [self presentViewController:mf animated:YES completion:nil];
+    
+    
+    
 }
 
 #pragma mark picker
