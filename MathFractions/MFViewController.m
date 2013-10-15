@@ -53,6 +53,7 @@
 @property (strong, nonatomic) NSArray * array;
 @property (strong, nonatomic) IBOutlet UIView *aboutView;
 @property (strong, nonatomic) IBOutlet UIView *userView;
+@property (strong, nonatomic) IBOutlet UIView *teacherGuideView;
 
 @property (strong, nonatomic) IBOutlet UITextField *classIdTxtField;
 
@@ -67,11 +68,10 @@
 - (IBAction)activityInfo:(id)sender;
 - (IBAction)showAbout:(id)sender;
 - (IBAction)showUserView:(id)sender;
-
-
-
+- (IBAction)showTeacherGuide:(id)sender;
 - (IBAction)dismissView:(id)sender;
 - (IBAction)showProgress:(id)sender;
+
 
 @end
 
@@ -154,22 +154,9 @@
     //get current progress
     for(int i=1;i<=6;i++){
         UIButton *btn = (UIButton *)[self.view viewWithTag:i];
-        NSString * imageName;
+        NSString * imageName = [_utilities getImageForActivity:i  correct:NO];
         
-        if(i== 1 ||i == 2)
-        {
-            imageName =@"scale2";
-        }
-        
-        if(i == 3)
-        {
-            
-            imageName =@"glass2";
-        }
-        if(i == 5||i == 6||i == 4)
-        {
-            imageName =@"choco1@2";
-        }
+       
         
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
@@ -179,21 +166,10 @@
         
         
         [UIView animateWithDuration:1.0 animations:^{
-            NSString * imageName;
-            if(act.activity.integerValue == 1 ||act.activity.integerValue == 2)
-            {
-                imageName =@"scale1";
-            }
-            if(act.activity.integerValue == 3)
-            {
-                imageName =@"glass1";
-            }
-            if(act.activity.integerValue == 4||act.activity.integerValue == 5||act.activity.integerValue == 6)
-            {
-                imageName =@"choco2@2";
-            }
+            NSString * imageName = [_utilities getImageForActivity:act.activity.integerValue  correct:YES];
             
             [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+            
         }];
     }
 }
@@ -339,6 +315,19 @@
                      }];
 
     
+}
+
+- (IBAction)showTeacherGuide:(id)sender {
+    [self.view addSubview:self.teacherGuideView];
+    self.teacherGuideView.alpha = 0;
+    [UIView animateWithDuration:1
+                     animations:^{
+                         self.teacherGuideView.alpha = 1;
+                         
+                     } completion:^(BOOL finished) {
+                         self.teacherGuideView.bounds = self.view.bounds;
+                         
+                     }];
 }
 
 - (IBAction)dismissView:(id)sender {

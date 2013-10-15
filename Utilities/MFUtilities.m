@@ -78,19 +78,55 @@
 
 }
 
+-(NSString *)getImageForActivity:(int)i correct:(BOOL)correct{
+    NSString *imageName;
+    if(!correct){
+    if(i== 1 ||i == 2 ||i == 3)
+    {
+        imageName =@"scale1@2";
+    }
+    
+    if(i == 4)
+    {
+        
+        imageName =@"glass1@2";
+    }
+    if(i == 5||i == 6)
+    {
+        imageName =@"choco1@2";
+    }
+    }
+    else{
+        if(i== 1 ||i == 2 ||i == 3)
+        {
+            imageName =@"scale2@2";
+        }
+        
+        if(i == 4)
+        {
+            
+            imageName =@"glass2@2";
+        }
+        if(i == 5||i == 6)
+        {
+            imageName =@"choco2@2";
+        }
+    
+    }
+    return imageName;
+}
 
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller{
-  //probably we can store it in database file
-#warning store it in database
-    if(activity == 1||activity == 2)
+
+    if(activity == 1||activity == 2||activity == 3)
     {
         [self presentScaleIntro:viewcontroller];
     }
-    if(activity == 4||activity == 5||activity == 6)
+    if(activity == 5||activity == 6)
     {
        [self presentNumberLineIntro:viewcontroller];
     }
-    if(activity == 3)
+    if(activity == 4)
     {
        [self presentFillGlassIntro:viewcontroller];
     }

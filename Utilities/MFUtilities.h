@@ -38,6 +38,7 @@
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object;
 - (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject;
 -(MFFraction *)simplify:(MFFraction *)_fraction;
+-(NSString *)getImageForActivity:(int)i correct:(BOOL)correct;
 
 
 @end

@@ -276,8 +276,11 @@
     mf.score = attempt.score;
     mf.attempt_date = attempt.attempt_date;
     mf.name = attempt.user.name;
-    mf.mfclassId = attempt.user.classId;
-  
+    mf.mfclassId =
+    
+    //attempt.user.classId;
+    
+    mf.mfuid = [NSString stringWithFormat:@"%@",[attempt objectID]];
     mf.activity = attempt.activity;
     NSMutableArray * a =[NSMutableArray new];
     for(MFFraction *fra in attempt.fractions){

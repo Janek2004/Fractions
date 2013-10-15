@@ -14,11 +14,14 @@
 #import "MFAttempt.h"
 #import "MFFraction.h"
 
+#import "MFUtilities.h"
 
 @interface MFProgressViewController ()<UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) ArrayDataSource * datasource;
 @property (strong,nonatomic) DataManager * dataManager;
+@property (strong,nonatomic) MFUtilities * utilities;
+
 @end
 
 @implementation MFProgressViewController
@@ -40,6 +43,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _utilities = [[MFUtilities alloc]init];
     self.tableView.delegate =self;
     _dataManager = [[DataManager alloc]init];
     MFUser * user = _dataManager.getCurrentUser;
@@ -63,48 +67,12 @@
             [s appendString:[NSString stringWithFormat:@"%@/%@ ",fr.numerator, fr.denominator]];
         }
         cell.fractionsLabel.text =s;
-        
-        
-        
-        
+
         int i = item.activity.intValue ;
         
-        NSLog(@"%@ ",item.score);
-        if(item.score.intValue ==0){
-            
-        }
-        else{
-        
-        }
-        NSString * imageName;
-        if((i== 1 ||i == 2) && item.score.intValue == 1)
-        {
-           imageName =  @"scale2@2";
-        }
 
-        if((i== 1 ||i == 2) && item.score.intValue == 0)
-        {
-            imageName =  @"scale1";
-        }
-        if(i == 3&& item.score.intValue == 1)
-        {
-            
-            imageName =@"glass2";
-        }
-        if(i == 3&& item.score.intValue == 0)
-        {
-            
-            imageName =@"glass1";
-        }
-        
-        if((i == 5||i == 6||i == 4) && item.score.intValue == 1)
-        {
-            imageName =@"choco1@2";
-        }
-        if((i == 5||i == 6||i == 4) && item.score.intValue == 0)
-        {
-            imageName =@"choco2";
-        }
+        NSString * imageName =[_utilities getImageForActivity:i correct:item.score.intValue];;
+
         
         cell.activityImageView.image =[UIImage imageNamed:imageName];
         
