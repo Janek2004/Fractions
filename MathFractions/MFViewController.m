@@ -101,9 +101,8 @@
         [[MFManager sharedManager]setMfuser:user];
         self.userNameTextField.text = user.name;
         self.userName.text = [NSString stringWithFormat:@"Hi %@", user.name];
+        self.classIdTxtField.text = user.classId;
     }
-    
-    
 }
 
 
@@ -162,6 +161,8 @@
     }
     
     MFUser * mf = [[MFManager sharedManager]mfuser];
+   
+    
     for(MFCompleted *act in mf.completed){
         
         
@@ -191,15 +192,20 @@
 
 - (IBAction)hideMenu:(id)sender {
    
-    if(self.classIdTxtField.text.length>0){
-        [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
-        
-    }
+    
     if(self.userNameTextField.text.length==0)
     {
         UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on User button to log in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [a show];
         return;
+    }
+    
+    if(self.classIdTxtField.text.length>0){
+        [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
+        MFUser * mf = [[MFManager sharedManager]mfuser];
+        mf.classId =self.classIdTxtField.text;
+        [_dataManager updateData:mf];
+        
     }
    
     [UIView animateWithDuration:1
@@ -274,7 +280,8 @@
     
     if(newuser){
         [self.dataManager loginUser:newuser];
-        self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
+        [[MFManager sharedManager]setMfuser: newuser];
+         self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
         
         [self dismissView:sender];
         [self hideMenu:nil];

@@ -37,15 +37,6 @@
                    "set": 4
                    },
                   
-                   {
-                   "id": 4,
-                   "name": "Number Line Activity",
-                   "classname": "NumberLineView",
-                   "standard": "CCSS.Math.Content.3.NF.A.3d",
-                   "questioncount": 3,
-                   "nr_fraction_inquestion": 1,
-                   "set": 1
-                   },
                    
                    {
                    "id": 5,

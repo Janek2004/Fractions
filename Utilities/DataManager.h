@@ -41,6 +41,7 @@
 -(NSDictionary *)getLocalJSON;
 -(void)import;
 -(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;
+-(void)updateData:(NSManagedObject *)object;
 //@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 //@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 //@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;

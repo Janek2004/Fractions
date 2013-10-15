@@ -235,8 +235,10 @@
     }
     if([self.currentActivity.name isEqualToString:@"Filling the Glass Activity"]) {
         MFGlassActivityViewController *glassVC = [[MFGlassActivityViewController alloc]initWithNibName:@"GlassActivityView" bundle:[NSBundle mainBundle]];
+        
         [self addChildViewController:glassVC];
         [glassVC willMoveToParentViewController:self];
+      
         [self.activityContainer addSubview:glassVC.view];
         [glassVC didMoveToParentViewController:self];
     }

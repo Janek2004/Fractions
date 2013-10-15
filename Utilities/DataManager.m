@@ -276,12 +276,10 @@
     mf.score = attempt.score;
     mf.attempt_date = attempt.attempt_date;
     mf.name = attempt.user.name;
-    mf.mfclassId =
-    
-    //attempt.user.classId;
-    
+    mf.mfclassId = _manager.mfuser.classId;
     mf.mfuid = [NSString stringWithFormat:@"%@",[attempt objectID]];
     mf.activity = attempt.activity;
+
     NSMutableArray * a =[NSMutableArray new];
     for(MFFraction *fra in attempt.fractions){
         MFFractalFraction *fr = [[MFFractalFraction alloc]init];
@@ -443,6 +441,16 @@
         [self loginUser:user];
          return user;
     }
+}
+
+-(void)updateData:(NSManagedObject *)object;{
+     NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+     NSError *error;
+     [context save:&error];
+     if(error){
+        NSLog(@"Update Data Error %@",error.debugDescription);
+    }
+
 }
 
 
