@@ -391,6 +391,7 @@
 		DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlassActivityView.xib; sourceTree = "<group>"; };
 		DBB42ACD17FE1FD20082D799 /* MFGlassActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFGlassActivityViewController.h; sourceTree = "<group>"; };
 		DBB42ACE17FE1FD20082D799 /* MFGlassActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFGlassActivityViewController.m; sourceTree = "<group>"; };
+		DBF3CB0B180CC83800317C94 /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../../../FatFractalSDK/FFEF.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,6 +452,7 @@
 		4F14C1E217999FD80043B1D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBF3CB0B180CC83800317C94 /* FFEF.framework */,
 				4F3B78CC1806F61B00E1E64B /* FFEF.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
 				4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */,
@@ -1226,6 +1228,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,
+					/Users/injahta/Documents/xcode/FatFractalSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";
@@ -1244,6 +1247,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,
+					/Users/injahta/Documents/xcode/FatFractalSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";

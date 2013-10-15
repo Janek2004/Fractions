@@ -238,6 +238,7 @@
         [self addChildViewController:glassVC];
         [glassVC willMoveToParentViewController:self];
         [self.activityContainer addSubview:glassVC.view];
+        self.practiceView = glassVC.view;
         [glassVC didMoveToParentViewController:self];
     }
     
@@ -311,9 +312,48 @@
 
 //method will be called when user submits the answer
 - (IBAction)answerSelected:(id)sender {
-
+    if([self.childViewControllers[0] respondsToSelector:@selector(checkAnswer)]) {
+        BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.childViewControllers[0] performSelector:@selector(checkAnswer)];
+        
+        if(!_manager)
+        {
+            _manager = [MFManager sharedManager];
+        }
+        
+        id question =   self.questionsSet[_currentQuestionIndex];
+        NSSet *set;
+        if([question isKindOfClass:[NSArray class]]){
+            set = [NSSet setWithArray:question];
+        }
+        if([question isKindOfClass:[MFFraction class]])
+        {
+            set = [NSSet setWithObject:question];
+        }
+        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
+        
+        
+        if(check){
+            
+            _manager = [MFManager sharedManager];
+            [self showFeedback:YES];
+            
+        }
+        else{
+            _wrongCount ++;
+            
+            if(_wrongCount > 12)
+            {
+                NSLog(@"Show the correct answer");
+            }
+            else{
+                [self showFeedback:NO];
+            }
+            
+        }
+  
+    }
     //calculate score
-    if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
+    else if([self.practiceView respondsToSelector:@selector(checkAnswer)]) {
         BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
        
         if(!_manager)

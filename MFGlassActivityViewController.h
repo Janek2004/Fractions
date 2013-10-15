@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MFGlassActivityViewController : UIViewController
+#import "MFPracticeRequiredMethods.h"
+@interface MFGlassActivityViewController : UIViewController<MFPracticeRequiredMethods>
 -(void)setCurrentFractions:(NSArray *)currentFractions;
-
+-(BOOL)checkAnswer;
 @end

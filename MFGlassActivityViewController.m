@@ -8,19 +8,30 @@
 
 #import "MFGlassActivityViewController.h"
 #import "MFFraction.h"
-
-@interface MFGlassActivityViewController ()
+#import "MFUtilities.h"
+enum kFractionComparator {
+    kEqual = 0,
+    kLess = 1,
+    kMore = 2
+};
+@interface MFGlassActivityViewController () {
+    enum kFractionComparator comparator;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *leftGlass;
 @property (weak, nonatomic) IBOutlet UIImageView *rightGlass;
 @property (weak, nonatomic) IBOutlet UIImageView *redoActivity;
 @property (strong, nonatomic) NSMutableArray *leftGlassViews;
 @property (strong, nonatomic) NSMutableArray *rightGlassViews;
 @property (strong, nonatomic) IBOutlet UILabel *fractionView;
+@property(strong,nonatomic) MFFraction *leftFraction;
+@property(strong,nonatomic) MFFraction *rightFraction;
+@property (weak, nonatomic) IBOutlet UILabel *cupLabel;
+@property(strong,nonatomic) MFUtilities *utitilities;
 
 @end
 
 @implementation MFGlassActivityViewController
-
+@synthesize currentFractions;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     
@@ -113,16 +124,38 @@
 }
 
 //displays current fraction
--(void)setCurrentFractions:(NSArray *)currentFractions{
+-(void)setCurrentFractions:(NSArray *)currentFractions {
     
 
 }
 
 -(BOOL)checkAnswer{
-
+    if(!_utitilities){
+        _utitilities =[[MFUtilities alloc]init];
+    }
+    
+    if([_utitilities getValueOfFraction: self.leftFraction] == [_utitilities getValueOfFraction: self.rightFraction] && comparator == kEqual)
+    {
+        
+        return YES;
+    }
+    if([_utitilities getValueOfFraction: self.leftFraction] < [_utitilities getValueOfFraction: self.rightFraction] && comparator == kLess)
+    {
+        
+        return YES;
+    }
+    if([_utitilities getValueOfFraction: self.leftFraction] > [_utitilities getValueOfFraction: self.rightFraction] && comparator == kMore)
+    {
+        
+        return YES;
+    }
+    
+    
     return NO;
 }
-
+-(void)reset {
+    
+}
 
 
 @end
