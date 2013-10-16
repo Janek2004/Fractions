@@ -320,33 +320,7 @@
   
     }
     
-    
-//[manager.ff createObj:at atUri:@"/Attempt" onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
-//    at.saved =[NSNumber numberWithBool:YES];
-//    if(theErr){
-//        NSLog(@"Saving Attempt %@",theErr.debugDescription);
-//    }
-//    NSError * error;
-//    [context save:&error];
-//    if(error){
-//        NSLog(@"Online Attempt 2 %@",error.debugDescription);
-//    }
-//    
-//
-//} onOffline:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
-//        at.saved =[NSNumber numberWithBool:NO];
-//    if(theErr){
-//        NSLog(@"Offline Attempt %@",theErr.debugDescription);
-//    }
-//    NSError * error;
-//    [context save:&error];
-//    if(error){
-//        NSLog(@"Offline Attempt 2 %@",error.debugDescription);
-//    }
-//}];
-
-
-}
+ }
 
 
 + (NSString *) applicationDocumentsDirectory
