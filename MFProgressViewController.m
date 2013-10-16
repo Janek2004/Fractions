@@ -54,9 +54,9 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ProgressCell"  bundle:nil]forCellReuseIdentifier:@"progressCell"];
 
     _datasource= [[ArrayDataSource alloc]initWithItems:a cellIdentifier:@"progressCell" configureCellBlock:^(ProgressCell * cell, MFAttempt * item){
-        cell.activityName.text =[NSString stringWithFormat:@"%d", item.activity.intValue];
+        cell.activityName.text =[NSString stringWithFormat:@"Activity: %d", item.activity.intValue];
         NSDateFormatter * df = [[NSDateFormatter alloc]init];
-        [df setDateFormat:@"mm:dd:yy hh:mm"];
+        [df setDateFormat:@"MM:DD:YY hh:mm"];
         NSString * str =       [df stringFromDate:item.attempt_date];
         cell.dateTimeLabel.text = [NSString stringWithFormat:@"%@",str ];
         
@@ -71,7 +71,7 @@
         int i = item.activity.intValue ;
         
 
-        NSString * imageName =[_utilities getImageForActivity:i correct:item.score.intValue];;
+        NSString * imageName =[_utilities getImageForActivity:i correct:item.score.intValue];
 
         
         cell.activityImageView.image =[UIImage imageNamed:imageName];

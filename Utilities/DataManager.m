@@ -184,6 +184,13 @@
 }
 
 
+-(MFFraction *)getFraction;{
+    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+
+     return [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
+    
+}
+
 
 -(NSDictionary *)getLocalJSON{
    

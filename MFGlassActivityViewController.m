@@ -8,6 +8,9 @@
 
 #import "MFGlassActivityViewController.h"
 #import "MFFraction.h"
+#import "MFUtilities.h"
+
+#import "DataManager.h"
 
 @interface MFGlassActivityViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *leftGlass;
@@ -16,6 +19,15 @@
 @property (strong, nonatomic) NSMutableArray *leftGlassViews;
 @property (strong, nonatomic) NSMutableArray *rightGlassViews;
 @property (strong, nonatomic) IBOutlet UILabel *fractionView;
+@property (strong, nonatomic) IBOutlet UIImageView *cupView;
+@property (strong, nonatomic) IBOutlet UILabel *cupLabel;
+@property (strong, nonatomic) MFFraction * currentFraction;
+@property (strong, nonatomic) MFUtilities * utilities;
+
+@property (strong, nonatomic) DataManager* dataManager;
+
+@property int numerator;
+@property int denominator;
 
 @end
 
@@ -35,12 +47,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _numerator = 1;
+    _denominator = 2;
+    _utilities = [[MFUtilities alloc]init];
+    _dataManager=[[DataManager alloc]init];
+    [self displayCupLabel:_denominator];
     self.leftGlassViews = [NSMutableArray new];
     self.rightGlassViews = [NSMutableArray new];
     [self.leftGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLeftGlass:)]];
-    [self.rightGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapRightGlass:)]];
+    
+    [self.cupView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCup:)]];
+    
     [self.redoActivity addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startOver:)]];
 }
+
+-(void)displayCupLabel:(int)denominator{
+    NSString * s = [NSString stringWithFormat:@"1/%d",denominator];
+    self.cupLabel.text  = s;
+}
+
 
 -(void)startOver:(UITapGestureRecognizer *)recognizer {
     for(NSInteger i = self.leftGlassViews.count - 1; i >= 0; i--) {
@@ -65,7 +90,7 @@
 -(void)tapLeftGlass:(UITapGestureRecognizer *)recognizer {
     if(self.leftGlassViews.count == 0) {
         UIView *fraction = ({
-            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(recognizer.view.frame) + 10, CGRectGetMaxY(recognizer.view.frame) - CGRectGetHeight(recognizer.view.frame) / 6, CGRectGetWidth(recognizer.view.frame) - 20, CGRectGetHeight(recognizer.view.frame) / 6)];
+            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(recognizer.view.frame) + 10, -15 + CGRectGetMaxY(recognizer.view.frame) - (CGRectGetHeight(recognizer.view.frame)-15) / _denominator, CGRectGetWidth(recognizer.view.frame) - 20, CGRectGetHeight(recognizer.view.frame) / _denominator)];
             v.backgroundColor = [UIColor blueColor];
             v;
         });
@@ -74,11 +99,13 @@
         [self.leftGlassViews addObject:fraction];
     }
         
-    else if(self.leftGlassViews.count < 6 && self.leftGlassViews.count != 0) {
+    else if(self.leftGlassViews.count < _denominator && self.leftGlassViews.count != 0) {
         UIView *topView = [self.leftGlassViews lastObject];
         UIView *fraction = ({
             UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(topView.frame), CGRectGetMinY(topView.frame) - CGRectGetHeight(topView.frame), CGRectGetWidth(topView.frame), CGRectGetHeight(topView.frame))];
             v.backgroundColor = [UIColor blueColor];
+            v.layer.borderColor = [[UIColor darkGrayColor]CGColor];
+            v.layer.borderWidth = 1.0;
             v;
         });
         [self.view addSubview:fraction];
@@ -86,40 +113,33 @@
         [self.leftGlassViews addObject:fraction];
     }
 }
-
--(void)tapRightGlass:(UITapGestureRecognizer *)recognizer {
-    if(self.rightGlassViews.count == 0) {
-        UIView *fraction = ({
-            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(recognizer.view.frame) + 10, CGRectGetMaxY(recognizer.view.frame) - CGRectGetHeight(recognizer.view.frame) / 6, CGRectGetWidth(recognizer.view.frame) - 20, CGRectGetHeight(recognizer.view.frame) / 6)];
-            v.backgroundColor = [UIColor blueColor];
-            v;
-        });
-        [self.view addSubview:fraction];
-        [self.view insertSubview:fraction belowSubview:self.rightGlass];
-        [self.rightGlassViews addObject:fraction];
+-(void)tapCup:(UITapGestureRecognizer *)recognizer {
+    _denominator ++;
+    if(_denominator>10){
+        _denominator = 2;
+    
     }
     
-    else if(self.rightGlassViews.count < 6 && self.rightGlassViews.count != 0) {
-        UIView *topView = [self.rightGlassViews lastObject];
-        UIView *fraction = ({
-            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(topView.frame), CGRectGetMinY(topView.frame) - CGRectGetHeight(topView.frame), CGRectGetWidth(topView.frame), CGRectGetHeight(topView.frame))];
-            v.backgroundColor = [UIColor blueColor];
-            v;
-        });
-        [self.view addSubview:fraction];
-        [self.view insertSubview:fraction belowSubview:self.rightGlass];
-        [self.rightGlassViews addObject:fraction];
-    }
+    [self displayCupLabel:_denominator];
 }
 
 //displays current fraction
 -(void)setCurrentFractions:(NSArray *)currentFractions{
-    
-
+   _currentFraction = currentFractions[0];
+    _fractionView.text= [NSString stringWithFormat:@"%@/%@",_currentFraction.numerator,_currentFraction.denominator];
 }
 
 -(BOOL)checkAnswer{
+    //curent value
+    MFFraction * fraction = [_dataManager getFraction];
+  
+    fraction.numerator =[NSNumber numberWithInt:self.leftGlassViews.count];
+    fraction.denominator =[NSNumber numberWithInt:self.denominator];
 
+    if([_utilities isEqual:_currentFraction and:fraction]){
+        return YES;
+    }
+    
     return NO;
 }
 

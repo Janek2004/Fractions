@@ -44,6 +44,7 @@
 
 
 @interface PracticeViewController ()
+@property (nonatomic,strong) MFGlassActivityViewController *glassVC;
 @property (nonatomic) BOOL  introShown;
 @property (nonatomic,strong) MFUtilities * utilities;
 @property (nonatomic,strong) DataManager * dataManager;
@@ -181,7 +182,6 @@
     }
     else{
         //Game Over
-         NSLog(@"GAME OVER Screen");
         [self.dataManager markActivity:self.activityId asCompletedForUser:self.manager.mfuser];
         [self.view addSubview: self.gameOver];
         
@@ -192,11 +192,14 @@
 }
 
 -(void)displayFraction{
-    if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
+   
+    id question = self.questionsSet[_currentQuestionIndex];
+    
+    if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)])
+    {
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
  
-        id question = self.questionsSet[_currentQuestionIndex];
-      
+        
         if([question isKindOfClass:[NSArray class]]){
             [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
         }
@@ -207,6 +210,23 @@
         }
         
     }
+    else{
+        
+        if([question isKindOfClass:[NSArray class]]){
+            [_glassVC performSelector:@selector(setCurrentFractions:) withObject:question];
+        }
+        if([question isKindOfClass:[MFFraction class]]){
+            
+            [_glassVC performSelector:@selector(setCurrentFractions:) withObject:@[question]];
+            
+        }
+   
+  
+    }
+#warning fix this crap
+    
+    
+    
 }
 
 -(void)loadData{
@@ -234,13 +254,15 @@
         
     }
     if([self.currentActivity.name isEqualToString:@"Filling the Glass Activity"]) {
-        MFGlassActivityViewController *glassVC = [[MFGlassActivityViewController alloc]initWithNibName:@"GlassActivityView" bundle:[NSBundle mainBundle]];
+        _glassVC = [[MFGlassActivityViewController alloc]initWithNibName:@"GlassActivityView" bundle:[NSBundle mainBundle]];
         
-        [self addChildViewController:glassVC];
-        [glassVC willMoveToParentViewController:self];
+        [self addChildViewController:_glassVC];
+        [_glassVC willMoveToParentViewController:self];
       
-        [self.activityContainer addSubview:glassVC.view];
-        [glassVC didMoveToParentViewController:self];
+        [self.activityContainer addSubview:_glassVC.view];
+        [_glassVC didMoveToParentViewController:self];
+        self.practiceView =_glassVC.view;
+ 
     }
     
     NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
@@ -315,49 +337,55 @@
 - (IBAction)answerSelected:(id)sender {
 
     //calculate score
-    if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
-        BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
-       
-        if(!_manager)
-        {
-            _manager = [MFManager sharedManager];
-        }
-        
-      id question =   self.questionsSet[_currentQuestionIndex];
-        NSSet *set;
-        if([question isKindOfClass:[NSArray class]]){
-         set = [NSSet setWithArray:question];
-        }
-        if([question isKindOfClass:[MFFraction class]])
-        {
-            set = [NSSet setWithObject:question];
-        }
-        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
-
-
-        if(check){
-
-           _manager = [MFManager sharedManager];
-           [self showFeedback:YES];
-            
-        }
-        else{
-            _wrongCount ++;
-           
-            if(_wrongCount > 12)
-            {
-                NSLog(@"Show the correct answer");
-            }
-            else{
-             [self showFeedback:NO];
-           }
-            
-        }
-       
+    BOOL check;
+   
+    if(!_manager)
+    {
+        _manager = [MFManager sharedManager];
     }
     
-    //compare the scores
-    //current answer
+    id question = self.questionsSet[_currentQuestionIndex];
+    
+   
+    if(_glassVC){
+       check =  (BOOL)[_glassVC performSelector:@selector(checkAnswer)];
+    }
+    
+    if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
+       check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
+
+    }
+    
+    NSSet *set;
+    if([question isKindOfClass:[NSArray class]]){
+        set = [NSSet setWithArray:question];
+    }
+    if([question isKindOfClass:[MFFraction class]])
+    {
+        set = [NSSet setWithObject:question];
+    }
+    [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
+    
+    
+    if(check){
+        
+        _manager = [MFManager sharedManager];
+        [self showFeedback:YES];
+        
+    }
+    else{
+        _wrongCount ++;
+        
+        if(_wrongCount > 12)
+        {
+            NSLog(@"Show the correct answer");
+        }
+        else{
+            [self showFeedback:NO];
+        }
+        
+    }
+
     
     
 }

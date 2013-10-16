@@ -54,23 +54,21 @@
  */
 
 -(void)presentIntroIn:(id)viewcontroller{
-    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Math Fractions"
-                                                          withDetail: @"That will be intro to the fractions app"
+    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Fractio Snack Time in Fractionville"
+                                                          withDetail: @"Fractio travels around the world to visit different villages. Currently, Fractio is taking a break in “Fractionville” for snacks.  For each station that Fractio stops, it’s an activity related to fraction concept starting with the Common Core State Standards Mathematics for Grade 3. "
                                                            withImage: [UIImage imageNamed:@"titlepage"]];
     
-    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"About US"
-                                                          withDetail: @"List of new features\n\n- feature #1\n- feature #2\n- feature #3\n- feature #4\n- feature #5"
-                                                           withImage: [UIImage imageNamed:@"fractio"]];
+  
 
     
     page0.fullScreenImage = YES;
-    page1.detailLabel.textAlignment = NSTextAlignmentLeft;
+  
     
-    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0 ]];
     vc.introView.animatePageChanges = YES;
     vc.introView.gradientBackground = YES;
     void (^handler)()=^(){
-        NSLog(@"Handler 2 got called");
+
     };
     
     vc.completionHandler =handler;

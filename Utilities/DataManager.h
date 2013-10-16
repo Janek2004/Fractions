@@ -30,6 +30,7 @@
 @class MFActivity;
 @class MFAttempt;
 @class MFUser;
+@class MFFraction;
 
 @interface DataManager : NSObject
 -(MFActivity *)getActivity:(int)activityId;
@@ -42,6 +43,8 @@
 -(void)import;
 -(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;
 -(void)updateData:(NSManagedObject *)object;
+-(MFFraction *)getFraction;
+
 //@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 //@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 //@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
