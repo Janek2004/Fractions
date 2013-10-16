@@ -124,8 +124,15 @@ enum kFractionComparator {
 }
 
 //displays current fraction
--(void)setCurrentFractions:(NSArray *)currentFractions {
-    
+-(void)setCurrentFractions:(NSArray *)fractions {
+    NSLog(@"%d",fractions.count);
+    if(fractions.count==2){
+        self.leftFraction = fractions[0];
+        self.rightFraction = fractions[1];
+        
+        self.fractionView.text = [NSString stringWithFormat:@"%@/%@", self.leftFraction.numerator, self.leftFraction.denominator];
+        
+    }
 
 }
 

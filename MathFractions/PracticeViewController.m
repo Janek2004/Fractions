@@ -192,7 +192,20 @@
 }
 
 -(void)displayFraction{
-    if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
+    if(self.childViewControllers.count > 0 && [self.childViewControllers[0] respondsToSelector:@selector(setCurrentFractions:)]) {
+        [self.childViewControllers[0] reset];
+        id question = self.questionsSet[_currentQuestionIndex];
+        
+        if([question isKindOfClass:[NSArray class]]){
+            [self.childViewControllers[0] performSelector:@selector(setCurrentFractions:) withObject:question];
+        }
+        if([question isKindOfClass:[MFFraction class]]){
+            
+            [self.childViewControllers[0] performSelector:@selector(setCurrentFractions:) withObject:@[question]];
+            
+        }
+    }
+    else if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)]){
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
  
         id question = self.questionsSet[_currentQuestionIndex];
@@ -312,7 +325,7 @@
 
 //method will be called when user submits the answer
 - (IBAction)answerSelected:(id)sender {
-    if([self.childViewControllers[0] respondsToSelector:@selector(checkAnswer)]) {
+    if(self.childViewControllers.count > 0 && [self.childViewControllers[0] respondsToSelector:@selector(checkAnswer)]) {
         BOOL check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.childViewControllers[0] performSelector:@selector(checkAnswer)];
         
         if(!_manager)
