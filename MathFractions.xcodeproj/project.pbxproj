@@ -172,6 +172,7 @@
 		4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04B17EA3142004AF076 /* DataManager.m */; };
 		4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFA9C0417F2381900F6FF32 /* MFViewController.xib */; };
 		822276F317FBBDB0006A5798 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822276F217FBBDB0006A5798 /* Images.xcassets */; };
+		82ABC33F181049D700182737 /* feedbackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 82ABC33E181049D700182737 /* feedbackButton.png */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
 		DBB42ACB17FE1BA90082D799 /* GlassActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */; };
 		DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB42ACE17FE1FD20082D799 /* MFGlassActivityViewController.m */; };
@@ -387,6 +388,7 @@
 		4FEFE04B17EA3142004AF076 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Utilities/DataManager.m; sourceTree = "<group>"; };
 		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFViewController.xib; sourceTree = "<group>"; };
 		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		82ABC33E181049D700182737 /* feedbackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackButton.png; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlassActivityView.xib; sourceTree = "<group>"; };
 		DBB42ACD17FE1FD20082D799 /* MFGlassActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFGlassActivityViewController.h; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				82ABC33E181049D700182737 /* feedbackButton.png */,
 				4F3B78BB1805A64B00E1E64B /* Activities Screenshots */,
 				4FE8C50D17FF0A5800B0C796 /* Choco.png */,
 				4F50349917FC7779007A9DE8 /* Graphics_All */,
@@ -874,6 +877,11 @@
 				CLASSPREFIX = MF;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = UWF;
+				TargetAttributes = {
+					4F14C1DF17999FD80043B1D4 = {
+						DevelopmentTeam = BZUY5AR8YB;
+					};
+				};
 			};
 			buildConfigurationList = 4F14C1DB17999FD80043B1D4 /* Build configuration list for PBXProject "MathFractions" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1020,6 +1028,7 @@
 				4F50348117FC7747007A9DE8 /* glass1.png in Resources */,
 				4F50346717FC7747007A9DE8 /* titlepage.png in Resources */,
 				4F50348217FC7747007A9DE8 /* glass2.png in Resources */,
+				82ABC33F181049D700182737 /* feedbackButton.png in Resources */,
 				4FE8C4E617FDF73A00B0C796 /* done1@2.png in Resources */,
 				4FE8C4FA17FDF73A00B0C796 /* map2@2.png in Resources */,
 				4F50347617FC7747007A9DE8 /* intro1.png in Resources */,
@@ -1223,14 +1232,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,
+					/Users/sadmin/Downloads,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";
 				INFOPLIST_FILE = "MathFractions/MathFractions-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1241,14 +1254,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,
+					/Users/sadmin/Downloads,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";
 				INFOPLIST_FILE = "MathFractions/MathFractions-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

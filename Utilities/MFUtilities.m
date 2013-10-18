@@ -61,7 +61,7 @@
   
 
     
-    page0.fullScreenImage = YES;
+    page0.fullScreenImage = NO;
   
     
     KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0 ]];
@@ -79,33 +79,33 @@
 -(NSString *)getImageForActivity:(int)i correct:(BOOL)correct{
     NSString *imageName;
     if(!correct){
-    if(i== 1 ||i == 2 ||i == 3)
+    if(i== 3 ||i == 4 ||i == 5)
     {
         imageName =@"scale1@2";
     }
     
-    if(i == 4)
+    if(i == 6)
     {
         
         imageName =@"glass1@2";
     }
-    if(i == 5||i == 6)
+    if(i == 1||i == 2)
     {
         imageName =@"choco1@2";
     }
     }
     else{
-        if(i== 1 ||i == 2 ||i == 3)
+        if(i== 4 ||i == 5 ||i == 3)
         {
             imageName =@"scale2@2";
         }
         
-        if(i == 4)
+        if(i == 6)
         {
             
             imageName =@"glass2@2";
         }
-        if(i == 5||i == 6)
+        if(i == 1||i == 2)
         {
             imageName =@"choco2@2";
         }
@@ -116,15 +116,15 @@
 
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller{
 
-    if(activity == 1||activity == 2||activity == 3)
+    if(activity == 4||activity == 5||activity == 3)
     {
         [self presentScaleIntro:viewcontroller];
     }
-    if(activity == 5||activity == 6)
+    if(activity == 1||activity == 2)
     {
        [self presentNumberLineIntro:viewcontroller];
     }
-    if(activity == 4)
+    if(activity == 6)
     {
        [self presentFillGlassIntro:viewcontroller];
     }

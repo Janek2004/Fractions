@@ -195,7 +195,7 @@
     
     if(self.userNameTextField.text.length==0)
     {
-        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on User button to log in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on the User button to log in or create a new user." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [a show];
         return;
     }

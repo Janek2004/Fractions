@@ -85,10 +85,24 @@
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    CGRect btnframe = CGRectMake(5,150,31,116);
+    UIButton *_addButton=[[UIButton alloc]initWithFrame:btnframe];
+    [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
+//    [_addButton setTitle:@"Feedback" forState:UIControlStateNormal];
+//    [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _addButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    [_addButton setImage:[UIImage imageNamed:@"feedbackButton"] forState:UIControlStateNormal];
+    [_addButton setBackgroundColor:[UIColor redColor]];
+    _addButton.layer.cornerRadius =5;
+   // [self.window addSubview:_addButton];
+    
+    
+    
     return YES;
 }
 
 //importing data to core data model
+//mail
 
 
 

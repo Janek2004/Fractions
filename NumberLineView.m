@@ -107,7 +107,9 @@
     CGRect btnframe = CGRectMake(5,25,50,50);
     _addButton=[[UIButton alloc]initWithFrame:btnframe];
     [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
-   
+    [_addButton setTitle:@"+" forState:UIControlStateNormal];
+    [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _addButton.titleLabel.font = [UIFont systemFontOfSize:30];
     [_addButton setBackgroundColor:[UIColor redColor]];
     _addButton.layer.cornerRadius =5;
     numerator = 0;
