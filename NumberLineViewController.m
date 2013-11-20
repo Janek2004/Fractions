@@ -27,16 +27,14 @@
  THE SOFTWARE.
  */
 
-#import "NumberLineView.h"
 #import "NumberLinePieceView.h"
 #import "Segment.h"
 #import "MFFraction.h"
-//#import "MFFractionView.h"
 #import "MFUtilities.h"
 #import "MFAppDelegate.h"
+#import "NumberLineViewController.h"
 
-
-@interface NumberLineView()
+@interface NumberLineViewController()
 {
     int numerator;
     int denominator;
@@ -62,23 +60,22 @@
 #define PIECE_WIDTH 600
 #define PIECE_HEIGHT  100
 
-@implementation NumberLineView
+@implementation NumberLineViewController
 -(void)reset{
     for(UIView * v in _piecesArray){
         [v removeFromSuperview];
-    
+        
     }
     [_piecesArray removeAllObjects];
     float w = PIECE_WIDTH;///_PR * CGRectGetWidth(self.frame);
     
-    float x =w / 2.0; //CGRectGetWidth(self.frame) - w -w/2.0;
-    x = [self getX];
+    float x = [self getX];
     CGRect frame = CGRectMake(x,55, w,100);
     NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
     [_piecesArray addObject:nl];
-   [self drawPieces];
+    [self drawPieces];
     
-    [self setNeedsDisplay];
+    //[self setNeedsDisplay];
 }
 
 - (id)initWithCoder:(NSCoder *)inCoder;{
@@ -89,16 +86,21 @@
     return self;
 }
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    [self setUpView];
+    
+}
+
 -(void)setUpView{
     NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
-
+    
     _tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
     _piecesArray = [[NSMutableArray alloc]initWithCapacity:0];
     
     float w = PIECE_WIDTH;
-    float x =CGRectGetWidth(self.frame) - w -w/2.0;
-    x =[self getX];
+    float x =[self getX];
     
     CGRect frame = CGRectMake(x,55, w,100);
     NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
@@ -118,19 +120,11 @@
     _utilities = [[MFUtilities alloc]init];
     
     [self drawPieces];
-    [self addSubview:_addButton];
-
+    [self.view addSubview:_addButton];
+    
 }
 
 
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-             }
-    return self;
-}
 
 -(void)setCurrentFractions:(NSArray *)currentFractions{
     MFFraction * currentFraction = currentFractions[0];
@@ -138,19 +132,19 @@
     self.fractionLabel.text =[NSString stringWithFormat:@"%@/%@",_currentFraction.numerator, _currentFraction.denominator];
     
     
-  }
+}
 
 -(void)addPiece{
     if(_piecesArray.count < MAX_NUM_PIECES){
-       NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:CGRectZero];
-      [_piecesArray addObject:nl];
-      [self drawPieces];
+        NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:CGRectZero];
+        [_piecesArray addObject:nl];
+        [self drawPieces];
     }
 }
 
- 
+
 -(void)tapGesture:(UITapGestureRecognizer*)r{
-    CGPoint point = [r locationInView:self];
+    CGPoint point = [r locationInView:self.view];
     
     if(CGRectContainsPoint(_ovalPath.bounds, point)){
         NSLog(@"We should add more segments");
@@ -160,9 +154,7 @@
 }
 
 -(int)getX{
-    float w = PIECE_WIDTH;
-    float x =w / 2.0;
-    x= 40;
+    float x= 40;
     return x;
 }
 
@@ -170,11 +162,11 @@
 -(void)drawPieces{
     //calculate dimensions
     //add as subview
-    float h = (CGRectGetHeight(self.frame )- 55 -(_piecesArray.count * 10))/_piecesArray.count;
+    float h = (CGRectGetHeight(self.view.frame )- 55 -(_piecesArray.count * 10))/_piecesArray.count;
     if(h>100){
         h =80;
     }
-
+    
     for(int i = 0; i<_piecesArray.count;i++){
         [_piecesArray[i] removeFromSuperview];
         // calculate frame
@@ -183,20 +175,49 @@
         float w = PIECE_WIDTH;
         //float x =CGRectGetWidth(self.frame) - w -w/2.0;
         float x = [self getX];
-       
+        
         CGRect frame = CGRectMake(x,y, w, h);
         
-        UIView * v = _piecesArray[i];
-        v.frame = frame;
-   
-        [self addSubview:v];
-        [self setNeedsDisplay];
+        [UIView animateWithDuration:0.2
+
+                         animations:^{
+        
+                             UIView * v = _piecesArray[i];
+                             v.frame = frame;
+                             
+                             [self.view addSubview:v];
+    }];
+;
     }
 }
+
+
+
 
 -(BOOL)checkAnswer{
     MFFraction * mf = [self calculateScore];
     MFFraction * mf1 = self.currentFraction;
+    
+    for(int i = 0; i<_piecesArray.count;i++){
+        //remove
+        
+        //animate
+        [UIView animateWithDuration:1 animations:^{
+            [_piecesArray[i] removeFromSuperview];
+            NumberLinePieceView * s= _piecesArray[i];
+            UILabel * lbl = [[UILabel alloc]initWithFrame:CGRectMake(40,40,100,100)];
+            lbl.backgroundColor = [UIColor clearColor];
+            lbl.text = [NSString stringWithFormat:@"%.1f",s.getCurrentValue];
+            [self.view addSubview:lbl];
+            
+        }];
+        
+        //show the score of each piece
+       
+        
+    
+    }
+    
     
     
     return [_utilities isEqual:mf and:mf1];
@@ -220,9 +241,9 @@
         
         if(denominator == 0 && new_denominator !=0 && new_numerator != 0)
         {
-           numerator = new_numerator;
-           denominator =new_denominator;
-
+            numerator = new_numerator;
+            denominator =new_denominator;
+            
         }
         else if(new_denominator!=0 && denominator !=0)
         {

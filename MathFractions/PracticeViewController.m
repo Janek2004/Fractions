@@ -29,44 +29,46 @@
 
 
 #import "MFUtilities.h"
-#import "PracticeViewController.h"
-#import "NumberLineView.h"
-#import "ATCScaleView.h"
 #import "UIBAlertView.h"
 #import "DataManager.h"
 #import "MFManager.h"
-#import "MFGlassActivityViewController.h"
 #import "MFFraction.h"
 #import "MFActivity.h"
 #import "MFPracticeRequiredMethods.h"
 #import "MFAttempt.h"
-#import "NumberLineView.h"
 
+#import "MFGlassActivityViewController.h"
+#import "PracticeViewController.h"
+#import "NumberLineViewController.h"
+#import "MFScaleActivity.h"
+
+#import "SoundHelper.h"
 
 @interface PracticeViewController ()
 @property (nonatomic,strong) MFGlassActivityViewController *glassVC;
+@property (nonatomic,strong) MFScaleActivity * scaleVC;
 @property (nonatomic) BOOL  introShown;
 @property (nonatomic,strong) MFUtilities * utilities;
 @property (nonatomic,strong) DataManager * dataManager;
 @property (nonatomic,strong) MFManager * manager;
 @property (nonatomic,strong) MFActivity *currentActivity;
 
-@property (nonatomic,strong) UIView * practiceView;
+//@property (nonatomic,strong) UIView * practiceView;
 @property (strong, nonatomic) IBOutlet UIView *activityContainer;
 @property int currentQuestionIndex;
 @property int wrongCount;
 @property (strong, nonatomic) IBOutlet UIView *feedbackView;
 @property (strong, nonatomic) IBOutlet UIView *gameOver;
 @property (strong, nonatomic) IBOutlet UIView *hintView;
-
-@property (strong, nonatomic) IBOutlet NumberLineView *numberLineView;
-
-@property (strong, nonatomic) IBOutlet ATCScaleView *scaleView;
+@property (strong, nonatomic) NumberLineViewController *numberLineVC;
+@property (strong, nonatomic) UIViewController * currentVC;
 
 @property (strong, nonatomic) IBOutlet UIImageView *feedbackImageView;
 @property (strong, nonatomic) IBOutlet UILabel *fedbackLabel;
 @property (strong,nonatomic) NSMutableArray *questionsSet;
 @property BOOL right;
+
+@property (nonatomic,strong) SoundHelper * soundHelper;
 
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 - (IBAction)goBack:(id)sender;
@@ -83,6 +85,7 @@
 }
 
 -(void)showFeedback:(BOOL)positive{
+
     _right = positive;
     UIImage * img = positive?[UIImage imageNamed:@"correct"]:[UIImage imageNamed:@"wrong"];
     NSString * feedback = positive?@"Good Job!":@"Try again!";
@@ -160,6 +163,7 @@
     _dataManager =[[DataManager alloc] init];
     _currentQuestionIndex =0;
     _wrongCount=0;
+    _soundHelper = [[SoundHelper alloc]init];
     
     [self loadData];
    
@@ -194,7 +198,7 @@
 -(void)displayFraction{
    
     id question = self.questionsSet[_currentQuestionIndex];
-    
+/*
     if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)])
     {
         [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
@@ -211,46 +215,58 @@
         
     }
     else{
-        
+*/
         if([question isKindOfClass:[NSArray class]]){
-            [_glassVC performSelector:@selector(setCurrentFractions:) withObject:question];
+            [_currentVC performSelector:@selector(setCurrentFractions:) withObject:question];
         }
         if([question isKindOfClass:[MFFraction class]]){
             
-            [_glassVC performSelector:@selector(setCurrentFractions:) withObject:@[question]];
+            [_currentVC performSelector:@selector(setCurrentFractions:) withObject:@[question]];
             
         }
    
   
-    }
-#warning fix this crap
-    
-    
-    
+//    } #warning fix this crap
+
 }
 
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
-    self.currentActivity = [_dataManager getActivity:self.activityId];
+        self.currentActivity = [_dataManager getActivity:self.activityId];
     
 //    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
 //    self.practiceView = (UIView *) activityView;
 
-    [self.activityContainer addSubview:self.practiceView];
+    //[self.activityContainer addSubview:self.practiceView];
     _currentQuestionIndex =0;
   
     if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
-        self.backgroundImageView.image =  [UIImage imageNamed:@"scalebg.png"];
+      
+        
+        _scaleVC = [[MFScaleActivity alloc]initWithNibName:@"MFScaleActivity" bundle:nil];
+        [self addChildViewController:_scaleVC];
+        [_scaleVC willMoveToParentViewController:self];
 
-        [self.activityContainer addSubview:self.scaleView];
-        self.practiceView = self.scaleView;
-    
+        [self.activityContainer addSubview:_scaleVC.view];
+        [_scaleVC didMoveToParentViewController:self];
+        _currentVC = self.scaleVC;
+    //    self.practiceView = self.scaleVC.view;
     }
     
     if([self.currentActivity.name isEqualToString:@"Number Line Activity"]){
-       self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
-       [self.activityContainer addSubview:self.numberLineView];
-        self.practiceView = self.numberLineView;
+//       self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
+//       [self.activityContainer addSubview:self.numberLineView];
+//        self.practiceView = self.numberLineView;
+        
+        _numberLineVC = [[NumberLineViewController alloc]initWithNibName:@"NumberLineViewController" bundle:nil];
+        [self addChildViewController:_numberLineVC];
+        [_numberLineVC willMoveToParentViewController:self];
+        
+        [self.activityContainer addSubview:_numberLineVC.view];
+        [_numberLineVC didMoveToParentViewController:self];
+        _currentVC = self.numberLineVC;
+    //    self.practiceView = self.numberLineVC.view;
+
         
     }
     if([self.currentActivity.name isEqualToString:@"Filling the Glass Activity"]) {
@@ -261,7 +277,8 @@
       
         [self.activityContainer addSubview:_glassVC.view];
         [_glassVC didMoveToParentViewController:self];
-        self.practiceView =_glassVC.view;
+        //self.practiceView =_glassVC.view;
+        _currentVC = _glassVC;
  
     }
     
@@ -337,7 +354,7 @@
 - (IBAction)answerSelected:(id)sender {
 
     //calculate score
-    BOOL check;
+    BOOL check = NO;
    
     if(!_manager)
     {
@@ -345,17 +362,12 @@
     }
     
     id question = self.questionsSet[_currentQuestionIndex];
-    
    
-    if(_glassVC){
-       check =  (BOOL)[_glassVC performSelector:@selector(checkAnswer)];
-    }
+    [(id <MFPracticeRequiredMethods>) self.currentVC  checkAnswer:^(BOOL) {
+        
     
-    if([self.practiceView respondsToSelector:@selector(checkAnswer)]){
-       check =  (BOOL)[(id <MFPracticeRequiredMethods>) self.practiceView performSelector:@selector(checkAnswer)];
-
-    }
-    
+    }];
+     
     NSSet *set;
     if([question isKindOfClass:[NSArray class]]){
         set = [NSSet setWithArray:question];
@@ -364,13 +376,14 @@
     {
         set = [NSSet setWithObject:question];
     }
+    
     [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
     
-    
+   [_soundHelper playSound:check];
     if(check){
         
-        _manager = [MFManager sharedManager];
         [self showFeedback:YES];
+
         
     }
     else{
@@ -378,7 +391,7 @@
         
         if(_wrongCount > 12)
         {
-            NSLog(@"Show the correct answer");
+            
         }
         else{
             [self showFeedback:NO];
@@ -392,8 +405,6 @@
 
 - (IBAction)showHint:(id)sender {
     
-   // [self.view addSubview:self.hintView];
-   // [self show]
     [_utilities presentIntroForActivity:self.activityId inViewController:self];
 }
 @end

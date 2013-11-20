@@ -129,7 +129,7 @@
     _fractionView.text= [NSString stringWithFormat:@"%@/%@",_currentFraction.numerator,_currentFraction.denominator];
 }
 
--(BOOL)checkAnswer{
+-(BOOL)checkAnswer:(void (^)(BOOL))completed{
     //curent value
     MFFraction * fraction = [_dataManager getFraction];
   
@@ -138,7 +138,9 @@
 
     if([_utilities isEqual:_currentFraction and:fraction]){
         return YES;
+        completed(YES);
     }
+    completed(NO);
     
     return NO;
 }

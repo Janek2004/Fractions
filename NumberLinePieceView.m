@@ -29,6 +29,9 @@
 
 #import "NumberLinePieceView.h"
 #import "Segment.h"
+#import "MFAppDelegate.h"
+#import "MFFraction.h"
+
 #define maxSegmentsNumber 10
 #define minSegmentsNumber 1
 @interface NumberLinePieceView()
@@ -119,7 +122,7 @@
             }
         }
        self.segmentsNumberChanged = YES;
-        [self.segmentsArray removeAllObjects];
+       [self.segmentsArray removeAllObjects];
        [self setNeedsDisplay];
     }
   }
@@ -238,22 +241,30 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected == 1"];
     
     NSArray *filteredArray = [self.segmentsArray filteredArrayUsingPredicate:predicate];
-    id firstFoundObject = nil;
-    if ([filteredArray count] > 0) {
-        firstFoundObject = filteredArray[0];
-    }
-  //  NSLog(@"Filtered Array %@",filteredArray);
-    float val = filteredArray.count*1.0/self.segmentsArray.count *1.0;
- //   NSLog(@"%f",val);
-//    
-//    for(int i =0;i<self.segmentsArray.count;i++)
-//    {
-//        Segment * s =(Segment *)self.segmentsArray[i];
-//        if(s.selected){
-//            
-//        }
+//    id firstFoundObject = nil;
+//    if ([filteredArray count] > 0) {
+//        firstFoundObject = filteredArray[0];
 //    }
+
+    float val = filteredArray.count*1.0/self.segmentsArray.count *1.0;
+    
+    
     return val;
+}
+
+
+-(MFFraction *)getCurrentFraction{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected == 1"];
+    
+    MFAppDelegate * delegate = (MFAppDelegate *) [UIApplication sharedApplication];
+    MFFraction * fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext: delegate.managedObjectContext];
+        
+    NSArray *filteredArray = [self.segmentsArray filteredArrayUsingPredicate:predicate];
+
+    fraction.numerator = [NSNumber numberWithInt:filteredArray.count];
+    fraction.denominator = [NSNumber numberWithInt:self.segmentsArray.count];
+    
+    return fraction;
 }
 
 

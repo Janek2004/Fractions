@@ -34,9 +34,12 @@
 #import "MFActivity.h"
 #import "MFFraction.h"
 #import "PDDebugger.h"
+#import "SoundHelper.h"
+
 
 @interface MFAppDelegate()
 @property (nonatomic,strong)  DataManager *dm;
+@property (nonatomic,strong) SoundHelper * soundHelper;
 @end
 @implementation MFAppDelegate
 
@@ -96,7 +99,9 @@
     _addButton.layer.cornerRadius =5;
    // [self.window addSubview:_addButton];
     
-    
+    _soundHelper = [[SoundHelper alloc]init];
+   
+    //[_soundHelper playBackgroundMusic];
     
     return YES;
 }

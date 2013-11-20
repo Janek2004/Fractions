@@ -223,7 +223,7 @@
     
 }
 
--(float)getValueOfFraction:(MFFraction *)fraction;{
++(float)getValueOfFraction:(MFFraction *)fraction;{
      return fraction.numerator.intValue*1.0/fraction.denominator.intValue*1.0;
 
 }

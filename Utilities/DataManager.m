@@ -39,6 +39,7 @@
 #import "MFFrAttempt.h"
 #import  "MFFractalFraction.h"
 
+
 @interface DataManager()
 @property (nonatomic,strong) NSMutableDictionary * appData;
 @property (nonatomic,strong) MFManager * manager;

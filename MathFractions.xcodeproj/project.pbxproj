@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F137B5C1832AC0600B1CF70 /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F137B5B1832AC0600B1CF70 /* FFEF.framework */; };
 		4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E317999FD80043B1D4 /* UIKit.framework */; };
 		4F14C1E617999FD90043B1D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E517999FD90043B1D4 /* Foundation.framework */; };
 		4F14C1E817999FD90043B1D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E717999FD90043B1D4 /* CoreGraphics.framework */; };
@@ -30,7 +31,6 @@
 		4F3B78C91805A64B00E1E64B /* n5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C11805A64B00E1E64B /* n5.png */; };
 		4F3B78CA1805A64B00E1E64B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C31805A64B00E1E64B /* s1.png */; };
 		4F3B78CB1805A64B00E1E64B /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C41805A64B00E1E64B /* s2.png */; };
-		4F3B78CD1806F61B00E1E64B /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3B78CC1806F61B00E1E64B /* FFEF.framework */; };
 		4F3B78D01807006B00E1E64B /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78CF1807006B00E1E64B /* MFUser.m */; };
 		4F3B78D9180728C300E1E64B /* MFFractalUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78D8180728C300E1E64B /* MFFractalUser.m */; };
 		4F3B78DD180728FF00E1E64B /* MFFrAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */; };
@@ -104,6 +104,15 @@
 		4F50349717FC7747007A9DE8 /* scaleleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50345E17FC7747007A9DE8 /* scaleleft.png */; };
 		4F50349817FC7747007A9DE8 /* scaleright.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50345F17FC7747007A9DE8 /* scaleright.png */; };
 		4F50349B17FCAB17007A9DE8 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50349A17FCAB17007A9DE8 /* bg.png */; };
+		4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F864BE9183D090C00C888B8 /* SoundHelper.m */; };
+		4F864BED183D094300C888B8 /* CorrectBellDing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BEB183D094300C888B8 /* CorrectBellDing.aiff */; };
+		4F864BEE183D094300C888B8 /* WrongBuzzer.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BEC183D094300C888B8 /* WrongBuzzer.aiff */; };
+		4F864BF0183D096700C888B8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F864BEF183D096700C888B8 /* AudioToolbox.framework */; };
+		4F864BF2183D124900C888B8 /* Simon Says (Theme).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BF1183D124900C888B8 /* Simon Says (Theme).mp3 */; };
+		4F864BF6183D15E300C888B8 /* MFScaleActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F864BF4183D15E300C888B8 /* MFScaleActivity.m */; };
+		4F864BF7183D15E300C888B8 /* MFScaleActivity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BF5183D15E300C888B8 /* MFScaleActivity.xib */; };
+		4F864BFC183D4FA800C888B8 /* NumberLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F864BFA183D4FA800C888B8 /* NumberLineViewController.m */; };
+		4F864BFD183D4FA800C888B8 /* NumberLineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BFB183D4FA800C888B8 /* NumberLineViewController.xib */; };
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
 		4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7BA7E179F286B0025DAF7 /* Segment.m */; };
@@ -159,7 +168,6 @@
 		4FE8C50817FDF73A00B0C796 /* wrong@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D617FDF73A00B0C796 /* wrong@2.png */; };
 		4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */; };
 		4FE8C50E17FF0A5800B0C796 /* Choco.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C50D17FF0A5800B0C796 /* Choco.png */; };
-		4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */; };
 		4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02B17E7AE48004AF076 /* KxIntroView.m */; };
 		4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02D17E7AE48004AF076 /* KxIntroViewController.m */; };
 		4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02F17E7AE48004AF076 /* KxIntroViewPage.m */; };
@@ -167,7 +175,6 @@
 		4FEFE03A17E8D8DC004AF076 /* MFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE03917E8D8DC004AF076 /* MFManager.m */; };
 		4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE03C17E8DCED004AF076 /* MFUtilities.m */; };
 		4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */; };
-		4FEFE04517E8FD0F004AF076 /* NumberLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04417E8FD0F004AF076 /* NumberLineView.m */; };
 		4FEFE04917EA2D05004AF076 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04817EA2D05004AF076 /* UIBAlertView.m */; };
 		4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04B17EA3142004AF076 /* DataManager.m */; };
 		4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFA9C0417F2381900F6FF32 /* MFViewController.xib */; };
@@ -190,6 +197,7 @@
 
 /* Begin PBXFileReference section */
 		484E0B35804B4496A4C80DE5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		4F137B5B1832AC0600B1CF70 /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../FatFractal/FFEF.framework; sourceTree = "<group>"; };
 		4F14C1E017999FD80043B1D4 /* MathFractions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathFractions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F14C1E317999FD80043B1D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4F14C1E517999FD90043B1D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -308,6 +316,18 @@
 		4F50345E17FC7747007A9DE8 /* scaleleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scaleleft.png; path = Graphics/scaleleft.png; sourceTree = "<group>"; };
 		4F50345F17FC7747007A9DE8 /* scaleright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scaleright.png; path = Graphics/scaleright.png; sourceTree = "<group>"; };
 		4F50349A17FCAB17007A9DE8 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		4F864BE8183D090C00C888B8 /* SoundHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundHelper.h; sourceTree = "<group>"; };
+		4F864BE9183D090C00C888B8 /* SoundHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundHelper.m; sourceTree = "<group>"; };
+		4F864BEB183D094300C888B8 /* CorrectBellDing.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = CorrectBellDing.aiff; sourceTree = "<group>"; };
+		4F864BEC183D094300C888B8 /* WrongBuzzer.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = WrongBuzzer.aiff; sourceTree = "<group>"; };
+		4F864BEF183D096700C888B8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		4F864BF1183D124900C888B8 /* Simon Says (Theme).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Simon Says (Theme).mp3"; sourceTree = "<group>"; };
+		4F864BF3183D15E300C888B8 /* MFScaleActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFScaleActivity.h; sourceTree = "<group>"; };
+		4F864BF4183D15E300C888B8 /* MFScaleActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFScaleActivity.m; sourceTree = "<group>"; };
+		4F864BF5183D15E300C888B8 /* MFScaleActivity.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFScaleActivity.xib; sourceTree = "<group>"; };
+		4F864BF9183D4FA800C888B8 /* NumberLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberLineViewController.h; sourceTree = "<group>"; };
+		4F864BFA183D4FA800C888B8 /* NumberLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberLineViewController.m; sourceTree = "<group>"; };
+		4F864BFB183D4FA800C888B8 /* NumberLineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberLineViewController.xib; sourceTree = "<group>"; };
 		4F97803317A31C7A0093294A /* PracticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeViewController.h; sourceTree = "<group>"; };
 		4F97803417A31C7A0093294A /* PracticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeViewController.m; sourceTree = "<group>"; };
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
@@ -366,8 +386,6 @@
 		4FE8C50917FE1AF000B0C796 /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
 		4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
 		4FE8C50D17FF0A5800B0C796 /* Choco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Choco.png; sourceTree = "<group>"; };
-		4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCScaleView.h; sourceTree = "<group>"; };
-		4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCScaleView.m; sourceTree = "<group>"; };
 		4FEFE02A17E7AE48004AF076 /* KxIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroView.h; sourceTree = "<group>"; };
 		4FEFE02B17E7AE48004AF076 /* KxIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxIntroView.m; sourceTree = "<group>"; };
 		4FEFE02C17E7AE48004AF076 /* KxIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroViewController.h; sourceTree = "<group>"; };
@@ -380,8 +398,6 @@
 		4FEFE03B17E8DCED004AF076 /* MFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUtilities.h; path = Utilities/MFUtilities.h; sourceTree = "<group>"; };
 		4FEFE03C17E8DCED004AF076 /* MFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFUtilities.m; path = Utilities/MFUtilities.m; sourceTree = "<group>"; };
 		4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		4FEFE04317E8FD0F004AF076 /* NumberLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberLineView.h; sourceTree = "<group>"; };
-		4FEFE04417E8FD0F004AF076 /* NumberLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberLineView.m; sourceTree = "<group>"; };
 		4FEFE04717EA2D05004AF076 /* UIBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBAlertView.h; sourceTree = "<group>"; };
 		4FEFE04817EA2D05004AF076 /* UIBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBAlertView.m; sourceTree = "<group>"; };
 		4FEFE04A17EA3142004AF076 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Utilities/DataManager.h; sourceTree = "<group>"; };
@@ -400,7 +416,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F3B78CD1806F61B00E1E64B /* FFEF.framework in Frameworks */,
+				4F864BF0183D096700C888B8 /* AudioToolbox.framework in Frameworks */,
+				4F137B5C1832AC0600B1CF70 /* FFEF.framework in Frameworks */,
 				4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */,
 				4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */,
 				4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */,
@@ -430,8 +447,7 @@
 				4F44AEF217ECE08D001AF95B /* Model */,
 				4FEFE04617EA2D05004AF076 /* UIBAlertView */,
 				4FEFE03517E8D81D004AF076 /* Resources */,
-				4FEFE02617E7ABFE004AF076 /* ActivityView */,
-				DBB42ACC17FE1BE60082D799 /* GlassActivity */,
+				4FEFE02617E7ABFE004AF076 /* Activities */,
 				4FEFE02517E7ABE8004AF076 /* Intro */,
 				4F14C1E917999FD90043B1D4 /* MathFractions */,
 				4F14C20D17999FD90043B1D4 /* MathFractionsTests */,
@@ -453,6 +469,8 @@
 		4F14C1E217999FD80043B1D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F864BEF183D096700C888B8 /* AudioToolbox.framework */,
+				4F137B5B1832AC0600B1CF70 /* FFEF.framework */,
 				4F3B78CC1806F61B00E1E64B /* FFEF.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
 				4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */,
@@ -719,6 +737,16 @@
 			name = Graphics_All;
 			sourceTree = "<group>";
 		};
+		4F864BF8183D4BDD00C888B8 /* ScaleView */ = {
+			isa = PBXGroup;
+			children = (
+				4F864BF3183D15E300C888B8 /* MFScaleActivity.h */,
+				4F864BF4183D15E300C888B8 /* MFScaleActivity.m */,
+				4F864BF5183D15E300C888B8 /* MFScaleActivity.xib */,
+			);
+			name = ScaleView;
+			sourceTree = "<group>";
+		};
 		4FDFE0C417F9DC55008D31D4 /* Fractio */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,10 +759,11 @@
 			children = (
 				4F14C21E1799BA160043B1D4 /* NumberLinePieceView.h */,
 				4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */,
-				4FEFE04317E8FD0F004AF076 /* NumberLineView.h */,
-				4FEFE04417E8FD0F004AF076 /* NumberLineView.m */,
 				4FE7BA7D179F286B0025DAF7 /* Segment.h */,
 				4FE7BA7E179F286B0025DAF7 /* Segment.m */,
+				4F864BF9183D4FA800C888B8 /* NumberLineViewController.h */,
+				4F864BFA183D4FA800C888B8 /* NumberLineViewController.m */,
+				4F864BFB183D4FA800C888B8 /* NumberLineViewController.xib */,
 			);
 			name = NumberLine;
 			sourceTree = "<group>";
@@ -752,19 +781,19 @@
 			name = Intro;
 			sourceTree = "<group>";
 		};
-		4FEFE02617E7ABFE004AF076 /* ActivityView */ = {
+		4FEFE02617E7ABFE004AF076 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
-				4FEFE02717E7ACD8004AF076 /* ATCScaleView.h */,
-				4FEFE02817E7ACD8004AF076 /* ATCScaleView.m */,
+				DBB42ACC17FE1BE60082D799 /* GlassActivity */,
 				4FE8C50C17FF07AE00B0C796 /* NumberLine */,
 				4F44AEE817ECAEA1001AF95B /* MFFractionView.h */,
 				4F44AEE917ECAEA1001AF95B /* MFFractionView.m */,
 				4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */,
 				4F44AEEF17ECD176001AF95B /* MFQuestionSet.m */,
 				4F44AEF117ECDE82001AF95B /* MFPracticeRequiredMethods.h */,
+				4F864BF8183D4BDD00C888B8 /* ScaleView */,
 			);
-			name = ActivityView;
+			name = Activities;
 			sourceTree = "<group>";
 		};
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
@@ -801,8 +830,13 @@
 		4FEFE04217E8ED4B004AF076 /* Practice Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4F864BEB183D094300C888B8 /* CorrectBellDing.aiff */,
+				4F864BEC183D094300C888B8 /* WrongBuzzer.aiff */,
+				4F864BF1183D124900C888B8 /* Simon Says (Theme).mp3 */,
 				4F97803317A31C7A0093294A /* PracticeViewController.h */,
 				4F97803417A31C7A0093294A /* PracticeViewController.m */,
+				4F864BE8183D090C00C888B8 /* SoundHelper.h */,
+				4F864BE9183D090C00C888B8 /* SoundHelper.m */,
 				4F97803517A31C7A0093294A /* PracticeViewController.xib */,
 			);
 			name = "Practice Controller";
@@ -934,6 +968,7 @@
 				4F50349317FC7747007A9DE8 /* happy.png in Resources */,
 				4F50349017FC7747007A9DE8 /* chocopiece.png in Resources */,
 				4F50347D17FC7747007A9DE8 /* home2.png in Resources */,
+				4F864BF7183D15E300C888B8 /* MFScaleActivity.xib in Resources */,
 				4F50349817FC7747007A9DE8 /* scaleright.png in Resources */,
 				4F50348017FC7747007A9DE8 /* hint2.png in Resources */,
 				4F50346C17FC7747007A9DE8 /* scale1.png in Resources */,
@@ -951,6 +986,7 @@
 				4FE8C50417FDF73A00B0C796 /* walk1@2.png in Resources */,
 				4F50347117FC7747007A9DE8 /* map1.png in Resources */,
 				4FE8C4FF17FDF73A00B0C796 /* scalebg@2.png in Resources */,
+				4F864BF2183D124900C888B8 /* Simon Says (Theme).mp3 in Resources */,
 				4F50349517FC7747007A9DE8 /* selectedDot.png in Resources */,
 				4FEFE03417E7B10A004AF076 /* data.json in Resources */,
 				4FE8C4DD17FDF73A00B0C796 /* choco2@2.png in Resources */,
@@ -960,6 +996,7 @@
 				4F50347417FC7747007A9DE8 /* intro2.png in Resources */,
 				4FE8C4D817FDF73A00B0C796 /* armright@2.png in Resources */,
 				4FE8C4F217FDF73A00B0C796 /* home1@2.png in Resources */,
+				4F864BED183D094300C888B8 /* CorrectBellDing.aiff in Resources */,
 				4FE8C4DE17FDF73A00B0C796 /* chocobg@2.png in Resources */,
 				4F50346E17FC7747007A9DE8 /* map2.png in Resources */,
 				4F50347917FC7747007A9DE8 /* Icon-Small@2x.png in Resources */,
@@ -991,6 +1028,7 @@
 				4FE8C4F917FDF73A00B0C796 /* map1@2.png in Resources */,
 				4F50346A17FC7747007A9DE8 /* spout.png in Resources */,
 				4FE8C50817FDF73A00B0C796 /* wrong@2.png in Resources */,
+				4F864BFD183D4FA800C888B8 /* NumberLineViewController.xib in Resources */,
 				4FE8C4E717FDF73A00B0C796 /* done2@2.png in Resources */,
 				4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */,
 				4F50346F17FC7747007A9DE8 /* menu1.png in Resources */,
@@ -1004,6 +1042,7 @@
 				4F50347217FC7747007A9DE8 /* login1.png in Resources */,
 				4FE8C4EB17FDF73A00B0C796 /* glass2@2.png in Resources */,
 				4FE8C4DF17FDF73A00B0C796 /* chocopiece@2.png in Resources */,
+				4F864BEE183D094300C888B8 /* WrongBuzzer.aiff in Resources */,
 				4F50349117FC7747007A9DE8 /* choco2.png in Resources */,
 				4F50347B17FC7747007A9DE8 /* Icon-Small-50.png in Resources */,
 				4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */,
@@ -1098,9 +1137,11 @@
 			files = (
 				4FEFE03A17E8D8DC004AF076 /* MFManager.m in Sources */,
 				4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */,
+				4F864BF6183D15E300C888B8 /* MFScaleActivity.m in Sources */,
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
 				4F14C1F017999FD90043B1D4 /* main.m in Sources */,
 				4F3B7904180844FD00E1E64B /* MFProgressViewController.m in Sources */,
+				4F864BFC183D4FA800C888B8 /* NumberLineViewController.m in Sources */,
 				4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */,
 				4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */,
 				4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */,
@@ -1108,15 +1149,14 @@
 				4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */,
 				4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */,
 				4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */,
-				4FEFE02917E7ACD8004AF076 /* ATCScaleView.m in Sources */,
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4F3B78D01807006B00E1E64B /* MFUser.m in Sources */,
+				4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */,
 				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,
 				4F3B790B1808496900E1E64B /* ArrayDataSource.m in Sources */,
 				4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */,
-				4FEFE04517E8FD0F004AF076 /* NumberLineView.m in Sources */,
 				4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */,
 				4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */,
 				4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */,
@@ -1232,12 +1272,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,
 					/Users/sadmin/Downloads,
+					/Users/jmc72/Desktop/NewRepositories/FatFractal,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";
@@ -1254,12 +1296,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,
 					/Users/sadmin/Downloads,
+					/Users/jmc72/Desktop/NewRepositories/FatFractal,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/MathFractions-Prefix.pch";

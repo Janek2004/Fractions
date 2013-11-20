@@ -34,7 +34,7 @@
 //main intro
 -(void)presentIntroIn:(id)viewcontroller;
 -(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller;
--(float)getValueOfFraction:(MFFraction *)fraction;
++(float)getValueOfFraction:(MFFraction *)fraction;
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object;
 - (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject;
 -(MFFraction *)simplify:(MFFraction *)_fraction;

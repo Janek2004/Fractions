@@ -121,9 +121,9 @@
      ^(BOOL finished) {
          if(finished){
          self.fractioImageView.center = btn.center;
-         CGRect r =    self.fractioImageView.frame;
-         r.origin = btn.frame.origin;
-         self.fractioImageView.frame = r;
+         CGRect r1 =    self.fractioImageView.frame;
+             r1.origin = btn.frame.origin;
+             self.fractioImageView.frame =r1;
  
         PracticeViewController * pv = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
          pv.activityId = btn.tag;
@@ -154,9 +154,6 @@
     for(int i=1;i<=6;i++){
         UIButton *btn = (UIButton *)[self.view viewWithTag:i];
         NSString * imageName = [_utilities getImageForActivity:i  correct:NO];
-        
-       
-        
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     

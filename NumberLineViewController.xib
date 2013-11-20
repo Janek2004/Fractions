@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumberLineViewController">
+            <connections>
+                <outlet property="fractionLabel" destination="dS2-0H-c9Z" id="IOf-zq-g7c"/>
+                <outlet property="view" destination="QcT-sJ-Rbt" id="nuA-Se-2bx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="QcT-sJ-Rbt" userLabel="NumberLineView">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chocobg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jsX-5s-SeR">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="dS2-0H-c9Z">
+                    <rect key="frame" x="844" y="356" width="105" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="105" id="dUa-Ig-PIc"/>
+                        <constraint firstAttribute="height" constant="55" id="vbu-9L-VAP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sign@2.png" translatesAutoresizingMaskIntoConstraints="NO" id="HQ2-a9-uHy">
+                    <rect key="frame" x="747" y="439" width="267" height="370"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="370" id="d1G-d7-hcb"/>
+                        <constraint firstAttribute="width" constant="267" id="dJi-Af-SiN"/>
+                    </constraints>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tJW-hM-XBH">
+                    <rect key="frame" x="759" y="497" width="105" height="124"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="105" id="cFc-Au-gRo"/>
+                        <constraint firstAttribute="height" constant="124" id="rh8-7U-epu"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment>
+                            <string key="content">Tap twice to break the chocolate! 
+
+Tap once to select the chocolate! 
+
+Tap on the + button to add a new chocolate.
+</string>
+                            <attributes>
+                                <font key="NSFont" size="11" name="Arial-Black"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="dS2-0H-c9Z" firstAttribute="top" secondItem="QcT-sJ-Rbt" secondAttribute="top" constant="356" id="9kq-cI-XWb"/>
+                <constraint firstAttribute="bottom" secondItem="tJW-hM-XBH" secondAttribute="bottom" constant="147" id="EQx-1f-wxR"/>
+                <constraint firstAttribute="bottom" secondItem="jsX-5s-SeR" secondAttribute="bottom" id="ZpU-dq-DuA"/>
+                <constraint firstItem="HQ2-a9-uHy" firstAttribute="top" secondItem="QcT-sJ-Rbt" secondAttribute="top" constant="439" id="bqA-1X-zz2"/>
+                <constraint firstItem="jsX-5s-SeR" firstAttribute="top" secondItem="QcT-sJ-Rbt" secondAttribute="top" id="c5o-zJ-rc5"/>
+                <constraint firstAttribute="trailing" secondItem="tJW-hM-XBH" secondAttribute="trailing" constant="160" id="hZJ-Wv-ovK"/>
+                <constraint firstAttribute="trailing" secondItem="dS2-0H-c9Z" secondAttribute="trailing" constant="75" id="jDF-fz-Vny"/>
+                <constraint firstItem="HQ2-a9-uHy" firstAttribute="leading" secondItem="QcT-sJ-Rbt" secondAttribute="leading" constant="747" id="rt1-b5-BWy"/>
+                <constraint firstItem="jsX-5s-SeR" firstAttribute="leading" secondItem="QcT-sJ-Rbt" secondAttribute="leading" id="uuR-S4-VMH"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chocobg.png" width="1024" height="748"/>
+        <image name="sign@2.png" width="240" height="275"/>
+    </resources>
+</document>
