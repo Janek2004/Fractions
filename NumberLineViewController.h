@@ -12,7 +12,7 @@
 @class MFFraction;
 @interface NumberLineViewController : UIViewController
 
--(BOOL)checkAnswer;
+-(BOOL)checkAnswer:(void (^)(BOOL s))completed;
 -(void)reset;
 @property (nonatomic,strong) NSArray * currentFractions;
 @end

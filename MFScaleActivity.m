@@ -54,7 +54,7 @@ enum kFractionComparator {
 
 
 @implementation MFScaleActivity
--(BOOL)checkAnswer:(void (^)(BOOL))completed{
+-(BOOL)checkAnswer:(void (^)(BOOL s))completed{
     if(!_utitilities){
         _utitilities =[[MFUtilities alloc]init];
     }

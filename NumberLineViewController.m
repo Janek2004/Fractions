@@ -51,7 +51,7 @@
 @property (nonatomic,strong) MFUtilities * utilities;
 
 @property (strong, nonatomic) IBOutlet UILabel *fractionLabel;
-
+@property (strong, nonatomic)  UILabel * lbl;
 
 @property int pieces;
 @end
@@ -194,32 +194,43 @@
 
 
 
--(BOOL)checkAnswer{
+-(BOOL)checkAnswer:(void (^)(BOOL s))completed;{
     MFFraction * mf = [self calculateScore];
     MFFraction * mf1 = self.currentFraction;
+    if(!_lbl){
+        _lbl = [[UILabel alloc]initWithFrame:CGRectMake(40,40,100,100)];
+    }
+    [self.view addSubview:_lbl];
+    _lbl.backgroundColor = [UIColor clearColor];
+    CATransition *animation = [CATransition animation];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.75;
+    [_lbl.layer addAnimation:animation forKey:@"kCATransitionFade"];
+    
+#warning timer
+    
     
     for(int i = 0; i<_piecesArray.count;i++){
         //remove
         
-        //animate
-        [UIView animateWithDuration:1 animations:^{
-            [_piecesArray[i] removeFromSuperview];
+        [UIView animateKeyframesWithDuration:2 delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
             NumberLinePieceView * s= _piecesArray[i];
-            UILabel * lbl = [[UILabel alloc]initWithFrame:CGRectMake(40,40,100,100)];
-            lbl.backgroundColor = [UIColor clearColor];
-            lbl.text = [NSString stringWithFormat:@"%.1f",s.getCurrentValue];
-            [self.view addSubview:lbl];
+            s.alpha =0;
+           
+            _lbl.text = [NSString stringWithFormat:@"%.2f",s.getCurrentValue];
             
+            
+            NSLog(@"Get Current Value + %f",s.getCurrentValue);
+            
+           
+ 
+        } completion:^(BOOL finished) {
+            completed([_utilities isEqual:mf and:mf1]);
+            [self reset];
         }];
-        
-        //show the score of each piece
-       
-        
     
-    }
-    
-    
-    
+}
     return [_utilities isEqual:mf and:mf1];
 }
 

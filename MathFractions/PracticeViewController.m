@@ -353,8 +353,7 @@
 //method will be called when user submits the answer
 - (IBAction)answerSelected:(id)sender {
 
-    //calculate score
-    BOOL check = NO;
+
    
     if(!_manager)
     {
@@ -363,44 +362,38 @@
     
     id question = self.questionsSet[_currentQuestionIndex];
    
-    [(id <MFPracticeRequiredMethods>) self.currentVC  checkAnswer:^(BOOL) {
-        
-    
-    }];
-     
-    NSSet *set;
-    if([question isKindOfClass:[NSArray class]]){
-        set = [NSSet setWithArray:question];
-    }
-    if([question isKindOfClass:[MFFraction class]])
-    {
-        set = [NSSet setWithObject:question];
-    }
-    
-    [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
-    
-   [_soundHelper playSound:check];
-    if(check){
-        
-        [self showFeedback:YES];
-
-        
-    }
-    else{
-        _wrongCount ++;
-        
-        if(_wrongCount > 12)
+    [(id <MFPracticeRequiredMethods>) self.currentVC  checkAnswer:^(BOOL check) {
+          [_soundHelper playSound:check];
+        if(check)
         {
+            [self showFeedback:YES];
+            
             
         }
         else{
-            [self showFeedback:NO];
+            _wrongCount ++;
+            
+            if(_wrongCount > 12)
+            {
+               //show the answer
+               
+            }
+            else{
+                [self showFeedback:NO];
+            }
+        }
+        NSSet *set;
+        if([question isKindOfClass:[NSArray class]]){
+            set = [NSSet setWithArray:question];
+        }
+        if([question isKindOfClass:[MFFraction class]])
+        {
+            set = [NSSet setWithObject:question];
         }
         
-    }
-
-    
-    
+        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
+        
+    }];
 }
 
 - (IBAction)showHint:(id)sender {
