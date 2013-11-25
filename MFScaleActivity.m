@@ -54,7 +54,7 @@ enum kFractionComparator {
 
 
 @implementation MFScaleActivity
--(BOOL)checkAnswer:(void (^)(BOOL s))completed{
+-(void)checkAnswer:(void (^)(BOOL s))completed{
     if(!_utitilities){
         _utitilities =[[MFUtilities alloc]init];
     }
@@ -62,22 +62,22 @@ enum kFractionComparator {
     if([MFUtilities getValueOfFraction: self.leftFraction] == [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kEqual)
     {
         completed(YES);
-        return YES;
+ 
+    }
+    else if([MFUtilities getValueOfFraction: self.leftFraction] < [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kLess)
+    {
+        completed(YES);
+ 
+    }
+    else if([MFUtilities getValueOfFraction: self.leftFraction] > [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kMore)
+    {
+        completed(YES);
+ 
+    }
+    else{
+        completed(NO);
+    }
 
-    }
-    if([MFUtilities getValueOfFraction: self.leftFraction] < [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kLess)
-    {
-        completed(YES);
-        return YES;
-    }
-    if([MFUtilities getValueOfFraction: self.leftFraction] > [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kMore)
-    {
-        completed(YES);
-        return YES;
-    }
-    
-    completed(NO);
-    return NO;
 }
 
 

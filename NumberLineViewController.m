@@ -34,12 +34,15 @@
 #import "MFAppDelegate.h"
 #import "NumberLineViewController.h"
 
+typedef   void (^checkAnswerBlock)(BOOL s);
+
 @interface NumberLineViewController()
 {
     int numerator;
     int denominator;
     MFFraction *fraction;
-    
+    int anim_count;
+  
 }
 
 @property (nonatomic,strong) UIBezierPath* ovalPath;
@@ -52,6 +55,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *fractionLabel;
 @property (strong, nonatomic)  UILabel * lbl;
+@property (nonatomic, copy) checkAnswerBlock completionBlock;
 
 @property int pieces;
 @end
@@ -75,7 +79,6 @@
     [_piecesArray addObject:nl];
     [self drawPieces];
     
-    //[self setNeedsDisplay];
 }
 
 - (id)initWithCoder:(NSCoder *)inCoder;{
@@ -89,7 +92,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     [self setUpView];
-    
+    anim_count = 0;
 }
 
 -(void)setUpView{
@@ -127,10 +130,11 @@
 
 
 -(void)setCurrentFractions:(NSArray *)currentFractions{
+    [self reset];
+
     MFFraction * currentFraction = currentFractions[0];
     _currentFraction = currentFraction;
     self.fractionLabel.text =[NSString stringWithFormat:@"%@/%@",_currentFraction.numerator, _currentFraction.denominator];
-    
     
 }
 
@@ -191,47 +195,46 @@
     }
 }
 
-
-
-
--(BOOL)checkAnswer:(void (^)(BOOL s))completed;{
-    MFFraction * mf = [self calculateScore];
-    MFFraction * mf1 = self.currentFraction;
+-(void)animateFeedback:(NSTimer *)timer{
+    NSLog(@"timer");
     if(!_lbl){
         _lbl = [[UILabel alloc]initWithFrame:CGRectMake(40,40,100,100)];
     }
     [self.view addSubview:_lbl];
     _lbl.backgroundColor = [UIColor clearColor];
-    CATransition *animation = [CATransition animation];
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    animation.type = kCATransitionFade;
-    animation.duration = 0.75;
-    [_lbl.layer addAnimation:animation forKey:@"kCATransitionFade"];
+    _lbl.font = [UIFont fontWithName:@"Arial" size:40];
+    _lbl.textColor = [UIColor whiteColor];
     
-#warning timer
-    
-    
-    for(int i = 0; i<_piecesArray.count;i++){
-        //remove
+    if(anim_count == _piecesArray.count){
+        MFFraction * mf = [self calculateScore];
+        MFFraction * mf1 = self.currentFraction;
+        if([timer isValid])        [timer invalidate];
         
-        [UIView animateKeyframesWithDuration:2 delay:0 options:UIViewKeyframeAnimationOptionBeginFromCurrentState animations:^{
-            NumberLinePieceView * s= _piecesArray[i];
-            s.alpha =0;
-           
-            _lbl.text = [NSString stringWithFormat:@"%.2f",s.getCurrentValue];
-            
-            
-            NSLog(@"Get Current Value + %f",s.getCurrentValue);
-            
-           
- 
-        } completion:^(BOOL finished) {
-            completed([_utilities isEqual:mf and:mf1]);
-            [self reset];
-        }];
-    
+        NSLog(@"mf %@ and mf1 %@",mf, mf1);
+
+        self.completionBlock( [_utilities isEqual:mf and:mf1]);
+        
+        
+        [_lbl removeFromSuperview];
+        
+    }else{
+       NumberLinePieceView * s= _piecesArray[anim_count];
+        _lbl.text = [NSString stringWithFormat:@"%@/%@",s.getCurrentFraction.numerator,s.getCurrentFraction.denominator];
+        _lbl.frame = CGRectOffset(s.frame, 0, 30);
+         [UIView animateWithDuration:1
+                         animations:^{
+                             s.alpha = 0;
+                         }];
+        
+        
+        anim_count ++;
+    }
 }
-    return [_utilities isEqual:mf and:mf1];
+
+-(void)checkAnswer:(void (^)(BOOL s))completed;{
+    self.completionBlock = [completed copy];
+    anim_count = 0;
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(animateFeedback:) userInfo:nil repeats:YES];
 }
 
 
@@ -260,7 +263,7 @@
         {
             numerator = numerator  * new_denominator + new_numerator * denominator;
             denominator = new_denominator * denominator;
-            
+
         }
     }
     

@@ -62,7 +62,16 @@
 
     
     page0.fullScreenImage = NO;
-  
+    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Fractio Snack Time in Fractionville"
+                                                          withDetail: @"Please contact Janusz Chudzynski"
+                                                           withImage: [UIImage imageNamed:@"titlepage"]];
+    
+    
+    
+    
+    page1.fullScreenImage = NO;
+    
+    
     
     KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0 ]];
     vc.introView.animatePageChanges = YES;

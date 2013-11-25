@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MFScaleActivity : UIViewController
--(BOOL)checkAnswer:(void (^)(BOOL s))completed;
+-(void)checkAnswer:(void (^)(BOOL s))completed;
 @property (nonatomic,strong) NSArray * currentFractions;
 
 @end

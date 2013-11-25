@@ -32,7 +32,7 @@
 
 @protocol MFPracticeRequiredMethods <NSObject>
 @required
--(BOOL)checkAnswer:(void (^)(BOOL s))completed;
+-(void)checkAnswer:(void (^)(BOOL s))completed;
 -(void)reset;
 @property (nonatomic,strong) NSArray * currentFractions;
 

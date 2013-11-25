@@ -104,6 +104,7 @@
 		4F50349717FC7747007A9DE8 /* scaleleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50345E17FC7747007A9DE8 /* scaleleft.png */; };
 		4F50349817FC7747007A9DE8 /* scaleright.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50345F17FC7747007A9DE8 /* scaleright.png */; };
 		4F50349B17FCAB17007A9DE8 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50349A17FCAB17007A9DE8 /* bg.png */; };
+		4F65E2041843E7CA004C5607 /* MailHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F65E2031843E7CA004C5607 /* MailHelper.m */; };
 		4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F864BE9183D090C00C888B8 /* SoundHelper.m */; };
 		4F864BED183D094300C888B8 /* CorrectBellDing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BEB183D094300C888B8 /* CorrectBellDing.aiff */; };
 		4F864BEE183D094300C888B8 /* WrongBuzzer.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BEC183D094300C888B8 /* WrongBuzzer.aiff */; };
@@ -316,6 +317,8 @@
 		4F50345E17FC7747007A9DE8 /* scaleleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scaleleft.png; path = Graphics/scaleleft.png; sourceTree = "<group>"; };
 		4F50345F17FC7747007A9DE8 /* scaleright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scaleright.png; path = Graphics/scaleright.png; sourceTree = "<group>"; };
 		4F50349A17FCAB17007A9DE8 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		4F65E2021843E7CA004C5607 /* MailHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailHelper.h; sourceTree = "<group>"; };
+		4F65E2031843E7CA004C5607 /* MailHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailHelper.m; sourceTree = "<group>"; };
 		4F864BE8183D090C00C888B8 /* SoundHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundHelper.h; sourceTree = "<group>"; };
 		4F864BE9183D090C00C888B8 /* SoundHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundHelper.m; sourceTree = "<group>"; };
 		4F864BEB183D094300C888B8 /* CorrectBellDing.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = CorrectBellDing.aiff; sourceTree = "<group>"; };
@@ -595,6 +598,8 @@
 				4F3B78DA180728C900E1E64B /* FatFractal */,
 				4F50340E17FB4F7D007A9DE8 /* CoreData */,
 				4FEFE03B17E8DCED004AF076 /* MFUtilities.h */,
+				4F65E2021843E7CA004C5607 /* MailHelper.h */,
+				4F65E2031843E7CA004C5607 /* MailHelper.m */,
 				4FEFE03C17E8DCED004AF076 /* MFUtilities.m */,
 				4FEFE04A17EA3142004AF076 /* DataManager.h */,
 				4FEFE04B17EA3142004AF076 /* DataManager.m */,
@@ -913,7 +918,7 @@
 				ORGANIZATIONNAME = UWF;
 				TargetAttributes = {
 					4F14C1DF17999FD80043B1D4 = {
-						DevelopmentTeam = BZUY5AR8YB;
+						DevelopmentTeam = W23JT3HF49;
 					};
 				};
 			};
@@ -1153,6 +1158,7 @@
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4F3B78D01807006B00E1E64B /* MFUser.m in Sources */,
+				4F65E2041843E7CA004C5607 /* MailHelper.m in Sources */,
 				4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */,
 				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,
 				4F3B790B1808496900E1E64B /* ArrayDataSource.m in Sources */,
@@ -1252,7 +1258,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1297,8 +1304,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: University of West Florida (W23JT3HF49)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: University of West Florida (W23JT3HF49)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Downloads,

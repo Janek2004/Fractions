@@ -35,7 +35,7 @@
 #import "MFActivity.h"
 #import "MFCompleted.h"
 #import "MFProgressViewController.h"
-
+#import "MailHelper.h"
 
 @interface MFViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *MenuView;
@@ -56,7 +56,7 @@
 @property (strong, nonatomic) IBOutlet UIView *teacherGuideView;
 
 @property (strong, nonatomic) IBOutlet UITextField *classIdTxtField;
-
+@property (strong,nonatomic)MailHelper * mailHelper;
 
 - (IBAction)showMenu:(id)sender;
 - (IBAction)hideMenu:(id)sender;
@@ -72,6 +72,7 @@
 - (IBAction)dismissView:(id)sender;
 - (IBAction)showProgress:(id)sender;
 
+- (IBAction)contactSupport:(id)sender;
 
 @end
 
@@ -86,6 +87,8 @@
     _pickerView.delegate = self;
     _pickerView.dataSource= self;
 
+    _mailHelper =[[MailHelper alloc]init];
+    
     NSArray * images = @[[UIImage imageNamed:@"walk1"],[UIImage imageNamed:@"walk2"],[UIImage imageNamed:@"walk3"],[UIImage imageNamed:@"walk4"]];
     
     self.fractioImageView.animationImages = images;
@@ -204,6 +207,7 @@
         [_dataManager updateData:mf];
         
     }
+   
    
     [UIView animateWithDuration:1
                      animations:^{
@@ -353,6 +357,11 @@
     [self presentViewController:mf animated:YES completion:nil];
     
     
+    
+}
+
+- (IBAction)contactSupport:(id)sender {
+    [_mailHelper sendEmailFromVC:self];
     
 }
 

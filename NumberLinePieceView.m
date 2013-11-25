@@ -256,7 +256,7 @@
 -(MFFraction *)getCurrentFraction{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected == 1"];
     
-    MFAppDelegate * delegate = (MFAppDelegate *) [UIApplication sharedApplication];
+    MFAppDelegate * delegate = (MFAppDelegate *) [[UIApplication sharedApplication]delegate];
     MFFraction * fraction = [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext: delegate.managedObjectContext];
         
     NSArray *filteredArray = [self.segmentsArray filteredArrayUsingPredicate:predicate];

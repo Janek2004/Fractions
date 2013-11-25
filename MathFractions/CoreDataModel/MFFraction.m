@@ -18,4 +18,7 @@
 @dynamic activity;
 @dynamic attempt;
 
+-(NSString *)description{
+    return [NSString stringWithFormat:@"%@ %@",self.numerator, self.denominator];
+}
 @end

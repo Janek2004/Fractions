@@ -28,8 +28,11 @@
  */
 #import <UIKit/UIKit.h>
 
+@class MFFraction;
 @interface NumberLinePieceView : UIView
 @property (nonatomic,strong) NSMutableArray * segmentsArray;
 
 -(float)getCurrentValue;
+-(MFFraction *)getCurrentFraction;
+
 @end
