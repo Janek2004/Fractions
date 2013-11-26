@@ -33,12 +33,17 @@
                     <rect key="frame" x="775" y="589" width="100" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="star.png" translatesAutoresizingMaskIntoConstraints="NO" id="zOr-lF-jy6">
+                    <rect key="frame" x="324" y="148" width="195" height="195"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1/2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwb-hm-3SV">
-                    <rect key="frame" x="745" y="23" width="230" height="117"/>
+                    <rect key="frame" x="306" y="203" width="230" height="117"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhw-pB-5fg">
                     <rect key="frame" x="20" y="36" width="196" height="104"/>
@@ -86,5 +91,6 @@
         <image name="glass@2.png" width="380" height="780"/>
         <image name="glassbg@2.png" width="2048" height="1496"/>
         <image name="spout@2.png" width="140" height="180"/>
+        <image name="star.png" width="170" height="168"/>
     </resources>
 </document>
