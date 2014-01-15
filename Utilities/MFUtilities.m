@@ -28,8 +28,9 @@
 #import "KxIntroViewController.h"
 #import "KxIntroViewPage.h"
 #import "KxIntroView.h"
-
 #import "MFUtilities.h"
+#import "MFAppDelegate.h"
+
 
 @interface MFUtilities()
 @property (nonatomic,strong)  KxIntroViewController *vc;
@@ -254,14 +255,14 @@
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object
 {
    MFFraction * other = (MFFraction *)object;
-  if(fractionOne)  fractionOne = [self simplify:fractionOne];
-    if(other)   other = [self simplify:other];
+  if(fractionOne)  fractionOne = [MFUtilities simplify:fractionOne];
+    if(other)   other = [MFUtilities simplify:other];
     
   return fractionOne.numerator.intValue == other.numerator.intValue && fractionOne.denominator.intValue == other.denominator.intValue;
   
 }
 
--(MFFraction *)simplify:(MFFraction *)_fraction{
++(MFFraction *)simplify:(MFFraction *)_fraction{
   
     int a = _fraction.numerator.intValue;
     int b = _fraction.denominator.intValue;
@@ -279,5 +280,29 @@ int GCD(int a, int b){
     if (b==0) return a;
     return GCD(b,a%b);
 }
+
++(MFFraction *)addFraction:(MFFraction*)fractionA to:(MFFraction *)fractionB{
+    //find common denominator
+    float denominator = fractionA.denominator.intValue * fractionB.denominator.intValue;
+    
+    float numerator = fractionA.numerator.intValue * fractionB.denominator.intValue + fractionB.numerator.intValue * fractionA.denominator.intValue;
+    
+    MFAppDelegate * delegate = [[UIApplication sharedApplication]delegate];
+    NSManagedObjectModel *model =   [delegate managedObjectModel];
+    
+    
+    NSEntityDescription *entity = [[model entitiesByName]objectForKey:@"MFFraction"];
+    MFFraction * fraction = (MFFraction *) [[NSManagedObject alloc] initWithEntity:entity
+                      insertIntoManagedObjectContext:nil];
+    
+    
+    fraction.numerator = [NSNumber numberWithInt:numerator];
+    fraction.denominator = [NSNumber numberWithInt:denominator];
+    
+    fraction = [self simplify:fraction];
+    return fraction;
+}
+
+
 
 @end

@@ -185,10 +185,16 @@
 }
 
 
--(MFFraction *)getFraction;{
-    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+-(MFFraction *)getFractionInContext:(NSManagedObjectContext *)context{
+   // NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+    NSManagedObjectModel *model =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectModel];
 
-     return [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
+    NSEntityDescription *entity = [[model entitiesByName]objectForKey:@"MFFraction"];
+    id obj = [[NSManagedObject alloc] initWithEntity:entity
+                      insertIntoManagedObjectContext:context];
+    return obj;
+
+//     return [NSEntityDescription insertNewObjectForEntityForName:@"MFFraction" inManagedObjectContext:context];
     
 }
 

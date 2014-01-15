@@ -22,7 +22,7 @@
 #define COCOAPODS_POD_AVAILABLE_PonyDebugger
 #define COCOAPODS_VERSION_MAJOR_PonyDebugger 0
 #define COCOAPODS_VERSION_MINOR_PonyDebugger 3
-#define COCOAPODS_VERSION_PATCH_PonyDebugger 0
+#define COCOAPODS_VERSION_PATCH_PonyDebugger 1
 
 // SocketRocket
 #define COCOAPODS_POD_AVAILABLE_SocketRocket

@@ -37,8 +37,8 @@
 +(float)getValueOfFraction:(MFFraction *)fraction;
 - (BOOL)isEqual:(MFFraction *)fractionOne and:(MFFraction *)object;
 - (NSComparisonResult)compare:(MFFraction *)fractionOne and:(MFFraction *)otherObject;
--(MFFraction *)simplify:(MFFraction *)_fraction;
++(MFFraction *)simplify:(MFFraction *)_fraction;
 -(NSString *)getImageForActivity:(int)i correct:(BOOL)correct;
-
++(MFFraction *)addFraction:(MFFraction*)fractionA to:(MFFraction *)fractionB;
 
 @end

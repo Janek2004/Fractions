@@ -79,7 +79,7 @@
     }
     
     if (!value) {
-       // value = [NSNull null];
+        value = [NSNull null];
         remoteValueObject.type = @"object";
         remoteValueObject.subtype = @"null";
     }

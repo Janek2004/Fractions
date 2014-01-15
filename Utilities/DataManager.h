@@ -43,7 +43,7 @@
 -(void)import;
 -(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;
 -(void)updateData:(NSManagedObject *)object;
--(MFFraction *)getFraction;
+-(MFFraction *)getFractionInContext:(NSManagedObjectContext *)context;
 
 //@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 //@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

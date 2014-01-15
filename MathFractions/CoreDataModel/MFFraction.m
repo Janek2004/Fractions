@@ -19,6 +19,6 @@
 @dynamic attempt;
 
 -(NSString *)description{
-    return [NSString stringWithFormat:@"%@ %@",self.numerator, self.denominator];
+    return [NSString stringWithFormat:@"%@/%@",self.numerator, self.denominator];
 }
 @end

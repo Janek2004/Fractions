@@ -53,7 +53,8 @@
 @property (nonatomic,strong) MFManager * manager;
 @property (nonatomic,strong) MFActivity *currentActivity;
 
-//@property (nonatomic,strong) UIView * practiceView;
+
+
 @property (strong, nonatomic) IBOutlet UIView *activityContainer;
 @property int currentQuestionIndex;
 @property int wrongCount;
@@ -69,6 +70,12 @@
 @property BOOL right;
 
 @property (nonatomic,strong) SoundHelper * soundHelper;
+
+@property (strong, nonatomic) IBOutlet UIButton *homeButton;
+@property (strong, nonatomic) IBOutlet UIButton *hintButton;
+@property (strong, nonatomic) IBOutlet UIButton *goOnButton;
+
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 - (IBAction)goBack:(id)sender;
@@ -92,7 +99,6 @@
     self.fedbackLabel.text = feedback;
     self.feedbackImageView.image= img;
     self.feedbackView.alpha = 0;
-   // _questionsSet= [NSMutableArray new];
     
    [self.view addSubview:self.feedbackView];
 
@@ -311,6 +317,12 @@
     
     }
 
+    [self.view addSubview:  self.homeButton];
+    [self.view addSubview:self.hintButton];
+    [self.view addSubview:self.goOnButton];
+    
+    
+    
     [self displayFraction];
     
 }
@@ -373,10 +385,15 @@
         else{
             _wrongCount ++;
             
-            if(_wrongCount > 12)
+            if(_wrongCount > 2)
             {
-               //show the answer
-               
+#warning After 3 incorrect submissions introduce a new problem.
+                //reset the counter
+                _wrongCount = 0;
+
+                //show the answer
+                [self nextQuestion];
+
             }
             else{
                 [self showFeedback:NO];

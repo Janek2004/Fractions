@@ -200,7 +200,7 @@
 /* Begin PBXFileReference section */
 		484E0B35804B4496A4C80DE5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		4F137B5B1832AC0600B1CF70 /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../FatFractal/FFEF.framework; sourceTree = "<group>"; };
-		4F14C1E017999FD80043B1D4 /* MathFractions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathFractions.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F14C1E017999FD80043B1D4 /* Fractio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fractio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F14C1E317999FD80043B1D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4F14C1E517999FD90043B1D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4F14C1E717999FD90043B1D4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -465,7 +465,7 @@
 		4F14C1E117999FD80043B1D4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F14C1E017999FD80043B1D4 /* MathFractions.app */,
+				4F14C1E017999FD80043B1D4 /* Fractio.app */,
 				4F14C20617999FD90043B1D4 /* FractioTests.octest */,
 			);
 			name = Products;
@@ -888,7 +888,7 @@
 			);
 			name = Fractio;
 			productName = MathFractions;
-			productReference = 4F14C1E017999FD80043B1D4 /* MathFractions.app */;
+			productReference = 4F14C1E017999FD80043B1D4 /* Fractio.app */;
 			productType = "com.apple.product-type.application";
 		};
 		4F14C20517999FD90043B1D4 /* FractioTests */ = {

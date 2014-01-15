@@ -273,7 +273,7 @@ typedef   void (^checkAnswerBlock)(BOOL s);
     fraction.numerator = [NSNumber numberWithInt: numerator];
     fraction.denominator = [NSNumber numberWithInt:denominator];
     
-    fraction =  [_utilities simplify:fraction];
+    fraction =  [MFUtilities simplify:fraction];
     
     
     return fraction;
