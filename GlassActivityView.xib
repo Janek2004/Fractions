@@ -13,6 +13,7 @@
                 <outlet property="middleCupButton" destination="1Jf-eM-LrI" id="YZN-w8-NbR"/>
                 <outlet property="redoActivity" destination="2WR-lR-1Qf" id="wRa-SB-Iwl"/>
                 <outlet property="rightCupButton" destination="mD0-S2-13y" id="cFv-zr-P7J"/>
+                <outlet property="rightGlass" destination="IAB-ll-ZOn" id="O1D-Zp-qEk"/>
                 <outlet property="view" destination="c45-2d-IQi" id="kfB-sH-etT"/>
             </connections>
         </placeholder>
@@ -26,23 +27,23 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="glass@2.png" translatesAutoresizingMaskIntoConstraints="NO" id="bKL-Hc-G1L">
-                    <rect key="frame" x="671" y="266" width="184" height="462"/>
+                    <rect key="frame" x="375" y="261" width="184" height="462"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="glass@2.png" translatesAutoresizingMaskIntoConstraints="NO" id="IAB-ll-ZOn">
-                    <rect key="frame" x="372" y="266" width="184" height="462"/>
+                    <rect key="frame" x="714" y="266" width="184" height="462"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spout@2.png" translatesAutoresizingMaskIntoConstraints="NO" id="2WR-lR-1Qf">
-                    <rect key="frame" x="854" y="616" width="87" height="112"/>
+                    <rect key="frame" x="558" y="611" width="87" height="112"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="star.png" translatesAutoresizingMaskIntoConstraints="NO" id="zOr-lF-jy6">
-                    <rect key="frame" x="89" y="119" width="168" height="168"/>
+                    <rect key="frame" x="722" y="158" width="168" height="168"/>
                     <autoresizingMask key="autoresizingMask"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1/2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwb-hm-3SV">
-                    <rect key="frame" x="78" y="164" width="191" height="97"/>
+                    <rect key="frame" x="711" y="203" width="191" height="97"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

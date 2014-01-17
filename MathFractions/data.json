@@ -2,7 +2,7 @@
     "activities": [
                    {
                    "id": 1,
-                   "name": "Number Line Activity",
+                   "name": "Candy Bar Activity",
                    "classname": "NumberLineView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
                    "questioncount": 5,
@@ -11,7 +11,7 @@
                    },
                    {
                    "id": 2,
-                   "name": "Number Line Activity",
+                   "name": "Candy Bar Activity",
                    "classname": "NumberLineView",
                    "standard": "CCSS.Math.Content.3.NF.A.3d",
                    "questioncount": 5,

@@ -194,34 +194,13 @@
         //Game Over
         [self.dataManager markActivity:self.activityId asCompletedForUser:self.manager.mfuser];
         [self.view addSubview: self.gameOver];
-        
-        
     }
-
-
 }
 
 -(void)displayFraction{
    
     id question = self.questionsSet[_currentQuestionIndex];
-/*
-    if([self.practiceView respondsToSelector:@selector(setCurrentFractions:)])
-    {
-        [(id <MFPracticeRequiredMethods>) self.practiceView  reset];
- 
-        
-        if([question isKindOfClass:[NSArray class]]){
-            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:question];
-        }
-        if([question isKindOfClass:[MFFraction class]]){
-            
-            [self.practiceView performSelector:@selector(setCurrentFractions:) withObject:@[question]];
-        
-        }
-        
-    }
-    else{
-*/
+
         if([question isKindOfClass:[NSArray class]]){
             [_currentVC performSelector:@selector(setCurrentFractions:) withObject:question];
         }
@@ -230,20 +209,11 @@
             [_currentVC performSelector:@selector(setCurrentFractions:) withObject:@[question]];
             
         }
-   
-  
-//    } #warning fix this crap
-
 }
 
 -(void)loadData{
     //Get activity data. This method is loading dynamically questions sets and etc.
         self.currentActivity = [_dataManager getActivity:self.activityId];
-    
-//    id <MFPracticeRequiredMethods> activityView    = [[NSClassFromString(self.currentActivity.class_name) alloc]initWithFrame:self.activityContainer.bounds];
-//    self.practiceView = (UIView *) activityView;
-
-    //[self.activityContainer addSubview:self.practiceView];
     _currentQuestionIndex =0;
   
     if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
@@ -256,14 +226,9 @@
         [self.activityContainer addSubview:_scaleVC.view];
         [_scaleVC didMoveToParentViewController:self];
         _currentVC = self.scaleVC;
-    //    self.practiceView = self.scaleVC.view;
     }
     
-    if([self.currentActivity.name isEqualToString:@"Number Line Activity"]){
-//       self.backgroundImageView.image = [UIImage imageNamed:@"chocobg"];
-//       [self.activityContainer addSubview:self.numberLineView];
-//        self.practiceView = self.numberLineView;
-        
+    if([self.currentActivity.name isEqualToString:@"Candy Bar Activity"]){
         _numberLineVC = [[NumberLineViewController alloc]initWithNibName:@"NumberLineViewController" bundle:nil];
         [self addChildViewController:_numberLineVC];
         [_numberLineVC willMoveToParentViewController:self];
@@ -271,8 +236,6 @@
         [self.activityContainer addSubview:_numberLineVC.view];
         [_numberLineVC didMoveToParentViewController:self];
         _currentVC = self.numberLineVC;
-    //    self.practiceView = self.numberLineVC.view;
-
         
     }
     if([self.currentActivity.name isEqualToString:@"Filling the Glass Activity"]) {
@@ -283,7 +246,7 @@
       
         [self.activityContainer addSubview:_glassVC.view];
         [_glassVC didMoveToParentViewController:self];
-        //self.practiceView =_glassVC.view;
+
         _currentVC = _glassVC;
  
     }

@@ -16,28 +16,28 @@
 @property (weak, nonatomic) IBOutlet UIImageView *leftGlass;
 @property (weak, nonatomic) IBOutlet UIImageView *rightGlass;
 @property (weak, nonatomic) IBOutlet UIImageView *redoActivity;
-@property (strong, nonatomic) NSMutableArray *leftGlassViews;
 
 @property (strong, nonatomic) IBOutlet UILabel *fractionView;
-
-
 @property (strong, nonatomic) IBOutlet UIButton *leftCupButton;
 @property (strong, nonatomic) IBOutlet UIButton *middleCupButton;
 @property (strong, nonatomic) IBOutlet UIButton *rightCupButton;
 
-@property (strong, nonatomic) MFFraction * currentFraction;
+@property (strong, nonatomic) MFFraction * currentFraction; //target fraction
+@property (strong, nonatomic) MFFraction * currentValue; // current user's answer
+
 @property (strong, nonatomic) MFUtilities * utilities;
 @property (strong, nonatomic) DataManager* dataManager;
 
 @property (nonatomic,strong) NSArray *cupsArray;
-@property(strong,nonatomic) UIView *waterView;
-
-@property (strong, nonatomic) MFFraction * currentValue;
-
+@property (strong,nonatomic) UIView *leftWaterView;
+@property (strong,nonatomic) UIView *rightWaterView;
 
 
-@property int numerator;
-@property int denominator;
+
+
+
+//@property int numerator;
+//@property int denominator;
 
 - (IBAction)pourCup:(id)sender;
 
@@ -56,16 +56,21 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+ [self displayRightView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _numerator = 1;
-    _denominator = 2;
+    //_numerator = 1;
+    //_denominator = 2;
     _utilities = [[MFUtilities alloc]init];
     _dataManager=[[DataManager alloc]init];
+   
+        NSLog(@"Current View DidLoad");
+   
 
-    self.leftGlassViews = [NSMutableArray new];
-   // [self.leftGlass addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLeftGlass:)]];
     
     [self.redoActivity addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startOver:)]];
     _cupsArray = [NSArray new];
@@ -74,76 +79,100 @@
 
 
 -(void)startOver:(UITapGestureRecognizer *)recognizer {
-    for(NSInteger i = self.leftGlassViews.count - 1; i >= 0; i--) {
-        UIView *v = self.leftGlassViews[i];
-        [UIView animateWithDuration:.227 delay:((self.leftGlassViews.count - 1 - i) * .1) options:UIViewAnimationOptionCurveLinear animations:^{
-            v.alpha = 0;
-        } completion:^(BOOL finished) {
-            [v removeFromSuperview];
-        }];
-    }
-    [self.leftGlassViews removeAllObjects];
-    //reset the current count
-    self.currentValue = nil;
-    
-    
-//    for(NSInteger i = self.rightGlassViews.count - 1; i >= 0; i--) {
-//        UIView *v = self.rightGlassViews[i];
-//        [UIView animateWithDuration:.227 delay:((self.rightGlassViews.count - 1 - i) * .1) options:UIViewAnimationOptionCurveLinear animations:^{
-//            v.alpha = 0;
-//        } completion:^(BOOL finished) {
-//            [v removeFromSuperview];
-//        }];
-//    }
-//    [self.rightGlassViews removeAllObjects];
+    self.currentValue = NULL;
+    [self displayLeftView];
 }
--(void)tapLeftGlass:(UITapGestureRecognizer *)recognizer {
-    if(self.leftGlassViews.count == 0) {
-        UIView *fraction = ({
-            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(recognizer.view.frame) + 10, -15 + CGRectGetMaxY(recognizer.view.frame) - (CGRectGetHeight(recognizer.view.frame)-15) / _denominator, CGRectGetWidth(recognizer.view.frame) - 20, CGRectGetHeight(recognizer.view.frame) / _denominator)];
-            v.backgroundColor = [UIColor blueColor];
-            v;
-        });
-        [self.view addSubview:fraction];
-        [self.view insertSubview:fraction belowSubview:self.leftGlass];
-        [self.leftGlassViews addObject:fraction];
-    }
+
+
+-(void)displayLeftView{
+   
+    [self.leftWaterView removeFromSuperview];
+    
+    self.leftWaterView= ({
+        UIView *v;
+        //calculating height
+        float k;
         
-    else if(self.leftGlassViews.count < _denominator && self.leftGlassViews.count != 0) {
-        UIView *topView = [self.leftGlassViews lastObject];
-        UIView *fraction = ({
-            UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(topView.frame), CGRectGetMinY(topView.frame) - CGRectGetHeight(topView.frame), CGRectGetWidth(topView.frame), CGRectGetHeight(topView.frame))];
-            v.backgroundColor = [UIColor blueColor];
-            v.layer.borderColor = [[UIColor darkGrayColor]CGColor];
-            v.layer.borderWidth = 1.0;
-            v;
-        });
-        [self.view addSubview:fraction];
-        [self.view insertSubview:fraction belowSubview:self.leftGlass];
-        [self.leftGlassViews addObject:fraction];
-    }
+        if(!self.currentValue){
+            v = [[UIView alloc]initWithFrame:CGRectZero];
+        }
+        else{
+            k = self.currentValue.numerator.integerValue*1.0/ self.currentValue.denominator.integerValue*1.0;
+        
+        
+        float h = CGRectGetHeight(self.leftGlass.frame);
+        //adjusted height
+        float dh = h * k;
+        float y  = CGRectGetMinY(self.leftGlass.frame) + h -dh;
+        
+         v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(self.leftGlass.frame),
+                                                            y,
+                                                            CGRectGetWidth(self.leftGlass.frame), h * k)];
+        }
+        v.backgroundColor = [UIColor blueColor];
+        v;
+    });
+    
+    
+    
+    [UIView animateWithDuration:.227 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [self.view addSubview:self.leftWaterView];
+        
+    } completion:^(BOOL finished) {
+        [self.view insertSubview:self.leftWaterView belowSubview:self.leftGlass];
+        //[self.leftGlassViews addObject:self.leftWaterView];
+    }];
+
+}
+
+-(void)displayRightView{
+    self.rightWaterView=({
+        
+        //calculating height
+        float k = self.currentFraction.numerator.integerValue*1.0/ self.currentFraction.denominator.integerValue*1.0;
+        
+        float h = CGRectGetHeight(self.rightGlass.frame);
+        //adjusted height
+        float dh = h * k;
+        float y  = CGRectGetMinY(self.rightGlass.frame) + h -dh;
+        
+
+        UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(self.rightGlass.frame),
+                                                            y,
+                                                            CGRectGetWidth(self.rightGlass.frame), dh)];
+        
+        v.backgroundColor = [UIColor blueColor];
+        v;
+    });
+    
+    
+    [UIView animateWithDuration:.227 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [self.view addSubview:self.rightWaterView];
+        
+    } completion:^(BOOL finished) {
+        [self.view insertSubview:self.rightWaterView belowSubview:self.rightGlass];
+        
+    }];
+
 }
 
 //displays current fraction
 -(void)setCurrentFractions:(NSArray *)currentFractions{
-    
-    
+    NSLog(@"Current FR");
     _currentFraction = currentFractions[0];
     _fractionView.text= [NSString stringWithFormat:@"%@/%@",_currentFraction.numerator,_currentFraction.denominator];
-    
-    //that's the one that they are looking for
-    //get denonominator
+
+    //reset the current value
+    self.currentValue = nil;
+    [self.leftWaterView removeFromSuperview];
     
     int d1 = _currentFraction.denominator.intValue;
-    int n1 = _currentFraction.denominator.intValue;
-
-    int k = 10/d1; //maximum factor
+    int n1 = _currentFraction.numerator.intValue;
     
-    int l =  arc4random()%k+ 1;
     NSMutableArray * a = [NSMutableArray new];
     MFFraction * fr =[_dataManager getFractionInContext:nil];
-    fr.numerator = [NSNumber numberWithInt:(n1* l) ];
-    fr.denominator= [NSNumber numberWithInt:(d1*l)];
+    fr.numerator = [NSNumber numberWithInt:1];
+    fr.denominator= [NSNumber numberWithInt:10];
 
     [a addObject:fr];
 
@@ -153,7 +182,7 @@
 
         int n  =arc4random() %10 + 1;
         int d  =arc4random() %10 + 1;
-        if(n1/d1 != n/d && n<d)
+        if((n1 *1.0/d1 != n*1.0/d) && n<d)
         {
             MFFraction * fr =[_dataManager getFractionInContext:context];
             fr.numerator = [NSNumber numberWithInt:n];
@@ -162,42 +191,39 @@
             [a addObject:fr];
         }
     }
-    NSSortDescriptor * ds =[NSSortDescriptor sortDescriptorWithKey:@"numerator" ascending:YES];
+    NSSortDescriptor * ds =[NSSortDescriptor sortDescriptorWithKey:@"denominator" ascending:YES];
     NSArray * b = [a sortedArrayUsingDescriptors:@[ds]];
    
     self.cupsArray = b;
+    
+    
    //set the values of the labels and so on
    [ self.leftCupButton setTitle:[NSString stringWithFormat:@"   %@/%@",[(MFFraction *)(self.cupsArray[0]) numerator],[(MFFraction *)self.cupsArray[0] denominator]] forState:UIControlStateNormal];
     
    [ self.middleCupButton setTitle: [NSString stringWithFormat:@"   %@/%@",[(MFFraction *)(self.cupsArray[1]) numerator],[(MFFraction *)self.cupsArray[1] denominator]] forState:UIControlStateNormal];
     
    [ self.rightCupButton setTitle: [NSString stringWithFormat:@"   %@/%@",[(MFFraction *)(self.cupsArray[2]) numerator],[(MFFraction *)self.cupsArray[2] denominator]] forState:UIControlStateNormal];
-
     
+    [self displayRightView];
+    [self displayLeftView];
 }
 
 #warning check it
 -(void)checkAnswer:(void (^)(BOOL s))completed{
-    //curent value
-   NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-    
-    MFFraction * fraction = [_dataManager getFractionInContext:context];
-    
-  //   fraction.numerator =[NSNumber numberWithInt:self.leftGlassViews.count];
-  //  fraction.denominator =[NSNumber numberWithInt:self.denominator];
-    fraction.numerator = [NSNumber numberWithInt:self.numerator];
-    fraction.denominator = [NSNumber numberWithInt:self.denominator];
-    fraction =  [MFUtilities simplify:fraction];
+
     _currentFraction = [MFUtilities simplify:_currentFraction];
-    NSLog(@"%@ %@",fraction, _currentFraction);
+    NSLog(@"current value %@ target %@",_currentValue, _currentFraction);
     
-    if([_utilities isEqual:_currentFraction and:fraction]){
-      
+    if([_utilities isEqual:_currentFraction and:_currentValue]){
         completed(YES);
     }
     else{
         completed(NO);
     }
+    //reset values
+    self.currentValue =nil;
+    [self displayLeftView];
+    
 }
 
 - (IBAction)pourCup:(id)sender {
@@ -213,13 +239,6 @@
         fr = self.cupsArray[2];
     }
     
-    _numerator = fr.numerator.integerValue;
-    _denominator = fr.denominator.integerValue;
-    
-    
-    //[_waterView removeFromSuperview];
-    
-  //  CGRect waterRect = _waterView.frame;
     if(!self.currentValue)
     {
         self.currentValue = [_dataManager getFractionInContext:nil];
@@ -240,42 +259,7 @@
             self.currentValue = addition;
         }
     }
-
-
-    
-    
-    _waterView= ({
-
-        //calculating height
-        float k = self.currentValue.numerator.integerValue*1.0/ self.currentValue.denominator.integerValue*1.0;
-       
-//        float h = CGRectGetHeight(self.leftGlass.frame) -25;
-//        float y = CGRectGetMaxY(self.leftGlass.frame) - h;
-        
-        float h = CGRectGetHeight(self.leftGlass.frame)-25;
-        //adjusted height
-        float dh = h * k;
-        float y  = CGRectGetMinY(self.leftGlass.frame) + h -dh;
-        
-        
-        
-        UIView *v = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(self.leftGlass.frame),
-                                                          y,
-                                                            CGRectGetWidth(self.leftGlass.frame), h * k)];
-        
-        v.backgroundColor = [UIColor blueColor];
-        v;
-    });
-    
-    
-    
-    [UIView animateWithDuration:.227 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [self.view addSubview:_waterView];
-        
-    } completion:^(BOOL finished) {
-        [self.view insertSubview:_waterView belowSubview:self.leftGlass];
-        [self.leftGlassViews addObject:_waterView];
-    }];
+    [self displayLeftView];
 }
 
 @end

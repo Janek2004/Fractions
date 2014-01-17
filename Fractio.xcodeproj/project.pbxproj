@@ -761,7 +761,7 @@
 			name = Fractio;
 			sourceTree = "<group>";
 		};
-		4FE8C50C17FF07AE00B0C796 /* NumberLine */ = {
+		4FE8C50C17FF07AE00B0C796 /* Choco Bar */ = {
 			isa = PBXGroup;
 			children = (
 				4F14C21E1799BA160043B1D4 /* NumberLinePieceView.h */,
@@ -772,7 +772,7 @@
 				4F864BFA183D4FA800C888B8 /* NumberLineViewController.m */,
 				4F864BFB183D4FA800C888B8 /* NumberLineViewController.xib */,
 			);
-			name = NumberLine;
+			name = "Choco Bar";
 			sourceTree = "<group>";
 		};
 		4FEFE02517E7ABE8004AF076 /* Intro */ = {
@@ -792,7 +792,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB42ACC17FE1BE60082D799 /* GlassActivity */,
-				4FE8C50C17FF07AE00B0C796 /* NumberLine */,
+				4FE8C50C17FF07AE00B0C796 /* Choco Bar */,
 				4F44AEE817ECAEA1001AF95B /* MFFractionView.h */,
 				4F44AEE917ECAEA1001AF95B /* MFFractionView.m */,
 				4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */,

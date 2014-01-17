@@ -109,12 +109,12 @@ typedef   void (^checkAnswerBlock)(BOOL s);
     NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
     [_piecesArray addObject:nl];
     
-    CGRect btnframe = CGRectMake(5,25,50,50);
+    CGRect btnframe = CGRectMake(5,25,220,30);
     _addButton=[[UIButton alloc]initWithFrame:btnframe];
     [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
-    [_addButton setTitle:@"+" forState:UIControlStateNormal];
+    [_addButton setTitle:@"Add Candy Bar" forState:UIControlStateNormal];
     [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _addButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    _addButton.titleLabel.font = [UIFont systemFontOfSize:24];
     [_addButton setBackgroundColor:[UIColor redColor]];
     _addButton.layer.cornerRadius =5;
     numerator = 0;
@@ -209,10 +209,10 @@ typedef   void (^checkAnswerBlock)(BOOL s);
         MFFraction * mf = [self calculateScore];
         MFFraction * mf1 = self.currentFraction;
         if([timer isValid])        [timer invalidate];
-        
-        NSLog(@"mf %@ and mf1 %@",mf, mf1);
 
         self.completionBlock( [_utilities isEqual:mf and:mf1]);
+        [self.piecesArray removeAllObjects];
+        [self drawPieces];
         
         
         [_lbl removeFromSuperview];
@@ -234,6 +234,8 @@ typedef   void (^checkAnswerBlock)(BOOL s);
 -(void)checkAnswer:(void (^)(BOOL s))completed;{
     self.completionBlock = [completed copy];
     anim_count = 0;
+    
+    
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(animateFeedback:) userInfo:nil repeats:YES];
 }
 

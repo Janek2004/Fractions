@@ -175,17 +175,17 @@
 }
 
 -(void)presentNumberLineIntro:(id)viewcontroller{
-    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
                                                           withDetail: @""
                                                            withImage: [UIImage imageNamed:@"holdchoco@2"]];
     
-    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+    KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
                                                           withDetail: @"5/1 = 5 selected chocolate bars"
                                                            withImage: [UIImage imageNamed:@"n1"]];
-    KxIntroViewPage *page2 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+    KxIntroViewPage *page2 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
                                                           withDetail: @"2/3 = 2 selected chocolate segments out of three available"
                                                            withImage: [UIImage imageNamed:@"n3"]];
-    KxIntroViewPage *page3 = [KxIntroViewPage introViewPageWithTitle: @"Number Line Intro Activity"
+    KxIntroViewPage *page3 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
                                                           withDetail: @"5/9 = 5 selected chocolate segments out of nine available"
                                                            withImage: [UIImage imageNamed:@"n4"]];
     
@@ -193,7 +193,7 @@
     
     page1.detailLabel.textAlignment = NSTextAlignmentLeft;
     
-    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1, page2, page3]];
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page1, page2, page3]];
 
     vc.introView.animatePageChanges = YES;
     vc.introView.gradientBackground = YES;
