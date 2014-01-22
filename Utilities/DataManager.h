@@ -39,15 +39,14 @@
 -(MFUser *)getCurrentUser;
 -(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
 -(void)loginUser:(MFUser *)user;
+-(void)loginUser:(NSString *)username andPassword:(NSString *)password block:(void (^)())block;
+
+
 -(NSDictionary *)getLocalJSON;
 -(void)import;
--(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;
+-(void)addNewUserWithPin:(NSString *)pin andName:(NSString *)name  classId:(NSString *)classId first:(NSString *)firstName last:(NSString *)lastName successBlock:(void (^)())block;
 -(void)updateData:(NSManagedObject *)object;
 -(MFFraction *)getFractionInContext:(NSManagedObjectContext *)context;
-
-//@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-//@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-//@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
 @end

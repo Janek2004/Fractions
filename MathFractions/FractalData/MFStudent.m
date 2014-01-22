@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 UWF. All rights reserved.
 //
 
-#import "MFFractalUser.h"
+#import "MFStudent.h"
 
-@implementation MFFractalUser
+@implementation MFStudent
 
 @end

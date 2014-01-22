@@ -31,6 +31,8 @@
 #import "MFActivity.h"
 #import "MFFraction.h"
 #import "MFUser.h"
+#import "MFStudent.h"
+
 #import "MFAttempt.h"
 #import "MFAppDelegate.h"
 #import "MFCompleted.h"
@@ -58,48 +60,6 @@
 }
 
 
--(NSMutableArray *)randomize:(NSMutableArray *) array fromSet:(NSMutableArray *)defaultSet andDesiredCount:(int)count
-{
-    
-    
-    
-   
-    if(!array){
-        array = [NSMutableArray new];
-    }
-    
-    while(array.count<count){
-        int index = arc4random()%defaultSet.count;
-        id obj = defaultSet[index];
-        [defaultSet removeObjectAtIndex:index];
-        [array addObject:obj];
-    }
-    
-    return array;
-//    //desired count
-    
-    
-//    NSLog(@"Desired Count : %d",count);
-//    if(array.count == count){
-//
-//        NSLog(@"Desired Array is %@",array);
-//        return array;
-//    }
-//    else{
-//        int index = arc4random()%defaultSet.count;
-//        id obj = defaultSet[index];
-//        [defaultSet removeObjectAtIndex:index];
-//        [array addObject:obj];
-//        
-//        [self randomize:array fromSet:defaultSet andDesiredCount:count];
-//    
-//    }
-//    for (int i=0;i<array.count;i++){
-//        NSLog(@"n%@ d%@",[array[i] numerator], [array[i] denominator]);
-//    }
-//    
-//    return nil;
-}
 
 
 -(MFActivity *)getActivity:(int)activityId{
@@ -323,6 +283,7 @@
     at.activity = [NSNumber numberWithInt: activity.activityid];
     at.fractions = fractions;
     at.uid = [NSString stringWithFormat:@"%@",[at objectID]];
+
     
     MFFrAttempt * a = [self createFractalAttemptWithAttempt:at];
     
@@ -367,8 +328,32 @@
     [ud setObject: user.pin forKey:@"current_pin"];
     [ud setObject:user.name    forKey:@"current_user"];
     [ud synchronize];
- 
 }
+
+
+-(void)loginUser:(NSString *)username andPassword:(NSString *)password block:(void (^)())block{
+    NSString * query = [NSString stringWithFormat:@"/MFStudent/((username eq '%@') and (password eq = '%@'))",username, password];
+    
+    [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+        if(theErr){
+            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't complete your request." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [a show];
+        }
+        else{
+            if([(NSArray *)theObj count]== 0)
+            { UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Wrong username and password combination." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [a show];
+                //user doesn't exist
+            }
+            if([(NSArray *)theObj count]== 1)
+            {
+                block();
+            
+            }
+
+        }}];
+}
+
 
 -(void)import{
     [self getLocalJSON];
@@ -403,32 +388,73 @@
 }
 
 
--(MFUser *)addNewUserWithPin:(NSString *)pin andName:(NSString *)name;{
+-(void)addNewUserWithPin:(NSString *)pin andName:(NSString *)name classId:(NSString *)classId first:(NSString *)firstName last:(NSString *)lastName successBlock:(void (^)())block{
+  
+    NSString * query = [NSString stringWithFormat:@"/MFStudent/((username eq '%@') and (password eq = '%@'))",name,pin];
     
-    if([self findUserWithPin:pin andName:name]){
-        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User already exists" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [a show];
+    [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+        if(theErr){
+            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't complete your request." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [a show];
+        }
+        else{
+            if([(NSArray *)theObj count]== 0)
+            {
+                //create an instance of MFStudent
+                MFStudent * student = [[MFStudent alloc]init];
+                student.username = name;
+                student.password = pin;
+                student.lastname = lastName;
+                student.firstname = firstName;
+                student.classId = classId;
+                
+                NSError * error;
+                [_manager.ff createObj:student atUri:@"/MFStudent" error:&error];
+                
+                if(error) {
+                   NSLog(@"Registration Error %@",error.debugDescription);
+                    UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't register user. Please try again or continue as a guest." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                    [a show];
+                    
+                }
+                else{
+                   
+                    UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User Created. Use username and password to log in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                    [a show];
+                    block();
 
-        return nil;
-    }
+                }
+            }
+        }
+    }];
     
-    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+#warning local user
 
-    MFUser * user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:context];
-    user.pin = [NSNumber numberWithInt:pin.integerValue];
-    user.name = name;
-    
-    NSError *error;
-    [context save:&error];
-    if(error){
-        NSLog(@"Error %@",error.debugDescription);
-        return nil;
-    }
-    else{
-        
-        [self loginUser:user];
-         return user;
-    }
+    //
+//    if([self findUserWithPin:pin andName:name]){
+//        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User already exists" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+//        [a show];
+//
+//        return nil;
+//    }
+//    
+//    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+//
+//    MFUser * user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:context];
+//    user.pin = [NSNumber numberWithInt:pin.integerValue];
+//    user.name = name;
+//    
+//    NSError *error;
+//    [context save:&error];
+//    if(error){
+//        NSLog(@"Error %@",error.debugDescription);
+//        return nil;
+//    }
+//    else{
+//        
+//        [self loginUser:user];
+//         return user;
+//    }
 }
 
 -(void)updateData:(NSManagedObject *)object;{
@@ -438,8 +464,25 @@
      if(error){
         NSLog(@"Update Data Error %@",error.debugDescription);
     }
-
 }
+
+-(NSMutableArray *)randomize:(NSMutableArray *) array fromSet:(NSMutableArray *)defaultSet andDesiredCount:(int)count
+{
+    
+    if(!array){
+        array = [NSMutableArray new];
+    }
+    
+    while(array.count<count){
+        int index = arc4random()%defaultSet.count;
+        id obj = defaultSet[index];
+        [defaultSet removeObjectAtIndex:index];
+        [array addObject:obj];
+    }
+    
+    return array;
+}
+
 
 
 

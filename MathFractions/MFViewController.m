@@ -37,14 +37,14 @@
 #import "MFProgressViewController.h"
 #import "MailHelper.h"
 
-@interface MFViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface MFViewController ()
 @property (strong, nonatomic) IBOutlet UIView *MenuView;
 @property (nonatomic) BOOL introShown;
 @property (nonatomic,strong)MFUtilities * utilities;
 @property (nonatomic,strong)DataManager * dataManager;
 @property (nonatomic,strong)MFManager * manager;
 
-@property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
+
 @property (strong, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 
@@ -54,6 +54,16 @@
 @property (strong, nonatomic) IBOutlet UIView *aboutView;
 @property (strong, nonatomic) IBOutlet UIView *userView;
 @property (strong, nonatomic) IBOutlet UIView *teacherGuideView;
+@property (strong, nonatomic) IBOutlet UIView *registrationView;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *loginPasswordTxtField;
+
+@property (strong, nonatomic) IBOutlet UITextField *registrationPassword;
+@property (strong, nonatomic) IBOutlet UITextField *firstnameTxtField;
+@property (strong, nonatomic) IBOutlet UITextField *lastNameTxtField;
+@property (strong, nonatomic) IBOutlet UITextField *registrationUserName;
+
 
 @property (strong, nonatomic) IBOutlet UITextField *classIdTxtField;
 @property (strong,nonatomic)MailHelper * mailHelper;
@@ -63,7 +73,8 @@
 - (IBAction)showIntro:(id)sender;
 
 - (IBAction)loginUser:(id)sender;
-- (IBAction)newUser:(id)sender;
+- (IBAction)registerUser:(id)sender;
+
 
 - (IBAction)activityInfo:(id)sender;
 - (IBAction)showAbout:(id)sender;
@@ -83,9 +94,8 @@
     [super viewDidLoad];
     _array =@[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
     _utilities= [[MFUtilities alloc]init];
-   _dataManager = [[DataManager alloc]init];
-    _pickerView.delegate = self;
-    _pickerView.dataSource= self;
+    _dataManager = [[DataManager alloc]init];
+
 
     _mailHelper =[[MailHelper alloc]init];
     
@@ -95,17 +105,19 @@
     self.fractioImageView.animationDuration=1;
     [self.fractioImageView startAnimating];
     
-    MFUser * user =  [_dataManager getCurrentUser];
-    if(!user){
-        [self showMenu:nil];
+    [self showUserView:nil];
     
-    }
-    else{
-        [[MFManager sharedManager]setMfuser:user];
-        self.userNameTextField.text = user.name;
-        self.userName.text = [NSString stringWithFormat:@"Hi %@", user.name];
-        self.classIdTxtField.text = user.classId;
-    }
+   // MFUser * user =  [_dataManager getCurrentUser];
+ //   if(!user){
+    
+    
+//    }
+//    else{
+//        [[MFManager sharedManager]setMfuser:user];
+//        self.userNameTextField.text = user.name;
+//        self.userName.text = [NSString stringWithFormat:@"Hi %@", user.name];
+//        self.classIdTxtField.text = user.classId;
+//    }
 }
 
 
@@ -177,6 +189,7 @@
 
 
 
+
 - (IBAction)showMenu:(id)sender {
     [self.view addSubview:self.MenuView];
     self.MenuView.alpha = 0;
@@ -235,60 +248,99 @@
 #pragma mark authentication
 
 - (IBAction)loginUser:(id)sender {
-    if(self.userNameTextField.text.length==0)
+    if(self.userNameTextField.text.length==0||self.loginPasswordTxtField.text.length==0)
     {
         UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Please enter your name" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [a show];
+        return;
     }
-    //TO DO
-    NSNumber * pin1 = _array[[_pickerView selectedRowInComponent:0]];
-    NSNumber * pin2 = _array[[_pickerView selectedRowInComponent:1]];
-    NSNumber * pin3 = _array[[_pickerView selectedRowInComponent:2]];
-    NSNumber * pin4 = _array[[_pickerView selectedRowInComponent:3]];
     
-    NSString * pin = [NSString stringWithFormat:@"%@%@%@%@",pin1,pin2,pin3,pin4];
-    NSString * name = _userNameTextField.text;
-    
-    MFUser * mf =  [self.dataManager findUserWithPin:pin andName:name];
-    
-    
-    if(!mf){
-
-        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"User with this pin and name doesn't exist." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [a show];
+    else{
         
+        [self.dataManager loginUser:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text block:^{
+            [self dismissView:sender];
+            
+        }];
+    
+    }
+    
+    
+//    //TO DO
+//    NSNumber * pin1 = _array[[_pickerView selectedRowInComponent:0]];
+//    NSNumber * pin2 = _array[[_pickerView selectedRowInComponent:1]];
+//    NSNumber * pin3 = _array[[_pickerView selectedRowInComponent:2]];
+//    NSNumber * pin4 = _array[[_pickerView selectedRowInComponent:3]];
+//    
+//    NSString * pin = [NSString stringWithFormat:@"%@%@%@%@",pin1,pin2,pin3,pin4];
+//    NSString * name = _userNameTextField.text;
+//    
+//    MFUser * mf =  [self.dataManager findUserWithPin:pin andName:name];
+//    
+//    
+//    if(!mf){
+//
+//        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"User with this pin and name doesn't exist." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+//        [a show];
+//        
+//    }
+//    else{
+//        [self.dataManager loginUser:mf];
+//        [self dismissView:sender];
+//        [self hideMenu:nil];
+//        self.userName.text = [NSString stringWithFormat:@"Hi %@", mf.name];
+//    }
+}
+
+
+- (IBAction)registerUser:(id)sender {
+    NSString * username = _registrationUserName.text;
+    // NSString *
+    NSString * firstname= _firstnameTxtField.text;
+    NSString * lastname = _lastNameTxtField.text;
+    NSString * password = _registrationPassword.text;
+    NSString *classId = _classIdTxtField.text;
+    
+    if(firstname.length >0 && lastname.length>0 && password.length >0 && classId.length >0&&username.length>0){
+        id weakself = self;
+        [self.dataManager addNewUserWithPin:password andName:username classId:classId first:firstname last:lastname successBlock:^{
+            [weakself showUserView:nil];
+            [weakself dismissView:[weakself registrationView]];
+    }];
+    
     }
     else{
-        [self.dataManager loginUser:mf];
-        [self dismissView:sender];
-        [self hideMenu:nil];
-        self.userName.text = [NSString stringWithFormat:@"Hi %@", mf.name];
+        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Fill all the fields." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [a show];
     }
+    
+    
+    
 }
-
+/*
 - (IBAction)newUser:(id)sender {
     //DATA MANAGER
-    NSNumber * pin1 = _array[[_pickerView selectedRowInComponent:0]];
-    NSNumber * pin2 = _array[[_pickerView selectedRowInComponent:1]];
-    NSNumber * pin3 = _array[[_pickerView selectedRowInComponent:2]];
-    NSNumber * pin4 = _array[[_pickerView selectedRowInComponent:3]];
+   
+    NSString * username = _registrationUserName.text;
+   // NSString *
+    NSString * firstname= _firstnameTxtField.text;
+    NSString * lastname = _lastNameTxtField.text;
+    NSString * password = _registrationPassword.text;
+    NSString *classId = _classIdTxtField.text;
+    [self.dataManager addNewUserWithPin:password andName:username classId:classId first:firstname last:lastname];
     
-    NSString * pin = [NSString stringWithFormat:@"%@%@%@%@",pin1,pin2,pin3,pin4];
-    NSString * name = _userNameTextField.text;
     
-    MFUser * newuser = [self.dataManager addNewUserWithPin:pin andName:name];
-    
-    
-    if(newuser){
-        [self.dataManager loginUser:newuser];
-        [[MFManager sharedManager]setMfuser: newuser];
-         self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
-        
-        [self dismissView:sender];
-        [self hideMenu:nil];
-
-    }
+//    
+//    if(newuser){
+//        [self.dataManager loginUser:newuser];
+//        [[MFManager sharedManager]setMfuser: newuser];
+//         self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
+//        
+//        [self dismissView:sender];
+//        [self hideMenu:nil];
+//
+//    }
 }
+*/
 
 - (IBAction)activityInfo:(id)sender {
     NSLog(@"Activity ");
@@ -306,9 +358,10 @@
                          self.aboutView.bounds = self.view.bounds;
                          
                      }];
-
-    
 }
+
+
+
 
 - (IBAction)showUserView:(id)sender {
     [self.view addSubview:self.userView];
@@ -324,6 +377,35 @@
 
     
 }
+
+- (IBAction)showRegistrationView:(id)sender {
+    [self.view addSubview:self.registrationView];
+    self.registrationView.alpha = 0;
+    [UIView animateWithDuration:1
+                     animations:^{
+                         self.registrationView.alpha = 1;
+                         
+                     } completion:^(BOOL finished) {
+                         self.registrationView.bounds = self.view.bounds;
+                         
+                     }];
+    
+}
+
+
+- (IBAction)continueAsGuest:(id)sender {
+    //remove current user
+    
+    
+    //dismiss
+    [self dismissView:sender];
+    
+}
+
+
+
+
+
 
 - (IBAction)showTeacherGuide:(id)sender {
     [self.view addSubview:self.teacherGuideView];
@@ -344,7 +426,9 @@
                          [[sender superview]setAlpha:0];
                          
                      } completion:^(BOOL finished) {
-                         [[sender superview] removeFromSuperview];
+                         //[[[sender superview]superview] removeFromSuperview];
+
+                        [[sender superview] removeFromSuperview];
                          
                      }];
 
@@ -399,4 +483,6 @@
 
 
 
+- (IBAction)usernameTxtField:(id)sender {
+}
 @end
