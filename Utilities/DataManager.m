@@ -361,8 +361,12 @@
                 
                 MFStudent * student = [(NSArray *)theObj objectAtIndex:0];
                 
-                // NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-                MFUser *user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:nil];
+                 NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+                
+                NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFUser"  inManagedObjectContext:context];
+                
+              MFUser *user =  [[MFUser alloc]initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
+                
                 user.password =student.password;
                 user.username = student.username;
                 FFMetaData * meta = [_manager.ff metaDataForObj:student];

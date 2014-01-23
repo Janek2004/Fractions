@@ -382,6 +382,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<bool key="IBUISecureTextEntry">YES</bool>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="767486694">
@@ -2961,16 +2962,20 @@ ID0gMi8xMAo</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="activityInfo:">id</string>
 						<string key="contactSupport:">id</string>
+						<string key="continueAsGuest:">id</string>
 						<string key="dismissView:">id</string>
 						<string key="hideMenu:">id</string>
 						<string key="loginUser:">id</string>
 						<string key="registerUser:">id</string>
 						<string key="showAbout:">id</string>
+						<string key="showActivity:">id</string>
 						<string key="showIntro:">id</string>
 						<string key="showMenu:">id</string>
 						<string key="showProgress:">id</string>
+						<string key="showRegistrationView:">id</string>
 						<string key="showTeacherGuide:">id</string>
 						<string key="showUserView:">id</string>
+						<string key="usernameTxtField:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="activityInfo:">
@@ -2979,6 +2984,10 @@ ID0gMi8xMAo</string>
 						</object>
 						<object class="IBActionInfo" key="contactSupport:">
 							<string key="name">contactSupport:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="continueAsGuest:">
+							<string key="name">continueAsGuest:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="dismissView:">
@@ -3001,6 +3010,10 @@ ID0gMi8xMAo</string>
 							<string key="name">showAbout:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="showActivity:">
+							<string key="name">showActivity:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showIntro:">
 							<string key="name">showIntro:</string>
 							<string key="candidateClassName">id</string>
@@ -3013,12 +3026,20 @@ ID0gMi8xMAo</string>
 							<string key="name">showProgress:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="showRegistrationView:">
+							<string key="name">showRegistrationView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showTeacherGuide:">
 							<string key="name">showTeacherGuide:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showUserView:">
 							<string key="name">showUserView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="usernameTxtField:">
+							<string key="name">usernameTxtField:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
