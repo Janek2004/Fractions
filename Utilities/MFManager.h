@@ -28,11 +28,13 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "MFUser.h"
+#import "MFStudent.h"
+@class MyFractal;
+
 @interface MFManager : NSObject
-@property (nonatomic,strong) MFUser * mfuser;
+@property (nonatomic,strong) MFStudent * mfuser;
 @property (nonatomic) int currentLevel;
-@property (strong, nonatomic) FatFractal *ff;
+@property (strong, nonatomic) MyFractal *ff;
 @property (strong, nonatomic ) NSString * classId;
 + (id)sharedManager;
 @end

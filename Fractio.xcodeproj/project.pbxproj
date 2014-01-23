@@ -24,14 +24,12 @@
 		4F14C21217999FD90043B1D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F14C21017999FD90043B1D4 /* InfoPlist.strings */; };
 		4F14C21517999FD90043B1D4 /* MathFractionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14C21417999FD90043B1D4 /* MathFractionsTests.m */; };
 		4F14C2201799BA160043B1D4 /* NumberLinePieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */; };
-		4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78B6180319B500E1E64B /* MFFraction.m */; };
 		4F3B78C51805A64B00E1E64B /* n1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78BD1805A64B00E1E64B /* n1.png */; };
 		4F3B78C71805A64B00E1E64B /* n3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78BF1805A64B00E1E64B /* n3.png */; };
 		4F3B78C81805A64B00E1E64B /* n4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C01805A64B00E1E64B /* n4.png */; };
 		4F3B78C91805A64B00E1E64B /* n5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C11805A64B00E1E64B /* n5.png */; };
 		4F3B78CA1805A64B00E1E64B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C31805A64B00E1E64B /* s1.png */; };
 		4F3B78CB1805A64B00E1E64B /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C41805A64B00E1E64B /* s2.png */; };
-		4F3B78D9180728C300E1E64B /* MFStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78D8180728C300E1E64B /* MFStudent.m */; };
 		4F3B78DD180728FF00E1E64B /* MFFrAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */; };
 		4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DF1807291500E1E64B /* MFFractalFraction.m */; };
 		4F3B7904180844FD00E1E64B /* MFProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B7902180844FD00E1E64B /* MFProgressViewController.m */; };
@@ -39,13 +37,11 @@
 		4F3B79081808477800E1E64B /* ProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B79071808477800E1E64B /* ProgressCell.xib */; };
 		4F3B790B1808496900E1E64B /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B79091808496900E1E64B /* ArrayDataSource.m */; };
 		4F3B790E1808509500E1E64B /* ProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B790D1808509500E1E64B /* ProgressCell.m */; };
-		4F3B7911180857A500E1E64B /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B7910180857A500E1E64B /* MFAttempt.m */; };
 		4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEE917ECAEA1001AF95B /* MFFractionView.m */; };
 		4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEEF17ECD176001AF95B /* MFQuestionSet.m */; };
 		4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEF717F09BB9001AF95B /* NSArray+RandomArray.m */; };
 		4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5033F417FB41B9007A9DE8 /* CoreData.framework */; };
 		4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */; };
-		4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F50342517FB5BB5007A9DE8 /* MFActivity.m */; };
 		4F50346017FC7747007A9DE8 /* LevelComp.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342717FC7747007A9DE8 /* LevelComp.png */; };
 		4F50346117FC7747007A9DE8 /* wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342817FC7747007A9DE8 /* wrong.png */; };
 		4F50346217FC7747007A9DE8 /* correct.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F50342917FC7747007A9DE8 /* correct.png */; };
@@ -116,6 +112,12 @@
 		4F864BFD183D4FA800C888B8 /* NumberLineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BFB183D4FA800C888B8 /* NumberLineViewController.xib */; };
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
+		4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBE71891605B0087EBDC /* MFActivity.m */; };
+		4FD4CBEB1891605C0087EBDC /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBEA1891605C0087EBDC /* MFAttempt.m */; };
+		4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBED1891605C0087EBDC /* MFCompleted.m */; };
+		4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF01891605C0087EBDC /* MFFraction.m */; };
+		4FD4CBF41891605C0087EBDC /* MFStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF31891605C0087EBDC /* MFStudent.m */; };
+		4FD4CBF718916B380087EBDC /* MyFractal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF618916B380087EBDC /* MyFractal.m */; };
 		4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7BA7E179F286B0025DAF7 /* Segment.m */; };
 		4FE8C4D717FDF73A00B0C796 /* armleft@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4A517FDF73A00B0C796 /* armleft@2.png */; };
 		4FE8C4D817FDF73A00B0C796 /* armright@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4A617FDF73A00B0C796 /* armright@2.png */; };
@@ -167,7 +169,6 @@
 		4FE8C50617FDF73A00B0C796 /* walk3@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D417FDF73A00B0C796 /* walk3@2.png */; };
 		4FE8C50717FDF73A00B0C796 /* walk4@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D517FDF73A00B0C796 /* walk4@2.png */; };
 		4FE8C50817FDF73A00B0C796 /* wrong@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C4D617FDF73A00B0C796 /* wrong@2.png */; };
-		4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */; };
 		4FE8C50E17FF0A5800B0C796 /* Choco.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8C50D17FF0A5800B0C796 /* Choco.png */; };
 		4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02B17E7AE48004AF076 /* KxIntroView.m */; };
 		4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE02D17E7AE48004AF076 /* KxIntroViewController.m */; };
@@ -179,7 +180,6 @@
 		4FEFE04917EA2D05004AF076 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04817EA2D05004AF076 /* UIBAlertView.m */; };
 		4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04B17EA3142004AF076 /* DataManager.m */; };
 		4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFA9C0417F2381900F6FF32 /* MFViewController.xib */; };
-		821F634F1890CF4C002F657E /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 821F634E1890CF4C002F657E /* MFUser.m */; };
 		822276F317FBBDB0006A5798 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822276F217FBBDB0006A5798 /* Images.xcassets */; };
 		82ABC33F181049D700182737 /* feedbackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 82ABC33E181049D700182737 /* feedbackButton.png */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
@@ -223,8 +223,6 @@
 		4F14C21417999FD90043B1D4 /* MathFractionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MathFractionsTests.m; sourceTree = "<group>"; };
 		4F14C21E1799BA160043B1D4 /* NumberLinePieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberLinePieceView.h; sourceTree = "<group>"; };
 		4F14C21F1799BA160043B1D4 /* NumberLinePieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberLinePieceView.m; sourceTree = "<group>"; };
-		4F3B78B5180319B500E1E64B /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFraction.h; path = CoreDataModel/MFFraction.h; sourceTree = "<group>"; };
-		4F3B78B6180319B500E1E64B /* MFFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFraction.m; path = CoreDataModel/MFFraction.m; sourceTree = "<group>"; };
 		4F3B78BD1805A64B00E1E64B /* n1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n1.png; sourceTree = "<group>"; };
 		4F3B78BF1805A64B00E1E64B /* n3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n3.png; sourceTree = "<group>"; };
 		4F3B78C01805A64B00E1E64B /* n4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n4.png; sourceTree = "<group>"; };
@@ -232,8 +230,6 @@
 		4F3B78C31805A64B00E1E64B /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
 		4F3B78C41805A64B00E1E64B /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
 		4F3B78CC1806F61B00E1E64B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../../../Downloads/FFEF.framework; sourceTree = "<group>"; };
-		4F3B78D7180728C300E1E64B /* MFStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFStudent.h; path = FractalData/MFStudent.h; sourceTree = "<group>"; };
-		4F3B78D8180728C300E1E64B /* MFStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFStudent.m; path = FractalData/MFStudent.m; sourceTree = "<group>"; };
 		4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFrAttempt.h; sourceTree = "<group>"; };
 		4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFrAttempt.m; sourceTree = "<group>"; };
 		4F3B78DE1807291500E1E64B /* MFFractalFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFractalFraction.h; sourceTree = "<group>"; };
@@ -246,8 +242,6 @@
 		4F3B790A1808496900E1E64B /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
 		4F3B790C1808509500E1E64B /* ProgressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressCell.h; sourceTree = "<group>"; };
 		4F3B790D1808509500E1E64B /* ProgressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressCell.m; sourceTree = "<group>"; };
-		4F3B790F180857A500E1E64B /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFAttempt.h; path = CoreDataModel/MFAttempt.h; sourceTree = "<group>"; };
-		4F3B7910180857A500E1E64B /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFAttempt.m; path = CoreDataModel/MFAttempt.m; sourceTree = "<group>"; };
 		4F44AEE817ECAEA1001AF95B /* MFFractionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFractionView.h; path = Utilities/MFFractionView.h; sourceTree = "<group>"; };
 		4F44AEE917ECAEA1001AF95B /* MFFractionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFractionView.m; path = Utilities/MFFractionView.m; sourceTree = "<group>"; };
 		4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFQuestionSet.h; path = Utilities/MFQuestionSet.h; sourceTree = "<group>"; };
@@ -257,8 +251,6 @@
 		4F44AEF717F09BB9001AF95B /* NSArray+RandomArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+RandomArray.m"; path = "Utilities/NSArray+RandomArray.m"; sourceTree = SOURCE_ROOT; };
 		4F5033F417FB41B9007A9DE8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4F5033FD17FB4B35007A9DE8 /* CoreDataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CoreDataModel 2.xcdatamodel"; sourceTree = "<group>"; };
-		4F50342417FB5BB5007A9DE8 /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
-		4F50342517FB5BB5007A9DE8 /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4F50342717FC7747007A9DE8 /* LevelComp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LevelComp.png; path = Graphics/LevelComp.png; sourceTree = "<group>"; };
 		4F50342817FC7747007A9DE8 /* wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wrong.png; path = Graphics/wrong.png; sourceTree = "<group>"; };
 		4F50342917FC7747007A9DE8 /* correct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = correct.png; path = Graphics/correct.png; sourceTree = "<group>"; };
@@ -334,6 +326,18 @@
 		4F97803317A31C7A0093294A /* PracticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeViewController.h; sourceTree = "<group>"; };
 		4F97803417A31C7A0093294A /* PracticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeViewController.m; sourceTree = "<group>"; };
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
+		4FD4CBE61891605B0087EBDC /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
+		4FD4CBE71891605B0087EBDC /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
+		4FD4CBE91891605C0087EBDC /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
+		4FD4CBEA1891605C0087EBDC /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
+		4FD4CBEC1891605C0087EBDC /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
+		4FD4CBED1891605C0087EBDC /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
+		4FD4CBEF1891605C0087EBDC /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFraction.h; sourceTree = "<group>"; };
+		4FD4CBF01891605C0087EBDC /* MFFraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFraction.m; sourceTree = "<group>"; };
+		4FD4CBF21891605C0087EBDC /* MFStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStudent.h; sourceTree = "<group>"; };
+		4FD4CBF31891605C0087EBDC /* MFStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStudent.m; sourceTree = "<group>"; };
+		4FD4CBF518916B380087EBDC /* MyFractal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFractal.h; sourceTree = "<group>"; };
+		4FD4CBF618916B380087EBDC /* MyFractal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFractal.m; sourceTree = "<group>"; };
 		4FE7BA7D179F286B0025DAF7 /* Segment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
 		4FE7BA7E179F286B0025DAF7 /* Segment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		4FE8C4A517FDF73A00B0C796 /* armleft@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "armleft@2.png"; sourceTree = "<group>"; };
@@ -386,8 +390,6 @@
 		4FE8C4D417FDF73A00B0C796 /* walk3@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walk3@2.png"; sourceTree = "<group>"; };
 		4FE8C4D517FDF73A00B0C796 /* walk4@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walk4@2.png"; sourceTree = "<group>"; };
 		4FE8C4D617FDF73A00B0C796 /* wrong@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrong@2.png"; sourceTree = "<group>"; };
-		4FE8C50917FE1AF000B0C796 /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
-		4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
 		4FE8C50D17FF0A5800B0C796 /* Choco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Choco.png; sourceTree = "<group>"; };
 		4FEFE02A17E7AE48004AF076 /* KxIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroView.h; sourceTree = "<group>"; };
 		4FEFE02B17E7AE48004AF076 /* KxIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxIntroView.m; sourceTree = "<group>"; };
@@ -406,8 +408,6 @@
 		4FEFE04A17EA3142004AF076 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Utilities/DataManager.h; sourceTree = "<group>"; };
 		4FEFE04B17EA3142004AF076 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Utilities/DataManager.m; sourceTree = "<group>"; };
 		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFViewController.xib; sourceTree = "<group>"; };
-		821F634D1890CF4C002F657E /* MFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUser.h; sourceTree = "<group>"; };
-		821F634E1890CF4C002F657E /* MFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUser.m; sourceTree = "<group>"; };
 		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		82ABC33E181049D700182737 /* feedbackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackButton.png; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -568,12 +568,12 @@
 		4F3B78DA180728C900E1E64B /* FatFractal */ = {
 			isa = PBXGroup;
 			children = (
-				4F3B78D7180728C300E1E64B /* MFStudent.h */,
-				4F3B78D8180728C300E1E64B /* MFStudent.m */,
 				4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */,
 				4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */,
 				4F3B78DE1807291500E1E64B /* MFFractalFraction.h */,
 				4F3B78DF1807291500E1E64B /* MFFractalFraction.m */,
+				4FD4CBF518916B380087EBDC /* MyFractal.h */,
+				4FD4CBF618916B380087EBDC /* MyFractal.m */,
 			);
 			name = FatFractal;
 			path = MathFractions;
@@ -615,16 +615,16 @@
 			isa = PBXGroup;
 			children = (
 				4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */,
-				821F634D1890CF4C002F657E /* MFUser.h */,
-				821F634E1890CF4C002F657E /* MFUser.m */,
-				4F3B790F180857A500E1E64B /* MFAttempt.h */,
-				4F3B7910180857A500E1E64B /* MFAttempt.m */,
-				4F3B78B5180319B500E1E64B /* MFFraction.h */,
-				4F3B78B6180319B500E1E64B /* MFFraction.m */,
-				4FE8C50917FE1AF000B0C796 /* MFCompleted.h */,
-				4FE8C50A17FE1AF000B0C796 /* MFCompleted.m */,
-				4F50342417FB5BB5007A9DE8 /* MFActivity.h */,
-				4F50342517FB5BB5007A9DE8 /* MFActivity.m */,
+				4FD4CBF21891605C0087EBDC /* MFStudent.h */,
+				4FD4CBF31891605C0087EBDC /* MFStudent.m */,
+				4FD4CBEF1891605C0087EBDC /* MFFraction.h */,
+				4FD4CBF01891605C0087EBDC /* MFFraction.m */,
+				4FD4CBEC1891605C0087EBDC /* MFCompleted.h */,
+				4FD4CBED1891605C0087EBDC /* MFCompleted.m */,
+				4FD4CBE91891605C0087EBDC /* MFAttempt.h */,
+				4FD4CBEA1891605C0087EBDC /* MFAttempt.m */,
+				4FD4CBE61891605B0087EBDC /* MFActivity.h */,
+				4FD4CBE71891605B0087EBDC /* MFActivity.m */,
 			);
 			name = CoreData;
 			path = MathFractions;
@@ -1145,13 +1145,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FEFE03A17E8D8DC004AF076 /* MFManager.m in Sources */,
-				821F634F1890CF4C002F657E /* MFUser.m in Sources */,
 				4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */,
 				4F864BF6183D15E300C888B8 /* MFScaleActivity.m in Sources */,
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
+				4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */,
 				4F14C1F017999FD90043B1D4 /* main.m in Sources */,
 				4F3B7904180844FD00E1E64B /* MFProgressViewController.m in Sources */,
 				4F864BFC183D4FA800C888B8 /* NumberLineViewController.m in Sources */,
+				4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */,
 				4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */,
 				4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */,
 				4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */,
@@ -1161,18 +1162,17 @@
 				4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */,
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
+				4FD4CBEB1891605C0087EBDC /* MFAttempt.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4F65E2041843E7CA004C5607 /* MailHelper.m in Sources */,
+				4FD4CBF41891605C0087EBDC /* MFStudent.m in Sources */,
 				4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */,
-				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,
 				4F3B790B1808496900E1E64B /* ArrayDataSource.m in Sources */,
-				4F3B78B7180319B500E1E64B /* MFFraction.m in Sources */,
 				4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */,
-				4F50342617FB5BB5007A9DE8 /* MFActivity.m in Sources */,
+				4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */,
 				4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */,
-				4F3B7911180857A500E1E64B /* MFAttempt.m in Sources */,
 				4F14C2201799BA160043B1D4 /* NumberLinePieceView.m in Sources */,
-				4F3B78D9180728C300E1E64B /* MFStudent.m in Sources */,
+				4FD4CBF718916B380087EBDC /* MyFractal.m in Sources */,
 				4F3B790E1808509500E1E64B /* ProgressCell.m in Sources */,
 				4FEFE04917EA2D05004AF076 /* UIBAlertView.m in Sources */,
 				4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */,

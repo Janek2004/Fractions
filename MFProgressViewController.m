@@ -9,7 +9,7 @@
 #import "MFProgressViewController.h"
 #import "ArrayDataSource.h"
 #import "DataManager.h"
-#import "MFUser.h"
+#import "MFStudent.h"
 #import "ProgressCell.h"
 #import "MFAttempt.h"
 #import "MFFraction.h"
@@ -46,7 +46,7 @@
     _utilities = [[MFUtilities alloc]init];
     self.tableView.delegate =self;
     _dataManager = [[DataManager alloc]init];
-    MFUser * user = _dataManager.getCurrentUser;
+    MFStudent * user = _dataManager.getCurrentUser;
     NSArray * a= user.attempts.allObjects;
     NSSortDescriptor * sort = [[NSSortDescriptor alloc]initWithKey:@"attempt_date" ascending:NO];
     a =  [a sortedArrayUsingDescriptors:@[sort]];

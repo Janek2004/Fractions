@@ -1,19 +1,19 @@
 //
 //  MFCompleted.m
-//  MathFractions
+//  Fractio
 //
-//  Created by Janusz Chudzynski on 10/3/13.
-//  Copyright (c) 2013 UWF. All rights reserved.
+//  Created by Janusz Chudzynski on 1/23/14.
+//  Copyright (c) 2014 UWF. All rights reserved.
 //
 
 #import "MFCompleted.h"
-#import "MFUser.h"
+#import "MFStudent.h"
 
 
 @implementation MFCompleted
 
-@dynamic completed_date;
 @dynamic activity;
+@dynamic completed_date;
 @dynamic user;
 
 @end

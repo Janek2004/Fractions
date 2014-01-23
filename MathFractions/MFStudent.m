@@ -2,21 +2,23 @@
 //  MFUser.m
 //  Fractio
 //
-//  Created by sadmin on 1/22/14.
+//  Created by Janusz Chudzynski on 1/23/14.
 //  Copyright (c) 2014 UWF. All rights reserved.
 //
 
-#import "MFUser.h"
+#import "MFStudent.h"
 #import "MFAttempt.h"
 #import "MFCompleted.h"
 
 
-@implementation MFUser
+@implementation MFStudent
 
 @dynamic classId;
-@dynamic username;
 @dynamic password;
 @dynamic userid;
+@dynamic username;
+@dynamic firstname;
+@dynamic lastname;
 @dynamic attempts;
 @dynamic completed;
 

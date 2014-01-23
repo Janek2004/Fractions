@@ -29,16 +29,16 @@
 #import <UIKit/UIKit.h>
 @class MFActivity;
 @class MFAttempt;
-@class MFUser;
+@class MFStudent;
 @class MFFraction;
 
 @interface DataManager : NSObject
 -(MFActivity *)getActivity:(int)activityId;
 -(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions;
--(void)markActivity:(int )activity asCompletedForUser:(MFUser *)user;
--(MFUser *)getCurrentUser;
--(MFUser *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
--(void)loginUser:(MFUser *)user;
+-(void)markActivity:(int )activity asCompletedForUser:(MFStudent *)user;
+-(MFStudent *)getCurrentUser;
+-(MFStudent *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
+-(void)loginUser:(MFStudent *)user;
 -(void)loginUser:(NSString *)username andPassword:(NSString *)password block:(void (^)())block;
 
 

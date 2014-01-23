@@ -254,7 +254,7 @@
     NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
     
     
-    if(self.currentActivity.fractionCount>1){
+    if(self.currentActivity.fractionCount.intValue>1){
    
     NSMutableArray * array = [NSMutableArray new];
    int count = a.count;

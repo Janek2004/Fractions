@@ -172,7 +172,7 @@
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     
-    MFUser * mf = [[MFManager sharedManager]mfuser];
+    MFStudent * mf = [[MFManager sharedManager]mfuser];
    
     
     for(MFCompleted *act in mf.completed){
@@ -215,7 +215,7 @@
     
     if(self.classIdTxtField.text.length>0){
         [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
-        MFUser * mf = [[MFManager sharedManager]mfuser];
+        MFStudent * mf = [[MFManager sharedManager]mfuser];
         mf.classId =self.classIdTxtField.text;
         [_dataManager updateData:mf];
         
@@ -367,7 +367,7 @@
 
 - (IBAction)showUserView:(id)sender {
     [self.view addSubview:self.userView];
-   self.userView.alpha = 0;
+    self.userView.alpha = 0;
     [UIView animateWithDuration:1
                      animations:^{
                          self.userView.alpha = 1;
