@@ -34,7 +34,17 @@
 
 
 #pragma mark Singleton Methods
-
++(BOOL)isConnected{
+    NSURL *scriptUrl = [NSURL URLWithString:@"http://google.com/m"];
+    NSData *data = [NSData dataWithContentsOfURL:scriptUrl];
+    if (data){
+        NSLog(@"Device is connected to the internet");
+        return YES;}
+    else
+        NSLog(@"Device is not connected to the internet");
+    
+    return NO;
+}
 + (id)sharedManager {
     static MFManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -47,13 +57,13 @@
 - (id)init {
     if (self = [super init]) {
         NSString *baseUrl = @"https://research.fatfractal.com/Fractions/";
-#warning base URL
+        #warning base URL
         baseUrl = @"https://djmobileinc.fatfractal.com/Fractions/";
         
         if(!_ff){
             _ff = [[MyFractal alloc] initWithBaseUrl:baseUrl];
-            [_ff loginWithUserName:@"Test" andPassword:@"Test1234"];
-            _ff.debug = YES;
+                [_ff loginWithUserName:@"Test" andPassword:@"Test1234"];
+                _ff.debug = YES;
         }
 
 

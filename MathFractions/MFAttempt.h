@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * saved;
 @property (nonatomic, retain) NSNumber * score;
 @property (nonatomic, retain) NSString * uid;
+@property (nonatomic, retain) NSString * userid;
 @property (nonatomic, retain) NSSet *fractions;
 @property (nonatomic, retain) MFStudent *user;
 @end

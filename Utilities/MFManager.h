@@ -25,7 +25,7 @@
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
- */
+*/
 
 #import <Foundation/Foundation.h>
 #import "MFStudent.h"
@@ -36,5 +36,9 @@
 @property (nonatomic) int currentLevel;
 @property (strong, nonatomic) MyFractal *ff;
 @property (strong, nonatomic ) NSString * classId;
+@property BOOL guestMode;
+
 + (id)sharedManager;
++ (BOOL)isConnected;
+
 @end

@@ -206,21 +206,17 @@
 }
 
 
--(MFStudent *)findUserWithPin:(NSString *)pin andName:(NSString *)name{
+-(MFStudent *)findUserWithId: (NSString *)userId{
     NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     
     NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"MFUser" inManagedObjectContext:context];
+                                              entityForName:@"MFStudent" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(name LIKE[c] %@)",name];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(userid LIKE[c] %@)",userId];
     
     [request setPredicate:predicate];
-   
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"name" ascending:YES];
-    [request setSortDescriptors:@[sortDescriptor]];
     
     NSError *error;
     NSArray *array = [context executeFetchRequest:request error:&error];
@@ -248,8 +244,7 @@
     NSString *userId= [ud objectForKey:USER_ID_KEY];
 
     if(!userName||!userPin||!userId) return nil;
-    MFStudent * user=   [self findUserWithPin:userPin andName:userName];
-
+    MFStudent * user=   [self findUserWithId:userId];
     user.userid = userId;
     
     return user;
@@ -259,11 +254,16 @@
     MFFrAttempt * mf = [[MFFrAttempt alloc]init];
     mf.score = attempt.score;
     mf.attempt_date = attempt.attempt_date;
-    mf.userId=attempt.user.userid;
-    assert(mf.userId);
+        
     
-    mf.mfclassId = _manager.mfuser.classId;
-    mf.mfuid = [NSString stringWithFormat:@"%@",[attempt objectID]];
+    if(_manager.mfuser){
+        NSLog(@"%@ %@ ", _manager.mfuser.userid ,attempt.user.userid );
+        assert([_manager.mfuser.userid isEqualToString:attempt.user.userid]);
+
+        mf.mfclassId = _manager.mfuser.classId;
+        mf.userId=attempt.user.userid;
+    }
+
     mf.activity = attempt.activity;
 
     NSMutableArray * a =[NSMutableArray new];
@@ -288,23 +288,36 @@
     NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     
     MFAttempt *at = [NSEntityDescription insertNewObjectForEntityForName:@"MFAttempt" inManagedObjectContext:context];
-    at.score = [NSNumber numberWithInt:score];
-    at.attempt_date = [NSDate new];
-    at.user = self.getCurrentUser;
-    at.activity = activity.activityid;
-    at.fractions = fractions;
-    at.uid = [NSString stringWithFormat:@"%@",[at objectID]];
+    
+    MFStudent * st = [self getCurrentUser];
 
-    
-    MFFrAttempt * a = [self createFractalAttemptWithAttempt:at];
-    
-    NSError * error;
-   [_manager.ff createObj:a atUri:@"/MFAttempt" error:&error];
-    
-    if(error) {
-        NSLog(@"Saving Attempt %@",error.debugDescription);
-  
+    if(st){
+        at.score = [NSNumber numberWithInt:score];
+        at.attempt_date = [NSDate new];
+        at.user = self.getCurrentUser;
+        at.userid = st.userid;
+        at.activity = activity.activityid;
+        at.fractions = fractions;
+        at.uid = [NSString stringWithFormat:@"%@",[at objectID]];
+
+        MFFrAttempt * a = [self createFractalAttemptWithAttempt:at];
+        
+        NSError * error;
+        [_manager.ff createObj:a atUri:@"/MFAttempt" error:&error];
+        
+        if(error) {
+            NSLog(@"Saving Attempt %@",error.debugDescription);
+            
+        }
+        error = nil;
+        [context save:&error];
+        if(error){
+            NSLog(@"Core Data Saving Attempt %@",error.debugDescription);
+        }
     }
+    
+    
+    
     
  }
 
@@ -338,58 +351,69 @@
 
     [ud setObject: user.password forKey:USER_PASS_KEY];
     [ud setObject:user.username  forKey:USER_NAME_KEY];
-    [ud setObject:user.userid forKey:USER_ID_KEY];
-    
+    [ud setObject:user.userid    forKey:USER_ID_KEY];
     [ud synchronize];
+    _manager.mfuser = user;
+    _manager.guestMode = NO;
 }
+
+-(void)logout;{
+    _manager.mfuser = nil;
+    _manager.guestMode = NO;
+    
+}
+
 
 
 -(void)loginUser:(NSString *)username andPassword:(NSString *)password block:(void (^)())block{
     NSString * query = [NSString stringWithFormat:@"/MFStudent/((username eq '%@') and (password eq = '%@'))",username, password];
-        [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
-            if(theErr){
+  
+    [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+        if(theErr){
+            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't complete your request." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [a show];
+        }
+        else{
+            if([(NSArray *)theObj count]== 0)
+            { UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Wrong username and password combination." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [a show];
+                //user doesn't exist
+            }
+            if([(NSArray *)theObj count]== 1){
+                
+
+                
+                MFStudent * student = [(NSArray *)theObj objectAtIndex:0];
+                
+                [_manager.ff metaDataForObj:student];
+                
+
+       
+                MFStudent * localStudent = [self findUserWithId:student.userid];
+
+                if(!localStudent){
+                    //save user
+                    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+                 
+                    [context insertObject:student];
+                   
+                    
+                    NSError *e;
+                     [context save:&e];
+                    if(e){
+                        NSLog(@"%@",e.debugDescription);
+                    }
+                }
+                NSLog(@" here %@ %@ %@",student.username, student.userid, student.classId);
+                
+              
+                [self loginUser:student];
+                
+                block();
             
             }
-        }];
 
-    
-//    [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
-//        if(theErr){
-//            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't complete your request." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//            [a show];
-//        }
-//        else{
-//            if([(NSArray *)theObj count]== 0)
-//            { UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Wrong username and password combination." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//                [a show];
-//                //user doesn't exist
-//            }
-//            if([(NSArray *)theObj count]== 1){
-//                
-//                NSLog(@" here");
-//                
-//                MFStudent * student = [(NSArray *)theObj objectAtIndex:0];
-//                
-//                 NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-//                
-//                NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFStudent"  inManagedObjectContext:context];
-//                
-//              MFStudent *user =  [[MFStudent alloc]initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
-//                
-//                user.password =student.password;
-//                user.username = student.username;
-//                FFMetaData * meta = [_manager.ff metaDataForObj:student];
-//                if(meta){
-//                    user.userid = meta.guid;
-//                }
-//                
-//                [self loginUser:user];
-//                
-//                block();
-//            
-//            }
-//
-//        }}];
+        }}];
 }
 
 
@@ -442,7 +466,7 @@
 //                MFStudent * student = [[MFStudent alloc]init];
                 
                 NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-                NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFUser"  inManagedObjectContext:context];
+                NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFStudent"  inManagedObjectContext:context];
                 MFStudent *student =  [[MFStudent alloc]initWithEntity:entityDescription insertIntoManagedObjectContext:context];
                 
                 
@@ -487,23 +511,35 @@
 //        return nil;
 //    }
 //    
-//    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-//
-//    MFUser * user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:context];
-//    user.pin = [NSNumber numberWithInt:pin.integerValue];
-//    user.name = name;
-//    
-//    NSError *error;
-//    [context save:&error];
-//    if(error){
-//        NSLog(@"Error %@",error.debugDescription);
-//        return nil;
 //    }
-//    else{
-//        
-//        [self loginUser:user];
-//         return user;
-//    }
+}
+
+-(MFStudent *)findUserWith:(NSString *)username andPassword:(NSString *)password;{
+    NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+   
+
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFStudent"  inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(userid LIKE[c] %@ and password = %@)",username,password];
+    
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if(error){
+        NSLog(@"Error %@",error.debugDescription);
+    }
+    MFStudent *mf;
+    if(array.count==1)
+    {
+        mf = array[0];
+        
+    }
+    return mf;
+
 }
 
 -(void)updateData:(NSManagedObject *)object;{

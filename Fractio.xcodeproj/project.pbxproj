@@ -112,8 +112,8 @@
 		4F864BFD183D4FA800C888B8 /* NumberLineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F864BFB183D4FA800C888B8 /* NumberLineViewController.xib */; };
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
+		4F9913591891B047001B9EFD /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9913581891B047001B9EFD /* MFAttempt.m */; };
 		4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBE71891605B0087EBDC /* MFActivity.m */; };
-		4FD4CBEB1891605C0087EBDC /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBEA1891605C0087EBDC /* MFAttempt.m */; };
 		4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBED1891605C0087EBDC /* MFCompleted.m */; };
 		4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF01891605C0087EBDC /* MFFraction.m */; };
 		4FD4CBF41891605C0087EBDC /* MFStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF31891605C0087EBDC /* MFStudent.m */; };
@@ -213,8 +213,8 @@
 		4F14C1F517999FD90043B1D4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4F14C1F717999FD90043B1D4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4F14C1F917999FD90043B1D4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		4F14C1FB17999FD90043B1D4 /* MFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFViewController.h; sourceTree = "<group>"; };
-		4F14C1FC17999FD90043B1D4 /* MFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFViewController.m; sourceTree = "<group>"; };
+		4F14C1FB17999FD90043B1D4 /* MFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MFViewController.h; path = MathFractions/MFViewController.h; sourceTree = "<group>"; };
+		4F14C1FC17999FD90043B1D4 /* MFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MFViewController.m; path = MathFractions/MFViewController.m; sourceTree = "<group>"; };
 		4F14C20617999FD90043B1D4 /* FractioTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FractioTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F14C20717999FD90043B1D4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		4F14C20F17999FD90043B1D4 /* FractioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FractioTests-Info.plist"; sourceTree = "<group>"; };
@@ -326,10 +326,10 @@
 		4F97803317A31C7A0093294A /* PracticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeViewController.h; sourceTree = "<group>"; };
 		4F97803417A31C7A0093294A /* PracticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeViewController.m; sourceTree = "<group>"; };
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
+		4F9913571891B047001B9EFD /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
+		4F9913581891B047001B9EFD /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
 		4FD4CBE61891605B0087EBDC /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4FD4CBE71891605B0087EBDC /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
-		4FD4CBE91891605C0087EBDC /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
-		4FD4CBEA1891605C0087EBDC /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
 		4FD4CBEC1891605C0087EBDC /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
 		4FD4CBED1891605C0087EBDC /* MFCompleted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCompleted.m; sourceTree = "<group>"; };
 		4FD4CBEF1891605C0087EBDC /* MFFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFraction.h; sourceTree = "<group>"; };
@@ -397,7 +397,7 @@
 		4FEFE02D17E7AE48004AF076 /* KxIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxIntroViewController.m; sourceTree = "<group>"; };
 		4FEFE02E17E7AE48004AF076 /* KxIntroViewPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxIntroViewPage.h; sourceTree = "<group>"; };
 		4FEFE02F17E7AE48004AF076 /* KxIntroViewPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxIntroViewPage.m; sourceTree = "<group>"; };
-		4FEFE03317E7B10A004AF076 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		4FEFE03317E7B10A004AF076 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = MathFractions/data.json; sourceTree = "<group>"; };
 		4FEFE03817E8D8DC004AF076 /* MFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFManager.h; path = Utilities/MFManager.h; sourceTree = "<group>"; };
 		4FEFE03917E8D8DC004AF076 /* MFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFManager.m; path = Utilities/MFManager.m; sourceTree = "<group>"; };
 		4FEFE03B17E8DCED004AF076 /* MFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUtilities.h; path = Utilities/MFUtilities.h; sourceTree = "<group>"; };
@@ -407,8 +407,8 @@
 		4FEFE04817EA2D05004AF076 /* UIBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBAlertView.m; sourceTree = "<group>"; };
 		4FEFE04A17EA3142004AF076 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Utilities/DataManager.h; sourceTree = "<group>"; };
 		4FEFE04B17EA3142004AF076 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Utilities/DataManager.m; sourceTree = "<group>"; };
-		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFViewController.xib; sourceTree = "<group>"; };
-		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MFViewController.xib; path = MathFractions/MFViewController.xib; sourceTree = "<group>"; };
+		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MathFractions/Images.xcassets; sourceTree = "<group>"; };
 		82ABC33E181049D700182737 /* feedbackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackButton.png; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlassActivityView.xib; sourceTree = "<group>"; };
@@ -448,16 +448,24 @@
 		4F14C1D717999FD80043B1D4 = {
 			isa = PBXGroup;
 			children = (
+				4FEFE04017E8E299004AF076 /* Delegate */,
+				4FEFE04117E8E2A6004AF076 /* Main Map */,
+				4F14C1FB17999FD90043B1D4 /* MFViewController.h */,
+				4F14C1FC17999FD90043B1D4 /* MFViewController.m */,
+				4FFA9C0417F2381900F6FF32 /* MFViewController.xib */,
+				4FEFE03317E7B10A004AF076 /* data.json */,
+				4FEFE04217E8ED4B004AF076 /* Practice Controller */,
+				822276F217FBBDB0006A5798 /* Images.xcassets */,
+				4F14C1EA17999FD90043B1D4 /* Supporting Files */,
+				4F14C20D17999FD90043B1D4 /* MathFractionsTests */,
+				4F14C1E217999FD80043B1D4 /* Frameworks */,
+				4F14C1E117999FD80043B1D4 /* Products */,
 				4F3B79061808455F00E1E64B /* Progress */,
 				4F44AEF217ECE08D001AF95B /* Model */,
 				4FEFE04617EA2D05004AF076 /* UIBAlertView */,
 				4FEFE03517E8D81D004AF076 /* Resources */,
 				4FEFE02617E7ABFE004AF076 /* Activities */,
 				4FEFE02517E7ABE8004AF076 /* Intro */,
-				4F14C1E917999FD90043B1D4 /* MathFractions */,
-				4F14C20D17999FD90043B1D4 /* MathFractionsTests */,
-				4F14C1E217999FD80043B1D4 /* Frameworks */,
-				4F14C1E117999FD80043B1D4 /* Products */,
 				484E0B35804B4496A4C80DE5 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
@@ -488,19 +496,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4F14C1E917999FD90043B1D4 /* MathFractions */ = {
-			isa = PBXGroup;
-			children = (
-				4FEFE04017E8E299004AF076 /* Delegate */,
-				4FEFE04117E8E2A6004AF076 /* Main Map */,
-				4FEFE03317E7B10A004AF076 /* data.json */,
-				4FEFE04217E8ED4B004AF076 /* Practice Controller */,
-				822276F217FBBDB0006A5798 /* Images.xcassets */,
-				4F14C1EA17999FD90043B1D4 /* Supporting Files */,
-			);
-			path = MathFractions;
-			sourceTree = "<group>";
-		};
 		4F14C1EA17999FD90043B1D4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +510,7 @@
 				4F14C1F917999FD90043B1D4 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			path = MathFractions;
 			sourceTree = "<group>";
 		};
 		4F14C20D17999FD90043B1D4 /* MathFractionsTests */ = {
@@ -615,14 +611,14 @@
 			isa = PBXGroup;
 			children = (
 				4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */,
+				4F9913571891B047001B9EFD /* MFAttempt.h */,
+				4F9913581891B047001B9EFD /* MFAttempt.m */,
 				4FD4CBF21891605C0087EBDC /* MFStudent.h */,
 				4FD4CBF31891605C0087EBDC /* MFStudent.m */,
 				4FD4CBEF1891605C0087EBDC /* MFFraction.h */,
 				4FD4CBF01891605C0087EBDC /* MFFraction.m */,
 				4FD4CBEC1891605C0087EBDC /* MFCompleted.h */,
 				4FD4CBED1891605C0087EBDC /* MFCompleted.m */,
-				4FD4CBE91891605C0087EBDC /* MFAttempt.h */,
-				4FD4CBEA1891605C0087EBDC /* MFAttempt.m */,
 				4FD4CBE61891605B0087EBDC /* MFActivity.h */,
 				4FD4CBE71891605B0087EBDC /* MFActivity.m */,
 			);
@@ -823,16 +819,15 @@
 				4F14C1F317999FD90043B1D4 /* MFAppDelegate.m */,
 			);
 			name = Delegate;
+			path = MathFractions;
 			sourceTree = "<group>";
 		};
 		4FEFE04117E8E2A6004AF076 /* Main Map */ = {
 			isa = PBXGroup;
 			children = (
-				4F14C1FB17999FD90043B1D4 /* MFViewController.h */,
-				4F14C1FC17999FD90043B1D4 /* MFViewController.m */,
-				4FFA9C0417F2381900F6FF32 /* MFViewController.xib */,
 			);
 			name = "Main Map";
+			path = MathFractions;
 			sourceTree = "<group>";
 		};
 		4FEFE04217E8ED4B004AF076 /* Practice Controller */ = {
@@ -848,6 +843,7 @@
 				4F97803517A31C7A0093294A /* PracticeViewController.xib */,
 			);
 			name = "Practice Controller";
+			path = MathFractions;
 			sourceTree = "<group>";
 		};
 		4FEFE04617EA2D05004AF076 /* UIBAlertView */ = {
@@ -1159,10 +1155,10 @@
 				4F14C1F417999FD90043B1D4 /* MFAppDelegate.m in Sources */,
 				4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */,
 				4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */,
+				4F9913591891B047001B9EFD /* MFAttempt.m in Sources */,
 				4FEFE03217E7AE48004AF076 /* KxIntroViewPage.m in Sources */,
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
-				4FD4CBEB1891605C0087EBDC /* MFAttempt.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4F65E2041843E7CA004C5607 /* MailHelper.m in Sources */,
 				4FD4CBF41891605C0087EBDC /* MFStudent.m in Sources */,

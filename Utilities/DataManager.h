@@ -37,7 +37,9 @@
 -(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions;
 -(void)markActivity:(int )activity asCompletedForUser:(MFStudent *)user;
 -(MFStudent *)getCurrentUser;
--(MFStudent *)findUserWithPin:(NSString *)pin andName:(NSString *)name;
+-(MFStudent *)findUserWithId: (NSString *)userId;
+-(MFStudent *)findUserWith:(NSString *)username andPassword:(NSString *)password;
+
 -(void)loginUser:(MFStudent *)user;
 -(void)loginUser:(NSString *)username andPassword:(NSString *)password block:(void (^)())block;
 
@@ -48,5 +50,6 @@
 -(void)updateData:(NSManagedObject *)object;
 -(MFFraction *)getFractionInContext:(NSManagedObjectContext *)context;
 
+-(void)logout;
 
 @end

@@ -18,6 +18,7 @@
 @dynamic saved;
 @dynamic score;
 @dynamic uid;
+@dynamic userid;
 @dynamic fractions;
 @dynamic user;
 

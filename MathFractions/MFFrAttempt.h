@@ -12,7 +12,6 @@
 @property (nonatomic, retain) NSNumber * activity;
 @property (nonatomic, retain) NSDate * attempt_date;
 @property (nonatomic, retain) NSNumber * score;
-@property (nonatomic, retain) NSString * mfuid;
 @property (nonatomic, retain) NSArray *fractions;
 @property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * mfclassId;

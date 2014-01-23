@@ -74,6 +74,7 @@
 
 - (IBAction)loginUser:(id)sender;
 - (IBAction)registerUser:(id)sender;
+- (IBAction)logoutUser:(id)sender;
 
 
 - (IBAction)activityInfo:(id)sender;
@@ -106,18 +107,6 @@
     [self.fractioImageView startAnimating];
     
     [self showUserView:nil];
-    
-   // MFUser * user =  [_dataManager getCurrentUser];
- //   if(!user){
-    
-    
-//    }
-//    else{
-//        [[MFManager sharedManager]setMfuser:user];
-//        self.userNameTextField.text = user.name;
-//        self.userName.text = [NSString stringWithFormat:@"Hi %@", user.name];
-//        self.classIdTxtField.text = user.classId;
-//    }
 }
 
 
@@ -256,39 +245,27 @@
     }
     
     else{
+        if(!_manager){
+            _manager = [MFManager sharedManager];
         
+        }
+        if([MFManager isConnected]){
+
         [self.dataManager loginUser:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text block:^{
-            [self dismissView:sender];
+            self.userName.text =[NSString stringWithFormat:@"Hi %@",self.manager.mfuser.username];
+           [self dismissView:sender];
+        }];    
+      }
+        else{
+          MFStudent * st =  [self.dataManager findUserWith:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text];
+            if(!st){
+                UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We can't log you in. Please check your online connection, enter different credentials or continue as a guest." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [a show];
+            }
             
-        }];
-    
+            
+        }
     }
-    
-    
-//    //TO DO
-//    NSNumber * pin1 = _array[[_pickerView selectedRowInComponent:0]];
-//    NSNumber * pin2 = _array[[_pickerView selectedRowInComponent:1]];
-//    NSNumber * pin3 = _array[[_pickerView selectedRowInComponent:2]];
-//    NSNumber * pin4 = _array[[_pickerView selectedRowInComponent:3]];
-//    
-//    NSString * pin = [NSString stringWithFormat:@"%@%@%@%@",pin1,pin2,pin3,pin4];
-//    NSString * name = _userNameTextField.text;
-//    
-//    MFUser * mf =  [self.dataManager findUserWithPin:pin andName:name];
-//    
-//    
-//    if(!mf){
-//
-//        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"User with this pin and name doesn't exist." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//        [a show];
-//        
-//    }
-//    else{
-//        [self.dataManager loginUser:mf];
-//        [self dismissView:sender];
-//        [self hideMenu:nil];
-//        self.userName.text = [NSString stringWithFormat:@"Hi %@", mf.name];
-//    }
 }
 
 
@@ -316,6 +293,14 @@
     }
     
     
+    
+}
+
+- (IBAction)logoutUser:(id)sender {
+    
+    [self.dataManager logout];
+    [self showUserView:sender];
+    self.userName.text = @"Hello guest!";
     
 }
 /*
@@ -448,43 +433,6 @@
 
 - (IBAction)contactSupport:(id)sender {
     [_mailHelper sendEmailFromVC:self];
-    
 }
 
-#pragma mark picker
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
-{
-    return 4;
-}
-// returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
-{
-    return _array.count;
-
-}
-
-
-    - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row
-
-
-
-            forComponent:(NSInteger)component;{
-       return  [NSString stringWithFormat:@"%@",_array[row]];
-
-}
-
--(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
-    lbl.backgroundColor = [UIColor clearColor];
-    lbl.text =[NSString stringWithFormat:@"%@",_array[row]];
-    lbl.textColor = [UIColor whiteColor];
-    
-    return lbl;
-    
-}
-
-
-
-- (IBAction)usernameTxtField:(id)sender {
-}
 @end
