@@ -304,8 +304,10 @@
         id weakself = self;
         [self.dataManager addNewUserWithPin:password andName:username classId:classId first:firstname last:lastname successBlock:^{
             [weakself showUserView:nil];
-            [weakself dismissView:[weakself registrationView]];
-    }];
+            [weakself dismissView:[[[weakself registrationView]subviews] objectAtIndex:0]];
+            
+            
+        }];
     
     }
     else{

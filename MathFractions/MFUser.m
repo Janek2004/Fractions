@@ -1,9 +1,9 @@
 //
 //  MFUser.m
-//  
+//  Fractio
 //
 //  Created by sadmin on 1/22/14.
-//
+//  Copyright (c) 2014 UWF. All rights reserved.
 //
 
 #import "MFUser.h"

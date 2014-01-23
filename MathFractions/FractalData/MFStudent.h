@@ -13,7 +13,7 @@
     @property(nonatomic,strong) NSString * firstname;
     @property(nonatomic,strong) NSString * lastname;
     @property(nonatomic,strong) NSString * password;
-    @property(nonatomic,strong) NSString * classId;
+    @property(nonatomic,strong) NSString * classid;
     @property(nonatomic,strong) NSString * email;
 
 @end

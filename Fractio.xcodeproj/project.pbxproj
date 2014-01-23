@@ -31,7 +31,6 @@
 		4F3B78C91805A64B00E1E64B /* n5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C11805A64B00E1E64B /* n5.png */; };
 		4F3B78CA1805A64B00E1E64B /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C31805A64B00E1E64B /* s1.png */; };
 		4F3B78CB1805A64B00E1E64B /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F3B78C41805A64B00E1E64B /* s2.png */; };
-		4F3B78D01807006B00E1E64B /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78CF1807006B00E1E64B /* MFUser.m */; };
 		4F3B78D9180728C300E1E64B /* MFStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78D8180728C300E1E64B /* MFStudent.m */; };
 		4F3B78DD180728FF00E1E64B /* MFFrAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */; };
 		4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B78DF1807291500E1E64B /* MFFractalFraction.m */; };
@@ -180,6 +179,7 @@
 		4FEFE04917EA2D05004AF076 /* UIBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04817EA2D05004AF076 /* UIBAlertView.m */; };
 		4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04B17EA3142004AF076 /* DataManager.m */; };
 		4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFA9C0417F2381900F6FF32 /* MFViewController.xib */; };
+		821F634F1890CF4C002F657E /* MFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 821F634E1890CF4C002F657E /* MFUser.m */; };
 		822276F317FBBDB0006A5798 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822276F217FBBDB0006A5798 /* Images.xcassets */; };
 		82ABC33F181049D700182737 /* feedbackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 82ABC33E181049D700182737 /* feedbackButton.png */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
@@ -232,8 +232,6 @@
 		4F3B78C31805A64B00E1E64B /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
 		4F3B78C41805A64B00E1E64B /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
 		4F3B78CC1806F61B00E1E64B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../../../Downloads/FFEF.framework; sourceTree = "<group>"; };
-		4F3B78CE1807006B00E1E64B /* MFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFUser.h; path = ../MFUser.h; sourceTree = "<group>"; };
-		4F3B78CF1807006B00E1E64B /* MFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFUser.m; path = ../MFUser.m; sourceTree = "<group>"; };
 		4F3B78D7180728C300E1E64B /* MFStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFStudent.h; path = FractalData/MFStudent.h; sourceTree = "<group>"; };
 		4F3B78D8180728C300E1E64B /* MFStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFStudent.m; path = FractalData/MFStudent.m; sourceTree = "<group>"; };
 		4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFrAttempt.h; sourceTree = "<group>"; };
@@ -408,6 +406,8 @@
 		4FEFE04A17EA3142004AF076 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Utilities/DataManager.h; sourceTree = "<group>"; };
 		4FEFE04B17EA3142004AF076 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Utilities/DataManager.m; sourceTree = "<group>"; };
 		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MFViewController.xib; sourceTree = "<group>"; };
+		821F634D1890CF4C002F657E /* MFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFUser.h; sourceTree = "<group>"; };
+		821F634E1890CF4C002F657E /* MFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFUser.m; sourceTree = "<group>"; };
 		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		82ABC33E181049D700182737 /* feedbackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackButton.png; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -614,9 +614,9 @@
 		4F50340E17FB4F7D007A9DE8 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				4F3B78CE1807006B00E1E64B /* MFUser.h */,
-				4F3B78CF1807006B00E1E64B /* MFUser.m */,
 				4F5033FC17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld */,
+				821F634D1890CF4C002F657E /* MFUser.h */,
+				821F634E1890CF4C002F657E /* MFUser.m */,
 				4F3B790F180857A500E1E64B /* MFAttempt.h */,
 				4F3B7910180857A500E1E64B /* MFAttempt.m */,
 				4F3B78B5180319B500E1E64B /* MFFraction.h */,
@@ -1145,6 +1145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FEFE03A17E8D8DC004AF076 /* MFManager.m in Sources */,
+				821F634F1890CF4C002F657E /* MFUser.m in Sources */,
 				4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */,
 				4F864BF6183D15E300C888B8 /* MFScaleActivity.m in Sources */,
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
@@ -1161,7 +1162,6 @@
 				4F14C1FD17999FD90043B1D4 /* MFViewController.m in Sources */,
 				DBB42ACF17FE1FD20082D799 /* MFGlassActivityViewController.m in Sources */,
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
-				4F3B78D01807006B00E1E64B /* MFUser.m in Sources */,
 				4F65E2041843E7CA004C5607 /* MailHelper.m in Sources */,
 				4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */,
 				4FE8C50B17FE1AF000B0C796 /* MFCompleted.m in Sources */,

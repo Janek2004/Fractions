@@ -42,6 +42,11 @@
 #import  "MFFractalFraction.h"
 
 
+#define USER_NAME_KEY @"current_username"
+#define USER_PASS_KEY  @"current_password"
+#define USER_ID_KEY  @"current_id"
+
+
 @interface DataManager()
 @property (nonatomic,strong) NSMutableDictionary * appData;
 @property (nonatomic,strong) MFManager * manager;
@@ -237,11 +242,15 @@
 -(MFUser *)getCurrentUser{
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
-    NSString *userName= [ud objectForKey:@"current_user"];
-    NSString *userPin= [ud objectForKey:@"current_pin"];
-    if(!userName||!userPin) return nil;
+    NSString *userName= [ud objectForKey:USER_NAME_KEY];
+    NSString *userPin= [ud objectForKey:USER_PASS_KEY];
+    NSString *userId= [ud objectForKey:USER_ID_KEY];
 
+    if(!userName||!userPin||!userId) return nil;
     MFUser * user=   [self findUserWithPin:userPin andName:userName];
+
+    user.userid = userId;
+    
     return user;
 }
 
@@ -249,7 +258,9 @@
     MFFrAttempt * mf = [[MFFrAttempt alloc]init];
     mf.score = attempt.score;
     mf.attempt_date = attempt.attempt_date;
-    mf.name = attempt.user.name;
+    mf.userId=attempt.user.userid;
+    assert(mf.userId);
+    
     mf.mfclassId = _manager.mfuser.classId;
     mf.mfuid = [NSString stringWithFormat:@"%@",[attempt objectID]];
     mf.activity = attempt.activity;
@@ -261,7 +272,6 @@
         fr.denominator = fra.denominator;
         
         [a addObject:fr];
-        
         
     }
     NSLog(@"Fractions %@",a);
@@ -325,8 +335,10 @@
 -(void)loginUser:(MFUser *)user{
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
-    [ud setObject: user.pin forKey:@"current_pin"];
-    [ud setObject:user.name    forKey:@"current_user"];
+    [ud setObject: user.password forKey:USER_PASS_KEY];
+    [ud setObject:user.username  forKey:USER_NAME_KEY];
+    [ud setObject:user.userid forKey:USER_ID_KEY];
+    
     [ud synchronize];
 }
 
@@ -345,8 +357,21 @@
                 [a show];
                 //user doesn't exist
             }
-            if([(NSArray *)theObj count]== 1)
-            {
+            if([(NSArray *)theObj count]== 1){
+                
+                MFStudent * student = [(NSArray *)theObj objectAtIndex:0];
+                
+                // NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
+                MFUser *user = [NSEntityDescription insertNewObjectForEntityForName:@"MFUser" inManagedObjectContext:nil];
+                user.password =student.password;
+                user.username = student.username;
+                FFMetaData * meta = [_manager.ff metaDataForObj:student];
+                if(meta){
+                    user.userid = meta.guid;
+                }
+                
+                [self loginUser:user];
+                
                 block();
             
             }
@@ -406,7 +431,8 @@
                 student.password = pin;
                 student.lastname = lastName;
                 student.firstname = firstName;
-                student.classId = classId;
+#warning change it eventually to classId
+                student.classid = classId;
                 
                 NSError * error;
                 [_manager.ff createObj:student atUri:@"/MFStudent" error:&error];
@@ -424,6 +450,10 @@
                     block();
 
                 }
+            }
+            else{
+                UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User already exists." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [a show];
             }
         }
     }];

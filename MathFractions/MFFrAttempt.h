@@ -14,8 +14,7 @@
 @property (nonatomic, retain) NSNumber * score;
 @property (nonatomic, retain) NSString * mfuid;
 @property (nonatomic, retain) NSArray *fractions;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * pin;
+@property (nonatomic, retain) NSString * userId;
 @property (nonatomic, retain) NSString * mfclassId;
 
 @end
