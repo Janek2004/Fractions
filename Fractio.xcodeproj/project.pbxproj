@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F137B5C1832AC0600B1CF70 /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F137B5B1832AC0600B1CF70 /* FFEF.framework */; };
 		4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E317999FD80043B1D4 /* UIKit.framework */; };
 		4F14C1E617999FD90043B1D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E517999FD90043B1D4 /* Foundation.framework */; };
 		4F14C1E817999FD90043B1D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E717999FD90043B1D4 /* CoreGraphics.framework */; };
@@ -113,6 +112,7 @@
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
 		4F9913591891B047001B9EFD /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9913581891B047001B9EFD /* MFAttempt.m */; };
+		4FBC8D221892AF6D00D98C1B /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FBC8D211892AF6D00D98C1B /* FFEF.framework */; };
 		4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBE71891605B0087EBDC /* MFActivity.m */; };
 		4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBED1891605C0087EBDC /* MFCompleted.m */; };
 		4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF01891605C0087EBDC /* MFFraction.m */; };
@@ -199,7 +199,6 @@
 
 /* Begin PBXFileReference section */
 		484E0B35804B4496A4C80DE5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		4F137B5B1832AC0600B1CF70 /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../FatFractal/FFEF.framework; sourceTree = "<group>"; };
 		4F14C1E017999FD80043B1D4 /* Fractio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fractio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F14C1E317999FD80043B1D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4F14C1E517999FD90043B1D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -229,7 +228,6 @@
 		4F3B78C11805A64B00E1E64B /* n5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n5.png; sourceTree = "<group>"; };
 		4F3B78C31805A64B00E1E64B /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
 		4F3B78C41805A64B00E1E64B /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
-		4F3B78CC1806F61B00E1E64B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFEF.framework; path = ../../../Downloads/FFEF.framework; sourceTree = "<group>"; };
 		4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFrAttempt.h; sourceTree = "<group>"; };
 		4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFrAttempt.m; sourceTree = "<group>"; };
 		4F3B78DE1807291500E1E64B /* MFFractalFraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFractalFraction.h; sourceTree = "<group>"; };
@@ -328,6 +326,7 @@
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
 		4F9913571891B047001B9EFD /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
 		4F9913581891B047001B9EFD /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
+		4FBC8D211892AF6D00D98C1B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FFEF.framework; sourceTree = "<group>"; };
 		4FD4CBE61891605B0087EBDC /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4FD4CBE71891605B0087EBDC /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4FD4CBEC1891605C0087EBDC /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
@@ -421,8 +420,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FBC8D221892AF6D00D98C1B /* FFEF.framework in Frameworks */,
 				4F864BF0183D096700C888B8 /* AudioToolbox.framework in Frameworks */,
-				4F137B5C1832AC0600B1CF70 /* FFEF.framework in Frameworks */,
 				4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */,
 				4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */,
 				4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */,
@@ -482,9 +481,8 @@
 		4F14C1E217999FD80043B1D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FBC8D211892AF6D00D98C1B /* FFEF.framework */,
 				4F864BEF183D096700C888B8 /* AudioToolbox.framework */,
-				4F137B5B1832AC0600B1CF70 /* FFEF.framework */,
-				4F3B78CC1806F61B00E1E64B /* FFEF.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
 				4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */,
 				4F14C1E317999FD80043B1D4 /* UIKit.framework */,
@@ -1287,6 +1285,7 @@
 					/Users/jmc72/Downloads,
 					/Users/sadmin/Downloads,
 					/Users/jmc72/Desktop/NewRepositories/FatFractal,
+					/Users/jmc72/Desktop/NewRepositories/Fractions,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/Fractio-Prefix.pch";
@@ -1311,6 +1310,7 @@
 					/Users/jmc72/Downloads,
 					/Users/sadmin/Downloads,
 					/Users/jmc72/Desktop/NewRepositories/FatFractal,
+					/Users/jmc72/Desktop/NewRepositories/Fractions,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/Fractio-Prefix.pch";
