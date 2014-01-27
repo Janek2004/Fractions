@@ -158,22 +158,22 @@
     //get current progress
     for(UIButton * btn in self.activityButtons){
         NSString * imageName = [_utilities getImageForActivity:btn.tag  correct:NO];
-        NSLog(@"Btn tag %d image name %@",btn.tag, imageName);
+      //  NSLog(@"Btn tag %d image name %@",btn.tag, imageName);
 
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
 #warning change it to add more activities
  // it's probably not the best approach. Assigning activity based on button tag.
     
-//    MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
-//    for(MFCompleted *act in mf.completed){
-//        [UIView animateWithDuration:1.0 animations:^{
-//            NSString * imageName = [_utilities getImageForActivity:act.activity.integerValue  correct:YES];
-//            
-//            [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-//            
-//        }];
-//    }
+    MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
+    for(MFCompleted *act in mf.completed){
+        [UIView animateWithDuration:1.0 animations:^{
+            NSString * imageName = [_utilities getImageForActivity:act.activity.integerValue  correct:YES];
+            
+            [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+            
+        }];
+    }
 }
 
 

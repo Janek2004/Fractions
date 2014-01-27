@@ -35,6 +35,7 @@
 #import "MFFraction.h"
 #import "PDDebugger.h"
 #import "SoundHelper.h"
+#import <FFEF/FatFractal.h>
 
 
 @interface MFAppDelegate()
@@ -51,8 +52,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[MFViewController alloc] initWithNibName:@"MFViewController" bundle:nil];
@@ -64,12 +63,14 @@
     [debugger enableCoreDataDebugging];
     [debugger addManagedObjectContext:context withName:@"My MOC"];
     
-
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFActivity" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
    [request setEntity:entityDescription];
     NSError *error;
   
+    
+   [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
     NSArray *array = [context executeFetchRequest:request error:&error];
     if(error){
         NSLog(@"Error %@",error.debugDescription);
@@ -88,11 +89,20 @@
     _soundHelper = [[SoundHelper alloc]init];
    
    // [self testMe];
-
-    
-    
     return YES;
 }
+
+-(void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    [[FatFractal main] registerNotificationID:[devToken description]];
+        NSString *str = [NSString stringWithFormat:@"Device Token=%@",devToken];
+        NSLog(@"This is device token%@", str);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // handle notification as you wish
+
+}
+
 
 //importing data to core data model
 //mail
