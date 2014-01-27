@@ -28,13 +28,14 @@
 */
 
 #import <Foundation/Foundation.h>
-#import "MFStudent.h"
-@class MyFractal;
+#import "MFLocalStudent.h"
+#import <FFEF/FatFractal.h>
+//@class MyFractal;
 
 @interface MFManager : NSObject
-@property (nonatomic,strong) MFStudent * mfuser;
+@property (nonatomic,strong) MFLocalStudent * mfuser;
 @property (nonatomic) int currentLevel;
-@property (strong, nonatomic) MyFractal *ff;
+@property (strong, nonatomic) FatFractal *ff;
 @property (strong, nonatomic ) NSString * classId;
 @property BOOL guestMode;
 

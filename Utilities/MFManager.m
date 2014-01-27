@@ -28,7 +28,7 @@
  */
 
 #import "MFManager.h"
-#import "MyFractal.h"
+//#import "MyFractal.h"
 
 @implementation MFManager
 
@@ -61,9 +61,9 @@
         baseUrl = @"https://djmobileinc.fatfractal.com/Fractions/";
         
         if(!_ff){
-            _ff = [[MyFractal alloc] initWithBaseUrl:baseUrl];
+            _ff = [[FatFractal alloc] initWithBaseUrl:baseUrl];
                 [_ff loginWithUserName:@"Test" andPassword:@"Test1234"];
-                _ff.debug = YES;
+               // _ff.debug = YES;
         }
 
 

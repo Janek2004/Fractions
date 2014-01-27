@@ -7,19 +7,9 @@
 //
 
 #import "MFStudent.h"
-#import "MFAttempt.h"
-#import "MFCompleted.h"
+
 
 
 @implementation MFStudent
-
-@dynamic classId;
-@dynamic password;
-@dynamic userid;
-@dynamic username;
-@dynamic firstname;
-@dynamic lastname;
-@dynamic attempts;
-@dynamic completed;
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MFPracticeRequiredMethods.h"
+@interface MFScaleActivity : UIViewController <MFPracticeRequiredMethods>
 
-@interface MFScaleActivity : UIViewController
--(void)checkAnswer:(void (^)(BOOL s))completed;
 @property (nonatomic,strong) NSArray * currentFractions;
 
 @end

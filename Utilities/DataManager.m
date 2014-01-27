@@ -31,7 +31,7 @@
 #import "MFActivity.h"
 #import "MFFraction.h"
 #import "MFStudent.h"
-#import "MFStudent.h"
+#import "MFLocalStudent.h"
 #import "MyFractal.h"
 
 #import "MFAttempt.h"
@@ -76,11 +76,9 @@
                                               entityForName:@"MFActivity" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
-    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:  @"(activityid == %d)",activityId];
-    
     [request setPredicate:predicate];
-    
+   
     
     NSError *error;
     NSArray *array = [context executeFetchRequest:request error:&error];
@@ -97,12 +95,7 @@
             [self getLocalJSON];
         }
         
-       // NSLog(@"Act %hd %@ %hd",act.maxQuestions, act.set,act.fractionCount);
-        
         NSMutableArray * a=[self randomize:nil fromSet:act.set.allObjects.mutableCopy  andDesiredCount:act.maxQuestions.intValue];
-       
-        
-        
         act.set = [NSSet setWithArray:a];
  
 
@@ -206,11 +199,11 @@
 }
 
 
--(MFStudent *)findUserWithId: (NSString *)userId{
+-(MFLocalStudent *)findUserWithId: (NSString *)userId{
     NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     
     NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"MFStudent" inManagedObjectContext:context];
+                                              entityForName:@"MFLocalStudent" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
    
@@ -223,7 +216,7 @@
     if(error){
         NSLog(@"Error %@",error.debugDescription);
     }
-    MFStudent *mf;
+    MFLocalStudent *mf;
     if(array.count==1)
     {
         mf = array[0];
@@ -236,7 +229,7 @@
     
 }
 
--(MFStudent *)getCurrentUser{
+-(MFLocalStudent *)getCurrentUser{
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
     NSString *userName= [ud objectForKey:USER_NAME_KEY];
@@ -244,7 +237,7 @@
     NSString *userId= [ud objectForKey:USER_ID_KEY];
 
     if(!userName||!userPin||!userId) return nil;
-    MFStudent * user=   [self findUserWithId:userId];
+    MFLocalStudent * user=   [self findUserWithId:userId];
     user.userid = userId;
     
     return user;
@@ -271,7 +264,6 @@
         MFFractalFraction *fr = [[MFFractalFraction alloc]init];
         fr.numerator = fra.numerator;
         fr.denominator = fra.denominator;
-        
         [a addObject:fr];
         
     }
@@ -283,13 +275,11 @@
     return mf;
 }
 
--(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions{
+-(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions andAnswer:(MFFraction *)answer;{
     
     NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-    
     MFAttempt *at = [NSEntityDescription insertNewObjectForEntityForName:@"MFAttempt" inManagedObjectContext:context];
-    
-    MFStudent * st = [self getCurrentUser];
+    MFLocalStudent * st = [self getCurrentUser];
 
     if(st){
         at.score = [NSNumber numberWithInt:score];
@@ -299,15 +289,19 @@
         at.activity = activity.activityid;
         at.fractions = fractions;
         at.uid = [NSString stringWithFormat:@"%@",[at objectID]];
-
+        #warning store answer as well
+        
         MFFrAttempt * a = [self createFractalAttemptWithAttempt:at];
+        MFFractalFraction * fr = [[MFFractalFraction alloc]init];
+        fr.denominator = answer.denominator;
+        fr.numerator = answer.numerator;
+        a.answer = fr;
         
         NSError * error;
         [_manager.ff createObj:a atUri:@"/MFAttempt" error:&error];
         
         if(error) {
-            NSLog(@"Saving Attempt %@",error.debugDescription);
-            
+            NSLog(@"Saving Attempt %@",error.debugDescription);            
         }
         error = nil;
         [context save:&error];
@@ -315,10 +309,6 @@
             NSLog(@"Core Data Saving Attempt %@",error.debugDescription);
         }
     }
-    
-    
-    
-    
  }
 
 
@@ -346,7 +336,7 @@
 }
 
 
--(void)loginUser:(MFStudent *)user{
+-(void)loginUser:(MFLocalStudent *)user{
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
 
     [ud setObject: user.password forKey:USER_PASS_KEY];
@@ -382,21 +372,18 @@
             if([(NSArray *)theObj count]== 1){
                 
 
-                
                 MFStudent * student = [(NSArray *)theObj objectAtIndex:0];
+                FFMetaData * meta = [_manager.ff metaDataForObj:student];
+                student.userId = meta.guid;
                 
-                [_manager.ff metaDataForObj:student];
+                MFLocalStudent * localStudent = [self findUserWithId:student.userId];
                 
-
-       
-                MFStudent * localStudent = [self findUserWithId:student.userid];
-
                 if(!localStudent){
-                    //save user
+                    //create a local student
+                   localStudent = [self createLocalStudentfromFractalStudent:student];
+                    
                     NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-                 
-                    [context insertObject:student];
-                   
+                    [context insertObject:localStudent];
                     
                     NSError *e;
                      [context save:&e];
@@ -404,10 +391,9 @@
                         NSLog(@"%@",e.debugDescription);
                     }
                 }
-                NSLog(@" here %@ %@ %@",student.username, student.userid, student.classId);
-                
-              
-                [self loginUser:student];
+                NSLog(@" here %@ %@ %@",student.username, student.userId, student.classId);
+                NSLog(@" here %@ %@ %@",localStudent.username, localStudent.userid, localStudent.classId);
+                [self loginUser:localStudent];
                 
                 block();
             
@@ -450,35 +436,67 @@
 }
 
 
--(void)addNewUserWithPin:(NSString *)pin andName:(NSString *)name classId:(NSString *)classId first:(NSString *)firstName last:(NSString *)lastName successBlock:(void (^)())block{
+-(MFLocalStudent *)createLocalStudentfromFractalStudent:(MFStudent *)student{
+    NSManagedObjectModel *model =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectModel];
+    
+    NSEntityDescription *entity = [[model entitiesByName]objectForKey:@"MFLocalStudent"];
+    MFLocalStudent *localStudent = (MFLocalStudent *)[[NSManagedObject alloc] initWithEntity:entity
+                      insertIntoManagedObjectContext:nil];
+    
+    localStudent.userid = student.userId;
+    localStudent.username = student.username;
+    localStudent.lastname = student.lastname;
+    localStudent.password = student.password;
+    localStudent.classId = student.classId;
+    localStudent.firstname = student.firstname;
+    
+    return localStudent;
+}
+
+-(MFStudent *)createFractalStudentfromLocalStudent:(MFLocalStudent *)student{
+    MFStudent * fractalStudent = [[MFStudent alloc]init];
+    
+    fractalStudent.userId = student.userid;
+    fractalStudent.username = student.username;
+    fractalStudent.lastname = student.lastname;
+    fractalStudent.password = student.password;
+    fractalStudent.classId = student.classId;
+    fractalStudent.firstname = student.firstname;
+    
+    return fractalStudent;
+}
+
+
+-(void)addNewUserWithPassword:(NSString *)pin andName:(NSString *)name classId:(NSString *)classId first:(NSString *)firstName last:(NSString *)lastName successBlock:(void (^)(id obj))block responseBlock:(void (^)(NSError * error))errorBlock{
   
     NSString * query = [NSString stringWithFormat:@"/MFStudent/((username eq '%@') and (password eq = '%@'))",name,pin];
     
     [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+        
         if(theErr){
             UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't complete your request." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [a show];
+            errorBlock(theErr);
         }
         else{
             if([(NSArray *)theObj count]== 0)
             {
-                //create an instance of MFStudent
-//                MFStudent * student = [[MFStudent alloc]init];
-                
                 NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
-                NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFStudent"  inManagedObjectContext:context];
-                MFStudent *student =  [[MFStudent alloc]initWithEntity:entityDescription insertIntoManagedObjectContext:context];
-                
-                
+                NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFLocalStudent"  inManagedObjectContext:context];
+                MFLocalStudent *student =  [[MFLocalStudent alloc]initWithEntity:entityDescription insertIntoManagedObjectContext:context];
                 student.username = name;
                 student.password = pin;
                 student.lastname = lastName;
                 student.firstname = firstName;
-#warning change it eventually to classId
                 student.classId = classId;
-                               
+
+                //Create a mfstudent object
+                MFStudent *fractalStudent =[self createFractalStudentfromLocalStudent:student];
                 NSError * error;
-                [_manager.ff createObj:student atUri:@"/MFStudent" error:&error];
+                fractalStudent =  [_manager.ff createObj:fractalStudent atUri:@"/MFStudent" error:&error];
+                ///get metadata
+                FFMetaData * meta = [_manager.ff metaDataForObj:fractalStudent];
+                student.userid = meta.guid;
                 
                 if(error) {
                    NSLog(@"Registration Error %@",error.debugDescription);
@@ -487,17 +505,27 @@
                     
                 }
                 else{
-                   
                     UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User Created. Use username and password to log in." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                     [a show];
-                    block();
-
+                    //save the user
+                    MFLocalStudent * localStudent = [self findUserWithId:student.userid];
+                    if(!localStudent){
+                        NSError *e;
+                        [context save:&e];
+                        if(e){
+                            errorBlock(e);
+                        }
+                    }
+                    else{
+                        NSLog(@"Local User exists. Data Integrity Problem Detected.");
+                    }
                 }
             }
             else{
                 UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User already exists." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [a show];
             }
+           block(theObj);
         }
     }];
     

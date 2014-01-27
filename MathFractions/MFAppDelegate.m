@@ -39,7 +39,7 @@
 
 @interface MFAppDelegate()
 @property (nonatomic,strong)  DataManager *dm;
-@property (nonatomic,strong) SoundHelper * soundHelper;
+@property (nonatomic,strong)  SoundHelper * soundHelper;
 @end
 @implementation MFAppDelegate
 
@@ -77,10 +77,10 @@
     if(error){
         NSLog(@"Error %@",error.debugDescription);
     }
-
+    _dm = [[DataManager alloc]init];
     //if array is empty
     if(array.count ==0){
-        _dm = [[DataManager alloc]init];
+       
         [_dm import];
         
     }
@@ -88,26 +88,71 @@
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    CGRect btnframe = CGRectMake(5,150,31,116);
-    UIButton *_addButton=[[UIButton alloc]initWithFrame:btnframe];
-    [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
-//    [_addButton setTitle:@"Feedback" forState:UIControlStateNormal];
-//    [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _addButton.titleLabel.font = [UIFont systemFontOfSize:30];
-    [_addButton setImage:[UIImage imageNamed:@"feedbackButton"] forState:UIControlStateNormal];
-    [_addButton setBackgroundColor:[UIColor redColor]];
-    _addButton.layer.cornerRadius =5;
-   // [self.window addSubview:_addButton];
-    
     _soundHelper = [[SoundHelper alloc]init];
    
-    //[_soundHelper playBackgroundMusic];
+   // [self testMe];
+
+    
     
     return YES;
 }
 
 //importing data to core data model
 //mail
+
+-(void)testMe{
+    [self runLoginTests];
+    [self runRegistrationTest];
+}
+
+-(void)runLoginTests{
+    //
+    NSLog(@"Test 1 ");
+    [_dm loginUser:@"Janek2004" andPassword:@"stany17" block:^{
+            NSLog(@"Login successful  ");
+    }];
+}
+
+-(void)runRegistrationTest{
+    //
+
+    NSLog(@"Test 2 Adding new user ");
+    __weak DataManager *dm1 =_dm;
+    
+    [_dm addNewUserWithPassword: @"stany17" andName:@"Janek2004" classId:@"2013" first:@"Janusz" last:@"Chudzynski" successBlock:^(id obj) {
+        NSLog(@"Success obj %@",obj);
+        NSLog(@"Test 3 Adding new user again - it should fail! Number of objects should be the same as in the previous call ");
+        
+        [dm1 addNewUserWithPassword: @"stany17" andName:@"Janek2004" classId:@"2013" first:@"Janusz" last:@"Chudzynski" successBlock:^(id obj) {
+            NSLog(@"Success obj %@",obj);
+            
+        } responseBlock:^(NSError *error) {
+            NSLog(@"Error obj %@",error);
+        }];
+        
+        
+    } responseBlock:^(NSError *error) {
+        NSLog(@"Error obj %@",error);
+    }];
+    
+  
+    
+    
+//    
+//    
+//    [_dm addNewUserWithPin:@"stany17" andName:@"Janek2004" classId:@"2013" first:@"Janusz" last:@"Chudzynski" successBlock:^(NSArray * a){
+//            NSLog(@"Registration successful ");
+//    ];
+//
+//    NSLog(@"Test 3 Add it again ");
+//    [_dm addNewUserWithPin:@"stany17" andName:@"Janek2004" classId:@"2013" first:@"Janusz" last:@"Chudzynski" successBlock:^{
+//        NSLog(@"Registration shouldn't be successful ");
+//    }];
+    
+    
+    
+    
+}
 
 
 

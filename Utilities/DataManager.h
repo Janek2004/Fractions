@@ -29,24 +29,24 @@
 #import <UIKit/UIKit.h>
 @class MFActivity;
 @class MFAttempt;
-@class MFStudent;
+@class MFLocalStudent;
 @class MFFraction;
 
 @interface DataManager : NSObject
 -(MFActivity *)getActivity:(int)activityId;
--(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions;
--(void)markActivity:(int )activity asCompletedForUser:(MFStudent *)user;
--(MFStudent *)getCurrentUser;
--(MFStudent *)findUserWithId: (NSString *)userId;
--(MFStudent *)findUserWith:(NSString *)username andPassword:(NSString *)password;
+-(void)saveAttemptWithScore:(int)score andActivity:(MFActivity *)activity andFractions:(NSSet *)fractions andAnswer:(MFFraction *)answer;
+-(void)markActivity:(int )activity asCompletedForUser:(MFLocalStudent *)user;
+-(MFLocalStudent *)getCurrentUser;
+-(MFLocalStudent *)findUserWithId: (NSString *)userId;
+-(MFLocalStudent *)findUserWith:(NSString *)username andPassword:(NSString *)password;
 
--(void)loginUser:(MFStudent *)user;
+-(void)loginUser:(MFLocalStudent *)user;
 -(void)loginUser:(NSString *)username andPassword:(NSString *)password block:(void (^)())block;
-
 
 -(NSDictionary *)getLocalJSON;
 -(void)import;
--(void)addNewUserWithPin:(NSString *)pin andName:(NSString *)name  classId:(NSString *)classId first:(NSString *)firstName last:(NSString *)lastName successBlock:(void (^)())block;
+-(void)addNewUserWithPassword:(NSString *)pin andName:(NSString *)name classId:(NSString *)classId first:(NSString *)firstName last:(NSString *)lastName successBlock:(void (^)(id obj))block responseBlock:(void (^)(NSError * error))errorBlock;
+
 -(void)updateData:(NSManagedObject *)object;
 -(MFFraction *)getFractionInContext:(NSManagedObjectContext *)context;
 

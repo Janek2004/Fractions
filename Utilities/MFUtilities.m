@@ -175,9 +175,10 @@
 }
 
 -(void)presentNumberLineIntro:(id)viewcontroller{
-    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
+   /* KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
                                                           withDetail: @""
                                                            withImage: [UIImage imageNamed:@"holdchoco@2"]];
+    */
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Candy Bar Activity"
                                                           withDetail: @"5/1 = 5 selected chocolate bars"

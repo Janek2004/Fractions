@@ -17,12 +17,12 @@
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="fractions" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MFFraction" inverseName="attempt" inverseEntity="MFFraction" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFStudent" inverseName="attempts" inverseEntity="MFStudent" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFLocalStudent" inverseName="attempts" inverseEntity="MFLocalStudent" syncable="YES"/>
     </entity>
     <entity name="MFCompleted" representedClassName="MFCompleted" syncable="YES">
         <attribute name="activity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="completed_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFStudent" inverseName="completed" inverseEntity="MFStudent" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFLocalStudent" inverseName="completed" inverseEntity="MFLocalStudent" syncable="YES"/>
     </entity>
     <entity name="MFFraction" representedClassName="MFFraction" syncable="YES">
         <attribute name="denominator" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -30,7 +30,7 @@
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MFActivity" inverseName="set" inverseEntity="MFActivity" syncable="YES"/>
         <relationship name="attempt" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="MFAttempt" inverseName="fractions" inverseEntity="MFAttempt" syncable="YES"/>
     </entity>
-    <entity name="MFStudent" representedClassName="MFStudent" syncable="YES">
+    <entity name="MFLocalStudent" representedClassName="MFLocalStudent" syncable="YES">
         <attribute name="classId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,6 +45,6 @@
         <element name="MFAttempt" positionX="0" positionY="0" width="0" height="0"/>
         <element name="MFCompleted" positionX="0" positionY="0" width="0" height="0"/>
         <element name="MFFraction" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MFStudent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MFLocalStudent" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

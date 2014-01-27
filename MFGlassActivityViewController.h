@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MFPracticeRequiredMethods.h"
 
-@interface MFGlassActivityViewController : UIViewController
+@interface MFGlassActivityViewController : UIViewController <MFPracticeRequiredMethods>
+@property (nonatomic,strong) NSArray * currentFractions;
 -(void)setCurrentFractions:(NSArray *)currentFractions;
 
 @end

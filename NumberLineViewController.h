@@ -10,9 +10,8 @@
 #import "MFPracticeRequiredMethods.h"
 
 @class MFFraction;
-@interface NumberLineViewController : UIViewController
+@interface NumberLineViewController : UIViewController <MFPracticeRequiredMethods>
 
--(void)checkAnswer:(void (^)(BOOL s))completed;
 -(void)reset;
 @property (nonatomic,strong) NSArray * currentFractions;
 @end

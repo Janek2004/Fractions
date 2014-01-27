@@ -153,12 +153,18 @@
         [self.view insertSubview:self.rightWaterView belowSubview:self.rightGlass];
         
     }];
+}
+-(void)getFractions{
+    // 1/10 2/10 3/10 4/10, 5/10 6/10 7/10 7/10
+    //get denominator
+    
+    
 
 }
 
 //displays current fraction
 -(void)setCurrentFractions:(NSArray *)currentFractions{
-    NSLog(@"Current FR");
+
     _currentFraction = currentFractions[0];
     _fractionView.text= [NSString stringWithFormat:@"%@/%@",_currentFraction.numerator,_currentFraction.denominator];
 
@@ -172,7 +178,7 @@
     NSMutableArray * a = [NSMutableArray new];
     MFFraction * fr =[_dataManager getFractionInContext:nil];
     fr.numerator = [NSNumber numberWithInt:1];
-    fr.denominator= [NSNumber numberWithInt:10];
+    fr.denominator= [NSNumber numberWithInt:d1];
 
     [a addObject:fr];
 
@@ -208,17 +214,16 @@
     [self displayLeftView];
 }
 
-#warning check it
--(void)checkAnswer:(void (^)(BOOL s))completed{
+-(void)checkAnswer:(void (^)(BOOL s, MFFraction * answer))completed{
 
     _currentFraction = [MFUtilities simplify:_currentFraction];
     NSLog(@"current value %@ target %@",_currentValue, _currentFraction);
     
     if([_utilities isEqual:_currentFraction and:_currentValue]){
-        completed(YES);
+        completed(YES,_currentValue);
     }
     else{
-        completed(NO);
+        completed(NO,_currentValue);
     }
     //reset values
     self.currentValue =nil;
@@ -261,5 +266,10 @@
     }
     [self displayLeftView];
 }
+
+-(void)reset{
+    NSLog(@"Empty");
+}
+
 
 @end

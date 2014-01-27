@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MFFraction, MFStudent;
+@class MFFraction, MFLocalStudent;
 
 @interface MFAttempt : NSManagedObject
 
@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString * uid;
 @property (nonatomic, retain) NSString * userid;
 @property (nonatomic, retain) NSSet *fractions;
-@property (nonatomic, retain) MFStudent *user;
+@property (nonatomic, retain) MFLocalStudent *user;
 @end
 
 @interface MFAttempt (CoreDataGeneratedAccessors)

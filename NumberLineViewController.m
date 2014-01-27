@@ -34,7 +34,7 @@
 #import "MFAppDelegate.h"
 #import "NumberLineViewController.h"
 
-typedef   void (^checkAnswerBlock)(BOOL s);
+typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 
 @interface NumberLineViewController()
 {
@@ -210,7 +210,7 @@ typedef   void (^checkAnswerBlock)(BOOL s);
         MFFraction * mf1 = self.currentFraction;
         if([timer isValid])        [timer invalidate];
 
-        self.completionBlock( [_utilities isEqual:mf and:mf1]);
+        self.completionBlock( [_utilities isEqual:mf and:mf1],mf);
         [self.piecesArray removeAllObjects];
         [self drawPieces];
         
@@ -231,7 +231,7 @@ typedef   void (^checkAnswerBlock)(BOOL s);
     }
 }
 
--(void)checkAnswer:(void (^)(BOOL s))completed;{
+-(void)checkAnswer:(void (^)(BOOL s, MFFraction * answer))completed;{
     self.completionBlock = [completed copy];
     anim_count = 0;
     

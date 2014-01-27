@@ -36,6 +36,8 @@
 #import "MFCompleted.h"
 #import "MFProgressViewController.h"
 #import "MailHelper.h"
+#import "MFLocalStudent.h"
+
 
 @interface MFViewController ()
 @property (strong, nonatomic) IBOutlet UIView *MenuView;
@@ -161,7 +163,7 @@
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     
-    MFStudent * mf = [[MFManager sharedManager]mfuser];
+    MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
    
     
     for(MFCompleted *act in mf.completed){
@@ -194,22 +196,22 @@
 
 - (IBAction)hideMenu:(id)sender {
    
-    
-    if(self.userNameTextField.text.length==0)
-    {
-        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on the User button to log in or create a new user." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [a show];
-        return;
-    }
-    
-    if(self.classIdTxtField.text.length>0){
-        [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
-        MFStudent * mf = [[MFManager sharedManager]mfuser];
-        mf.classId =self.classIdTxtField.text;
-        [_dataManager updateData:mf];
-        
-    }
-   
+//    
+//    if(self.userNameTextField.text.length==0)
+//    {
+//        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on the User button to log in or create a new user." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+//        [a show];
+//        return;
+//    }
+//    
+//    if(self.classIdTxtField.text.length>0){
+//        [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
+//        MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
+//        mf.classId =self.classIdTxtField.text;
+//        [_dataManager updateData:mf];
+//        
+//    }
+//   
    
     [UIView animateWithDuration:1
                      animations:^{
@@ -257,7 +259,7 @@
         }];    
       }
         else{
-          MFStudent * st =  [self.dataManager findUserWith:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text];
+          MFLocalStudent * st =  [self.dataManager findUserWith:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text];
             if(!st){
                 UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We can't log you in. Please check your online connection, enter different credentials or continue as a guest." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [a show];
@@ -279,12 +281,16 @@
     
     if(firstname.length >0 && lastname.length>0 && password.length >0 && classId.length >0&&username.length>0){
         id weakself = self;
-        [self.dataManager addNewUserWithPin:password andName:username classId:classId first:firstname last:lastname successBlock:^{
-            [weakself showUserView:nil];
-            [weakself dismissView:[[[weakself registrationView]subviews] objectAtIndex:0]];
-            
+        [self.dataManager addNewUserWithPassword:password andName:username classId:classId first:firstname last:lastname successBlock:^(id obj) {
+            if([(NSArray *)obj count]==0){
+                [weakself showUserView:nil];
+                [weakself dismissView:[[[weakself registrationView]subviews] objectAtIndex:0]];
+            }
+        } responseBlock:^(NSError *error) {
             
         }];
+        
+            
     
     }
     else{

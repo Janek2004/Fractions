@@ -49,33 +49,29 @@ enum kFractionComparator {
 @end
 
 
-
-
-
-
 @implementation MFScaleActivity
--(void)checkAnswer:(void (^)(BOOL s))completed{
+-(void)checkAnswer:(void (^)(BOOL s, MFFraction * answer ))completed{
     if(!_utitilities){
         _utitilities =[[MFUtilities alloc]init];
     }
     
     if([MFUtilities getValueOfFraction: self.leftFraction] == [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kEqual)
     {
-        completed(YES);
+        completed(YES, nil);
  
     }
     else if([MFUtilities getValueOfFraction: self.leftFraction] < [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kLess)
     {
-        completed(YES);
+        completed(YES,nil);
  
     }
     else if([MFUtilities getValueOfFraction: self.leftFraction] > [MFUtilities getValueOfFraction: self.rightFraction] && comparator == kMore)
     {
-        completed(YES);
+        completed(YES,nil);
  
     }
     else{
-        completed(NO);
+        completed(NO,nil);
     }
 
 }

@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MFStudent;
+@class MFLocalStudent;
 
 @interface MFCompleted : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * activity;
 @property (nonatomic, retain) NSDate * completed_date;
-@property (nonatomic, retain) MFStudent *user;
+@property (nonatomic, retain) MFLocalStudent *user;
 
 @end

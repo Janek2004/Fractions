@@ -44,6 +44,9 @@
 
 #import "SoundHelper.h"
 
+
+
+
 @interface PracticeViewController ()
 @property (nonatomic,strong) MFGlassActivityViewController *glassVC;
 @property (nonatomic,strong) MFScaleActivity * scaleVC;
@@ -212,10 +215,43 @@
 }
 
 -(void)loadData{
+    
+    
+    
     //Get activity data. This method is loading dynamically questions sets and etc.
-        self.currentActivity = [_dataManager getActivity:self.activityId];
+     self.currentActivity = [_dataManager getActivity:self.activityId];
     _currentQuestionIndex =0;
-  
+    NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
+    
+    
+    if(self.currentActivity.fractionCount.intValue>1){
+        
+        NSMutableArray * array = [NSMutableArray new];
+        int count = a.count;
+        while(a.count>0) {
+            int random =arc4random()%a.count;
+            MFFraction  *a1 = a[random];
+            
+            [a removeObjectAtIndex:random];
+            count--;
+            if(a.count==0)break;
+            random =arc4random()%a.count;
+            
+            MFFraction  *a2 = a[random];
+            [a removeObjectAtIndex:random];
+            
+            NSArray * k =@[a1,a2];
+            [array addObject:k];
+        }
+        self.questionsSet = array;
+    }
+    else{
+        self.questionsSet = a;
+        
+    }
+    
+
+    
     if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
       
         
@@ -251,42 +287,14 @@
  
     }
     
-    NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
-    
-    
-    if(self.currentActivity.fractionCount.intValue>1){
-   
-    NSMutableArray * array = [NSMutableArray new];
-   int count = a.count;
-    while(a.count>0) {
-      int random =arc4random()%a.count;
-      MFFraction  *a1 = a[random];
-    
-        [a removeObjectAtIndex:random];
-    count--;
-        if(a.count==0)break;
-        random =arc4random()%a.count;
-      
-      MFFraction  *a2 = a[random];
-      [a removeObjectAtIndex:random];
-    
-      NSArray * k =@[a1,a2];
-      [array addObject:k];
-      }
-        self.questionsSet = array;
-    }
-    else{
-        self.questionsSet = a;
-    
-    }
-
     [self.view addSubview:  self.homeButton];
     [self.view addSubview:self.hintButton];
     [self.view addSubview:self.goOnButton];
     
-    
-    
     [self displayFraction];
+    
+    
+    
     
 }
 
@@ -337,7 +345,7 @@
     
     id question = self.questionsSet[_currentQuestionIndex];
    
-    [(id <MFPracticeRequiredMethods>) self.currentVC  checkAnswer:^(BOOL check) {
+    [(id <MFPracticeRequiredMethods>) self.currentVC checkAnswer:^(BOOL check, MFFraction* answer) {
           [_soundHelper playSound:check];
         if(check)
         {
@@ -348,9 +356,9 @@
         else{
             _wrongCount ++;
             
+            //introduce a new problem after three attempts
             if(_wrongCount > 2)
             {
-#warning After 3 incorrect submissions introduce a new problem.
                 //reset the counter
                 _wrongCount = 0;
 
@@ -371,8 +379,7 @@
             set = [NSSet setWithObject:question];
         }
         
-        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set];
-        
+        [self.dataManager saveAttemptWithScore:check andActivity:self.currentActivity andFractions:set andAnswer:answer];
     }];
 }
 
