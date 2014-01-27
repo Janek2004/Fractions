@@ -2,7 +2,7 @@
 //  FatFractal.h
 //  FatFractal
 //
-//  Copyright (c) 2012 FatFractal, Inc. All rights reserved.
+//  Copyright (c) 2012, 2013 FatFractal, Inc. All rights reserved.
 //
 
 /**
@@ -20,7 +20,12 @@
 #import "FFGeoLocation.h"
 #import "FFNotificationID.h"
 #import "FFQueuedOperation.h"
-#import "FFLocalQueuedOperationStore.h"
+#import "FFLocalStorage.h"
+#import "FFLocalStorageSQLite.h"
+#import "FFReadRequest.h"
+#import "FFReadResponse.h"
+//#import "FFWriteRequest.h"
+//#import "FFWriteResponse.h"
 
 extern NSString * const FF_SCRIPT_AUTH_SERVICE_FACEBOOK;
 extern NSString * const FF_SCRIPT_AUTH_SERVICE_TWITTER;
@@ -31,13 +36,20 @@ extern NSString * const FF_SCRIPT_AUTH_SERVICE_TWITTER;
  * queued operation with the FatFractal Platform.
  */
 @protocol FFQueueDelegate
-- (void) operationCompleted:(FFQueuedOperation *)queuedOperation;
+- (void) queuedOperationCompleted:(FFQueuedOperation *)queuedOperation;
 @end
 
 @protocol FFAnnotation
 @optional
 - (BOOL) shouldSerialize:(NSString *)propertyName;
 @end
+
+typedef NS_ENUM(NSInteger, FFUrlType) {
+    FFUrlTypeResources = 0,
+    FFUrlTypeExtension = 1,
+    FFUrlTypeAny       = 2
+};
+
 
 /** \brief The primary FatFractal class. */
 /** 
@@ -109,7 +121,7 @@ extern NSString * const FF_SCRIPT_AUTH_SERVICE_TWITTER;
 
 /**
  This property is set on successful execution of one of the FatFractal::loginWithUserName:andPassword:
- methods. It is the guid of the logged-in FFUser object. Currently FFUser.guid and FFUser.userName are the same - however this will not necessarily be the case in the future.
+ methods. It is the guid of the logged-in FFUser object.
  */
 @property (strong, nonatomic, readonly)   NSString              *loggedInUserGuid;
 
@@ -161,21 +173,74 @@ extern NSString * const FF_SCRIPT_AUTH_SERVICE_TWITTER;
 @property (strong, nonatomic)           id <FFQueueDelegate>    queueDelegate;
 
 /**
- A string unique (within your application) to a particular logical FatFractal instance.
- Set using proper init method (#initWithBaseUrl:localQueuedOpStoreKey: or #initWithBaseUrl:sslUrl:localQueuedOpStoreKey:) to enable persistence of queued operations to a local database, which will allows queued operations to remain queued after your app restarts.
- <br><br><strong>Note:</strong> More than one FatFractal instance with the same key will result in unspecified behavior.
- @see #initWithBaseUrl:localQueuedOpStoreKey:, #initWithBaseUrl:sslUrl:localQueuedOpStoreKey:
+ Useful in testing to verify how many HTTP requests are being made
  */
-@property (strong, nonatomic, readonly) NSString *localQueuedOpStoreKey;
+@property (atomic)                      int                     httpRequestCount;
 
+@property (strong, nonatomic)           id <FFLocalStorage>     localStorage;
 
+/**
+ Get the callback URI for the specified ScriptAuth service.
+ @param scriptAuthService   The ScriptAuth service
+ @return The callback URI
+ */
 - (NSString *)callbackUriForScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Set the callback URI for the specified ScriptAuth service.
+ @param callbackUri         The callback URI
+ @param scriptAuthService   The ScriptAuth service
+ */
 - (void)setCallbackUri:(NSString *)callbackUri forScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Get the access token for the specified ScriptAuth service.
+ @param scriptAuthService   The ScriptAuth service
+ @return The access token
+ @see #secretForScriptAuthService:
+ */
 - (NSString *)tokenForScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Set the access token for the specified ScriptAuth service.
+ @param token               The access token
+ @param scriptAuthService   The ScriptAuth service
+ @see #setToken:andSecret:forScriptAuthService:
+ @see #setSecret:forScriptAuthService:
+ */
 - (void)setToken:(NSString *)token forScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Get the access token secret for the specified ScriptAuth service.
+ @param scriptAuthService   The ScriptAuth service
+ @return The access token secret
+ @see #tokenForScriptAuthService:
+ */
 - (NSString *)secretForScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Set the access token secret for the specified ScriptAuth service.
+ @param secret              The access token secret
+ @param scriptAuthService   The ScriptAuth service
+ @see #setToken:forScriptAuthService:
+ @see #setToken:andSecret:forScriptAuthService:
+ */
 - (void)setSecret:(NSString *)secret forScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Set the access token and secret for the specified ScriptAuth service.
+ @param token               The access token
+ @param secret              The access token secret
+ @param scriptAuthService   The ScriptAuth service
+ @see #setToken:forScriptAuthService:
+ @see #setSecret:forScriptAuthService:
+ */
 - (void)setToken:(NSString *)token andSecret:(NSString *)secret forScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Clear the access token and secret for the specified ScriptAuth service.
+ @param scriptAuthService   The ScriptAuth service
+ */
 - (void)clearTokenForScriptAuthService:(NSString *)scriptAuthService;
 
 #pragma mark Lifecycle
@@ -194,8 +259,14 @@ extern NSString * const FF_SCRIPT_AUTH_SERVICE_TWITTER;
  */
 + (void) setMain:(FatFractal *)_main;
 
++ (NSURL *) getURL:(FatFractal *)ff urlString:(NSString *)urlString type:(FFUrlType)type;
+
+- (id) initWithBaseUrl:(NSString *)theBaseUrl sslUrl:(NSString *)theSslUrl localStorage:(id<FFLocalStorage>) theLocalStorage;
+
+- (id) initWithBaseUrl:(NSString *)theBaseUrl localStorage:(id<FFLocalStorage>) theLocalStorage;
+
 /**
-You will only need to use this method if you are testing your app's backend on a development machine and are 
+ You will only need to use this method if you are testing your app's backend on a development machine and are
  using non-standard ports - otherwise, use #initWithBaseUrl:
  <br><br>For illustration you might call:
  @code initWithBaseUrl:@"http://localhost:8080/AppName" sslUrl:@"https://localhost:8443/AppName"
@@ -209,18 +280,6 @@ You will only need to use this method if you are testing your app's backend on a
  @see #initWithBaseUrl:
  */
 - (id) initWithBaseUrl:(NSString *)url sslUrl:(NSString *)sslUrl;
-
-/**
- Similar to #initWithBaseUrl:sslUrl:, but also enables the local queued operation store.
- This stores queued operations to a local database, so that queued operations are not lost in the event of app restart.
- <br><br><strong>Note:</strong> The local queued operation store requires your project to link to libsqlite3.dylib.
- @param url     The URL used to set the #baseUrl property
- @param sslUrl  The URL used to set the #sslUrl property
- @param key     A unique string used to identify this FatFractal instance. <strong>Only one instance with a given key should exist simultaneously.</strong>
- @return        A new FatFractal instance
- @see #initWithBaseUrl:sslUrl:
- */
-- (id) initWithBaseUrl:(NSString *)url sslUrl:(NSString *)sslUrl localQueuedOpStoreKey:(NSString *)key;
 
 /**
  The FatFractal class will set two properties on initialization: #baseUrl and #sslUrl. The #baseUrl property 
@@ -237,17 +296,6 @@ You will only need to use this method if you are testing your app's backend on a
  @see #initWithBaseUrl:sslUrl
  */
 - (id) initWithBaseUrl:(NSString *)url;
-
-/**
- Similar to #initWithBaseUrl:, but also enables the local queued operation store.
- This stores queued operations to a local database, so that queued operations are not lost in the event of app restart.
- <br><br><strong>Note:</strong> The local queued operation store requires your project to link to libsqlite3.dylib.
- @param url     The URL used to set the #baseUrl property
- @param key     A unique string used to identify this FatFractal instance. <strong>Only one instance with a given key should exist simultaneously.</strong>
- @return        A new FatFractal instance
- @see #initWithBaseUrl:
- */
-- (id) initWithBaseUrl:(NSString *)url localQueuedOpStoreKey:(NSString *)key;
 
 #pragma mark Dynamic typing
 
@@ -315,9 +363,50 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  */
 - (FFUser *) registerUser:(FFUser *)user password:(NSString *)password error:(NSError **)outErr;
 
+/**
+ Asynchronous method to register a new user via a ScriptAuth service.
+ Saved token (and secret, if applicable) will be used as credentials.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @param onComplete          Completion block called when method has completed
+ @see #registerWithScriptAuthService:error:
+ @see #registerWithScriptAuthService:usingCredentials:onComplete:
+ @see #registerWithScriptAuthService:usingCredentials:error:
+ */
 - (void)registerWithScriptAuthService:(NSString *)scriptAuthService onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Synchronous method to register a new user via a ScriptAuth service.
+ Saved token (and secret, if applicable) will be used as credentials.
+ @param[in] scriptAuthService   The ScriptAuth service with which to register
+ @param[out] outErr             Error
+ @see #registerWithScriptAuthService:onComplete:
+ @see #registerWithScriptAuthService:usingCredentials:onComplete:
+ @see #registerWithScriptAuthService:usingCredentials:error:
+ @return Newly registered user if successful, nil otherwise
+ */
 - (FFUser *)registerWithScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
+
+/**
+ Asynchronous method to register a new user via a ScriptAuth service with explicit credentials.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @param credentials         Credentials dictionary
+ @param onComplete          Completion block called when method has completed
+ @see #registerWithScriptAuthService:onComplete:
+ @see #registerWithScriptAuthService:error:
+ @see #registerWithScriptAuthService:usingCredentials:error:
+ */
 - (void)registerWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Synchronous method to register a new user via a ScriptAuth service with explicit credentials.
+ @param[in] scriptAuthService   The ScriptAuth service with which to register
+ @param[in] credentials         Credentials dictionary
+ @param[out] outErr             Error
+ @see #registerWithScriptAuthService:onComplete:
+ @see #registerWithScriptAuthService:error:
+ @see #registerWithScriptAuthService:usingCredentials:onComplete:
+ @return Newly registered user if successful, nil otherwise
+ */
 - (FFUser *)registerWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials error:(NSError **)outErr;
 
 /**
@@ -413,11 +502,81 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  */
 - (FFUser *) loginWithUserName:(NSString *)theUserName andPassword:(NSString *)thePassword;
 
+/**
+ Asynchronous method to log in via a ScriptAuth service. Saved token (and secret, if applicable) will be used as credentials.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @param onComplete          Completion block called when method has completed
+ @see #loginWithScriptAuthService:error:
+ @see #loginWithScriptAuthService:
+ @see #loginWithScriptAuthService:usingCredentials:onComplete:
+ @see #loginWithScriptAuthService:usingCredentials:error:
+ @see #loginWithScriptAuthService:usingCredentials:
+ */
 - (void)loginWithScriptAuthService:(NSString *)scriptAuthService onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Synchronous method to log in via a ScriptAuth service. Saved token (and secret, if applicable) will be used as credentials.
+ @param[in] scriptAuthService   The ScriptAuth service with which to register
+ @param[out] outErr             Error
+ @return User if successful, nil otherwise
+ @see #loginWithScriptAuthService:onComplete:
+ @see #loginWithScriptAuthService:
+ @see #loginWithScriptAuthService:usingCredentials:onComplete:
+ @see #loginWithScriptAuthService:usingCredentials:error:
+ @see #loginWithScriptAuthService:usingCredentials:
+ */
 - (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
+
+/**
+ Synchronous method to log in via a ScriptAuth service. Saved token (and secret, if applicable) will be used as credentials.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @return User if successful, nil otherwise
+ @see #loginWithScriptAuthService:onComplete:
+ @see #loginWithScriptAuthService:error:
+ @see #loginWithScriptAuthService:usingCredentials:onComplete:
+ @see #loginWithScriptAuthService:usingCredentials:error:
+ @see #loginWithScriptAuthService:usingCredentials:
+ */
 - (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService;
+
+/**
+ Asynchronous method to log in via a ScriptAuth service with explicit credentials.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @param credentials         Credentials dictionary
+ @param onComplete          Completion block called when method has completed
+ @see #loginWithScriptAuthService:onComplete:
+ @see #loginWithScriptAuthService:error:
+ @see #loginWithScriptAuthService:
+ @see #loginWithScriptAuthService:usingCredentials:error:
+ @see #loginWithScriptAuthService:usingCredentials:
+ */
 - (void)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Synchronous method to log in via a ScriptAuth service with explicit credentials.
+ @param[in] scriptAuthService   The ScriptAuth service with which to register
+ @param[in] credentials         Credentials dictionary
+ @param[out] outErr             Error
+ @return User if successful, nil otherwise
+ @see #loginWithScriptAuthService:onComplete:
+ @see #loginWithScriptAuthService:error:
+ @see #loginWithScriptAuthService:
+ @see #loginWithScriptAuthService:usingCredentials:onComplete:
+ @see #loginWithScriptAuthService:usingCredentials:
+ */
 - (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials error:(NSError **)outErr;
+
+/**
+ Synchronous method to log in via a ScriptAuth service with explicit credentials.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @param credentials         Credentials dictionary
+ @return User if successful, nil otherwise
+ @see #loginWithScriptAuthService:onComplete:
+ @see #loginWithScriptAuthService:error:
+ @see #loginWithScriptAuthService:
+ @see #loginWithScriptAuthService:usingCredentials:onComplete:
+ @see #loginWithScriptAuthService:usingCredentials:error:
+ */
 - (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials;
 
 
@@ -427,13 +586,64 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  */
 - (void) logout;
 
+/**
+ Asynchronous method to get the authorization URI for the specified ScriptAuth service.
+ @param scriptAuthService   The ScriptAuth service
+ @param onComplete          Completion block called when method has completed
+ @see #authUriForScriptAuthService:error:
+ @see #authUriForScriptAuthService:
+ */
 - (void)authUriForScriptAuthService:(NSString *)scriptAuthService onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Synchronous method to get the authorization URI for the specified ScriptAuth service.
+ @param[in] scriptAuthService   The ScriptAuth service with which to register
+ @param[out] outErr             Error
+ @return The authorization URI
+ @see #authUriForScriptAuthService:onComplete:
+ @see #authUriForScriptAuthService:
+ */
 - (NSString *)authUriForScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
+
+/**
+ Synchronous method to get the authorization URI for the specified ScriptAuth service.
+ @param scriptAuthService   The ScriptAuth service with which to register
+ @return The authorization URI
+ @see #authUriForScriptAuthService:onComplete:
+ @see #authUriForScriptAuthService:error:
+ */
 - (NSString *)authUriForScriptAuthService:(NSString *)scriptAuthService;
 
+/**
+ Asynchronous method to retrieve an access token (and secret, if applicable) from the specified ScriptAuth service.
+ Token is stored in-memory via #setToken:andSecret:forScriptAuthService:.
+ @param scriptAuthService       The ScriptAuth service with which to register
+ @param callbackUriWithVerifier The callback URI redirected to after OAuth authentication, which includes an OAuth verifier
+ @param onComplete              Completion block called when method has completed
+ */
 - (void)retrieveAccessTokenForScriptAuthService:(NSString *)scriptAuthService callbackUriWithVerifier:(NSString *)callbackUriWithVerifier onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Synchronous method to retrieve an access token (and secret, if applicable) from the specified ScriptAuth service.
+ Token is stored in-memory via #setToken:andSecret:forScriptAuthService:.
+ @param[in] scriptAuthService       The ScriptAuth service with which to register
+ @param[in] callbackUriWithVerifier The callback URI redirected to after OAuth authentication, which includes an OAuth verifier
+ @param[out] outErr                 Error
+ */
 - (void)retrieveAccessTokenForScriptAuthService:(NSString *)scriptAuthService callbackUriWithVerifier:(NSString *)callbackUriWithVerifier error:(NSError **)outErr;
+
+/**
+ Synchronous method to retrieve an access token (and secret, if applicable) from the specified ScriptAuth service.
+ Token is stored in-memory via #setToken:andSecret:forScriptAuthService:.
+ @param scriptAuthService       The ScriptAuth service with which to register
+ @param callbackUriWithVerifier The callback URI redirected to after OAuth authentication, which includes an OAuth verifier
+ */
 - (void)retrieveAccessTokenForScriptAuthService:(NSString *)scriptAuthService callbackUriWithVerifier:(NSString *)callbackUriWithVerifier;
+
+- (FFReadOption) defaultReadOptions;
+- (FFReadRequest *) newReadRequest;
+//- (FFWriteOption) defaultWriteOptions;
+//- (FFWriteRequest *) newWriteRequest;
 
 /**
  Synchronous method with output parameter, error
@@ -590,7 +800,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
 - (void) loadRefsForObj:(id)obj onComplete:(FFHttpMethodCompletion)onComplete;
 
 /**
- Asynchronous method with an onComplete callback that will return an array of objects from a single collection 
+ Asynchronous method with an onComplete callback that will return an array of objects from a single collection
  from the application's backend.
  @param NSString ffUrl : the uri for the array of objects relative to the #baseUrl property (which is set by FatFractal::initWithBaseUrl: )
  @param FFHttpMethodCompletion onComplete : the block defined here will execute when the HTTP call completes
@@ -795,6 +1005,41 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
           onOffline:(FFHttpMethodCompletion)onOffline;
 
 /**
+ Asynchronous method with onComplete callback that will delete a binary data object (blob) from the application's backend
+ @param id obj : the object to which this blob belongs
+ @param NSString memberName : the 'field name' - eg imageData
+ @param FFHttpMethodCompletion onComplete: the block defined here will execute when the HTTP call completes
+ @return <b>void</b> does not return anything directly - response is via the FFHttpMethodCompletion block which has these parameters:
+ <br>   <b>(NSError *)</b> - non-nil if there is an error
+ <br>   <b>(id)</b> - the updated object, or nil if there is an error
+ <br>   <b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
+ @see FFHttpDelegate::onComplete
+ */
+- (void) deleteBlobForObj:(id)obj
+               memberName:(NSString *)memberName
+               onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Asynchronous method with onComplete callback that will delete a binary data object (blob) from the application's backend
+ @param id obj : the object to which this blob belongs
+ @param NSString memberName : the 'field name' - eg imageData
+ @param FFHttpMethodCompletion onComplete : the block defined here will execute when the HTTP call completes
+ @param FFHttpMethodCompletion onOffline : the block defined here will execute if the application's backend is not reachable and the operation has been queued via
+ #queueDeleteBlobForObj:memberName:
+ @return <b>void</b> does not return anything directly - response is via the FFHttpMethodCompletion onComplete or onOffline block which has these parameters:
+ <br>   <b>(NSError *)</b> - non-nil if there is an error
+ <br>   <b>(id)</b> - nil if there is an error; the passed object, if it's an onComplete block; or an #FFQueuedOperation, if it's an onOffline block
+ <br>   <b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
+ @see FFHttpDelegate::onComplete
+ @see FFHttpDelegate::onOffline
+ */
+- (void) deleteBlobForObj:(id)obj
+         memberName:(NSString *)memberName
+         onComplete:(FFHttpMethodCompletion)onComplete
+          onOffline:(FFHttpMethodCompletion)onOffline;
+
+
+/**
  Synchronous method that will update a binary data object (blob) to the application's backend.
  <br>(For access to HTTP status codes, use #updateObj:onComplete: )
  @param id obj : the object to be updated on your app's backend
@@ -873,6 +1118,11 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  */
 - (void) forgetObj:(id)obj;
 
+/**
+ Have this FatFractal object forget about all objects in memory
+ */
+- (void) forgetAllObjs;
+
 #pragma mark Support for "grab bags"
 
 /**
@@ -906,6 +1156,41 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
                 from:(id)obj
          grabBagName:(NSString *)name
                error:(NSError **)outErr;
+
+/**
+ Differs from grabBagAdd:to:grabBagName:error in two ways:
+ <ol>
+ <li>Asynchronous - takes onComplete block parameter</li>
+ <li>takes ffUrls as parameters</li>
+ </ol>
+ @param NSString itemUri : the ffUrl of the object which is being added to the grab-bag
+ @param NSString objUri : the ffUrl of the object whose grab-bag is being added to
+ @param NSString name : the name of the grabbag to be added to
+ @see #grabBagAdd:to:grabBagName:error:
+ @see #metaDataForObj:
+ */
+- (void) grabBagAddItemAtFfUrl:(NSString *)itemUri
+                  toObjAtFfUrl:(NSString *)objUri
+                   grabBagName:(NSString *)name
+                    onComplete:(FFHttpMethodCompletion)onComplete;
+
+/**
+ Differs from grabBagRemove:from:grabBagName:error in two ways:
+ <ol>
+ <li>Asynchronous - takes onComplete block parameter</li>
+ <li>takes ffUrls as parameters</li>
+ </ol>
+ @param NSString itemUri : the ffUrl of the object to be removed from the grab-bag
+ @param NSString objUri : the ffUrl of the object whose grab-bag is being removed from
+ @param NSString name : the name of the grabbag to be removed from
+ @see #grabBagRemove:from:grabBagName:error:
+ @see #metaDataForObj:
+ */
+- (void) grabBagRemoveItemAtFfUrl:(NSString *)itemUri
+                   fromObjAtFfUrl:(NSString *)objUri
+                      grabBagName:(NSString *)name
+                       onComplete:(FFHttpMethodCompletion)onComplete;
+
 
 /**
  Synchronous method with output parameter, error that will get an Array of all objects from a named grabbag of another object (obj).
@@ -1042,6 +1327,18 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
             withMimeType:(NSString *)mimeType
                   forObj:(id)obj
               memberName:(NSString *)memberName;
+
+/**
+ This method will delete your blob data from the application's backend when the network is next available.
+ @param id obj : the object to which this blob belongs
+ @param NSString the 'field name' - eg imageData
+ @see #deleteBlobForObj:memberName:onComplete:
+ @see #setFFQueueDelegate:
+ @return <b>FFQueuedOperation</b>
+ */
+
+- (FFQueuedOperation *) queueDeleteBlobForObj:(id)obj
+                             memberName:(NSString *)memberName;
 
 /**
  This method will delete an object from the application's backend when the network is next available.

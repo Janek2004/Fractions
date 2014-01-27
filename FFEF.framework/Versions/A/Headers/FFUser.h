@@ -2,7 +2,7 @@
 //  FFUser.h
 //  FatFractal
 //
-//  Copyright (c) 2012 FatFractal, Inc. All rights reserved.
+//  Copyright (c) 2012, 2013 FatFractal, Inc. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 
@@ -21,6 +21,8 @@
 }
 
 /*! An NSString with the unique username for the user. */
+@property (strong, nonatomic) NSString          *guid;
+/*! An NSString with the unique username for the user. */
 @property (strong, nonatomic) NSString          *userName;
 /*! An NSString with the first name of the user. */
 @property (strong, nonatomic) NSString          *firstName;
@@ -30,6 +32,11 @@
 @property (strong, nonatomic) NSString          *email;
 /*! Boolean - is this user 'active' or not. Inactive users may be able to log in and read data, but will be unable to modify data. */
 @property (nonatomic)         BOOL              active;
+/*! The user's authDomain. This will be removed from the FFUser object in a forthcoming release, and should never be modified. */
+@property (strong, nonatomic) NSString          *authDomain;
+/*! The user's associated scriptAuthService. This will be removed from the FFUser object in a forthcoming release, and should never be modified. */
+@property (strong, nonatomic) NSString          *scriptAuthService;
+
 
 /*!
  Standard initializer. No-args initializer calls this initializer with [FatFractal main] as parameter.

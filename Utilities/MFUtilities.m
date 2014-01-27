@@ -89,38 +89,37 @@
 -(NSString *)getImageForActivity:(int)i correct:(BOOL)correct{
     NSString *imageName;
     if(!correct){
-    if(i== 3 ||i == 4 ||i == 5)
-    {
-        imageName =@"scale1@2";
-    }
-    
-    if(i == 6)
-    {
-        
-        imageName =@"glass1@2";
-    }
-    if(i == 1||i == 2)
-    {
-        imageName =@"choco1@2";
-    }
+        if(i== 3 ||i == 4 ||i == 5)
+        {
+            imageName =@"scale1@2";
+        }
+        if(i == 6)
+        {
+            imageName =@"glass1@2";
+        }
+        if(i == 1||i == 2||i==7||i==8)
+        {
+            imageName =@"choco1@2";
+        }
     }
     else{
         if(i== 4 ||i == 5 ||i == 3)
         {
             imageName =@"scale2@2";
         }
-        
         if(i == 6)
         {
-            
             imageName =@"glass2@2";
         }
-        if(i == 1||i == 2)
+        if(i == 1||i == 2||i==7||i==8)
         {
             imageName =@"choco2@2";
         }
-    
     }
+    
+    
+    
+    
     return imageName;
 }
 
@@ -130,7 +129,7 @@
     {
         [self presentScaleIntro:viewcontroller];
     }
-    if(activity == 1||activity == 2)
+    if(activity == 1||activity == 2||activity==7||activity==8)
     {
        [self presentNumberLineIntro:viewcontroller];
     }
@@ -138,9 +137,6 @@
     {
        [self presentFillGlassIntro:viewcontroller];
     }
-    
-    
-    
 }
 
 -(void)presentScaleIntro:(id)viewcontroller{
@@ -210,18 +206,19 @@
 }
 
 -(void)presentFillGlassIntro:(id)viewcontroller{
-    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
-                                                          withDetail: nil
-                                                           withImage: [UIImage imageNamed:@"holdcup@2"]];
+//    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
+//                                                          withDetail: nil
+//                                                           withImage: [UIImage imageNamed:@"holdcup@2"]];
     
     KxIntroViewPage *page1 = [KxIntroViewPage introViewPageWithTitle: @"Fill the Glass Activity"
-                                                          withDetail: nil
-                                                           withImage: [UIImage imageNamed:@"holdcup@2"]];
+                                                          withDetail: @"Tap on the buckets above to fill the glass with water. You need to make sure that you poured enough water to exactly match the water in the glass on the right. Don't let the water overflow! Good luck!"
+                              
+                                                           withImage: [UIImage imageNamed:@"g1"]];
     
     
-    page1.detailLabel.textAlignment = NSTextAlignmentLeft;
+    page1.detailLabel.textAlignment = NSTextAlignmentCenter;
     
-    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0, page1 ]];
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[  page1 ]];
     
     vc.introView.animatePageChanges = YES;
     vc.introView.gradientBackground = YES;

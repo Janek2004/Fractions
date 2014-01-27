@@ -9,6 +9,27 @@
                    "nr_fraction_inquestion": 1,
                    "set": 8
                    },
+
+                   {
+                   "id": 7,
+                   "name": "Candy Bar Activity",
+                   "classname": "NumberLineView",
+                   "standard": "CCSS.Math.Content.3.NF.A.3d",
+                   "questioncount": 5,
+                   "nr_fraction_inquestion": 1,
+                   "set": 5
+                   },
+
+                   {
+                   "id": 8,
+                   "name": "Candy Bar Activity",
+                   "classname": "NumberLineView",
+                   "standard": "CCSS.Math.Content.3.NF.A.3d",
+                   "questioncount": 5,
+                   "nr_fraction_inquestion": 1,
+                   "set": 6
+                   },
+                   
                    {
                    "id": 2,
                    "name": "Candy Bar Activity",
@@ -28,6 +49,7 @@
                    "questioncount": 5,
                    "set": 1
                    },
+                   
                    {
                    "id": 4,
                    "name": "Tip The Scale",
@@ -37,6 +59,7 @@
                    "set": 2,
                    "questioncount": 5
                    },
+                   
                    {
                    "id": 5,
                    "name": "Tip The Scale",
@@ -90,18 +113,46 @@
              {
              "id": 5,
              "numerator": [
-                           1,
-                           1,
-                           1,
-                           1,
-                           1,
-                           1,
-                           1,
-                           1,
-                           1,
-                           1
+                           2,
+                           3,
+                           4,
+                           5,
+                           6,
+                           7,
+                           8,
+                           9,
+                           10
+
                           
                            ],
+             "denominator": [
+                             1,
+                             1,
+                             1,
+                             1,
+                             1,
+                             1,
+                             1,
+                             1,
+                             1
+                             ]
+             },
+             
+             {
+             "id": 6,
+             "numerator": [
+                           1,
+                           2,
+                           3,
+                           4,
+                           5,
+                           6,
+                           7,
+                           8,
+                           9,
+                           10
+                           ],
+             
              "denominator": [
                              1,
                              2,
@@ -114,8 +165,8 @@
                              9,
                              10
                              ]
-             }
-             ,
+             },
+             
              {
              "id": 4,
              "numerator": [

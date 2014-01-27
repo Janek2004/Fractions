@@ -37,6 +37,7 @@
 		4F3B790B1808496900E1E64B /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B79091808496900E1E64B /* ArrayDataSource.m */; };
 		4F3B790E1808509500E1E64B /* ProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B790D1808509500E1E64B /* ProgressCell.m */; };
 		4F4232031892B3D80068C8E4 /* MFLocalStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4232021892B3D80068C8E4 /* MFLocalStudent.m */; };
+		4F4232061896BBB40068C8E4 /* g1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F4232051896BBB40068C8E4 /* g1.png */; };
 		4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEE917ECAEA1001AF95B /* MFFractionView.m */; };
 		4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEEF17ECD176001AF95B /* MFQuestionSet.m */; };
 		4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44AEF717F09BB9001AF95B /* NSArray+RandomArray.m */; };
@@ -243,6 +244,7 @@
 		4F3B790D1808509500E1E64B /* ProgressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressCell.m; sourceTree = "<group>"; };
 		4F4232011892B3D80068C8E4 /* MFLocalStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFLocalStudent.h; sourceTree = "<group>"; };
 		4F4232021892B3D80068C8E4 /* MFLocalStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFLocalStudent.m; sourceTree = "<group>"; };
+		4F4232051896BBB40068C8E4 /* g1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = g1.png; sourceTree = "<group>"; };
 		4F44AEE817ECAEA1001AF95B /* MFFractionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFFractionView.h; path = Utilities/MFFractionView.h; sourceTree = "<group>"; };
 		4F44AEE917ECAEA1001AF95B /* MFFractionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFFractionView.m; path = Utilities/MFFractionView.m; sourceTree = "<group>"; };
 		4F44AEEE17ECD176001AF95B /* MFQuestionSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFQuestionSet.h; path = Utilities/MFQuestionSet.h; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 		4F3B78BB1805A64B00E1E64B /* Activities Screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				4F4232041896BB980068C8E4 /* Glass Activity */,
 				4F3B78BC1805A64B00E1E64B /* NumberLineActivity */,
 				4F3B78C21805A64B00E1E64B /* ScaleActivity */,
 			);
@@ -591,6 +594,14 @@
 				4F3B790D1808509500E1E64B /* ProgressCell.m */,
 			);
 			name = Progress;
+			sourceTree = "<group>";
+		};
+		4F4232041896BB980068C8E4 /* Glass Activity */ = {
+			isa = PBXGroup;
+			children = (
+				4F4232051896BBB40068C8E4 /* g1.png */,
+			);
+			name = "Glass Activity";
 			sourceTree = "<group>";
 		};
 		4F44AEF217ECE08D001AF95B /* Model */ = {
@@ -1023,6 +1034,7 @@
 				4F50349417FC7747007A9DE8 /* sad.png in Resources */,
 				4F50346317FC7747007A9DE8 /* walk3.png in Resources */,
 				4F50346D17FC7747007A9DE8 /* scale2.png in Resources */,
+				4F4232061896BBB40068C8E4 /* g1.png in Resources */,
 				4F50347C17FC7747007A9DE8 /* home1.png in Resources */,
 				4FE8C4F617FDF73A00B0C796 /* login1@2.png in Resources */,
 				4FE8C50717FDF73A00B0C796 /* walk4@2.png in Resources */,
@@ -1289,9 +1301,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/jmc72/Downloads,
-					/Users/sadmin/Downloads,
-					/Users/jmc72/Desktop/NewRepositories/FatFractal,
 					/Users/jmc72/Desktop/NewRepositories/Fractions,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1314,9 +1323,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/jmc72/Downloads,
-					/Users/sadmin/Downloads,
-					/Users/jmc72/Desktop/NewRepositories/FatFractal,
 					/Users/jmc72/Desktop/NewRepositories/Fractions,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

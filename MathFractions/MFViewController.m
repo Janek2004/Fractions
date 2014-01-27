@@ -46,13 +46,14 @@
 @property (nonatomic,strong)DataManager * dataManager;
 @property (nonatomic,strong)MFManager * manager;
 
+@property (strong, nonatomic) IBOutlet UIButton *showLoginViewButton;
 
 @property (strong, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 @property (strong, nonatomic) IBOutlet UIImageView *fractioImageView;
-@property (strong, nonatomic) NSArray * array;
+
 @property (strong, nonatomic) IBOutlet UIView *aboutView;
 @property (strong, nonatomic) IBOutlet UIView *userView;
 @property (strong, nonatomic) IBOutlet UIView *teacherGuideView;
@@ -85,8 +86,12 @@
 - (IBAction)showTeacherGuide:(id)sender;
 - (IBAction)dismissView:(id)sender;
 - (IBAction)showProgress:(id)sender;
-
 - (IBAction)contactSupport:(id)sender;
+
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *activityButtons;
+
+
 
 @end
 
@@ -95,12 +100,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _array =@[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
+
     _utilities= [[MFUtilities alloc]init];
     _dataManager = [[DataManager alloc]init];
-
-
     _mailHelper =[[MailHelper alloc]init];
+    _manager = [MFManager sharedManager];
     
     NSArray * images = @[[UIImage imageNamed:@"walk1"],[UIImage imageNamed:@"walk2"],[UIImage imageNamed:@"walk3"],[UIImage imageNamed:@"walk4"]];
     
@@ -134,14 +138,9 @@
         PracticeViewController * pv = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
          pv.activityId = btn.tag;
         [self presentViewController:pv animated:YES completion:^{
-            
-        }];
-         
+            }];
          }
-         
      }];
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -157,31 +156,37 @@
 
 -(void)checkProgress{
     //get current progress
-    for(int i=1;i<=6;i++){
-        UIButton *btn = (UIButton *)[self.view viewWithTag:i];
-        NSString * imageName = [_utilities getImageForActivity:i  correct:NO];
+    for(UIButton * btn in self.activityButtons){
+        NSString * imageName = [_utilities getImageForActivity:btn.tag  correct:NO];
+        NSLog(@"Btn tag %d image name %@",btn.tag, imageName);
+
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
+#warning change it to add more activities
+ // it's probably not the best approach. Assigning activity based on button tag.
     
-    MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
-   
-    
-    for(MFCompleted *act in mf.completed){
-        
-        
-        [UIView animateWithDuration:1.0 animations:^{
-            NSString * imageName = [_utilities getImageForActivity:act.activity.integerValue  correct:YES];
-            
-            [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-            
-        }];
-    }
+//    MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
+//    for(MFCompleted *act in mf.completed){
+//        [UIView animateWithDuration:1.0 animations:^{
+//            NSString * imageName = [_utilities getImageForActivity:act.activity.integerValue  correct:YES];
+//            
+//            [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+//            
+//        }];
+//    }
 }
 
 
 
 
 - (IBAction)showMenu:(id)sender {
+    if(!_manager.mfuser){
+        [self.showLoginViewButton setTitle:@"Log In" forState:UIControlStateNormal];
+    }
+    else{
+        [self.showLoginViewButton setTitle:@"Log Out" forState:UIControlStateNormal];
+    }
+    
     [self.view addSubview:self.MenuView];
     self.MenuView.alpha = 0;
     [UIView animateWithDuration:1
@@ -195,35 +200,13 @@
 }
 
 - (IBAction)hideMenu:(id)sender {
-   
-//    
-//    if(self.userNameTextField.text.length==0)
-//    {
-//        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"Tap on the User button to log in or create a new user." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//        [a show];
-//        return;
-//    }
-//    
-//    if(self.classIdTxtField.text.length>0){
-//        [[MFManager sharedManager]setClassId:self.classIdTxtField.text];
-//        MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
-//        mf.classId =self.classIdTxtField.text;
-//        [_dataManager updateData:mf];
-//        
-//    }
-//   
-   
     [UIView animateWithDuration:1
                      animations:^{
                          self.MenuView.alpha = 0;
                          
                      } completion:^(BOOL finished) {
                          [self.MenuView removeFromSuperview];
-                         
-                         
-                         
                      }];
-   
 }
 
 - (IBAction)showIntro:(id)sender {
@@ -264,8 +247,6 @@
                 UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We can't log you in. Please check your online connection, enter different credentials or continue as a guest." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [a show];
             }
-            
-            
         }
     }
 }
@@ -309,31 +290,6 @@
     self.userName.text = @"Hello guest!";
     
 }
-/*
-- (IBAction)newUser:(id)sender {
-    //DATA MANAGER
-   
-    NSString * username = _registrationUserName.text;
-   // NSString *
-    NSString * firstname= _firstnameTxtField.text;
-    NSString * lastname = _lastNameTxtField.text;
-    NSString * password = _registrationPassword.text;
-    NSString *classId = _classIdTxtField.text;
-    [self.dataManager addNewUserWithPin:password andName:username classId:classId first:firstname last:lastname];
-    
-    
-//    
-//    if(newuser){
-//        [self.dataManager loginUser:newuser];
-//        [[MFManager sharedManager]setMfuser: newuser];
-//         self.userName.text = [NSString stringWithFormat:@"Hi %@", newuser.name];
-//        
-//        [self dismissView:sender];
-//        [self hideMenu:nil];
-//
-//    }
-}
-*/
 
 - (IBAction)activityInfo:(id)sender {
     NSLog(@"Activity ");
@@ -357,6 +313,12 @@
 
 
 - (IBAction)showUserView:(id)sender {
+   
+    self.userName.text = nil;
+    if(_manager.mfuser){
+        _manager.mfuser = nil;
+        _manager.guestMode = NO;
+    }
     [self.view addSubview:self.userView];
     self.userView.alpha = 0;
     [UIView animateWithDuration:1
@@ -389,16 +351,10 @@
 - (IBAction)continueAsGuest:(id)sender {
     //remove current user
     
-    
+    self.userName.text = @"Guest";
     //dismiss
     [self dismissView:sender];
-    
 }
-
-
-
-
-
 
 - (IBAction)showTeacherGuide:(id)sender {
     [self.view addSubview:self.teacherGuideView];
@@ -413,16 +369,15 @@
                      }];
 }
 
+
 - (IBAction)dismissView:(id)sender {
     [UIView animateWithDuration:1
                      animations:^{
                          [[sender superview]setAlpha:0];
                          
                      } completion:^(BOOL finished) {
-                         //[[[sender superview]superview] removeFromSuperview];
 
                         [[sender superview] removeFromSuperview];
-                         
                      }];
 
 

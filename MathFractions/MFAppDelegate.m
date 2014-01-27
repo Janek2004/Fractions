@@ -64,15 +64,12 @@
     [debugger enableCoreDataDebugging];
     [debugger addManagedObjectContext:context withName:@"My MOC"];
     
-    
-    
+
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFActivity" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-
-    
-    
+   [request setEntity:entityDescription];
     NSError *error;
+  
     NSArray *array = [context executeFetchRequest:request error:&error];
     if(error){
         NSLog(@"Error %@",error.debugDescription);

@@ -223,8 +223,6 @@
   
     }
 
-    
-    
      return mf;
     
 }
@@ -301,7 +299,7 @@
         [_manager.ff createObj:a atUri:@"/MFAttempt" error:&error];
         
         if(error) {
-            NSLog(@"Saving Attempt %@",error.debugDescription);            
+            NSLog(@"Saving Attempt %@",error.debugDescription);
         }
         error = nil;
         [context save:&error];
@@ -407,10 +405,8 @@
     [self getLocalJSON];
 
     NSArray * a = [self.appData objectForKey:@"activities"];
-  
+    NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
     [a enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL *stop) {
-
-        NSManagedObjectContext *context =   [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
 
         MFActivity *act = [NSEntityDescription insertNewObjectForEntityForName:@"MFActivity" inManagedObjectContext:context];
         act.activityid = obj[@"id"];
@@ -422,17 +418,17 @@
         
         //get raw set
         NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
-
         act.set = set;
         
-        //save it
-        NSError * error;
-        [context save:&error];
-        if(error){
-            NSLog(@"Error %@",error.debugDescription);
+           }];
+    //save it
+    NSError * error;
+    [context save:&error];
+    if(error){
+        NSLog(@"Error %@",error.debugDescription);
         
-        }
-    }];
+    }
+
 }
 
 
