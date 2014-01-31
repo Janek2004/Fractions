@@ -183,6 +183,13 @@
 		4FEFE04C17EA3142004AF076 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE04B17EA3142004AF076 /* DataManager.m */; };
 		4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFA9C0417F2381900F6FF32 /* MFViewController.xib */; };
 		822276F317FBBDB0006A5798 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822276F217FBBDB0006A5798 /* Images.xcassets */; };
+		829F7CAB189A271500702515 /* MFTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CA9189A271500702515 /* MFTeacherViewController.m */; };
+		829F7CAC189A271500702515 /* MFTeacherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829F7CAA189A271500702515 /* MFTeacherViewController.xib */; };
+		829F7CAE189A28C200702515 /* TeacherFeedbackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829F7CAD189A28C200702515 /* TeacherFeedbackCell.xib */; };
+		829F7CB1189A2AD400702515 /* MFTeacherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CB0189A2AD400702515 /* MFTeacherCell.m */; };
+		829F7CB4189A30A800702515 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CB3189A30A700702515 /* DataSource.m */; };
+		829F7CB6189AABEB00702515 /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829F7CB5189AABEB00702515 /* FFEF.framework */; };
+		829F7CB9189B0DD800702515 /* MFMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CB8189B0DD800702515 /* MFMessage.m */; };
 		82ABC33F181049D700182737 /* feedbackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 82ABC33E181049D700182737 /* feedbackButton.png */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
 		DBB42ACB17FE1BA90082D799 /* GlassActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */; };
@@ -413,6 +420,17 @@
 		4FEFE04B17EA3142004AF076 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Utilities/DataManager.m; sourceTree = "<group>"; };
 		4FFA9C0417F2381900F6FF32 /* MFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MFViewController.xib; path = MathFractions/MFViewController.xib; sourceTree = "<group>"; };
 		822276F217FBBDB0006A5798 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MathFractions/Images.xcassets; sourceTree = "<group>"; };
+		829F7CA8189A271500702515 /* MFTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFTeacherViewController.h; path = "Teacher's Feedback/MFTeacherViewController.h"; sourceTree = "<group>"; };
+		829F7CA9189A271500702515 /* MFTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFTeacherViewController.m; path = "Teacher's Feedback/MFTeacherViewController.m"; sourceTree = "<group>"; };
+		829F7CAA189A271500702515 /* MFTeacherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MFTeacherViewController.xib; path = "Teacher's Feedback/MFTeacherViewController.xib"; sourceTree = "<group>"; };
+		829F7CAD189A28C200702515 /* TeacherFeedbackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherFeedbackCell.xib; sourceTree = "<group>"; };
+		829F7CAF189A2AD400702515 /* MFTeacherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFTeacherCell.h; path = "Teacher's Feedback/MFTeacherCell.h"; sourceTree = "<group>"; };
+		829F7CB0189A2AD400702515 /* MFTeacherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFTeacherCell.m; path = "Teacher's Feedback/MFTeacherCell.m"; sourceTree = "<group>"; };
+		829F7CB2189A30A700702515 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
+		829F7CB3189A30A700702515 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
+		829F7CB5189AABEB00702515 /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FFEF.framework; sourceTree = "<group>"; };
+		829F7CB7189B0DD800702515 /* MFMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMessage.h; sourceTree = "<group>"; };
+		829F7CB8189B0DD800702515 /* MFMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFMessage.m; sourceTree = "<group>"; };
 		82ABC33E181049D700182737 /* feedbackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackButton.png; sourceTree = "<group>"; };
 		CDAA783D0BE8466CA2DC1E4B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB42ACA17FE1BA90082D799 /* GlassActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlassActivityView.xib; sourceTree = "<group>"; };
@@ -431,6 +449,7 @@
 				4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */,
 				4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */,
 				4F14C1E617999FD90043B1D4 /* Foundation.framework in Frameworks */,
+				829F7CB6189AABEB00702515 /* FFEF.framework in Frameworks */,
 				4F14C1E817999FD90043B1D4 /* CoreGraphics.framework in Frameworks */,
 				A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */,
 			);
@@ -457,6 +476,14 @@
 				4F14C1FB17999FD90043B1D4 /* MFViewController.h */,
 				4F14C1FC17999FD90043B1D4 /* MFViewController.m */,
 				4FFA9C0417F2381900F6FF32 /* MFViewController.xib */,
+				829F7CA8189A271500702515 /* MFTeacherViewController.h */,
+				829F7CA9189A271500702515 /* MFTeacherViewController.m */,
+				829F7CAA189A271500702515 /* MFTeacherViewController.xib */,
+				829F7CAD189A28C200702515 /* TeacherFeedbackCell.xib */,
+				829F7CAF189A2AD400702515 /* MFTeacherCell.h */,
+				829F7CB0189A2AD400702515 /* MFTeacherCell.m */,
+				829F7CB2189A30A700702515 /* DataSource.h */,
+				829F7CB3189A30A700702515 /* DataSource.m */,
 				4FEFE03317E7B10A004AF076 /* data.json */,
 				4FEFE04217E8ED4B004AF076 /* Practice Controller */,
 				822276F217FBBDB0006A5798 /* Images.xcassets */,
@@ -486,6 +513,7 @@
 		4F14C1E217999FD80043B1D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				829F7CB5189AABEB00702515 /* FFEF.framework */,
 				4FBC8D211892AF6D00D98C1B /* FFEF.framework */,
 				4F864BEF183D096700C888B8 /* AudioToolbox.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
@@ -568,6 +596,8 @@
 		4F3B78DA180728C900E1E64B /* FatFractal */ = {
 			isa = PBXGroup;
 			children = (
+				829F7CB7189B0DD800702515 /* MFMessage.h */,
+				829F7CB8189B0DD800702515 /* MFMessage.m */,
 				4F3B78DB180728FF00E1E64B /* MFFrAttempt.h */,
 				4F3B78DC180728FF00E1E64B /* MFFrAttempt.m */,
 				4F3B78DE1807291500E1E64B /* MFFractalFraction.h */,
@@ -993,6 +1023,7 @@
 				4F14C1F617999FD90043B1D4 /* Default.png in Resources */,
 				4F50348817FC7747007A9DE8 /* done1.png in Resources */,
 				4F50347017FC7747007A9DE8 /* map.png in Resources */,
+				829F7CAE189A28C200702515 /* TeacherFeedbackCell.xib in Resources */,
 				4F50347E17FC7747007A9DE8 /* Icon-72.png in Resources */,
 				4F50348B17FC7747007A9DE8 /* cont1.png in Resources */,
 				4FE8C4E417FDF73A00B0C796 /* correct@2.png in Resources */,
@@ -1068,6 +1099,7 @@
 				4FFA9C0517F2381900F6FF32 /* MFViewController.xib in Resources */,
 				4FE8C4E317FDF73A00B0C796 /* cont2@2.png in Resources */,
 				4F50346617FC7747007A9DE8 /* walk2.png in Resources */,
+				829F7CAC189A271500702515 /* MFTeacherViewController.xib in Resources */,
 				4FE8C4D917FDF73A00B0C796 /* back1@2.png in Resources */,
 				4F50347717FC7747007A9DE8 /* Icon-Small-50@2x.png in Resources */,
 				4F50346B17FC7747007A9DE8 /* menu2.png in Resources */,
@@ -1161,12 +1193,14 @@
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
 				4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */,
 				4F14C1F017999FD90043B1D4 /* main.m in Sources */,
+				829F7CAB189A271500702515 /* MFTeacherViewController.m in Sources */,
 				4F3B7904180844FD00E1E64B /* MFProgressViewController.m in Sources */,
 				4F864BFC183D4FA800C888B8 /* NumberLineViewController.m in Sources */,
 				4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */,
 				4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */,
 				4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */,
 				4F44AEF817F09BB9001AF95B /* NSArray+RandomArray.m in Sources */,
+				829F7CB1189A2AD400702515 /* MFTeacherCell.m in Sources */,
 				4F14C1F417999FD90043B1D4 /* MFAppDelegate.m in Sources */,
 				4FE7BA7F179F286E0025DAF7 /* Segment.m in Sources */,
 				4F44AEF017ECD176001AF95B /* MFQuestionSet.m in Sources */,
@@ -1178,8 +1212,10 @@
 				4F44AEEA17ECAEA1001AF95B /* MFFractionView.m in Sources */,
 				4F65E2041843E7CA004C5607 /* MailHelper.m in Sources */,
 				4FD4CBF41891605C0087EBDC /* MFStudent.m in Sources */,
+				829F7CB4189A30A800702515 /* DataSource.m in Sources */,
 				4F864BEA183D090C00C888B8 /* SoundHelper.m in Sources */,
 				4F3B790B1808496900E1E64B /* ArrayDataSource.m in Sources */,
+				829F7CB9189B0DD800702515 /* MFMessage.m in Sources */,
 				4F5033FE17FB4B35007A9DE8 /* CoreDataModel.xcdatamodeld in Sources */,
 				4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */,
 				4FEFE03017E7AE48004AF076 /* KxIntroView.m in Sources */,
@@ -1302,6 +1338,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Desktop/NewRepositories/Fractions,
+					/Users/sadmin/Desktop/NewRepositories/Fractions,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/Fractio-Prefix.pch";
@@ -1324,6 +1361,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jmc72/Desktop/NewRepositories/Fractions,
+					/Users/sadmin/Desktop/NewRepositories/Fractions,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/Fractio-Prefix.pch";

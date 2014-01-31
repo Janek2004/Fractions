@@ -41,6 +41,7 @@
 #import "UIBAlertView.h"
 #import "MFFrAttempt.h"
 #import  "MFFractalFraction.h"
+#import  "MFMessage.h"
 
 
 #define USER_NAME_KEY @"current_username"
@@ -65,7 +66,22 @@
     return self;
 }
 
-
+-(void)teacherFeedbackForUser:(NSString *)userId completionBlock: (void(^)(NSArray *a)) block{
+    
+    NSString * query = [NSString stringWithFormat:@"/MFFeedbackMessage/(userId eq %@)",userId];
+    
+    [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+        if(theErr){
+            UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"We couldn't complete your request." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [a show];
+            NSLog(@"Error %@",theErr.debugDescription);
+            block(nil);
+        }
+        else{
+            block(theObj);
+        }}];
+    
+}
 
 
 -(MFActivity *)getActivity:(int)activityId{

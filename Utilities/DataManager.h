@@ -49,7 +49,11 @@
 
 -(void)updateData:(NSManagedObject *)object;
 -(MFFraction *)getFractionInContext:(NSManagedObjectContext *)context;
-
 -(void)logout;
+
+-(void)teacherFeedbackForUser:(NSString *)userId completionBlock: (void(^)(NSArray *a)) block;
+
+
+
 
 @end

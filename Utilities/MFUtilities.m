@@ -89,29 +89,29 @@
 -(NSString *)getImageForActivity:(int)i correct:(BOOL)correct{
     NSString *imageName;
     if(!correct){
-        if(i== 3 ||i == 4 ||i == 5)
+        if(i== 7 ||i == 8 ||i == 9)
         {
             imageName =@"scale1@2";
         }
-        if(i == 6)
+        if(i == 6||i == 5)
         {
             imageName =@"glass1@2";
         }
-        if(i == 1||i == 2||i==7||i==8)
+        if(i == 1||i == 2||i==3||i==4)
         {
             imageName =@"choco1@2";
         }
     }
     else{
-        if(i== 4 ||i == 5 ||i == 3)
+        if(i== 7 ||i == 8 ||i == 9)
         {
             imageName =@"scale2@2";
         }
-        if(i == 6)
+         if(i == 6||i == 5)
         {
             imageName =@"glass2@2";
         }
-        if(i == 1||i == 2||i==7||i==8)
+        if(i == 1||i == 2||i==3||i==4)
         {
             imageName =@"choco2@2";
         }
@@ -123,19 +123,19 @@
     return imageName;
 }
 
--(void)presentIntroForActivity:(int)activity inViewController: (id)viewcontroller{
+-(void)presentIntroForActivity:(int)i inViewController: (id)viewcontroller{
 
-    if(activity == 4||activity == 5||activity == 3)
+    if(i== 7 ||i == 8 ||i == 9)
     {
         [self presentScaleIntro:viewcontroller];
     }
-    if(activity == 1||activity == 2||activity==7||activity==8)
-    {
-       [self presentNumberLineIntro:viewcontroller];
-    }
-    if(activity == 6)
+    if(i == 6||i == 5)
     {
        [self presentFillGlassIntro:viewcontroller];
+    }
+    if(i == 1||i == 2||i==3||i==4)
+    {
+         [self presentNumberLineIntro:viewcontroller];
     }
 }
 

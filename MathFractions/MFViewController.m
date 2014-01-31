@@ -37,6 +37,8 @@
 #import "MFProgressViewController.h"
 #import "MailHelper.h"
 #import "MFLocalStudent.h"
+#import "MFTeacherViewController.h"
+
 
 
 @interface MFViewController ()
@@ -67,6 +69,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *lastNameTxtField;
 @property (strong, nonatomic) IBOutlet UITextField *registrationUserName;
 
+@property (strong, nonatomic) MFTeacherViewController * teacherVC;
+
 
 @property (strong, nonatomic) IBOutlet UITextField *classIdTxtField;
 @property (strong,nonatomic)MailHelper * mailHelper;
@@ -88,6 +92,7 @@
 - (IBAction)showProgress:(id)sender;
 - (IBAction)contactSupport:(id)sender;
 
+- (IBAction)showTeachersFeedback:(id)sender;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *activityButtons;
 
@@ -371,6 +376,14 @@
 
 
 - (IBAction)dismissView:(id)sender {
+    //update login button
+    if(!_manager.mfuser){
+        [self.showLoginViewButton setTitle:@"Log In" forState:UIControlStateNormal];
+    }
+    else{
+        [self.showLoginViewButton setTitle:@"Log Out" forState:UIControlStateNormal];
+    }
+    
     [UIView animateWithDuration:1
                      animations:^{
                          [[sender superview]setAlpha:0];
@@ -394,6 +407,18 @@
 
 - (IBAction)contactSupport:(id)sender {
     [_mailHelper sendEmailFromVC:self];
+}
+
+- (IBAction)showTeachersFeedback:(id)sender {
+    
+    if([_manager mfuser]){
+        MFTeacherViewController * mf = [[MFTeacherViewController alloc]initWithNibName:@"MFTeacherViewController" bundle:nil];
+        [self presentViewController:mf animated:YES completion:nil];
+    }else{
+        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Fractio" message:@"You need to log in to access the Inbox." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [a show];
+    }
+    
 }
 
 @end
