@@ -57,13 +57,13 @@
 - (id)init {
     if (self = [super init]) {
         NSString *baseUrl = @"https://research.fatfractal.com/Fractions/";
-        #warning base URL
-        baseUrl = @"https://djmobileinc.fatfractal.com/Fractions/";
+      //  #warning base URL
+      //  baseUrl = @"https://djmobileinc.fatfractal.com/Fractions/";
         
         if(!_ff){
             _ff = [[FatFractal alloc] initWithBaseUrl:baseUrl];
                 [_ff loginWithUserName:@"Test" andPassword:@"Test1234"];
-               // _ff.debug = YES;
+                _ff.debug = YES;
         }
 
 

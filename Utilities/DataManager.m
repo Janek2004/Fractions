@@ -40,8 +40,8 @@
 #import "MFManager.h"
 #import "UIBAlertView.h"
 #import "MFFrAttempt.h"
-#import  "MFFractalFraction.h"
-#import  "MFMessage.h"
+#import "MFFractalFraction.h"
+#import "MFMessage.h"
 
 
 #define USER_NAME_KEY @"current_username"
@@ -62,13 +62,24 @@
     if (self) {
         // Initialization code
         _manager = [MFManager sharedManager];
+//        
+//        NSString * query = [NSString stringWithFormat:@"/MFFractalAttempt/"];
+//        
+//        [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
+//            for (int i=0;i<[theObj count]; i++){
+//                [_manager.ff deleteObj:[theObj objectAtIndex:i]];
+//            }
+//        }];
+
+        
+       
     }
     return self;
 }
 
 -(void)teacherFeedbackForUser:(NSString *)userId completionBlock: (void(^)(NSArray *a)) block{
     
-    NSString * query = [NSString stringWithFormat:@"/MFFeedbackMessage/(userId eq %@)",userId];
+    NSString * query = [NSString stringWithFormat:@"/MFFeedbackMessage/(studentid eq '%@')",userId];
     
     [_manager.ff getArrayFromUri:query onComplete:^(NSError *theErr, id theObj, NSHTTPURLResponse *theResponse) {
         if(theErr){
@@ -311,8 +322,11 @@
         fr.numerator = answer.numerator;
         a.answer = fr;
         
+        
+        
+        
         NSError * error;
-        [_manager.ff createObj:a atUri:@"/MFAttempt" error:&error];
+        [_manager.ff createObj:a atUri:@"/MFFrAttempt" error:&error];
         
         if(error) {
             NSLog(@"Saving Attempt %@",error.debugDescription);

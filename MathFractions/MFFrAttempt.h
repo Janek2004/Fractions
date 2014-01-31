@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class MFFractalFraction;
+@class MFFractalFraction ;
 
 @interface MFFrAttempt : NSObject
 @property (nonatomic, retain) NSNumber * activity;
