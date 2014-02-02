@@ -33,7 +33,7 @@
 #import "DataManager.h"
 #import "MFActivity.h"
 #import "MFFraction.h"
-#import "PDDebugger.h"
+//#import "PDDebugger.h"
 #import "SoundHelper.h"
 #import <FFEF/FatFractal.h>
 
@@ -56,13 +56,15 @@
     // Override point for customization after application launch.
     self.viewController = [[MFViewController alloc] initWithNibName:@"MFViewController" bundle:nil];
     //test core data
+ 
+    
+//    PDDebugger *debugger = [PDDebugger defaultInstance];
+//    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+//    [debugger enableCoreDataDebugging];
+//    [debugger addManagedObjectContext:context withName:@"My MOC"];
+    
+    
     NSManagedObjectContext *context = [self managedObjectContext];
-    
-    PDDebugger *debugger = [PDDebugger defaultInstance];
-    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
-    [debugger enableCoreDataDebugging];
-    [debugger addManagedObjectContext:context withName:@"My MOC"];
-    
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFActivity" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
    [request setEntity:entityDescription];

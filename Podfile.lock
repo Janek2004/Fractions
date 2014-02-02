@@ -1,18 +1,10 @@
 PODS:
-  - Mantle (1.2):
-    - Mantle/extobjc
-  - Mantle/extobjc (1.2)
-  - PonyDebugger (0.3.1):
-    - SocketRocket
-  - SocketRocket (0.3.1-beta2)
+  - Reachability (3.1.1)
 
 DEPENDENCIES:
-  - Mantle (= 1.2)
-  - PonyDebugger (~> 0.3.0)
+  - Reachability
 
 SPEC CHECKSUMS:
-  Mantle: f5b5cba1b112273fe3bb4433cdcf1da76203c2b4
-  PonyDebugger: d31607145d785b2315cd6f6a4ebaa378eb0c1340
-  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
 
 COCOAPODS: 0.28.0

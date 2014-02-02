@@ -71,7 +71,7 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
         
     }
     [_piecesArray removeAllObjects];
-    float w = PIECE_WIDTH;///_PR * CGRectGetWidth(self.frame);
+    float w = PIECE_WIDTH;
     
     float x = [self getX];
     CGRect frame = CGRectMake(x,55, w,100);
