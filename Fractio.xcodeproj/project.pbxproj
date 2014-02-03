@@ -114,7 +114,6 @@
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
 		4F9913591891B047001B9EFD /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9913581891B047001B9EFD /* MFAttempt.m */; };
-		4FBC8D221892AF6D00D98C1B /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FBC8D211892AF6D00D98C1B /* FFEF.framework */; };
 		4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBE71891605B0087EBDC /* MFActivity.m */; };
 		4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBED1891605C0087EBDC /* MFCompleted.m */; };
 		4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF01891605C0087EBDC /* MFFraction.m */; };
@@ -338,7 +337,6 @@
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
 		4F9913571891B047001B9EFD /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
 		4F9913581891B047001B9EFD /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
-		4FBC8D211892AF6D00D98C1B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FFEF.framework; sourceTree = "<group>"; };
 		4FD4CBE61891605B0087EBDC /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4FD4CBE71891605B0087EBDC /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4FD4CBEC1891605C0087EBDC /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
@@ -443,7 +441,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FBC8D221892AF6D00D98C1B /* FFEF.framework in Frameworks */,
 				4F864BF0183D096700C888B8 /* AudioToolbox.framework in Frameworks */,
 				4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */,
 				4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */,
@@ -514,7 +511,6 @@
 			isa = PBXGroup;
 			children = (
 				829F7CB5189AABEB00702515 /* FFEF.framework */,
-				4FBC8D211892AF6D00D98C1B /* FFEF.framework */,
 				4F864BEF183D096700C888B8 /* AudioToolbox.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
 				4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */,
@@ -1356,7 +1352,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

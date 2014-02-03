@@ -243,8 +243,9 @@
 
         [self.dataManager loginUser:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text block:^{
             self.userName.text =[NSString stringWithFormat:@"Hi %@",self.manager.mfuser.username];
-           [self dismissView:sender];
-        }];    
+            [self dismissView:sender];
+            [self checkProgress];
+        }];
       }
         else{
           MFLocalStudent * st =  [self.dataManager findUserWith:self.userNameTextField.text andPassword:self.loginPasswordTxtField.text];

@@ -196,7 +196,11 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 }
 
 -(void)animateFeedback:(NSTimer *)timer{
+   
+#warning FIX IT!!!
     NSLog(@"timer");
+   
+    //displaying current value of the bar (feedback)
     if(!_lbl){
         _lbl = [[UILabel alloc]initWithFrame:CGRectMake(40,40,100,100)];
     }
@@ -204,7 +208,8 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
     _lbl.backgroundColor = [UIColor clearColor];
     _lbl.font = [UIFont fontWithName:@"Arial" size:40];
     _lbl.textColor = [UIColor whiteColor];
-    
+
+    //this the end of the animation
     if(anim_count == _piecesArray.count){
         MFFraction * mf = [self calculateScore];
         MFFraction * mf1 = self.currentFraction;
@@ -218,7 +223,14 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
         [_lbl removeFromSuperview];
         
     }else{
-       NumberLinePieceView * s= _piecesArray[anim_count];
+      
+        //cheating
+//        if(_piecesArray.count ==0){
+//            NSLog(@"0 ");
+//            return;
+//        }
+        
+        NumberLinePieceView * s= _piecesArray[anim_count];
         _lbl.text = [NSString stringWithFormat:@"%@/%@",s.getCurrentFraction.numerator,s.getCurrentFraction.denominator];
         _lbl.frame = CGRectOffset(s.frame, 0, 30);
          [UIView animateWithDuration:1
@@ -232,8 +244,9 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 }
 
 -(void)checkAnswer:(void (^)(BOOL s, MFFraction * answer))completed;{
-    self.completionBlock = [completed copy];
     anim_count = 0;
+    self.completionBlock = [completed copy];
+   
     
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(animateFeedback:) userInfo:nil repeats:YES];

@@ -110,7 +110,7 @@
         CGRect r = self.feedbackView.frame;
         CGPoint center =self.view.center;
 
-        NSLog(@"%f %f, %f",self.view.bounds.size.width, CGRectGetWidth(r),center.x);
+        //NSLog(@"%f %f, %f",self.view.bounds.size.width, CGRectGetWidth(r),center.x);
         
         float x = center.x -  CGRectGetHeight(r)/2.0;
         float y = center.y -  CGRectGetWidth(r)/2.0;
