@@ -44,7 +44,7 @@
 
 #import "SoundHelper.h"
 
-
+#define MAX_WRONG 3
 
 
 @interface PracticeViewController ()
@@ -109,8 +109,6 @@
         self.feedbackView.alpha = 1;
         CGRect r = self.feedbackView.frame;
         CGPoint center =self.view.center;
-
-        //NSLog(@"%f %f, %f",self.view.bounds.size.width, CGRectGetWidth(r),center.x);
         
         float x = center.x -  CGRectGetHeight(r)/2.0;
         float y = center.y -  CGRectGetWidth(r)/2.0;
@@ -136,8 +134,10 @@
 }
 
 - (IBAction)dismissFeedback:(id)sender {
-    if(_right){
+    if(_right||_wrongCount == MAX_WRONG){
+        _wrongCount =0;
         [self nextQuestion];
+        
     }
     [self dismissView:sender];
  
@@ -354,21 +354,22 @@
             
         }
         else{
-            _wrongCount ++;
-            
-            //introduce a new problem after three attempts
-            if(_wrongCount > 2)
-            {
-                //reset the counter
-                _wrongCount = 0;
-
-                //show the answer
-                [self nextQuestion];
-
-            }
-            else{
+           _wrongCount ++;
+//            
+//            //introduce a new problem after three attempts
+//            if(_wrongCount > 2)
+//            {
+//                //reset the counter
+//                _wrongCount = 0;
+//
+//                //show the answer
+//              //  [self showFeedback:NO];
+//                [self nextQuestion];
+//
+//            }
+//            else{
                 [self showFeedback:NO];
-            }
+//            }
         }
         NSSet *set;
         if([question isKindOfClass:[NSArray class]]){

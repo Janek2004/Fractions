@@ -211,44 +211,35 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 
     //this the end of the animation
     if(anim_count == _piecesArray.count){
-        MFFraction * mf = [self calculateScore];
-        MFFraction * mf1 = self.currentFraction;
         if([timer isValid])        [timer invalidate];
-
-        self.completionBlock( [_utilities isEqual:mf and:mf1],mf);
-        [self.piecesArray removeAllObjects];
-        [self drawPieces];
-        
-        
+         MFFraction * mf = [self calculateScore];
+         MFFraction * mf1 = self.currentFraction;
+         self.completionBlock( [_utilities isEqual:mf and:mf1],mf);
+         [self.piecesArray removeAllObjects];
+         [self drawPieces];
         [_lbl removeFromSuperview];
-        
     }else{
       
-        //cheating
-//        if(_piecesArray.count ==0){
-//            NSLog(@"0 ");
-//            return;
-//        }
+        if(_piecesArray.count==0 || anim_count>_piecesArray.count){
         
-        NumberLinePieceView * s= _piecesArray[anim_count];
-        _lbl.text = [NSString stringWithFormat:@"%@/%@",s.getCurrentFraction.numerator,s.getCurrentFraction.denominator];
-        _lbl.frame = CGRectOffset(s.frame, 0, 30);
-         [UIView animateWithDuration:1
+        }else{
+
+            NumberLinePieceView * s= _piecesArray[anim_count];
+            _lbl.text = [NSString stringWithFormat:@"%@/%@",s.getCurrentFraction.numerator,s.getCurrentFraction.denominator];
+            _lbl.frame = CGRectOffset(s.frame, 0, 30);
+            [UIView animateWithDuration:1
                          animations:^{
                              s.alpha = 0;
-                         }];
-        
-        
-        anim_count ++;
+                            }];
+            }
+            anim_count ++;
     }
 }
 
+//called when user taps on the Go On button
 -(void)checkAnswer:(void (^)(BOOL s, MFFraction * answer))completed;{
     anim_count = 0;
     self.completionBlock = [completed copy];
-   
-    
-    
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(animateFeedback:) userInfo:nil repeats:YES];
 }
 

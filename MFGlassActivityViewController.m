@@ -126,6 +126,8 @@
 }
 
 -(void)displayRightView{
+    [self.rightWaterView removeFromSuperview];
+    
     self.rightWaterView=({
         
         //calculating height
