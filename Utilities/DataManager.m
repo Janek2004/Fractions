@@ -572,7 +572,7 @@
     NSManagedObjectContext *context = [(MFAppDelegate *) [[UIApplication sharedApplication]delegate]managedObjectContext];
    
 
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFStudent"  inManagedObjectContext:context];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFLocalStudent"  inManagedObjectContext:context];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
@@ -589,8 +589,16 @@
     MFStudent *mf;
     if(array.count==1)
     {
-        mf = array[0];
+        mf  = [[MFStudent alloc]init];
+        MFLocalStudent * ls = array[0];
+        mf.firstname = ls.firstname;
+        mf.lastname = ls.lastname;
+        mf.password = ls.password;
+        mf.userId = ls.userid;
+        mf.classId = ls.classId;
         
+        
+              
     }
     return mf;
 
