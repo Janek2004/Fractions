@@ -81,8 +81,45 @@
                   "set":9,
                   "questioncount":5
                   }
-                  ],
+                  ,{
+                  "id":10,
+                  "name":"Circles and Bars",
+                  "classname":"ATCScaleView",
+                  "standard":"CCSS.Math.Content.3.NF.3.a",
+                  "nr_fraction_inquestion":1,
+                  "set":10,
+                  "questioncount":5
+                  }
+                ],
     "sets":[
+            {
+            "comment":"Activity 10: ½, ⅓, ¼, ⅕, ⅙, 1/7, ⅛, 1/9, 1/10",
+            "id":10,
+            "numerator":[
+                         1,
+                         1,
+                         1,
+                         1,
+                         2,
+                         2,
+                         3,
+                         3,
+                         4
+                         
+                         ],
+            "denominator":[
+                           2,
+                           3,
+                           4,
+                           5,
+                           3,
+                           5,
+                           4,
+                           5,
+                           5
+                           ]
+            },
+            
             {
             "comment":"Activity 1: ½, ⅓, ¼, ⅕, ⅙, 1/7, ⅛, 1/9, 1/10",
             "id":1,

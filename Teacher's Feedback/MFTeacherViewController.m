@@ -49,7 +49,7 @@
     [_dataManager teacherFeedbackForUser:_manager.mfuser.userid completionBlock:^(NSArray *a) {
         _dataSource = [[DataSource alloc]initWithItems:a cellIdentifier:@"teachercell" configureCellBlock:^(MFTeacherCell * cell, id message, id indexPath) {
             NSLog(@"Message %@", message);
-            int dateint = [[message objectForKey:@"messagedate"]integerValue];
+            int dateint =(int) [[message objectForKey:@"messagedate"]integerValue];
             NSString * name =[message objectForKey:@"teachername"];
           //  NSString * lastname =[message objectForKey:@"teacherlastname"];
             NSString * messagetext =[message objectForKey:@"messagetext"];

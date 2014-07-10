@@ -24,6 +24,8 @@
 #import "FFLocalStorageSQLite.h"
 #import "FFReadRequest.h"
 #import "FFReadResponse.h"
+#import "FFSerializationProtocol.h"
+
 //#import "FFWriteRequest.h"
 //#import "FFWriteResponse.h"
 
@@ -59,7 +61,7 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
 {
     /** Non-public instance variable used to help memory management for object references.
      */
-    NSMutableDictionary     *references;
+    NSMapTable              *references;
 
     /**
      The #classToClazzDict property (NSMutableDictionary) holds the mapping from Obj-C Class to 
@@ -121,7 +123,7 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
 
 /**
  This property is set on successful execution of one of the FatFractal::loginWithUserName:andPassword:
- methods. It is the guid of the logged-in FFUser object.
+ methods. It is the guid of the logged-in id<FFUserProtocol> object.
  */
 @property (strong, nonatomic, readonly)   NSString              *loggedInUserGuid;
 
@@ -129,7 +131,7 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
  This property is set on successful execution of one of the FatFractal::loginWithUserName:andPassword:
  methods. The default value is nil.
  */
-@property (strong, nonatomic, readonly)   FFUser                *loggedInUser;
+@property (strong, nonatomic, readonly)   id<FFUserProtocol>     loggedInUser;
 
 /**
  This property is set on successful execution of one of the FatFractal::loginWithUserName:andPassword:
@@ -177,7 +179,17 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
  */
 @property (atomic)                      int                     httpRequestCount;
 
+/**
+ * Use an FFLocalStorage when you want local caching of query responses,
+ * and local storage of queued operations in case app terminates before in-memory queued operations are able to execute.
+ * <br>Also, if you use localStorage, then the logged-in user will be preserved across application restarts</br>
+ */
 @property (strong, nonatomic)           id <FFLocalStorage>     localStorage;
+
+/**
+ Allow setting of custom http headers for requests
+ */
+@property (strong, nonatomic)   NSDictionary                *customHttpHeaders;
 
 /**
  Get the callback URI for the specified ScriptAuth service.
@@ -259,11 +271,10 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
  */
 + (void) setMain:(FatFractal *)_main;
 
+/**
+ Utility method to get a fully-qualified URL
+ */
 + (NSURL *) getURL:(FatFractal *)ff urlString:(NSString *)urlString type:(FFUrlType)type;
-
-- (id) initWithBaseUrl:(NSString *)theBaseUrl sslUrl:(NSString *)theSslUrl localStorage:(id<FFLocalStorage>) theLocalStorage;
-
-- (id) initWithBaseUrl:(NSString *)theBaseUrl localStorage:(id<FFLocalStorage>) theLocalStorage;
 
 /**
  You will only need to use this method if you are testing your app's backend on a development machine and are
@@ -277,7 +288,9 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
  @param NSString url that will be used to set the #baseUrl property
  @param NSString sslUrl that will be used to set the #baseUrl property
  @return id - returns the initialized instance
+ @deprecated
  @see #initWithBaseUrl:
+ @see #localStorage
  */
 - (id) initWithBaseUrl:(NSString *)url sslUrl:(NSString *)sslUrl;
 
@@ -294,6 +307,7 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
  @param NSString
  @return id - returns the initialized instance
  @see #initWithBaseUrl:sslUrl
+ @see #localStorage
  */
 - (id) initWithBaseUrl:(NSString *)url;
 
@@ -312,56 +326,43 @@ typedef NS_ENUM(NSInteger, FFUrlType) {
 #pragma mark Authentication and Authorization
 
 /**
- Asynchronous method with an onComplete callback for registering an FFUser with the FatFractal backend with a password.
- @param FFUser the FFUser object to be registered
+ Asynchronous method with an onComplete callback for registering a user with the FatFractal backend with a password.
+ @param id<FFUserProtocol> the user object to be registered
  @param NSString password the password for the user
  @param FFHttpMethodCompletion the block defined here will execute when the HTTP call completes
  @return <b>void</b> Currently a successful registration will also log the user in, and set the #loggedInSessionId, #loggedInUser and #loggedIn properties. This method does not return anything directly - response is via the FFHttpMethodCompletion block, which has these parameters:
  <br><b>(NSError *)</b> - non-nil if there is an error. An error will occur if a user with this userName already exists on your app's backend.
- <br><b>(id)</b> - the registered FFUser object, or nil if there is an error
+ <br><b>(id)</b> - the registered user object, or nil if there is an error
  <br><b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
  @see FFHttpDelegate::onComplete
  */
-- (void) registerUser:(FFUser *)user password:(NSString *)password onComplete:(FFHttpMethodCompletion)onComplete;
-
-/**
- Asynchronous method with an onComplete callback for registering an FFUser with the FatFractal backend with a Facebook ID.
- @param FFUser an FFUser object with the username should be set to the user's Facebook ID.
- @param NSString access_token as provided by the Facebook API
- @param FFHttpMethodCompletion the block defined here will execute when the HTTP call completes
- @return <b>void</b> Currently a successful registration will also log the user in, and set the #loggedInSessionId, #loggedInUser and #loggedIn properties. This method does not return anything directly - response is via the FFHttpMethodCompletion block, which has these parameters:
- <br><b>(NSError *)</b> - non-nil if there is an error. An error will occur if a user with this userName already exists on your app's backend.
- <br><b>(id)</b> - the registered FFUser object, or nil if there is an error.
- <br><b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
- @see FFHttpDelegate::onComplete
- */
-- (void) registerUser:(FFUser *)user withFacebookToken:(NSString *)access_token onComplete:(FFHttpMethodCompletion)onComplete;
+- (void) registerUser:(id<FFUserProtocol>)user password:(NSString *)password onComplete:(FFHttpMethodCompletion)onComplete;
 
 /*
- Asynchronous method with an onComplete callback for registering an FFUser with the FatFractal backend with a Twitter ID.
+ Asynchronous method with an onComplete callback for registering a user with the FatFractal backend with a Twitter ID.
  <br>Will request user access to the twitter accounts on the device; the backend will then use the oauth echo mechanism to verify the oauth access token.
- @param FFUser an FFUser object. The username should be set to the user's Twitter ID.
+ @param id<FFUserProtocol> the user object. The username should be set to the user's Twitter ID.
  @param FFHttpMethodCompletion the block defined here will execute when the HTTP call completes
  @return <b>void</b> Currently a successful registration will also log the user in, and set the #loggedInSessionId, #loggedInUser and #loggedIn properties. This method does not return anything directly - response is via the FFHttpMethodCompletion block, which has these parameters:
  <br><b>(NSError *)</b> - non-nil if there is an error. An error will occur if a user with this userName already exists on your app's backend.
- <br><b>(id)</b> - the registered FFUser object, or nil if there is an error.
+ <br><b>(id)</b> - the registered user object, or nil if there is an error.
  <br><b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
  @see FFHttpDelegate::onComplete
  */
-- (void)    registerTwitterUser:(id)user
+- (void)    registerTwitterUser:(id<FFUserProtocol>)user
            xAuthServiceProvider:(NSString *)xAuthServiceProvider
 xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
                      onComplete:(FFHttpMethodCompletion)onComplete;
 
 /**
- Synchronous method with output parameter, error for registering an FFUser with the FatFractal backend with a password.
+ Synchronous method with output parameter, error for registering a user with the FatFractal backend with a password.
  <br>(For access to HTTP status codes, use #registerUser:password:onComplete: )
- @param FFUser user the FFUser object to be registered
+ @param id<FFUserProtocol> the user object to be registered
  @param NSString password the password for the user
  @param NSError outErr will be non-nil if an error has occurred. An error will occur if a user with this userName already exists on your app's backend.
- @return <b>FFUser</b> - the registered user. Currently a successful registration will also log the user in, and set the #loggedInSessionId, #loggedInUser and #loggedIn properties.
+ @return <b>id<FFUserProtocol></b> - the registered user. Currently a successful registration will also log the user in, and set the #loggedInSessionId, #loggedInUser and #loggedIn properties.
  */
-- (FFUser *) registerUser:(FFUser *)user password:(NSString *)password error:(NSError **)outErr;
+- (id<FFUserProtocol>) registerUser:(id<FFUserProtocol>)user password:(NSString *)password error:(NSError **)outErr;
 
 /**
  Asynchronous method to register a new user via a ScriptAuth service.
@@ -384,7 +385,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @see #registerWithScriptAuthService:usingCredentials:error:
  @return Newly registered user if successful, nil otherwise
  */
-- (FFUser *)registerWithScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
+- (id<FFUserProtocol>)registerWithScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
 
 /**
  Asynchronous method to register a new user via a ScriptAuth service with explicit credentials.
@@ -407,17 +408,17 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @see #registerWithScriptAuthService:usingCredentials:onComplete:
  @return Newly registered user if successful, nil otherwise
  */
-- (FFUser *)registerWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials error:(NSError **)outErr;
+- (id<FFUserProtocol>)registerWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials error:(NSError **)outErr;
 
 /**
- Asynchronous method with an onComplete callback for logging in a registered FFUser using a combination of userName and password.
- <br>Login will succeed if there exists a registered FFUser with this userName and password. If you have set AllowAutoRegistration to true in the application.ffdl configuration, then login will also succeed if this userName does not exist in your app's backend. See also #registerUser:password
+ Asynchronous method with an onComplete callback for logging in a registered user using a combination of userName and password.
+ <br>Login will succeed if there exists a registered user with this userName and password. If you have set AllowAutoRegistration to true in the application.ffdl configuration, then login will also succeed if this userName does not exist in your app's backend. See also #registerUser:password
  @param NSString userName for the user logging in
  @param NSString password for the user logging in
  @param FFHttpMethodCompletion onComplete : the block defined here will execute when the HTTP call completes 
  @return <b>void</b> does not return anything directly - response is via the FFHttpMethodCompletion block which has these parameters:
  <br><b>(NSError *)</b> - non-nil if there is an error
- <br><b>(id)</b> - the logged-in FFUser object, or nil if there is an error
+ <br><b>(id)</b> - the logged-in user object, or nil if there is an error
  <br><b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
  <br> If login was successful, the values for the following properties are set. 
  <br><b>NSString #loggedInSessionId</b> is set to the SessionId returned by your app's backend
@@ -429,34 +430,16 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
                andPassword:(NSString *)password
                 onComplete:(FFHttpMethodCompletion)onComplete;
 
-/**
- Asynchronous method with an onComplete callback for logging in a registered FFUser with a FaceBook ID and access token.
- <br>Login will succeed if there exists a registered FFUser which corresponds with this Facebook access token.
- @param NSString facebook_id : the Facebook ID
- @param NSString access_token : the Facebook access token
- @param FFHttpMethodCompletion onComplete : the block defined here will execute when the HTTP call completes
- @return <b>void</b> does not return anything directly - response is via the FFHttpMethodCompletion block which has these parameters:
- <br><b>(NSError *)</b> - non-nil if there is an error
- <br><b>(id)</b> - the logged-in FFUser object, or nil if there is an error
- <br><b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
- <br> If login was successful, the values for the following properties are set. 
- <br><b>NSString #loggedInSessionId</b> is set to the SessionId returned by your app's backend
- <br><b>BOOL #loggedIn</b> is set to true.
- @see #registerUser:password:
- @see FFHttpDelegate::onComplete
- */
-- (void) loginWithFacebookID:(NSString *)facebook_id andToken:(NSString *)access_token onComplete:(FFHttpMethodCompletion)onComplete;
-
 /*
  Removed until fully implemented on backend
- Asynchronous method with an onComplete callback for logging in a registered FFUser using their Twitter ID.
+ Asynchronous method with an onComplete callback for logging in a registered user using their Twitter ID.
  <br>Will request user access to the twitter accounts on the device; the backend will then use the oauth echo mechanism to verify the oauth access token.
- <br>Login will succeed if there exists a registered FFUser with this Twitter ID.
+ <br>Login will succeed if there exists a registered user with this Twitter ID.
  @param NSString twitter_id : the Twitter ID
  @param FFHttpMethodCompletion onComplete : the block defined here will execute when the HTTP call completes
  @return <b>void</b> does not return anything directly - response is via the FFHttpMethodCompletion block which has these parameters:
  <br><b>(NSError *)</b> - non-nil if there is an error
- <br><b>(id)</b> - the logged-in FFUser object, or nil if there is an error
+ <br><b>(id)</b> - the logged-in user object, or nil if there is an error
  <br><b>(NSHTTPURLResponse *)</b> - the full NSHTTPURLResponse
  <br> If login was successful, the values for the following properties are set. 
  <br><b>NSString #loggedInSessionId</b> is set to the SessionId returned by your app's backend
@@ -470,13 +453,13 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
                      onComplete:(FFHttpMethodCompletion)onComplete;
 
 /**
- Synchronous method with output parameter, error for logging in a registered FFUser using a combination of userName and password.
+ Synchronous method with output parameter, error for logging in a registered user using a combination of userName and password.
  <br>(For access to HTTP status codes, use #loginWithUserName:andPassword:onComplete: )
- <br>Login will succeed if there exists a registered FFUser with this userName and password. If you have set AllowAutoRegistration to true in the application.ffdl configuration, then login will also succeed if this userName does not exist in your app's backend. See also #registerUser:password
+ <br>Login will succeed if there exists a registered user with this userName and password. If you have set AllowAutoRegistration to true in the application.ffdl configuration, then login will also succeed if this userName does not exist in your app's backend. See also #registerUser:password
  @param NSString userName of the user logging in
  @param NSString password of the user logging in
  @param NSError outErr : will be non-nil if an error has occurred
- @return <b>FFUser</b> - returns the logged-in FFUser, if the login was successful, nil otherwise.
+ @return <b>id<FFUserProtocol></b> - returns the logged-in user, if the login was successful, nil otherwise.
  Additionally upon success, the values for some other properties that are accessible by your
  application are set:
  <br><b>NSString loggedInSessionId</b> is set to the SessionId returned by your app's backend
@@ -484,15 +467,15 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  <br><b>BOOL loggedIn</b> is set to true.
  @see #registerUser:password:
  */
-- (FFUser *) loginWithUserName:(NSString *)theUserName andPassword:(NSString *)thePassword error:(NSError **)outErr;
+- (id<FFUserProtocol>) loginWithUserName:(NSString *)theUserName andPassword:(NSString *)thePassword error:(NSError **)outErr;
 
 /**
- Synchronous method for logging in a registered FFUser using a combination of userName and password.
+ Synchronous method for logging in a registered user using a combination of userName and password.
  <br>(For access to HTTP status codes, use #loginWithUserName:andPassword:onComplete: )
- <br>Login will succeed if there exists a registered FFUser with this userName and password. If you have set AllowAutoRegistration to true in the application.ffdl configuration, then login will also succeed if this userName does not exist in your app's backend. See also #registerUser:password
+ <br>Login will succeed if there exists a registered user with this userName and password. If you have set AllowAutoRegistration to true in the application.ffdl configuration, then login will also succeed if this userName does not exist in your app's backend. See also #registerUser:password
  @param NSString the userName of the user logging in
  @param NSString password of the user logging in
- @return <b>FFUser</b> - the logged-in FFUser, if the login was successful, nil otherwise.
+ @return <b>id<FFUserProtocol></b> - the logged-in user, if the login was successful, nil otherwise.
  Additionally upon success, the values for some other properties that are accessible by your
  application are set:
  <br><b>NSString loggedInSessionId</b> is set to the SessionId returned by your app's backend
@@ -500,7 +483,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  <br><b>BOOL loggedIn</b> is set to true.
  @see #registerUser:password:
  */
-- (FFUser *) loginWithUserName:(NSString *)theUserName andPassword:(NSString *)thePassword;
+- (id<FFUserProtocol>) loginWithUserName:(NSString *)theUserName andPassword:(NSString *)thePassword;
 
 /**
  Asynchronous method to log in via a ScriptAuth service. Saved token (and secret, if applicable) will be used as credentials.
@@ -525,7 +508,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @see #loginWithScriptAuthService:usingCredentials:error:
  @see #loginWithScriptAuthService:usingCredentials:
  */
-- (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
+- (id<FFUserProtocol>)loginWithScriptAuthService:(NSString *)scriptAuthService error:(NSError **)outErr;
 
 /**
  Synchronous method to log in via a ScriptAuth service. Saved token (and secret, if applicable) will be used as credentials.
@@ -537,7 +520,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @see #loginWithScriptAuthService:usingCredentials:error:
  @see #loginWithScriptAuthService:usingCredentials:
  */
-- (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService;
+- (id<FFUserProtocol>)loginWithScriptAuthService:(NSString *)scriptAuthService;
 
 /**
  Asynchronous method to log in via a ScriptAuth service with explicit credentials.
@@ -564,7 +547,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @see #loginWithScriptAuthService:usingCredentials:onComplete:
  @see #loginWithScriptAuthService:usingCredentials:
  */
-- (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials error:(NSError **)outErr;
+- (id<FFUserProtocol>)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials error:(NSError **)outErr;
 
 /**
  Synchronous method to log in via a ScriptAuth service with explicit credentials.
@@ -577,7 +560,7 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @see #loginWithScriptAuthService:usingCredentials:onComplete:
  @see #loginWithScriptAuthService:usingCredentials:error:
  */
-- (FFUser *)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials;
+- (id<FFUserProtocol>)loginWithScriptAuthService:(NSString *)scriptAuthService usingCredentials:(NSDictionary *)credentials;
 
 
 /**
@@ -640,7 +623,14 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  */
 - (void)retrieveAccessTokenForScriptAuthService:(NSString *)scriptAuthService callbackUriWithVerifier:(NSString *)callbackUriWithVerifier;
 
+/**
+ Get the current defaultReadOptions for this instance
+ */
 - (FFReadOption) defaultReadOptions;
+/**
+ Create a new FFReadRequest which you can use to set various options before executing the request
+ @return the newly-minted FFReadRequest
+ */
 - (FFReadRequest *) newReadRequest;
 //- (FFWriteOption) defaultWriteOptions;
 //- (FFWriteRequest *) newWriteRequest;
@@ -650,8 +640,8 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  <br>Set an object-specific ACL. Permissions are granted to read or write an object by user and by group. Once permission is granted to read or write an object by user, that permission persists until the method is reissued. If users are added or taken out of groups, the corresponding permissions for that group obtain dynamically.
  @see #setDefaultPermissionOnObject:error:
  @param id obj : the object for which we are setting permissions
- @param NSArray readUsers   : must be an array of FFUser each of which is to be given read access to the object
- @param NSArray writeUsers  : must be an array of FFUser each of which is to be given write access to the object
+ @param NSArray readUsers   : must be an array of objects implementing FFUserProtocol each of which is to be given read access to the object
+ @param NSArray writeUsers  : must be an array of objects implementing FFUserProtocol each of which is to be given write access to the object
  @param NSArray readGroups  : must be an array of FFUserGroup each of which is to be given read  access to the object
  @param NSArray writeGroups : must be an array of FFUserGroup each of which is to be given write access to the object
  @param NSError outErr : will be non-nil on return if an error has occurred
@@ -1104,10 +1094,17 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
 #pragma mark object metadata
 
 /**
+ Get the metadata for an object with a given "ffUrl".
+ Metadata is only held in memory for objects created in or retrieved from the backend since the app was last started.
+ If the object with this ffUrl has gone out of scope and been garbage-collected, then this method will return nil.
+ @param NSString ffUrl : the ffUrl for which metadata is required
+ @return FFMetaData - the FFMetaData for the object
+ */
+- (FFMetaData *) metaDataForFfUrl:(NSString *)ffUrl;
+
+/**
  Get the metadata for an object.
- Metadata is only created for an object during the current session. Therefore,
- the method will only return metadata for objects that you have retrieved or created
- during the current session.
+ Metadata is only held in memory for objects created in or retrieved from the backend since the app was last started.
  @param id obj : the object for which FFMetaData is required
  @return FFMetaData - the FFMetaData for the object
  */
@@ -1348,6 +1345,18 @@ xVerifyCredentialsAuthorization:(NSString *)xVerifyCredentialsAuthorization
  @return <b>FFQueuedOperation</b>
  */
 - (FFQueuedOperation *) queueDeleteObj:(id)obj;
+
+/**
+ Queue a grab-bag "add" operation
+ @see #grabBagAddItemAtFfUrl:toObjAtFfUrl:grabBagName:onComplete:
+ */
+- (FFQueuedOperation *) queueGrabBagAddItemAtUri:(NSString *)itemUri toObjAtUri:(NSString *)objUri grabBagName:(NSString *)gbName;
+
+/**
+ Queue a grab-bag "remove" operation
+ @see #grabBagRemoveItemAtFfUrl:fromObjAtFfUrl:grabBagName:onComplete:
+ */
+- (FFQueuedOperation *) queueGrabBagRemoveItemAtUri:(NSString *)itemUri fromObjAtUri:(NSString *)objUri grabBagName:(NSString *)gbName;
 
 /**
  This method simulates a restart of the app, at least insofar as queued operations are concerned.

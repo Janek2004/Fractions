@@ -56,9 +56,20 @@
 
     _datasource= [[ArrayDataSource alloc]initWithItems:a cellIdentifier:@"progressCell" configureCellBlock:^(ProgressCell * cell, MFAttempt * item){
         cell.activityName.text =[NSString stringWithFormat:@"Activity: %d", item.activity.intValue];
-        NSDateFormatter * df = [[NSDateFormatter alloc]init];
-        [df setDateFormat:@"MM:DD:YY hh:mm"];
-        NSString * str =       [df stringFromDate:item.attempt_date];
+//        NSDateFormatter * df = [[NSDateFormatter alloc]init];
+//       [df setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+//        NSDate * date = [df dateFromString:item.attempt_date];
+
+        
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear |NSCalendarUnitHour|NSCalendarUnitMinute fromDate:item.attempt_date];
+        
+        
+        
+        NSLog(@"Date %@",item.attempt_date);
+        
+NSString * str = [NSString stringWithFormat:@"%d/%d/%d %d:%d ", (int)components.month,(int)components.day, (int)components.year,(int)components.hour, (int)components.minute];
+        
+        
         cell.dateTimeLabel.text = [NSString stringWithFormat:@"%@",str ];
         
         NSMutableString *s = [NSMutableString new];

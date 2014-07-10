@@ -36,6 +36,8 @@
 //#import "PDDebugger.h"
 #import "SoundHelper.h"
 #import <FFEF/FatFractal.h>
+#import "PracticeViewController.h"
+
 
 
 @interface MFAppDelegate()
@@ -50,13 +52,19 @@
 
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[MFViewController alloc] initWithNibName:@"MFViewController" bundle:nil];
     //test core data
- 
+    
+    //TESTING
+//    self.viewController = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
+//    [(PracticeViewController *)self.viewController setActivityId:10];
+    
+    
     
 //    PDDebugger *debugger = [PDDebugger defaultInstance];
 //    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
@@ -67,7 +75,7 @@
     NSManagedObjectContext *context = [self managedObjectContext];
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"MFActivity" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-   [request setEntity:entityDescription];
+    [request setEntity:entityDescription];
     NSError *error;
   
     
@@ -78,19 +86,24 @@
         NSLog(@"Error %@",error.debugDescription);
     }
     _dm = [[DataManager alloc]init];
-    //if array is empty
-    if(array.count ==0){
-       
-        [_dm import];
-        
+    
+    
+    for(id idx in array){
+         [context deleteObject:idx];
     }
     
+    [context save:&error];
+    
+    [_dm import];
+  
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     _soundHelper = [[SoundHelper alloc]init];
    
-   // [self testMe];
+    
+    
+    
     return YES;
 }
 

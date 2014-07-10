@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0CEE04196ECAAA00AC340B /* JMCCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CEE03196ECAAA00AC340B /* JMCCircle.m */; };
+		4F0CEE07196EF41A00AC340B /* circularActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CEE06196EF41A00AC340B /* circularActivity.png */; };
+		4F0CEE0A196F0B0900AC340B /* circular1@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CEE08196F0B0900AC340B /* circular1@2.png */; };
+		4F0CEE0B196F0B0900AC340B /* circular2@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CEE09196F0B0900AC340B /* circular2@2.png */; };
+		4F0CEE10196F1AAE00AC340B /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0CEE0F196F1AAE00AC340B /* FFEF.framework */; };
 		4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E317999FD80043B1D4 /* UIKit.framework */; };
 		4F14C1E617999FD90043B1D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E517999FD90043B1D4 /* Foundation.framework */; };
 		4F14C1E817999FD90043B1D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F14C1E717999FD90043B1D4 /* CoreGraphics.framework */; };
@@ -114,6 +119,8 @@
 		4F97803617A31C7A0093294A /* PracticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F97803417A31C7A0093294A /* PracticeViewController.m */; };
 		4F97803717A31C7A0093294A /* PracticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F97803517A31C7A0093294A /* PracticeViewController.xib */; };
 		4F9913591891B047001B9EFD /* MFAttempt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9913581891B047001B9EFD /* MFAttempt.m */; };
+		4FCF49BA1962EF2E007ADBB3 /* MFCicleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF49B91962EF2E007ADBB3 /* MFCicleViewController.m */; };
+		4FCF49BD1962EF9B007ADBB3 /* MFCicleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCF49BC1962EF9B007ADBB3 /* MFCicleViewController.xib */; };
 		4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBE71891605B0087EBDC /* MFActivity.m */; };
 		4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBED1891605C0087EBDC /* MFCompleted.m */; };
 		4FD4CBF11891605C0087EBDC /* MFFraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4CBF01891605C0087EBDC /* MFFraction.m */; };
@@ -187,7 +194,6 @@
 		829F7CAE189A28C200702515 /* TeacherFeedbackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829F7CAD189A28C200702515 /* TeacherFeedbackCell.xib */; };
 		829F7CB1189A2AD400702515 /* MFTeacherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CB0189A2AD400702515 /* MFTeacherCell.m */; };
 		829F7CB4189A30A800702515 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CB3189A30A700702515 /* DataSource.m */; };
-		829F7CB6189AABEB00702515 /* FFEF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 829F7CB5189AABEB00702515 /* FFEF.framework */; };
 		829F7CB9189B0DD800702515 /* MFMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 829F7CB8189B0DD800702515 /* MFMessage.m */; };
 		82ABC33F181049D700182737 /* feedbackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 82ABC33E181049D700182737 /* feedbackButton.png */; };
 		A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAA783D0BE8466CA2DC1E4B /* libPods.a */; };
@@ -207,6 +213,12 @@
 
 /* Begin PBXFileReference section */
 		484E0B35804B4496A4C80DE5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		4F0CEE02196ECAAA00AC340B /* JMCCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCCircle.h; sourceTree = "<group>"; };
+		4F0CEE03196ECAAA00AC340B /* JMCCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCCircle.m; sourceTree = "<group>"; };
+		4F0CEE06196EF41A00AC340B /* circularActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circularActivity.png; sourceTree = "<group>"; };
+		4F0CEE08196F0B0900AC340B /* circular1@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular1@2.png"; sourceTree = "<group>"; };
+		4F0CEE09196F0B0900AC340B /* circular2@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular2@2.png"; sourceTree = "<group>"; };
+		4F0CEE0F196F1AAE00AC340B /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FFEF.framework; sourceTree = "<group>"; };
 		4F14C1E017999FD80043B1D4 /* Fractio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fractio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F14C1E317999FD80043B1D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4F14C1E517999FD90043B1D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -337,6 +349,9 @@
 		4F97803517A31C7A0093294A /* PracticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PracticeViewController.xib; sourceTree = "<group>"; };
 		4F9913571891B047001B9EFD /* MFAttempt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAttempt.h; sourceTree = "<group>"; };
 		4F9913581891B047001B9EFD /* MFAttempt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAttempt.m; sourceTree = "<group>"; };
+		4FCF49B81962EF2E007ADBB3 /* MFCicleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MFCicleViewController.h; path = CircularActivity/MFCicleViewController.h; sourceTree = "<group>"; };
+		4FCF49B91962EF2E007ADBB3 /* MFCicleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFCicleViewController.m; path = CircularActivity/MFCicleViewController.m; sourceTree = "<group>"; };
+		4FCF49BC1962EF9B007ADBB3 /* MFCicleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MFCicleViewController.xib; path = CircularActivity/MFCicleViewController.xib; sourceTree = "<group>"; };
 		4FD4CBE61891605B0087EBDC /* MFActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFActivity.h; sourceTree = "<group>"; };
 		4FD4CBE71891605B0087EBDC /* MFActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFActivity.m; sourceTree = "<group>"; };
 		4FD4CBEC1891605C0087EBDC /* MFCompleted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCompleted.h; sourceTree = "<group>"; };
@@ -426,7 +441,6 @@
 		829F7CB0189A2AD400702515 /* MFTeacherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MFTeacherCell.m; path = "Teacher's Feedback/MFTeacherCell.m"; sourceTree = "<group>"; };
 		829F7CB2189A30A700702515 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
 		829F7CB3189A30A700702515 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
-		829F7CB5189AABEB00702515 /* FFEF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FFEF.framework; sourceTree = "<group>"; };
 		829F7CB7189B0DD800702515 /* MFMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMessage.h; sourceTree = "<group>"; };
 		829F7CB8189B0DD800702515 /* MFMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFMessage.m; sourceTree = "<group>"; };
 		82ABC33E181049D700182737 /* feedbackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackButton.png; sourceTree = "<group>"; };
@@ -442,11 +456,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F864BF0183D096700C888B8 /* AudioToolbox.framework in Frameworks */,
+				4F0CEE10196F1AAE00AC340B /* FFEF.framework in Frameworks */,
 				4F5033F517FB41B9007A9DE8 /* CoreData.framework in Frameworks */,
 				4FEFE03F17E8E0E1004AF076 /* QuartzCore.framework in Frameworks */,
 				4F14C1E417999FD90043B1D4 /* UIKit.framework in Frameworks */,
 				4F14C1E617999FD90043B1D4 /* Foundation.framework in Frameworks */,
-				829F7CB6189AABEB00702515 /* FFEF.framework in Frameworks */,
 				4F14C1E817999FD90043B1D4 /* CoreGraphics.framework in Frameworks */,
 				A6EC6446E55741C89ACA59A2 /* libPods.a in Frameworks */,
 			);
@@ -465,6 +479,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0CEE05196EF3E100AC340B /* CircularActivity */ = {
+			isa = PBXGroup;
+			children = (
+				4F0CEE06196EF41A00AC340B /* circularActivity.png */,
+			);
+			name = CircularActivity;
+			sourceTree = "<group>";
+		};
 		4F14C1D717999FD80043B1D4 = {
 			isa = PBXGroup;
 			children = (
@@ -510,7 +532,7 @@
 		4F14C1E217999FD80043B1D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				829F7CB5189AABEB00702515 /* FFEF.framework */,
+				4F0CEE0F196F1AAE00AC340B /* FFEF.framework */,
 				4F864BEF183D096700C888B8 /* AudioToolbox.framework */,
 				4F5033F417FB41B9007A9DE8 /* CoreData.framework */,
 				4FEFE03E17E8E0E1004AF076 /* QuartzCore.framework */,
@@ -562,6 +584,7 @@
 		4F3B78BB1805A64B00E1E64B /* Activities Screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				4F0CEE05196EF3E100AC340B /* CircularActivity */,
 				4F4232041896BB980068C8E4 /* Glass Activity */,
 				4F3B78BC1805A64B00E1E64B /* NumberLineActivity */,
 				4F3B78C21805A64B00E1E64B /* ScaleActivity */,
@@ -790,6 +813,18 @@
 			name = ScaleView;
 			sourceTree = "<group>";
 		};
+		4FCF49BB1962EF38007ADBB3 /* CircleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4FCF49B81962EF2E007ADBB3 /* MFCicleViewController.h */,
+				4FCF49B91962EF2E007ADBB3 /* MFCicleViewController.m */,
+				4FCF49BC1962EF9B007ADBB3 /* MFCicleViewController.xib */,
+				4F0CEE02196ECAAA00AC340B /* JMCCircle.h */,
+				4F0CEE03196ECAAA00AC340B /* JMCCircle.m */,
+			);
+			name = CircleViewController;
+			sourceTree = "<group>";
+		};
 		4FDFE0C417F9DC55008D31D4 /* Fractio */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,6 +862,7 @@
 		4FEFE02617E7ABFE004AF076 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				4FCF49BB1962EF38007ADBB3 /* CircleViewController */,
 				DBB42ACC17FE1BE60082D799 /* GlassActivity */,
 				4FE8C50C17FF07AE00B0C796 /* Choco Bar */,
 				4F44AEE817ECAEA1001AF95B /* MFFractionView.h */,
@@ -842,6 +878,8 @@
 		4FEFE03517E8D81D004AF076 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4F0CEE08196F0B0900AC340B /* circular1@2.png */,
+				4F0CEE09196F0B0900AC340B /* circular2@2.png */,
 				82ABC33E181049D700182737 /* feedbackButton.png */,
 				4F3B78BB1805A64B00E1E64B /* Activities Screenshots */,
 				4FE8C50D17FF0A5800B0C796 /* Choco.png */,
@@ -953,6 +991,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MF;
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = UWF;
 				TargetAttributes = {
@@ -1020,6 +1059,7 @@
 				4F50348817FC7747007A9DE8 /* done1.png in Resources */,
 				4F50347017FC7747007A9DE8 /* map.png in Resources */,
 				829F7CAE189A28C200702515 /* TeacherFeedbackCell.xib in Resources */,
+				4FCF49BD1962EF9B007ADBB3 /* MFCicleViewController.xib in Resources */,
 				4F50347E17FC7747007A9DE8 /* Icon-72.png in Resources */,
 				4F50348B17FC7747007A9DE8 /* cont1.png in Resources */,
 				4FE8C4E417FDF73A00B0C796 /* correct@2.png in Resources */,
@@ -1057,6 +1097,7 @@
 				4F14C1F817999FD90043B1D4 /* Default@2x.png in Resources */,
 				4FE8C4F117FDF73A00B0C796 /* holdweight@2.png in Resources */,
 				4F14C1FA17999FD90043B1D4 /* Default-568h@2x.png in Resources */,
+				4F0CEE0B196F0B0900AC340B /* circular2@2.png in Resources */,
 				4FE8C4F317FDF73A00B0C796 /* home2@2.png in Resources */,
 				4F50349417FC7747007A9DE8 /* sad.png in Resources */,
 				4F50346317FC7747007A9DE8 /* walk3.png in Resources */,
@@ -1108,6 +1149,7 @@
 				4F50348417FC7747007A9DE8 /* fieldsm.png in Resources */,
 				4FE8C4E917FDF73A00B0C796 /* glass@2.png in Resources */,
 				4F3B78CA1805A64B00E1E64B /* s1.png in Resources */,
+				4F0CEE07196EF41A00AC340B /* circularActivity.png in Resources */,
 				4F50348F17FC7747007A9DE8 /* chocobg.png in Resources */,
 				4F50347317FC7747007A9DE8 /* login2.png in Resources */,
 				4F50346017FC7747007A9DE8 /* LevelComp.png in Resources */,
@@ -1118,6 +1160,7 @@
 				82ABC33F181049D700182737 /* feedbackButton.png in Resources */,
 				4FE8C4E617FDF73A00B0C796 /* done1@2.png in Resources */,
 				4FE8C4FA17FDF73A00B0C796 /* map2@2.png in Resources */,
+				4F0CEE0A196F0B0900AC340B /* circular1@2.png in Resources */,
 				4F50347617FC7747007A9DE8 /* intro1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1189,9 +1232,11 @@
 				4FEFE03117E7AE48004AF076 /* KxIntroViewController.m in Sources */,
 				4FD4CBEE1891605C0087EBDC /* MFCompleted.m in Sources */,
 				4F14C1F017999FD90043B1D4 /* main.m in Sources */,
+				4FCF49BA1962EF2E007ADBB3 /* MFCicleViewController.m in Sources */,
 				829F7CAB189A271500702515 /* MFTeacherViewController.m in Sources */,
 				4F3B7904180844FD00E1E64B /* MFProgressViewController.m in Sources */,
 				4F864BFC183D4FA800C888B8 /* NumberLineViewController.m in Sources */,
+				4F0CEE04196ECAAA00AC340B /* JMCCircle.m in Sources */,
 				4FD4CBE81891605B0087EBDC /* MFActivity.m in Sources */,
 				4F3B78E01807291500E1E64B /* MFFractalFraction.m in Sources */,
 				4FEFE03D17E8DCED004AF076 /* MFUtilities.m in Sources */,
@@ -1335,6 +1380,7 @@
 					"$(inherited)",
 					/Users/jmc72/Desktop/NewRepositories/Fractions,
 					/Users/sadmin/Desktop/NewRepositories/Fractions,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/Fractio-Prefix.pch";
@@ -1358,6 +1404,7 @@
 					"$(inherited)",
 					/Users/jmc72/Desktop/NewRepositories/Fractions,
 					/Users/sadmin/Desktop/NewRepositories/Fractions,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MathFractions/Fractio-Prefix.pch";

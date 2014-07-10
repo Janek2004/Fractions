@@ -9,18 +9,23 @@
 @class FFUserGroup;
 @class FatFractal;
 
+@protocol FFUserProtocol
+@property (strong, nonatomic) NSString          *guid;
+@property (strong, nonatomic) NSString          *userName;
+@end
+
 /*! \brief A special kind of FatFractal object for managing users of your application. */
 /*! 
  This is the special class for managing users in the FatFractal Emergent Framework.
  */ 
-@interface FFUser : NSObject <NSCoding> {
+@interface FFUser : NSObject <NSCoding, FFUserProtocol> {
     /*! The FatFractal instance which is managing this FFUser object */
     FatFractal          *ff;
     NSMutableDictionary *_groupsDict;
     BOOL                 _groupsLoaded;
 }
 
-/*! An NSString with the unique username for the user. */
+/*! An NSString with the unique identifier for the user. */
 @property (strong, nonatomic) NSString          *guid;
 /*! An NSString with the unique username for the user. */
 @property (strong, nonatomic) NSString          *userName;

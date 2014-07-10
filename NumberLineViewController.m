@@ -40,9 +40,9 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 {
     int numerator;
     int denominator;
-    MFFraction *fraction;
     int anim_count;
-  
+    MFFraction *fraction;
+    
 }
 
 @property (nonatomic,strong) UIBezierPath* ovalPath;
@@ -50,7 +50,7 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 @property (nonatomic,strong) NSMutableArray * piecesArray;
 @property (nonatomic,strong) UIButton * addButton;
 
-@property(nonatomic,strong) MFFraction * currentFraction;
+@property(nonatomic,strong)  MFFraction * currentFraction;
 @property (nonatomic,strong) MFUtilities * utilities;
 
 @property (strong, nonatomic) IBOutlet UILabel *fractionLabel;
@@ -104,8 +104,8 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
     
     float w = PIECE_WIDTH;
     float x =[self getX];
-    
     CGRect frame = CGRectMake(x,55, w,100);
+    
     NumberLinePieceView *nl =[[ NumberLinePieceView alloc]initWithFrame:frame];
     [_piecesArray addObject:nl];
     
@@ -114,8 +114,8 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
     [_addButton addTarget:self action:@selector(addPiece) forControlEvents:UIControlEventTouchUpInside];
     [_addButton setTitle:@"Add Candy Bar" forState:UIControlStateNormal];
     [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _addButton.titleLabel.font = [UIFont systemFontOfSize:24];
     [_addButton setBackgroundColor:[UIColor redColor]];
+    
     _addButton.layer.cornerRadius =5;
     numerator = 0;
     denominator = 0;
@@ -196,9 +196,7 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
 }
 
 -(void)animateFeedback:(NSTimer *)timer{
-   
-#warning FIX IT!!!
-    NSLog(@"timer");
+
    
     //displaying current value of the bar (feedback)
     if(!_lbl){
@@ -251,7 +249,7 @@ typedef   void (^checkAnswerBlock)(BOOL s, MFFraction * answer);
     for(int i = 0; i<_piecesArray.count;i++){
         NumberLinePieceView * p =_piecesArray[i];
         int new_numerator = 0;
-        int new_denominator = p.segmentsArray.count;
+        int new_denominator = (int)p.segmentsArray.count;
         for (int j=0; j<p.segmentsArray.count;j++){
             if([(Segment*) p.segmentsArray[j] selected])
             {

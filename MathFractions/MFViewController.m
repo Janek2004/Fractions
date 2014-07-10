@@ -141,7 +141,7 @@
              self.fractioImageView.frame =r1;
  
         PracticeViewController * pv = [[PracticeViewController alloc]initWithNibName:@"PracticeViewController" bundle:nil];
-         pv.activityId = btn.tag;
+         pv.activityId = (int) btn.tag;
         [self presentViewController:pv animated:YES completion:^{
             }];
          }
@@ -162,7 +162,7 @@
 -(void)checkProgress{
     //get current progress
     for(UIButton * btn in self.activityButtons){
-        NSString * imageName = [_utilities getImageForActivity:btn.tag  correct:NO];
+        NSString * imageName = [_utilities getImageForActivity:(int)btn.tag  correct:NO];
       //  NSLog(@"Btn tag %d image name %@",btn.tag, imageName);
 
         [btn setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
@@ -173,7 +173,7 @@
     MFLocalStudent * mf = [[MFManager sharedManager]mfuser];
     for(MFCompleted *act in mf.completed){
         [UIView animateWithDuration:1.0 animations:^{
-            NSString * imageName = [_utilities getImageForActivity:act.activity.integerValue  correct:YES];
+            NSString * imageName = [_utilities getImageForActivity:(int)act.activity.integerValue  correct:YES];
             
             [(UIButton*)[self.view viewWithTag:act.activity.integerValue]setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
             

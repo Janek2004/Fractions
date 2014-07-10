@@ -314,8 +314,7 @@
         at.activity = activity.activityid;
         at.fractions = fractions;
         at.uid = [NSString stringWithFormat:@"%@",[at objectID]];
-        #warning store answer as well
-        
+       
         MFFrAttempt * a = [self createFractalAttemptWithAttempt:at];
         MFFractalFraction * fr = [[MFFractalFraction alloc]init];
         fr.denominator = answer.denominator;
@@ -447,7 +446,7 @@
         act.fractionCount =obj[@"nr_fraction_inquestion"];
         
         //get raw set
-        NSSet *set = [self getSet:[obj[@"set"]integerValue] fromDict:self.appData];
+        NSSet *set = [self getSet:(int) [obj[@"set"]integerValue] fromDict:self.appData];
         act.set = set;
         
            }];
@@ -555,17 +554,6 @@
         }
     }];
     
-#warning local user
-
-    //
-//    if([self findUserWithPin:pin andName:name]){
-//        UIAlertView * a = [[UIAlertView alloc]initWithTitle:@"Message" message:@"User already exists" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//        [a show];
-//
-//        return nil;
-//    }
-//    
-//    }
 }
 
 -(MFStudent *)findUserWith:(NSString *)username andPassword:(NSString *)password;{

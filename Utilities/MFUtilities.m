@@ -89,6 +89,9 @@
 -(NSString *)getImageForActivity:(int)i correct:(BOOL)correct{
     NSString *imageName;
     if(!correct){
+        if(i==10){
+            imageName = @"circular1@2";
+        }
         if(i== 7 ||i == 8 ||i == 9)
         {
             imageName =@"scale1@2";
@@ -103,6 +106,9 @@
         }
     }
     else{
+        if(i==10){
+          imageName =@"circular2@2";
+        }
         if(i== 7 ||i == 8 ||i == 9)
         {
             imageName =@"scale2@2";
@@ -127,17 +133,45 @@
 
     if(i== 7 ||i == 8 ||i == 9)
     {
-        [self presentScaleIntro:viewcontroller];
+      [self presentScaleIntro:viewcontroller];
     }
     if(i == 6||i == 5)
     {
-       [self presentFillGlassIntro:viewcontroller];
+      [self presentFillGlassIntro:viewcontroller];
     }
     if(i == 1||i == 2||i==3||i==4)
     {
-         [self presentNumberLineIntro:viewcontroller];
+      [self presentNumberLineIntro:viewcontroller];
+    }
+    if(i==10){
+      [self presentCircularIntro:viewcontroller];
     }
 }
+
+
+-(void)presentCircularIntro:(id)viewcontroller{
+    KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Compare Graphical Fractions Activity"
+                                                          withDetail: @"Break the choco bar to match the fraction represented by selected part of the circle"
+                                                           withImage: [UIImage imageNamed:@"circularActivity"]];
+    
+    page0.detailLabel.textAlignment = NSTextAlignmentLeft;
+    
+    KxIntroViewController *vc = [[KxIntroViewController alloc ] initWithPages:@[ page0]];
+    
+    vc.introView.animatePageChanges = YES;
+    vc.introView.gradientBackground = YES;
+    //[vc presentInViewController:viewcontroller fullScreenLayout:YES];
+    void (^handler)()=^(){
+        [vc.view removeFromSuperview];
+    };
+    
+    vc.completionHandler =handler;
+    
+    [vc presentInView:[(UIViewController *) viewcontroller view]];
+    
+    
+}
+
 
 -(void)presentScaleIntro:(id)viewcontroller{
     KxIntroViewPage *page0 = [KxIntroViewPage introViewPageWithTitle: @"Scale Activity"

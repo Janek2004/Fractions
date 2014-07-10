@@ -41,6 +41,8 @@
 #import "PracticeViewController.h"
 #import "NumberLineViewController.h"
 #import "MFScaleActivity.h"
+#import "MFCicleViewController.h"
+
 
 #import "SoundHelper.h"
 
@@ -48,8 +50,11 @@
 
 
 @interface PracticeViewController ()
-@property (nonatomic,strong) MFGlassActivityViewController *glassVC;
-@property (nonatomic,strong) MFScaleActivity * scaleVC;
+//@property (nonatomic,strong) MFGlassActivityViewController *glassVC;
+//@property (nonatomic,strong) MFScaleActivity * scaleVC;
+//@property (strong, nonatomic) NumberLineViewController *numberLineVC;
+
+
 @property (nonatomic) BOOL  introShown;
 @property (nonatomic,strong) MFUtilities * utilities;
 @property (nonatomic,strong) DataManager * dataManager;
@@ -64,7 +69,7 @@
 @property (strong, nonatomic) IBOutlet UIView *feedbackView;
 @property (strong, nonatomic) IBOutlet UIView *gameOver;
 @property (strong, nonatomic) IBOutlet UIView *hintView;
-@property (strong, nonatomic) NumberLineViewController *numberLineVC;
+
 @property (strong, nonatomic) UIViewController * currentVC;
 
 @property (strong, nonatomic) IBOutlet UIImageView *feedbackImageView;
@@ -175,9 +180,7 @@
     _soundHelper = [[SoundHelper alloc]init];
     
     [self loadData];
-   
-    
-    
+  
     [_utilities presentIntroForActivity:self.activityId inViewController:self];
     
 }
@@ -216,18 +219,16 @@
 
 -(void)loadData{
     
-    
-    
     //Get activity data. This method is loading dynamically questions sets and etc.
      self.currentActivity = [_dataManager getActivity:self.activityId];
     _currentQuestionIndex =0;
+ 
     NSMutableArray * a= self.currentActivity.set.allObjects.mutableCopy;
-    
-    
+   
     if(self.currentActivity.fractionCount.intValue>1){
         
         NSMutableArray * array = [NSMutableArray new];
-        int count = a.count;
+        int count = (int) a.count;
         while(a.count>0) {
             int random =arc4random()%a.count;
             MFFraction  *a1 = a[random];
@@ -250,32 +251,43 @@
         
     }
     
-
-    
-    if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
+    if([self.currentActivity.name isEqualToString:@"Circles and Bars"]){
       
         
-        _scaleVC = [[MFScaleActivity alloc]initWithNibName:@"MFScaleActivity" bundle:nil];
-        [self addChildViewController:_scaleVC];
-        [_scaleVC willMoveToParentViewController:self];
+        UIViewController*circle= [[MFCicleViewController alloc]initWithNibName:@"MFCicleViewController" bundle:nil];
+        [self addChildViewController:circle];
+        [circle willMoveToParentViewController:self];
 
-        [self.activityContainer addSubview:_scaleVC.view];
-        [_scaleVC didMoveToParentViewController:self];
-        _currentVC = self.scaleVC;
+        [self.activityContainer addSubview:circle.view];
+        [circle didMoveToParentViewController:self];
+        _currentVC = circle;
     }
     
+    if([self.currentActivity.name isEqualToString:@"Tip The Scale"]){
+        
+        
+       UIViewController* _scaleVC = [[MFScaleActivity alloc]initWithNibName:@"MFScaleActivity" bundle:nil];
+        [self addChildViewController:_scaleVC];
+        [_scaleVC willMoveToParentViewController:self];
+        
+        [self.activityContainer addSubview:_scaleVC.view];
+        [_scaleVC didMoveToParentViewController:self];
+        _currentVC = _scaleVC;
+    }
+    
+    
     if([self.currentActivity.name isEqualToString:@"Candy Bar Activity"]){
-        _numberLineVC = [[NumberLineViewController alloc]initWithNibName:@"NumberLineViewController" bundle:nil];
+        UIViewController*_numberLineVC = [[NumberLineViewController alloc]initWithNibName:@"NumberLineViewController" bundle:nil];
         [self addChildViewController:_numberLineVC];
         [_numberLineVC willMoveToParentViewController:self];
         
         [self.activityContainer addSubview:_numberLineVC.view];
         [_numberLineVC didMoveToParentViewController:self];
-        _currentVC = self.numberLineVC;
+        _currentVC = _numberLineVC;
         
     }
     if([self.currentActivity.name isEqualToString:@"Filling the Glass Activity"]) {
-        _glassVC = [[MFGlassActivityViewController alloc]initWithNibName:@"GlassActivityView" bundle:[NSBundle mainBundle]];
+       UIViewController* _glassVC = [[MFGlassActivityViewController alloc]initWithNibName:@"GlassActivityView" bundle:[NSBundle mainBundle]];
         
         [self addChildViewController:_glassVC];
         [_glassVC willMoveToParentViewController:self];
@@ -288,14 +300,10 @@
     }
     
     [self.view addSubview:  self.homeButton];
-    [self.view addSubview:self.hintButton];
-    [self.view addSubview:self.goOnButton];
+    [self.view addSubview:  self.hintButton];
+    [self.view addSubview:  self.goOnButton];
     
     [self displayFraction];
-    
-    
-    
-    
 }
 
 

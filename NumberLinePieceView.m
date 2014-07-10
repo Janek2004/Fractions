@@ -261,8 +261,8 @@
         
     NSArray *filteredArray = [self.segmentsArray filteredArrayUsingPredicate:predicate];
 
-    fraction.numerator = [NSNumber numberWithInt:filteredArray.count];
-    fraction.denominator = [NSNumber numberWithInt:self.segmentsArray.count];
+    fraction.numerator = [NSNumber numberWithInt:(int)filteredArray.count];
+    fraction.denominator = [NSNumber numberWithInt:(int)self.segmentsArray.count];
     
     return fraction;
 }

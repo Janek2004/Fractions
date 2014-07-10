@@ -68,4 +68,9 @@
                 heading:(double)theHeading
                   speed:(double)theSpeed;
 
+/*! Initializer that accepts a dictionary from which we will extract
+ latitude, longitude, altitude, accuracy, altitudeAccuracy, heading and speed.
+ */
+- (id) initWithDictionary:(NSDictionary *)dict;
+
 @end
