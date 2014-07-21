@@ -73,7 +73,7 @@
 
 - (void) presentInView: (UIView *) view
 {
-    self.wantsFullScreenLayout = YES;
+
     self.view.frame = view.bounds;
     self.introView.completionHandler = self.completionHandler;
     self.introView.delegate= self;
@@ -89,7 +89,7 @@
     
     if (fullScreenLayout) {
         
-        self.wantsFullScreenLayout = YES;
+       
         UIApplication *app = [UIApplication sharedApplication];
         if (!app.statusBarHidden) {
             _needRestoreStatusBar = YES;

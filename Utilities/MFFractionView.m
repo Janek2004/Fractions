@@ -79,17 +79,28 @@
     
     
     [[UIColor blackColor] setFill];
-    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentLeft];
+//    [textContent drawInRect: textRect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentLeft];
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    /// Set line break mode
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    /// Set text alignment
+    paragraphStyle.alignment = NSTextAlignmentRight;
     
+    
+    NSDictionary * attr =@{NSFontAttributeName:[UIFont fontWithName: @"Helvetica" size: 30],
+                           NSParagraphStyleAttributeName: paragraphStyle};
+    
+    [textContent drawInRect:textRect withAttributes:attr];
     
     //// Text 2 Drawing
     CGRect text2Rect = CGRectMake(45, 80, 200, 100);
 
     
     [[UIColor blackColor] setFill];
-    [text2Content drawInRect: text2Rect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentLeft];
+//    [text2Content drawInRect: text2Rect withFont: [UIFont fontWithName: @"Helvetica" size: 30] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentLeft];
     
-    
+    [text2Content drawInRect:text2Rect withAttributes:attr];
+
 
 }
  
